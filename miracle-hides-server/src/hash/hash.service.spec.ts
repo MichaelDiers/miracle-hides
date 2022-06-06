@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConfigurationModule } from 'src/configuration/configuration.module';
+import { ConfigurationModule } from '../configuration/configuration.module';
 import { HashService } from './hash.service';
 
 describe('HashService', () => {

@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { ConfigurationModule } from '../configuration/configuration.module';
 import { DatabaseModule } from '../database/database.module';
 import { FirebaseModule } from '../firebase/firebase.module';
 import { AuthController } from './auth.controller';
@@ -10,7 +11,7 @@ describe('AuthController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [DatabaseModule, FirebaseModule],
+      imports: [ConfigurationModule, DatabaseModule, FirebaseModule],
       controllers: [AuthController],
       providers: [AuthService, FirebaseAuthService],
     }).compile();

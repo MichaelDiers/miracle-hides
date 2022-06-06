@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
 import { FirebaseModule } from '../firebase/firebase.module';
-import { DatabaseService } from './database.service';
 import { FirebaseDatabaseService } from './firebase-database.service';
 import { ConfigurationModule } from '../configuration/configuration.module';
+import { LoggingModule } from '../logging/logging.module';
+import { UserDatabaseService } from './user-database.service';
+import { HashModule } from '../hash/hash.module';
 
 @Module({
-  providers: [DatabaseService, FirebaseDatabaseService],
-  imports: [FirebaseModule, ConfigurationModule],
-  exports: [DatabaseService],
+  providers: [FirebaseDatabaseService, UserDatabaseService],
+  imports: [FirebaseModule, ConfigurationModule, LoggingModule, HashModule],
+  exports: [UserDatabaseService],
 })
 export class DatabaseModule {}

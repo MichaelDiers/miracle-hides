@@ -13,7 +13,7 @@ export class FirebaseService {
     return this.app.auth();
   }
 
-  database(): admin.database.Database {
-    return this.app.database();
+  firestore(): admin.firestore.Firestore {
+    return this.app.firestore();
   }
 }
