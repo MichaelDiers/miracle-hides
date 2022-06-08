@@ -1,21 +1,26 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { FirebaseModule } from './firebase/firebase.module';
-import { DatabaseModule } from './database/database.module';
-import { ConfigurationModule } from './configuration/configuration.module';
-import { HashModule } from './hash/hash.module';
-import { LoggingModule } from './logging/logging.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from './services/config/config.module';
+import { ConfigService } from './services/config/config.service';
+import { UsersDatabaseModule } from './databases/users-database/users-database.module';
+import { AuthModule } from './controllers/auth/auth.module';
+import { HashModule } from './services/hash/hash.module';
 
 @Module({
   imports: [
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: (await configService.readAsync()).mongoDbConnectionString,
+        dbName: (await configService.readAsync()).mongoDbDatabaseName,
+      }),
+      inject: [ConfigService],
+    }),
+    UsersDatabaseModule,
     AuthModule,
-    FirebaseModule,
-    DatabaseModule,
-    ConfigurationModule,
     HashModule,
-    LoggingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
