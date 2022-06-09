@@ -9,12 +9,14 @@ import { CreateUserDto } from '../../dtos/create-user.dto';
 import { User } from '../../dtos/user.interface';
 import { HashService } from '../../services/hash/hash.service';
 import { v4 as uuidv4 } from 'uuid';
+import { JwtService } from 'src/services/jwt/jwt.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private hashService: HashService,
-    private usersDatabaseService: UsersDatabaseService,
+    private readonly hashService: HashService,
+    private readonly jwtService: JwtService,
+    private readonly usersDatabaseService: UsersDatabaseService,
   ) {}
 
   public async createUser(user: CreateUserDto): Promise<void> {
@@ -45,11 +47,11 @@ export class AuthService {
     authenticateUser: AuthenticateUserDto,
   ): Promise<string> {
     const user = await this.readUserByEmail(authenticateUser.email);
-    if (!user) {
+    if (!user || await this.hashService.compare(authenticateUser.password, user.password) !== true) {
       throw new UnauthorizedException();
     }
 
-    return 'token';
+    return this.jwtService.createTokenAsync(user.userId);
   }
 
   private async readUserByEmail(email: string): Promise<User> {
