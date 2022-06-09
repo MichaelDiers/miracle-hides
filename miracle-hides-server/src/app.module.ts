@@ -7,6 +7,8 @@ import { ConfigService } from './services/config/config.service';
 import { UsersDatabaseModule } from './databases/users-database/users-database.module';
 import { AuthModule } from './controllers/auth/auth.module';
 import { HashModule } from './services/hash/hash.module';
+import { FirebaseModule } from './services/firebase/firebase.module';
+import { JwtModule } from './services/jwt/jwt.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { HashModule } from './services/hash/hash.module';
     UsersDatabaseModule,
     AuthModule,
     HashModule,
+    FirebaseModule,
+    JwtModule,
   ],
   controllers: [AppController],
   providers: [AppService],
