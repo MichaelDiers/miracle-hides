@@ -9,6 +9,8 @@ import { AuthModule } from './controllers/auth/auth.module';
 import { HashModule } from './services/hash/hash.module';
 import { FirebaseModule } from './services/firebase/firebase.module';
 import { JwtModule } from './services/jwt/jwt.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -19,6 +21,9 @@ import { JwtModule } from './services/jwt/jwt.module';
         dbName: (await configService.readAsync()).mongoDbDatabaseName,
       }),
       inject: [ConfigService],
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
     }),
     UsersDatabaseModule,
     AuthModule,
