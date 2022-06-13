@@ -11,6 +11,7 @@ import { FirebaseModule } from './services/firebase/firebase.module';
 import { JwtModule } from './services/jwt/jwt.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MessagesModule } from './controllers/messages/messages.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { join } from 'path';
     HashModule,
     FirebaseModule,
     JwtModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

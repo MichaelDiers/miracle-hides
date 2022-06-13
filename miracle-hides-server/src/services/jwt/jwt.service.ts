@@ -8,4 +8,18 @@ export class JwtService {
     public async createTokenAsync(uid: string): Promise<string> {
         return this.firebaseService.auth().createCustomToken(uid);
     }
+
+    public async verifyToken(token: string) : Promise<string> {
+        try {
+            const payload = await this.firebaseService.auth().verifyIdToken(token, true);
+            if (payload) {
+                return payload.uid;
+            }
+
+            return;
+        } catch
+        {
+            return;
+        }
+    }
 }
