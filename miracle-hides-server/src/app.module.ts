@@ -12,6 +12,7 @@ import { JwtModule } from './services/jwt/jwt.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MessagesModule } from './controllers/messages/messages.module';
+import { MessagesDatabaseModule } from './databases/messages-database/messages-database.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { MessagesModule } from './controllers/messages/messages.module';
     FirebaseModule,
     JwtModule,
     MessagesModule,
+    MessagesDatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -15,17 +15,9 @@ export class MessagesController {
         @Headers() headers,
         @Body() message: MessageDto,
     ) {
-        const uid = await this.jwtService.verifyToken(headers.authorization.substring(7));
-        if (uid) {
-            return this.messageService.send(
-                {
-                    receiver: message.receiver,
-                    sender: uid,
-                    text: message.text,
-                },
-            );
-        } else {
-            throw new UnauthorizedException();
-        }
+        return this.messageService.sendAsync(
+            message,
+            headers.authorization?.substring(7)
+        );
     }
 }

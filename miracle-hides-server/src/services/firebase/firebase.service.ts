@@ -12,4 +12,8 @@ export class FirebaseService {
     auth(): admin.auth.Auth {
         return this.app.auth();
     }
+
+    firestore(): admin.firestore.Firestore {
+        return this.app.firestore();
+    }
 }
