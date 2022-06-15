@@ -1,0 +1,2 @@
+initializeFirebase();
+showInvitationCodePage();
