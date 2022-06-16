@@ -6,7 +6,12 @@ const showInvitationCodePage = () => {
             <input type='text' id='code' mame='code' maxlength='50' placeholder='acfc29b1-7ec5-4ac4-88c9-0f4ea83f8739' required autofocus>
             <input type='submit' value='submit'>
         </form>
+        <a id='signInLink' href='signin'>I already have an account!</a> 
     `;
 
-    showPage(html, async () => {});
+    showPage(html, async () => {
+        document.querySelector('#signInLink').addEventListener('click', (e) => {
+            e.preventDefault();
+        });
+    });
 };
