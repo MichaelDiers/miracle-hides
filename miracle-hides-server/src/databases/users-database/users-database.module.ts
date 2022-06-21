@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from 'src/services/config/config.module';
 import { UserEntity, UserEntitySchema } from './user-entity.schema';
 import { UsersDatabaseService } from './users-database.service';
 
@@ -9,6 +10,7 @@ import { UsersDatabaseService } from './users-database.service';
     MongooseModule.forFeature([
       { name: UserEntity.name, schema: UserEntitySchema },
     ]),
+    ConfigModule,
   ],
   providers: [UsersDatabaseService],
 })

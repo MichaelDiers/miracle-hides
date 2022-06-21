@@ -1,25 +1,18 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { TokenDto } from 'src/dtos/token.dto';
 import { AuthenticateUserDto } from '../../dtos/authenticate-user.dto';
-import { CreateUserDto } from '../../dtos/create-user.dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('create')
-  @HttpCode(HttpStatus.CREATED)
-  public async createUser(@Body() user: CreateUserDto): Promise<void> {
-    return this.authService.createUser(user);
-  }
-
   @Post()
   @HttpCode(HttpStatus.OK)
-  public async authenticateUser(
+  public async signIn(
     @Body() user: AuthenticateUserDto,
   ): Promise<TokenDto> {
-    const token = await this.authService.authenticateUser(user);
+    const token = await this.authService.signIn(user);
     return new TokenDto(token);
   }
 }

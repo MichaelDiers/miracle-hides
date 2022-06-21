@@ -28,6 +28,9 @@ export class UserEntity {
 
   @Prop({ required: true })
   userId: string;
+
+  @Prop({ required: true })
+  verificationCode: string;
 }
 
 export const UserEntitySchema = SchemaFactory.createForClass(UserEntity);

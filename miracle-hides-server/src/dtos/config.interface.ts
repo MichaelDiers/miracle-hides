@@ -3,4 +3,5 @@ export interface Config {
   mongoDbDatabaseName: string;
   hashSaltRounds: number;
   messagesCollectionName: string;
+  pagingSize: number;
 }

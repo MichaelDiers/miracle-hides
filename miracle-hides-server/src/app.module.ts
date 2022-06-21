@@ -13,6 +13,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MessagesModule } from './controllers/messages/messages.module';
 import { MessagesDatabaseModule } from './databases/messages-database/messages-database.module';
+import { UserModule } from './controllers/user/user.module';
+import { InvitationCodeModule } from './controllers/invitation-code/invitation-code.module';
+import { InvitationCodesDatabaseModule } from './databases/invitation-codes-database/invitation-codes-database.module';
 
 @Module({
   imports: [
@@ -34,6 +37,9 @@ import { MessagesDatabaseModule } from './databases/messages-database/messages-d
     JwtModule,
     MessagesModule,
     MessagesDatabaseModule,
+    UserModule,
+    InvitationCodeModule,
+    InvitationCodesDatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
