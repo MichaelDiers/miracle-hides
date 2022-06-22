@@ -20,8 +20,8 @@ export class UserService {
   ) {}
 
   public async createAsync(createDto: CreateDto) : Promise<void> {
-    const invitation = await this.findInvitationAsync(createDto);
-    if (!invitation) {
+    const invitation = await this.invitationCodesDatabase.readByCodeAsync(createDto.code);
+    if (invitation && !await this.hashService.compare(createDto.email, invitation.email)) {
       throw new UnauthorizedException();
     }
 

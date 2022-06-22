@@ -4,4 +4,5 @@ export interface Config {
   hashSaltRounds: number;
   messagesCollectionName: string;
   pagingSize: number;
+  invitationCodesConnectionString: string;
 }

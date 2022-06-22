@@ -13,40 +13,18 @@ export class InvitationCodeService {
   ) {}
 
   public async createAsync(createDto: CreateDto) : Promise<InvitationCode> {
-    if (await this.invitationExistsAsync(createDto.email)) {
+    if (await this.invitationCodesDatabaseService.findOneAsync(async (invitationCode) => this.hashService.compare(createDto.email, invitationCode.email))) {
       throw new ConflictException();
     }
-    
+
     const code = uuidv4();
-    const codeHash = this.hashService.hash(code);
     const email = createDto.email;
     const emailHash = this.hashService.hash(email);
     await this.invitationCodesDatabaseService.createAsync({
-      code: await codeHash,
+      code,
       email: await emailHash,
     });
 
     return { code, email };
-  }
-
-  private async invitationExistsAsync(email: string) : Promise<boolean> {
-    const iterator = this.invitationCodesDatabaseService.readAllAsync();
-    let current = iterator.next();
-    while (!(await current).done) {
-      const invitations = (await current).value;
-      if (invitations) {
-        const results = await Promise.all(
-          invitations.map(({ email: emailHash }) => this.hashService.compare(email, emailHash)),
-        );
-
-        if (results.some(result => result)) {
-          return true;
-        }
-      }
-
-      current = iterator.next();
-    }
-
-    return false;
   }
 }
