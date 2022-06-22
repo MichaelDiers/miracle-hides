@@ -45,4 +45,12 @@ export class UsersDatabaseService {
       }
     }
   }
+
+  public async setEmailIsVerfiedAsync(user: User) : Promise<boolean> {
+    const result = await this.userModel.findOneAndUpdate(
+      { userId: user.userId },
+      { isEmailVerified: true },
+      { new: true });
+    return result && result.isEmailVerified;
+  }
 }

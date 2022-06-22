@@ -30,7 +30,10 @@ export class UserEntity {
   userId: string;
 
   @Prop({ required: true })
-  verificationCode: string;
+  emailVerificationCode: string;
+
+  @Prop({ required: true })
+  isEmailVerified: boolean;
 }
 
 export const UserEntitySchema = SchemaFactory.createForClass(UserEntity);

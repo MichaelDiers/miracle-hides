@@ -11,7 +11,6 @@ export class InvitationCodeController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   public async createAsync(@Body() createDto: CreateDto) : Promise<InvitationCode> {
-    console.log(createDto);
     return this.invitationCodeService.createAsync(createDto);
   }
 }

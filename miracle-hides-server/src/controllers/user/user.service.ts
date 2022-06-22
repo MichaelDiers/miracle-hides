@@ -1,12 +1,15 @@
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, Res, UnauthorizedException } from '@nestjs/common';
 import { InvitationCodesDatabaseService } from 'src/databases/invitation-codes-database/invitation-codes-database.service';
 import { UsersDatabaseService } from 'src/databases/users-database/users-database.service';
 import { InvitationCode } from 'src/dtos/invitation-code.interface';
 import { HashService } from 'src/services/hash/hash.service';
 import { CreateDto } from './create.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { UserEntity } from 'src/databases/users-database/user-entity.schema';
 import { User } from 'src/dtos/user.interface';
+import { response } from 'express';
+import { AuthService } from '../auth/auth.service';
+import { AuthController } from '../auth/auth.controller';
+import { TokenDto } from 'src/dtos/token.dto';
 
 @Injectable()
 export class UserService {
@@ -16,7 +19,7 @@ export class UserService {
     private readonly userDatabaseService: UsersDatabaseService,
   ) {}
 
-  public async createAsync(createDto: CreateDto) : Promise<User> {
+  public async createAsync(createDto: CreateDto) : Promise<void> {
     const invitation = await this.findInvitationAsync(createDto);
     if (!invitation) {
       throw new UnauthorizedException();
@@ -27,6 +30,7 @@ export class UserService {
       throw new ConflictException();
     }
 
+    const emailVerificationCode = uuidv4();
     user = {
       displayName: createDto.email,
       email: invitation.email,
@@ -36,12 +40,25 @@ export class UserService {
       password: await this.hashService.hash(createDto.password),
       signInAttemptFailures: 0,
       userId: uuidv4(),
-      verificationCode: uuidv4(),
+      emailVerificationCode: await this.hashService.hash(emailVerificationCode),
+      isEmailVerified: false,
     };
 
     await this.userDatabaseService.createAsync(user);
+    console.log(emailVerificationCode);
+  }
 
-    return user;
+  public async verifyEmailAsync(createDto: CreateDto) : Promise<void> {
+    const user = await this.userDatabaseService.findUserAsync(user => this.hashService.compare(createDto.email, user.email));
+    if (!user 
+      || !await this.hashService.compare(createDto.password, user.password)
+      || !await this.hashService.compare(createDto.code, user.emailVerificationCode)) {
+      throw new UnauthorizedException();
+    }
+
+    if (!await this.userDatabaseService.setEmailIsVerfiedAsync(user)) {
+      throw new InternalServerErrorException();
+    }
   }
 
   private async findInvitationAsync(createDto: CreateDto) : Promise<InvitationCode | undefined> {

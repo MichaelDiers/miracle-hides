@@ -19,7 +19,9 @@ export class AuthService {
     authenticateUser: AuthenticateUserDto,
   ): Promise<string> {
     const user = await this.usersDatabaseService.findUserAsync(userEntity => this.hashService.compare(authenticateUser.email, userEntity.email));
-    if (!user || await this.hashService.compare(authenticateUser.password, user.password) !== true) {
+    if (!user 
+      || !user.isEmailVerified
+      || await this.hashService.compare(authenticateUser.password, user.password) !== true) {
       throw new UnauthorizedException();
     }
 

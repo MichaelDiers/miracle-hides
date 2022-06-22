@@ -7,5 +7,6 @@ export interface User {
   password: string;
   signInAttemptFailures: number;
   userId: string;
-  verificationCode: string;
+  emailVerificationCode: string;
+  isEmailVerified: boolean;
 }
