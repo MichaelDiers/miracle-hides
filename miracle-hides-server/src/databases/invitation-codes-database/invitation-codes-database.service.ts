@@ -15,6 +15,11 @@ export class InvitationCodesDatabaseService {
     await (await this.connectAsync()).set(invitationCode.code, invitationCode.email);
   }
 
+  public async deleteByCodeAsync(code: string) : Promise<boolean> {
+    const deleted = await (await this.connectAsync()).del(code);
+    return deleted === 1;
+  }
+
   public async findOneAsync(predicate: (invitationCode: InvitationCode) => Promise<boolean>) : Promise<InvitationCode | undefined> {
     const iterator = this.readAllAsync();
     let current = iterator.next();

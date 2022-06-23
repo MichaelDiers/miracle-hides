@@ -21,7 +21,7 @@ export class UserService {
 
   public async createAsync(createDto: CreateDto) : Promise<void> {
     const invitation = await this.invitationCodesDatabase.readByCodeAsync(createDto.code);
-    if (invitation && !await this.hashService.compare(createDto.email, invitation.email)) {
+    if (!invitation || !await this.hashService.compare(createDto.email, invitation.email)) {
       throw new UnauthorizedException();
     }
 
@@ -45,6 +45,11 @@ export class UserService {
     };
 
     await this.userDatabaseService.createAsync(user);
+
+    if (!await this.invitationCodesDatabase.deleteByCodeAsync(createDto.code)) {
+      throw new InternalServerErrorException();
+    }
+
     console.log(emailVerificationCode);
   }
 
@@ -58,26 +63,6 @@ export class UserService {
 
     if (!await this.userDatabaseService.setEmailIsVerfiedAsync(user)) {
       throw new InternalServerErrorException();
-    }
-  }
-
-  private async findInvitationAsync(createDto: CreateDto) : Promise<InvitationCode | undefined> {
-    const iterator = this.invitationCodesDatabase.readAllAsync();
-    let current = iterator.next();
-    let invitationHashed : InvitationCode = null;
-    while (!(await current).done && !invitationHashed) {
-      const invitations = (await current).value;
-      if (invitations) {
-        for (let i=0; i < invitations.length; i += 1) {
-          const { code, email } = invitations[i];
-          if (await this.hashService.compare(createDto.code, code)
-            && await this.hashService.compare(createDto.email, email)) {
-              return { code, email };
-            }
-        }
-      }
-
-      current = iterator.next();
     }
   }
 
