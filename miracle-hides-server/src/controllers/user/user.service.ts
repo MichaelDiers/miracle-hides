@@ -10,6 +10,7 @@ import { response } from 'express';
 import { AuthService } from '../auth/auth.service';
 import { AuthController } from '../auth/auth.controller';
 import { TokenDto } from 'src/dtos/token.dto';
+import { VerifyEmailDto } from './verify-email.dto';
 
 @Injectable()
 export class UserService {
@@ -53,11 +54,11 @@ export class UserService {
     console.log(emailVerificationCode);
   }
 
-  public async verifyEmailAsync(createDto: CreateDto) : Promise<void> {
-    const user = await this.userDatabaseService.findUserAsync(user => this.hashService.compare(createDto.email, user.email));
+  public async verifyEmailAsync(verifyEmailDto: VerifyEmailDto) : Promise<void> {
+    const user = await this.userDatabaseService.findUserAsync(user => this.hashService.compare(verifyEmailDto.email, user.email));
     if (!user 
-      || !await this.hashService.compare(createDto.password, user.password)
-      || !await this.hashService.compare(createDto.code, user.emailVerificationCode)) {
+      || !await this.hashService.compare(verifyEmailDto.password, user.password)
+      || !await this.hashService.compare(verifyEmailDto.verificationCode, user.emailVerificationCode)) {
       throw new UnauthorizedException();
     }
 

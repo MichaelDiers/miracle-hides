@@ -3,6 +3,7 @@ import { TokenDto } from 'src/dtos/token.dto';
 import { AuthController } from '../auth/auth.controller';
 import { CreateDto } from './create.dto';
 import { UserService } from './user.service';
+import { VerifyEmailDto } from './verify-email.dto';
 
 @Controller('user')
 export class UserController {
@@ -18,8 +19,8 @@ export class UserController {
   }
 
   @Put()
-  public async verifyEmailAsync(@Body() createDto: CreateDto) : Promise<TokenDto> {
-    await this.userService.verifyEmailAsync(createDto);
-    return this.authController.signIn({ email: createDto.email, password: createDto.password });
+  public async verifyEmailAsync(@Body() verifyEmailDto: VerifyEmailDto) : Promise<TokenDto> {
+    await this.userService.verifyEmailAsync(verifyEmailDto);
+    return this.authController.signIn({ email: verifyEmailDto.email, password: verifyEmailDto.password });
   }
 }
