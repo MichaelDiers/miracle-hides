@@ -1,4 +1,8 @@
 class SignInPage extends BasePage {
+  constructor(firebaseApp) {
+    super(firebaseApp);
+  }
+
   get html() {
     return `
       <h1>Welcome back!</h1>
@@ -25,7 +29,7 @@ class SignInPage extends BasePage {
       const process = (json) => {
         if (json && json.token) {
           firebase.auth().signInWithCustomToken(json.token)
-            .then(() => console.log('we have a firebase token'))
+            .then(() => new MessengerPage(this.firebaseApp).show())
             .catch(() => document.querySelector('#error').textContent = 'A signin is not possible at the moment.');
         } else {
           document.querySelector('#error').textContent = 'Unknown combination of user and password';
@@ -39,7 +43,7 @@ class SignInPage extends BasePage {
   initializeEventLinkToSignUp() {
     document.querySelector('#signUpLink').addEventListener('click', (e) => {
       e.preventDefault();
-      new SignUpPage().show();
+      new SignUpPage(this.firebaseApp).show();
     });
   }
 

@@ -1,4 +1,8 @@
 class BasePage {
+  constructor(firebaseApp) {
+    this.firebaseApp = firebaseApp;
+  }
+  
   get html() {
     throw new Error('not implemented')
   }
@@ -43,5 +47,12 @@ class BasePage {
     this.initializeData();
     this.initializeFocus();
     this.initializeEvents();
+  }
+
+  showError(message, selector = '#error') {
+    const element = document.querySelector(selector);
+    if (element) {
+      element.textContent = message;
+    }
   }
 };

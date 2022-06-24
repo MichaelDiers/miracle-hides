@@ -1,7 +1,12 @@
 class SignUpPage extends BasePage {
+  constructor(firebaseApp) {
+    super(firebaseApp);
+  }
+
   get html() {
     return `
       <h1>Sign up for Miracle Hides!</h1>
+      <div id='error'></div>
       <form action='/user' method='post'>
         <label for='code'>Invitation Code</label>
         <input type='text' id='code' name='code' maxlength='50' placeholder='acfc29b1-7ec5-4ac4-88c9-0f4ea83f8739' required autofocus>
@@ -22,7 +27,7 @@ class SignUpPage extends BasePage {
   initializeEventLinkToSignIn() {
     document.querySelector('#signInLink').addEventListener('click', (e) => {
       e.preventDefault();
-      new SignInPage().show();
+      new SignInPage(this.firebaseApp).show();
     });
   }
 
@@ -31,7 +36,11 @@ class SignUpPage extends BasePage {
       e.preventDefault();
 
       const process = (json) => {
-        console.log(json);
+        if (json && json.success === true) {
+          new VerifyEmailPage(this.firebaseApp).show();
+        } else {
+          this.showError('Unable to sign up.');
+        }
       };
 
       ajax(process, e.target);
