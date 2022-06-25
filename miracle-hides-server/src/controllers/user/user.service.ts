@@ -11,6 +11,7 @@ import { AuthService } from '../auth/auth.service';
 import { AuthController } from '../auth/auth.controller';
 import { TokenDto } from 'src/dtos/token.dto';
 import { VerifyEmailDto } from './verify-email.dto';
+import { MailerService } from 'src/services/mailer/mailer.service';
 
 @Injectable()
 export class UserService {
@@ -18,6 +19,7 @@ export class UserService {
     private readonly invitationCodesDatabase: InvitationCodesDatabaseService,
     private readonly hashService: HashService,
     private readonly userDatabaseService: UsersDatabaseService,
+    private readonly mailerService: MailerService,
   ) {}
 
   public async createAsync(createDto: CreateDto) : Promise<void> {
@@ -50,6 +52,8 @@ export class UserService {
     if (!await this.invitationCodesDatabase.deleteByCodeAsync(createDto.code)) {
       throw new InternalServerErrorException();
     }
+
+    await this.mailerService.sendMailAsync(invitation.email, emailVerificationCode);
 
     console.log(emailVerificationCode);
   }

@@ -16,6 +16,7 @@ import { MessagesDatabaseModule } from './databases/messages-database/messages-d
 import { UserModule } from './controllers/user/user.module';
 import { InvitationCodeModule } from './controllers/invitation-code/invitation-code.module';
 import { InvitationCodesDatabaseModule } from './databases/invitation-codes-database/invitation-codes-database.module';
+import { MailerModule } from './services/mailer/mailer.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { InvitationCodesDatabaseModule } from './databases/invitation-codes-data
     UserModule,
     InvitationCodeModule,
     InvitationCodesDatabaseModule,
+    MailerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
