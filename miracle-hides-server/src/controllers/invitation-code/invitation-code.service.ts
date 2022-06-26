@@ -14,19 +14,9 @@ export class InvitationCodeService {
   ) {}
 
   public async createAsync(createDto: CreateDto) : Promise<InvitationCode> {
-    if (await this.invitationCodesDatabaseService.findOneAsync(async (invitationCode) => this.hashService.compare(createDto.email, invitationCode.email))) {
-      throw new ConflictException();
-    }
-
-    const code = uuidv4();
-    const email = createDto.email;
-    const emailHash = this.hashService.hash(email);
-    await this.invitationCodesDatabaseService.createAsync({
-      code,
-      email: await emailHash,
-    });
-
-    return { code, email };
+    const entry = { active: true, code: uuidv4() };
+    await this.invitationCodesDatabaseService.createAsync(entry);
+    return entry;
   }
 
   public async deleteAsync(deleteDto: DeleteDto) : Promise<void> {

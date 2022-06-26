@@ -24,7 +24,7 @@ export class UserService {
 
   public async createAsync(createDto: CreateDto) : Promise<void> {
     const invitation = await this.invitationCodesDatabase.readByCodeAsync(createDto.code);
-    if (!invitation || !await this.hashService.compare(createDto.email, invitation.email)) {
+    if (!invitation) {
       throw new UnauthorizedException();
     }
 
@@ -36,7 +36,7 @@ export class UserService {
     const emailVerificationCode = uuidv4();
     user = {
       displayName: createDto.email,
-      email: invitation.email,
+      email: createDto.email,
       forcePasswordChange: false,
       isLocked: false,
       lockedReason: '',
@@ -53,7 +53,7 @@ export class UserService {
       throw new InternalServerErrorException();
     }
 
-    await this.mailerService.sendMailAsync(invitation.email, emailVerificationCode);
+    await this.mailerService.sendMailAsync(createDto.email, emailVerificationCode);
 
     console.log(emailVerificationCode);
   }

@@ -6,13 +6,16 @@ import { createClient } from 'redis';
 @Injectable()
 export class InvitationCodesDatabaseService {
   private client;
+  private static ACTIVE = 'active';
+  private static INACTIVE = 'inactive';
 
   constructor(
     private readonly configService: ConfigService,
-  ) {}
+  ) {
+  }
 
   public async createAsync(invitationCode: InvitationCode) : Promise<void> {
-    await (await this.connectAsync()).set(invitationCode.code, invitationCode.email);
+    await (await this.connectAsync()).set(invitationCode.code, invitationCode ? InvitationCodesDatabaseService.ACTIVE : InvitationCodesDatabaseService.INACTIVE);
   }
 
   public async deleteByCodeAsync(code: string) : Promise<boolean> {
@@ -42,8 +45,8 @@ export class InvitationCodesDatabaseService {
     const client = await this.connectAsync();
     let entries = [];
     for await (const code of client.scanIterator()) {
-      const email = await client.get(code);
-      entries.push({ code, email });
+      const active = (await client.get(code)) === InvitationCodesDatabaseService.ACTIVE;
+      entries.push({ code, active });
       if (entries.length === pagingSize) {
         yield entries;
         entries = [];
@@ -57,12 +60,12 @@ export class InvitationCodesDatabaseService {
 
   public async readByCodeAsync(code: string) : Promise<InvitationCode | undefined> {
     const client = await this.connectAsync();
-    const email = await client.get(code);
-    if (!email) {
+    const active = (await client.get(code)) === InvitationCodesDatabaseService.ACTIVE;
+    if (!active) {
       return;
     }
 
-    return { code, email };
+    return { code, active };
   }
 
   private async connectAsync() {
