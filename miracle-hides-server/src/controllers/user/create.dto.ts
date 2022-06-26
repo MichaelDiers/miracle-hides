@@ -15,7 +15,7 @@ export class CreateDto {
 
   @IsUUID(4)
   @IsNotEmpty()
-  public code: string;
+  public invitationCode: string;
   
   @IsString()
   @Length(constants.PASSWORD_MIN_LENGTH, constants.PASSWORD_MAX_LENGTH)

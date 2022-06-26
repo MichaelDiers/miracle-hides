@@ -1,4 +1,4 @@
 export interface InvitationCode {
   code: string;
-  email: string;
+  active: boolean;
 }

@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, InternalServerErrorException, Res, UnauthorizedException } from '@nestjs/common';
+import { Body, ConflictException, Injectable, InternalServerErrorException, NotFoundException, Res, UnauthorizedException } from '@nestjs/common';
 import { InvitationCodesDatabaseService } from 'src/databases/invitation-codes-database/invitation-codes-database.service';
 import { UsersDatabaseService } from 'src/databases/users-database/users-database.service';
 import { InvitationCode } from 'src/dtos/invitation-code.interface';
@@ -12,6 +12,7 @@ import { AuthController } from '../auth/auth.controller';
 import { TokenDto } from 'src/dtos/token.dto';
 import { VerifyEmailDto } from './verify-email.dto';
 import { MailerService } from 'src/services/mailer/mailer.service';
+import { DeleteDto } from './delete.dto';
 
 @Injectable()
 export class UserService {
@@ -23,7 +24,7 @@ export class UserService {
   ) {}
 
   public async createAsync(createDto: CreateDto) : Promise<void> {
-    const invitation = await this.invitationCodesDatabase.readByCodeAsync(createDto.code);
+    const invitation = await this.invitationCodesDatabase.readByCodeAsync(createDto.invitationCode);
     if (!invitation) {
       throw new UnauthorizedException();
     }
@@ -36,7 +37,7 @@ export class UserService {
     const emailVerificationCode = uuidv4();
     user = {
       displayName: createDto.email,
-      email: createDto.email,
+      email: await this.hashService.hash(createDto.email),
       forcePasswordChange: false,
       isLocked: false,
       lockedReason: '',
@@ -49,7 +50,7 @@ export class UserService {
 
     await this.userDatabaseService.createAsync(user);
 
-    if (!await this.invitationCodesDatabase.deleteByCodeAsync(createDto.code)) {
+    if (!await this.invitationCodesDatabase.deleteByCodeAsync(createDto.invitationCode)) {
       throw new InternalServerErrorException();
     }
 
@@ -58,8 +59,31 @@ export class UserService {
     console.log(emailVerificationCode);
   }
 
+  public async deleteAsync(deleteDto: DeleteDto) : Promise<void> {
+    if (!await this.userDatabaseService.deleteAsync(deleteDto.userId)) {
+      throw new NotFoundException();
+    }
+  }
+
+  public async readAsync() : Promise<User[]> {
+    const iterator = this.userDatabaseService.readAllAsync();
+    let current = iterator.next();
+    const users = [];
+    while (!(await current).done) {
+      const value = (await current).value;
+      if (value) {
+        users.push(...value);
+      }
+
+      current = iterator.next();
+    }
+
+    return users;
+  }
+
   public async verifyEmailAsync(verifyEmailDto: VerifyEmailDto) : Promise<void> {
     const user = await this.userDatabaseService.findUserAsync(user => this.hashService.compare(verifyEmailDto.email, user.email));
+    console.log(user)
     if (!user 
       || !await this.hashService.compare(verifyEmailDto.password, user.password)
       || !await this.hashService.compare(verifyEmailDto.verificationCode, user.emailVerificationCode)) {

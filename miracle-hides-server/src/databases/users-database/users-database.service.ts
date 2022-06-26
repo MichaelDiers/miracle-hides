@@ -16,6 +16,11 @@ export class UsersDatabaseService {
     await new this.userModel(user).save();
   }
 
+  public async deleteAsync(userId: string) : Promise<boolean> {
+    const result = await this.userModel.deleteOne({ userId }).exec();
+    return result.deletedCount === 1;
+  }
+
   public async findUserAsync(predicate: (user: User) => Promise<boolean>) : Promise<User | undefined> {
     const iterator = this.readAllAsync();
     let current = iterator.next();
