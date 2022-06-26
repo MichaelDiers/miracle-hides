@@ -1,8 +1,13 @@
 class BasePage {
   constructor(firebaseApp) {
     this.firebaseApp = firebaseApp;
+    this.htmlComponents = new HtmlComponents();
   }
   
+  get components() {
+    return this.htmlComponents;
+  }
+
   get html() {
     throw new Error('not implemented')
   }
@@ -23,6 +28,10 @@ class BasePage {
     }
 
     mainElement.innerHTML = this.html;
+  }
+
+  isPageMatch() {
+    return false;
   }
 
   setFocusToFirstEmptyInputOrSubmit() {

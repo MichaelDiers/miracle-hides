@@ -1,10 +1,10 @@
 const firebaseApp = new FirebaseApp();
 
-const urlParams = new URLSearchParams(window.location.search);
-if ([...urlParams].length === 2) {
-  new SignUpPage(firebaseApp).show();
+const pages = [new SignUpPage(firebaseApp), new VerifyEmailPage(firebaseApp)];
+const index = pages.findIndex((page) => page.isPageMatch());
+if (index > -1) {
+  pages[index].show();
 } else {
-  // new SignInPage(firebaseApp).show();
-  new CreateInvitationAdminPage(firebaseApp).show();
+  //new ListUsersAdminPage(firebaseApp).show();
+  new ListInvitationsAdminPage(firebaseApp).show();
 }
-

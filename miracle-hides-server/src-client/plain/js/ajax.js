@@ -1,4 +1,18 @@
 const ajax = (callback, formElement, token) => {
+  const method = formElement.getAttribute('method');
+  const action = formElement.getAttribute('action');
+
+  const body = {};
+  formElement.querySelectorAll('[type=text],[type=password],[type=email],[type=hidden]').forEach((element) => {
+    const name = element.getAttribute('name');
+    const value = element.value;
+    body[name] = value;
+  });
+
+  ajaxPlain(method, action, callback, body, token);
+};
+  
+const ajaxPlain = (method, action, callback, body, token) => {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4) {
@@ -14,16 +28,6 @@ const ajax = (callback, formElement, token) => {
       }
     }
   };
-
-  const method = formElement.getAttribute('method');
-  const action = formElement.getAttribute('action');
-
-  const body = {};
-  formElement.querySelectorAll('[type=text],[type=password],[type=email]').forEach((element) => {
-    const name = element.getAttribute('name');
-    const value = element.value;
-    body[name] = value;
-  });
 
   xhttp.open(method, action, true);
   xhttp.setRequestHeader('Content-Type', 'application/json');

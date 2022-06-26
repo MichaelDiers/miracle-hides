@@ -1,6 +1,8 @@
 class SignUpPage extends BasePage {
   constructor(firebaseApp) {
     super(firebaseApp);
+
+    this.invitationCodeId = 'invitationCode';
   }
 
   get html() {
@@ -8,8 +10,8 @@ class SignUpPage extends BasePage {
       <h1>Sign up for Miracle Hides!</h1>
       <div id='error'></div>
       <form action='/user' method='post'>
-        <label for='code'>Invitation Code</label>
-        <input type='text' id='code' name='code' maxlength='50' placeholder='acfc29b1-7ec5-4ac4-88c9-0f4ea83f8739' required autofocus>
+        <label for='${this.invitationCodeId}'>Invitation Code</label>
+        <input type='text' id='${this.invitationCodeId}' name='${this.invitationCodeId}' maxlength='50' placeholder='acfc29b1-7ec5-4ac4-88c9-0f4ea83f8739' required autofocus>
         <label for="email">email</label>
         <input type="email" id="email" name="email" maxlength='50' placeholder='name@example.com' required>
         <label for="password">password</label>
@@ -54,5 +56,10 @@ class SignUpPage extends BasePage {
 
   initializeFocus() {
     this.setFocusToFirstEmptyInputOrSubmit();
+  }
+
+  isPageMatch() {
+    const urlParams = [...new URLSearchParams(window.location.search)];
+    return urlParams.length === 1 && urlParams[0][0] && urlParams[0][0].toUpperCase() === this.invitationCodeId.toUpperCase();
   }
 };
