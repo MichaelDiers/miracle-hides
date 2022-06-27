@@ -18,7 +18,8 @@ class MessengerPage extends BasePage {
 
   initializeEventAddChat() {
     document.querySelector('#addChat').addEventListener('submit', (e) => {
-
+      e.preventDefault();
+      new AddChatMessengerPage(this.firebaseApp).show();
     });
   }
 

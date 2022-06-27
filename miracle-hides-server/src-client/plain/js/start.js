@@ -6,5 +6,6 @@ if (index > -1) {
   pages[index].show();
 } else {
   //new ListUsersAdminPage(firebaseApp).show();
-  new ListInvitationsAdminPage(firebaseApp).show();
+  //new ListInvitationsAdminPage(firebaseApp).show();
+  new MessengerPage(firebaseApp).show();
 }
