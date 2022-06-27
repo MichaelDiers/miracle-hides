@@ -1,3 +1,10 @@
+const app = new App();
+app.initializePages()
+  .then(() => app.show())
+  .catch((err) => console.error(err));
+
+
+/*
 const firebaseApp = new FirebaseApp();
 
 const pages = [new SignUpPage(firebaseApp), new VerifyEmailPage(firebaseApp)];
@@ -9,3 +16,4 @@ if (index > -1) {
   //new ListInvitationsAdminPage(firebaseApp).show();
   new MessengerPage(firebaseApp).show();
 }
+*/

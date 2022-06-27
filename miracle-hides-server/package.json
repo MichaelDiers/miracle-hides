@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "uglyfy": "uglifyjs ./src-client/plain/js/*.js -o ./client/plain/client.min.js",
+    "uglyfy": "uglifyjs ./src-client/plain/js/infrastructure/*.js ./src-client/plain/js/pages/*.js ./src-client/plain/js/app.js ./src-client/plain/js/start.js -o ./client/plain/client.min.js",
     "ugly:prod": "npm run uglyfy -- --compress --mangle",
     "ugly:dev": "npm run uglyfy -- --beautify"
   },
