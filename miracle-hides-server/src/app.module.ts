@@ -17,6 +17,7 @@ import { UserModule } from './controllers/user/user.module';
 import { InvitationCodeModule } from './controllers/invitation-code/invitation-code.module';
 import { InvitationCodesDatabaseModule } from './databases/invitation-codes-database/invitation-codes-database.module';
 import { MailerModule } from './services/mailer/mailer.module';
+import { ChatModule } from './controllers/chat/chat.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { MailerModule } from './services/mailer/mailer.module';
     InvitationCodeModule,
     InvitationCodesDatabaseModule,
     MailerModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -83,7 +83,6 @@ export class UserService {
 
   public async verifyEmailAsync(verifyEmailDto: VerifyEmailDto) : Promise<void> {
     const user = await this.userDatabaseService.findUserAsync(user => this.hashService.compare(verifyEmailDto.email, user.email));
-    console.log(user)
     if (!user 
       || !await this.hashService.compare(verifyEmailDto.password, user.password)
       || !await this.hashService.compare(verifyEmailDto.verificationCode, user.emailVerificationCode)) {

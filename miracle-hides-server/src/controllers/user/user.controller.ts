@@ -34,9 +34,7 @@ export class UserController {
 
   @Put()
   public async verifyEmailAsync(@Body() verifyEmailDto: VerifyEmailDto) : Promise<TokenDto> {
-    console.log(verifyEmailDto)
     await this.userService.verifyEmailAsync(verifyEmailDto);
-    console.log('huh?')
     return this.authController.signIn({ email: verifyEmailDto.email, password: verifyEmailDto.password });
   }
 }
