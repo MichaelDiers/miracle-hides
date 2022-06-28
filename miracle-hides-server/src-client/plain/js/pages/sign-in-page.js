@@ -27,8 +27,8 @@ class SignInPage extends BasePage {
         method: 'post',
         content: [
           HtmlComponents.text({ id: this.__messageAreaId }),
-          HtmlComponents.emailInput(),
-          HtmlComponents.passwordInput(),
+          HtmlComponents.emailInput({ value: 'md@sreid.de' }),
+          HtmlComponents.passwordInput({ value: '12345678' }),
           HtmlComponents.submitInput({ translationTag: BaseTranslator.keys.signInSubmit }),
         ],
       })}

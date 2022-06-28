@@ -23,15 +23,18 @@ class BasePage {
       const main = document.querySelector('main');
       main.id = this.__id;
       main.textContent = '';
-      console.log(await this)
-      console.log(await this.html)
-      console.log(await this)
       main.append(...(await this.html));
       await this.__translator.translate(main);
     } catch (err) {
-      console.log(err)
       this.raiseErrorEvent(err.message, err.stack);
     }
+  }
+
+  handleLink({ root, sourceId, showPageEventName, sourceEventName = 'click'} = {}) {
+    root.querySelector(`#${sourceId}`).addEventListener(sourceEventName, (e) => {
+      e.preventDefault();
+      this.raiseEvent(showPageEventName);
+    });
   }
 
   raiseErrorEvent(message, stack) {

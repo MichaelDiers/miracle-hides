@@ -207,12 +207,7 @@ class HtmlComponents {
     });
   }
 
-  static text(options = {}) {
-    const {
-      id = '',
-      value = '',
-    } = options;
-
+  static text({ id = '', value = '' } = {}) {
     return `
       <div
         ${id ? `id='${id}'` : ''}

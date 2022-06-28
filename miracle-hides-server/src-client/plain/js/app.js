@@ -10,6 +10,7 @@ class App {
     const signInEventName = 'show-sign-in-event';
     const messengerEventName = 'show-messenger-event';
     const signUpEventName = 'show-sign-up-event';
+    const messengerCreateChatEventName = 'show-messenger-create-chat-event';
 
     const setupPromises = [];
     
@@ -25,8 +26,12 @@ class App {
     });
     setupPromises.push(this.__signInPage.setup());
     
-    this.__messengerPage = new MessengerPage(translator, messengerEventName, errorEventName);
-    setupPromises.push(this.__messengerPage.setup());
+    setupPromises.push(new MessengerPage({
+      customEventName: messengerEventName,
+      errorEventName,
+      translator,
+      requestAddChatPage: messengerCreateChatEventName,
+    }).setup());
 
     this.__signUpPage = new SignUpPage({
       translator,
@@ -35,6 +40,12 @@ class App {
       requestSignInEventName: signInEventName,
     });
     setupPromises.push(this.__signUpPage.setup());
+
+    setupPromises.push(new CreateChatMessengerPage({
+      customEventName: messengerCreateChatEventName,
+      errorEventName,
+      translator,
+    }).setup());
 
     try {
       await Promise.all(setupPromises);

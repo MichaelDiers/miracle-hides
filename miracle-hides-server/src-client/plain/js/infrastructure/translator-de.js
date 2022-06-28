@@ -21,6 +21,11 @@ class DeTranslator extends BaseTranslator {
         invitationCode: 'Einladungscode',
         displayName: 'Benutzername',
         displayNamePlaceholder: 'deine Name',
+        messengerCreateChat: 'Neuer Chat',
+        messengerCreateChatHeadline: 'Neuer Chat',
+        messengerCreateChatSubmit: 'Anlegen',
+        messengerCreateChatEmail: 'Chat Partner',
+        messengerCreateChatEmailPlaceholder: 'sein_name@seine_domain.example',
       },
     );
   }

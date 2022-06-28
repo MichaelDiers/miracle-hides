@@ -18,6 +18,11 @@ class BaseTranslator {
     invitationCode: 'invitationCode',
     displayName: 'displayName',
     displayNamePlaceholder: 'displayNamePlaceholder',
+    messengerCreateChat: 'messengerCreateChat',
+    messengerCreateChatHeadline: 'messengerCreateChatHeadline',
+    messengerCreateChatSubmit: 'messengerCreateChatSubmit',
+    messengerCreateChatEmail: 'messengerCreateChatEmail',
+    messengerCreateChatEmailPlaceholder: 'messengerCreateChatEmailPlaceholder',
   }
 
   constructor(language, translations) {
