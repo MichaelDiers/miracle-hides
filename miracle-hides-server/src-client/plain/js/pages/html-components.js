@@ -144,6 +144,9 @@ class HtmlComponents {
     link = 'link',
     translationTag,
     cssClass = 'linkButton',
+    event = '',
+    previous = '',
+    next = '',
   } = {}) {
     return `
       <a
@@ -151,6 +154,9 @@ class HtmlComponents {
         href='${link}'
         ${BaseTranslator.translationTag}='${translationTag}'
         ${id ? `id='${id}'` : ''}
+        ${event ? `event='${event}'` : ''}
+        ${previous ? `previous='${previous}'` : ''}
+        ${next ? `next='${next}'` : ''}
       ></a>`
   }
 
@@ -180,6 +186,38 @@ class HtmlComponents {
     });
   }
 
+  static select({
+    id,
+    name = id,
+    content = [],
+    translationTag,
+  }) {
+    return `
+      <label
+        ${id ? `for='${id}'` : ''}
+        ${translationTag ? `${BaseTranslator.translationTag}='${translationTag}'` : ''}
+      ></label>
+      <select
+        ${id ? `id='${id}'` : ''}
+        ${name ? `name='${name}'` : ''}
+      >
+        ${content.join('')}
+      </select>
+    `;
+  }
+
+  static selectOption({ value, translationTag, isSelected = false, displayValue }) {
+    return `
+      <option
+        ${value ? `value='${value}'` : ''}
+        ${translationTag ? `${BaseTranslator.translationTag}='${translationTag}'` : ''}
+        ${isSelected ? ' selected ' : ''}
+      >
+        ${displayValue ? displayValue : ''}
+      </option>
+    `
+  }
+
   static submitInput(options = {}) {
     const {
       addLabel = false,
@@ -207,12 +245,45 @@ class HtmlComponents {
     });
   }
 
-  static text({ id = '', value = '' } = {}) {
+  static text({ id = '', value = '', translationTag = '', cssClass = 'info-text' } = {}) {
     return `
       <div
         ${id ? `id='${id}'` : ''}
+        ${translationTag ? `${BaseTranslator.translationTag}='${translationTag}'` : ''}
+        ${cssClass ? `class='${cssClass}'` : ''}
       >${value || ''}
       </div>
     `;
+  }
+
+  static textarea({ id, name = id, cols, rows, translationTag, translationTagPlaceholder }) {
+    return `
+      <label
+        ${id ? `for='${id}'` : ''}
+        ${translationTag ? `${BaseTranslator.translationTag}='${translationTag}'` : ''}
+      ></label>
+      <textarea
+        ${name ? `name='${name}'` : ''}
+        ${id ? `id='${id}'` : ''}
+        ${cols ? `cols='${cols}'` : ''}
+        ${rows ? `rows='${rows}'` : ''}
+        ${translationTagPlaceholder ? `${BaseTranslator.translationPlaceholderTag}='${translationTagPlaceholder}'` : ''}
+        ></textarea>
+    `;
+  }
+  
+  static workflow({
+    pages = [],
+    cssClass = 'hide',
+  }) {
+    
+    return pages.map((page, index) => {
+      return `<div
+        id='page_${index}'
+        class='${(cssClass && index !== 0) ? cssClass : ''} page'
+      >
+        ${page}
+      </div>`
+    }).join('');
   }
 }
