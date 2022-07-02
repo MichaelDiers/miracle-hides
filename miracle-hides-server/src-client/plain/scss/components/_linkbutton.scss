@@ -5,3 +5,9 @@
   text-align: center;
   width: 200px;
 }
+
+.linkButton.disabled {
+  border-color: gray;
+  background-color: gray;
+  cursor: inherit;
+}
