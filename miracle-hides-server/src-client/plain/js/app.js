@@ -6,56 +6,46 @@ class App {
   async initializePages() {
     const translator = new Translator();
 
-    const errorEventName = 'show-error-event';
-    const signInEventName = 'show-sign-in-event';
-    const messengerEventName = 'show-messenger-event';
-    const signUpEventName = 'show-sign-up-event';
-    const messengerCreateChatEventName = 'show-messenger-create-chat-event';
-
     const setupPromises = [];
     
-    this.__errorPage = new ErrorPage(translator, errorEventName);
-    setupPromises.push(this.__errorPage.setup(console.error));
-    
-    this.__signInPage = new SignInPage({
+    setupPromises.push(new ErrorPage({ translator }).setup(console.error));    
+    setupPromises.push(new SignInPage({
       translator,
-      customEventName: signInEventName,
-      errorEventName,
-      signedInEventName: messengerEventName,
-      requestSignUpEvent: signUpEventName,
-    });
-    setupPromises.push(this.__signInPage.setup());
-    
-    setupPromises.push(new MessengerPage({
-      customEventName: messengerEventName,
-      errorEventName,
-      translator,
-      requestAddChatPage: messengerCreateChatEventName,
+      errorEventName: ErrorPage.name,
+      signedInEventName: MessengerPage.name,
+      requestSignUpEvent: SignUpPage.name,
     }).setup());
-
-    this.__signUpPage = new SignUpPage({
+    setupPromises.push(new MessengerPage({
+      errorEventName: ErrorPage.name,
       translator,
-      customEventName: signUpEventName,
-      errorEventName,
-      requestSignInEventName: signInEventName,
-    });
-    setupPromises.push(this.__signUpPage.setup());
-
-    setupPromises.push(new CreateChatMessengerPage({
-      customEventName: messengerCreateChatEventName,
-      errorEventName,
+      requestAddChatPage: CreateChatMessengerPage.name,
+      requestAddChatInvitationPage: CreateChatInvitationPage.name,
+    }).setup());
+    setupPromises.push(new SignUpPage({
+      translator,      
+      errorEventName: ErrorPage.name,
+      requestSignInEventName: SignInPage.name,
+    }).setup());
+    setupPromises.push(new CreateChatMessengerPage({      
+      errorEventName: ErrorPage.name,
       translator,
+    }).setup());
+    setupPromises.push(new CreateChatInvitationPage({      
+      errorEventName: ErrorPage.name,
+      translator,
+      nextEventName: MessengerPage.name,
     }).setup());
 
     try {
       await Promise.all(setupPromises);
+
     } catch (err) {
       console.error('Cannot setup pages', err);
     }
   }
 
   show() {
-    this.__signInPage.display();
+    EventRaiser.raise({ eventName: SignInPage.name });
   }
 
   start() {

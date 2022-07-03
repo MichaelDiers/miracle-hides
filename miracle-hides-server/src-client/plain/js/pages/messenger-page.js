@@ -1,6 +1,16 @@
 class MessengerPage extends BasePage {
-  constructor({ translator, customEventName, errorEventName, requestAddChatPage, requestAddChatInvitationPage }) {
-    super({ translator, customEventName, errorEventName, id: 'messanger' });
+  constructor({
+    translator,    
+    errorEventName,
+    requestAddChatPage,
+    requestAddChatInvitationPage,
+   }) {
+    super({
+      customEventName: MessengerPage.name,
+      errorEventName,
+      id: MessengerPage.name,
+      translator,
+    });
 
     this.__createChatId = 'createChat';
     this.__createChatInvitationId = 'createChatInvitation';
@@ -11,7 +21,13 @@ class MessengerPage extends BasePage {
 
   async setup() {
     super.setup()
-      .catch((err) => this.raiseErrorEvent(err.message, err.stack));
+      .catch((err) => EventRaiser.raise({
+        eventName: this.__errorEventName,
+      detail: {
+        message: err.message,
+        stack: err.stack,
+      }
+    }));
   }
 
   async setupHtml() {

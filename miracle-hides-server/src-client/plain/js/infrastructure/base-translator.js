@@ -23,6 +23,29 @@ class BaseTranslator {
     messengerCreateChatSubmit: 'messengerCreateChatSubmit',
     messengerCreateChatEmail: 'messengerCreateChatEmail',
     messengerCreateChatEmailPlaceholder: 'messengerCreateChatEmailPlaceholder',
+
+    messengerCreateChatInvitation: 'messengerCreateChatInvitation',    
+    
+    createChatInvitationPage_headline: 'createChatInvitationPage_headline',
+    createChatInvitationPage_next: 'createChatInvitationPage_next',
+    createChatInvitationPage_nextFinal: 'createChatInvitationPage_nextFinal',
+    createChatInvitationPage_previous: 'createChatInvitationPage_previous',
+    createChatInvitationPage_receiver: 'createChatInvitationPage_receiver',
+    createChatInvitationPage_receiverPlaceholder: 'createChatInvitationPage_receiverPlaceholder',
+    createChatInvitationPage_receiverText: 'createChatInvitationPage_receiverText',
+
+    createChatInvitationPage_keysText: 'createChatInvitationPage_keysText',
+    createChatInvitationPage_keysSize: 'createChatInvitationPage_keysSize',
+    createChatInvitationPage_keysPrivate: 'createChatInvitationPage_keysPrivate',
+    createChatInvitationPage_keysPrivatePlaceholder: 'createChatInvitationPage_keysPrivatePlaceholder',
+    createChatInvitationPage_keysPublic: 'createChatInvitationPage_keysPublic',
+    createChatInvitationPage_keysPublicPlaceholder: 'createChatInvitationPage_keysPublicPlaceholder',
+    createChatInvitationPage_keysGenerate: 'createChatInvitationPage_keysGenerate',
+    createChatInvitationPage_keysMismatch: 'createChatInvitationPage_keysMismatch',
+    createChatInvitationPage_addKeysText: 'createChatInvitationPage_addKeysText',
+    createChatInvitationPage_addKeysCopy: 'createChatInvitationPage_addKeysCopy',
+    createChatInvitationPage_sendKeysText: 'createChatInvitationPage_sendKeysText',
+    createChatInvitationPage_sendKeysCopy: 'createChatInvitationPage_sendKeysCopy',
   }
 
   constructor(language, translations) {

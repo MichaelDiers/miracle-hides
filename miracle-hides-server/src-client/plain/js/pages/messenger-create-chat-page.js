@@ -1,6 +1,11 @@
 class CreateChatMessengerPage extends BasePage {
-  constructor({ translator, customEventName, errorEventName }) {
-    super({ translator, customEventName, errorEventName, id: 'createChatMessenger' });    
+  constructor({ translator, errorEventName }) {
+    super({
+      customEventName: CreateChatMessengerPage.name,
+      errorEventName,
+      id: CreateChatMessengerPage.name,
+      translator,
+    });    
 
     this.__formId = 'createChatMessengerPageForm';
     this.__messageAreaId = 'messageArea';

@@ -12,6 +12,8 @@ class BasePage {
     this.__html = undefined;
 
     this.__id = id;
+
+    this.__linkEventsAttached = false;
   }
 
   get html() { return this.__html; }
@@ -22,36 +24,36 @@ class BasePage {
     try {
       const main = document.querySelector('main');
       main.id = this.__id;
+      console.log(main.id)
       main.textContent = '';
       main.append(...(await this.html));
+      if (!this.__linkEventsAttached) {
+        main.querySelectorAll('a[event]').forEach((element) => {
+          const eventName = element.getAttribute('event');
+          element.addEventListener('click', (e) => {
+            e.preventDefault();
+            EventRaiser.raise({ eventName });
+          })
+        });
+      }
+      
       await this.__translator.translate(main);
     } catch (err) {
-      this.raiseErrorEvent(err.message, err.stack);
+      EventRaiser.raise({
+        eventName: this.__errorEventName,
+        detail: {
+          message: err.message,
+          stack: err.stack,
+        }
+      });
     }
   }
 
   handleLink({ root, sourceId, showPageEventName, sourceEventName = 'click'} = {}) {
     root.querySelector(`#${sourceId}`).addEventListener(sourceEventName, (e) => {
       e.preventDefault();
-      this.raiseEvent(showPageEventName);
+      EventRaiser.raise({ eventName: showPageEventName });
     });
-  }
-
-  raiseErrorEvent(message, stack) {
-    this.raiseEvent(this.__errorEventName, { message, stack });
-  }
-
-  raiseEvent(eventName, detail) {
-    document.body.dispatchEvent(
-      new CustomEvent(
-        eventName,
-        {
-          bubbles: true,
-          cancelable: true,
-          detail
-        },
-      ),
-    );
   }
 
   async setup(logError) {
@@ -69,5 +71,10 @@ class BasePage {
 
   async setupHtml() {
     throw new Error('not implemented');
+  }
+
+  async translate(element) {
+    const root = element || document.main;
+    return this.__translator.translate(root);
   }
 }

@@ -1,6 +1,11 @@
 class ErrorPage extends BasePage {
-  constructor(translator, customEventName) {
-    super({ translator, customEventName, customEventName, id: 'error' });
+  constructor({ translator }) {
+    super({
+      customEventName: ErrorPage.name,
+      errorEventName: ErrorPage.name,
+      id: ErrorPage.name,
+      translator,
+    });
   }
 
   async setupHtml() {

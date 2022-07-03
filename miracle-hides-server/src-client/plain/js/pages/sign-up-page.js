@@ -1,12 +1,16 @@
 class SignUpPage extends BasePage {
-  constructor(options = {}) {
-    const {
-      translator,
-      customEventName,
+  constructor({
+    translator,
+    customEventName,
+    errorEventName,
+    requestSignInEventName,
+  }) {
+    super({
+      customEventName: SignUpPage.name,
       errorEventName,
-      requestSignInEventName,
-    } = options;
-    super({ translator, customEventName, errorEventName, id: 'signup' });
+      id: SignUpPage.name,
+      translator,
+    });
 
     this.__requestSignInEventName = requestSignInEventName;
 
@@ -45,8 +49,8 @@ class SignUpPage extends BasePage {
     `;
     
     div.querySelector(`#${this.__signInLinkId}`).addEventListener('click', (e) => {
-      e.preventDefault();      
-      this.raiseEvent(e.target.getAttribute('href'));
+      e.preventDefault();     
+      EventRaiser.raise({ eventName: e.target.getAttribute('href') }); 
     });
 
     const passwordErrorClass = 'password-error';

@@ -1,14 +1,16 @@
 class SignInPage extends BasePage {
-  constructor(options = {}) {
-    const {
-      translator,
-      customEventName,
+  constructor({
+    translator,    
+    errorEventName,
+    signedInEventName,
+    requestSignUpEvent,
+  }) {
+    super({
+      customEventName: SignInPage.name,
       errorEventName,
-      signedInEventName,
-      requestSignUpEvent,
-    } = options;
-
-    super({ translator, customEventName, errorEventName, id: 'signin' });
+      id: SignInPage.name,
+      translator,
+    });
 
     this.__signedInEventName = signedInEventName;
     this.__requestSignUpEvent = requestSignUpEvent;
@@ -27,8 +29,8 @@ class SignInPage extends BasePage {
         method: 'post',
         content: [
           HtmlComponents.text({ id: this.__messageAreaId }),
-          HtmlComponents.emailInput({ value: 'md@sreid.de' }),
-          HtmlComponents.passwordInput({ value: '12345678' }),
+          HtmlComponents.emailInput({ value: '' }),
+          HtmlComponents.passwordInput({ value: '' }),
           HtmlComponents.submitInput({ translationTag: BaseTranslator.keys.signInSubmit }),
         ],
       })}
@@ -43,7 +45,7 @@ class SignInPage extends BasePage {
     div.querySelector('form').addEventListener('submit', (e) => {
       e.preventDefault();
       AjaxHandler.submitForm({ formElement: e.target })
-        .then((json) => this.raiseEvent(this.__signedInEventName))
+        .then((json) => EventRaiser.raise({ eventName: this.__signedInEventName }))
         .catch((json) => {
           const messageAreaElement = document.getElementById(this.__messageAreaId);
           messageAreaElement.setAttribute(BaseTranslator.translationTag, `signIn${json.status}`);
@@ -53,7 +55,7 @@ class SignInPage extends BasePage {
 
     div.querySelector(`#${this.__signUpLinkId}`).addEventListener('click', (e) => {
       e.preventDefault();
-      this.raiseEvent(e.target.getAttribute('href'));
+      EventRaiser.raise({ eventName: e.target.getAttribute('href') });
     });
 
     return [...div.children];
