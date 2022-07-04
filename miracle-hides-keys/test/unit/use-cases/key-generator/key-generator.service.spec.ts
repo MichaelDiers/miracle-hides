@@ -1,0 +1,29 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { KEY_GENERATOR } from '../../../../src/core/interfaces/services/key-generator.interface';
+import { UtilsModule } from '../../../../src/core/utils/utils.module';
+import { RsaKeyGeneratorModule } from '../../../../src/use-cases/rsa-key-generator/rsa-key-generator.module';
+import KeyGeneratorService from '../../../../src/use-cases/key-generator/key-generator.service';
+
+describe('KeyGeneratorService', () => {
+  let service: KeyGeneratorService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      exports: [KEY_GENERATOR],
+      imports: [RsaKeyGeneratorModule, UtilsModule],
+      providers: [
+        {
+          provide: KEY_GENERATOR,
+          useClass: KeyGeneratorService,
+        },
+        KeyGeneratorService,
+      ],
+    }).compile();
+
+    service = module.get<KeyGeneratorService>(KeyGeneratorService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
