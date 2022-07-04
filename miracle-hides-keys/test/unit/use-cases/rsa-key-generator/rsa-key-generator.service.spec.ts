@@ -25,4 +25,20 @@ describe('RsaKeyGeneratorService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should generate private and public key', async () => {
+    const result = await service.generateAsync({ keySize: 1024 });
+
+    expect(result).toBeTruthy();
+
+    expect(result.privateKey).toBeTruthy();
+    expect(result.privateKey).toMatch(
+      /^-----BEGIN RSA PRIVATE KEY-----.+-----END RSA PRIVATE KEY-----\s*$/gms,
+    );
+
+    expect(result.publicKey).toBeTruthy();
+    expect(result.publicKey).toMatch(
+      /^-----BEGIN RSA PUBLIC KEY-----.+-----END RSA PUBLIC KEY-----\s*$/gms,
+    );
+  });
 });
