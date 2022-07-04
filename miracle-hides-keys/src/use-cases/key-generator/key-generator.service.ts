@@ -1,7 +1,6 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import {
   KeyGenerator,
-  LOGGER,
   RsaKeyGenerator,
   RSA_KEY_GENERATOR,
 } from '../../core/interfaces/services/services';
@@ -16,8 +15,6 @@ export default class KeyGeneratorService implements KeyGenerator {
   constructor(
     @Inject(RSA_KEY_GENERATOR)
     private readonly rsaKeyGenerator: RsaKeyGenerator,
-    @Inject(LOGGER)
-    private readonly logger: Logger,
   ) {}
 
   async generateAsync(keyOptions: KeyOptions): Promise<KeysResult> {
@@ -27,8 +24,7 @@ export default class KeyGeneratorService implements KeyGenerator {
           keySize: keyOptions.keySize,
         });
       default:
-        this.logger.error(`Unknown key type '${keyOptions.type}'`);
-        return { publicKey: '', privateKey: '' };
+        throw new BadRequestException(`Unknown key type '${keyOptions.type}'`);
     }
   }
 }
