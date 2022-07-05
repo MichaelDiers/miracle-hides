@@ -1,5 +1,14 @@
+import Translator from '../translations/translator';
+
 export default abstract class BasePage {
   private __html: Element[];
+
+  private readonly __source: string;
+
+  constructor() {
+    this.__source = this.constructor.name;
+    this.__source = `${this.source[0].toLowerCase()}${this.__source.substring(1)}`;
+  }
 
   display() : void {
     const main = document.querySelector('main');
@@ -15,9 +24,16 @@ export default abstract class BasePage {
     this.__html = content;
   }
 
-  async setupAsync() : Promise<BasePage> {
+  get source() : string {
+    return this.__source;  
+  }
+
+  async setupAsync(translator: Translator) : Promise<BasePage> {
     const div = document.createElement('div');
     div.innerHTML = this.setupHtml();
+    console.log(this.setupHtml())
+    console.log(div)
+    await translator.translate(div);
     this.html = [...div.children];
 
     document.body.addEventListener(BasePage.constructor.name, (e) => {
