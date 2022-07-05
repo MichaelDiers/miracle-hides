@@ -8,9 +8,14 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "build:client:plain": "npm run build:client:plain:html && npm run build:client:plain:images",
+    "build:client:plain:dev": "npm run build:client:plain:generic && npm run build:client:plain:uglyfy:dev",
+    "build:client:plain:prod": "npm run build:client:plain:generic && npm run build:client:plain:uglyfy:prod",
+    "build:client:plain:generic": "npm run build:client:plain:html && npm run build:client:plain:images",
     "build:client:plain:html": "npx copyfiles -u 2 src-client/plain/*.html dist/client/plain",
     "build:client:plain:images": "npx copyfiles -u 2 src-client/plain/*.png dist/client/plain",
+    "build:client:plain:uglyfy": "uglifyjs ./src-client/plain/js/main.js -o ./dist/client/plain/client.min.js",
+    "build:client:plain:uglyfy:prod": "npm run build:client:plain:uglyfy -- --compress --mangle",
+    "build:client:plain:uglyfy:dev": "npm run build:client:plain:uglyfy -- --beautify",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -58,7 +63,8 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "4.0.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "uglify-js": "^3.16.2"
   },
   "jest": {
     "moduleFileExtensions": [
