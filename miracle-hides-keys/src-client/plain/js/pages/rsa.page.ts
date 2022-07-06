@@ -2,6 +2,19 @@ import BasePage from './base-page';
 import HtmlComponents from './html-components';
 
 export default class RsaPage extends BasePage {
+  private readonly generateFormId = 'generate';
+
+  private readonly keySizeId = 'keySize';
+
+  setupEvents(element: HTMLElement) : void {
+    element.querySelector(`#${this.generateFormId}`).addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const keySize = (document.getElementById(this.keySizeId) as HTMLSelectElement).value;
+      console.log(keySize);
+    });
+  }
+
   setupHtml() : string {
     const { source } = this;
 
@@ -9,11 +22,11 @@ export default class RsaPage extends BasePage {
       ${HtmlComponents.h1({ source, value: 'headline' })}
       ${HtmlComponents.form({
     action: 'action',
-    id: 'form',
+    id: this.generateFormId,
     method: 'post',
     content: [
       HtmlComponents.select({
-        id: 'keySize',
+        id: this.keySizeId,
         label: 'keySize',
         placeholder: 'keySize',
         source,

@@ -31,6 +31,7 @@ export default abstract class BasePage {
   async setupAsync(translator: Translator) : Promise<BasePage> {
     const div = document.createElement('div');
     div.innerHTML = this.setupHtml();
+    this.setupEvents(div);
     await translator.translate(div);
     this.html = [...div.children];
 
@@ -43,4 +44,6 @@ export default abstract class BasePage {
   }
 
   abstract setupHtml() : string;
+
+  abstract setupEvents(element: HTMLElement) : void;
 }
