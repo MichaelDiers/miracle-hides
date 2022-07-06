@@ -1,4 +1,4 @@
-import RsaLanguage from './language-rsa'
+import RsaLanguage from './language-rsa';
 
 export default interface Language {
   rsaPage: RsaLanguage;

@@ -7,7 +7,7 @@ export default interface RsaLanguage extends LanguagePage {
   keySize4096: string;
   submit: string;
   publicKey: string;
-  publicKeyPlaceholder: string;       
-          privateKey: string;
-          privateKeyPlaceholder: string;
+  publicKeyPlaceholder: string;
+  privateKey: string;
+  privateKeyPlaceholder: string;
 }

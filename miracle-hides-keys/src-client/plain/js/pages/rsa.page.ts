@@ -3,12 +3,12 @@ import HtmlComponents from './html-components';
 
 export default class RsaPage extends BasePage {
   setupHtml() : string {
-    const {source} = this;
-    
+    const { source } = this;
+
     return `
       ${HtmlComponents.h1({ source, value: 'headline' })}
       ${HtmlComponents.form({
-    action: 'action',        
+    action: 'action',
     id: 'form',
     method: 'post',
     content: [
@@ -20,20 +20,21 @@ export default class RsaPage extends BasePage {
         options: [
           HtmlComponents.selectOption('1024', 'keySize1024', source),
           HtmlComponents.selectOption('2048', 'keySize2048', source),
-          HtmlComponents.selectOption('4096', 'keySize4096', source)
+          HtmlComponents.selectOption('4096', 'keySize4096', source),
         ],
       }),
       HtmlComponents.submit({
         label: 'submit',
-        source,            
-      })
+        source,
+      }),
     ],
   })}
-      ${HtmlComponents.textarea({ id: 'privateKey', label: 'privateKey', placeholder: 'privateKeyPlaceholder', source })}
-      ${HtmlComponents.textarea({ id: 'publicKey', label: 'publicKey', placeholder: 'publicKeyPlaceholder', source })}
+      ${HtmlComponents.textarea({
+    id: 'privateKey', label: 'privateKey', placeholder: 'privateKeyPlaceholder', source,
+  })}
+      ${HtmlComponents.textarea({
+    id: 'publicKey', label: 'publicKey', placeholder: 'publicKeyPlaceholder', source,
+  })}
     `;
   }
-
-
-  
 }

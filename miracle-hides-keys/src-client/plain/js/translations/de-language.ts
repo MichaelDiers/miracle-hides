@@ -16,7 +16,8 @@ export default class DeLanguage extends BaseLanguage {
           publicKeyPlaceholder: 'noch kein Schlüssel generiert',
           privateKey: 'Privater Schlüssel',
           privateKeyPlaceholder: 'noch kein Schlüssel generiert',
-        }
-      });
+        },
+      },
+    );
   }
 }

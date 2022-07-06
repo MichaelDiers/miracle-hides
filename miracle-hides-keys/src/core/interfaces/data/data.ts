@@ -7,6 +7,5 @@ export {
   KeyOptions,
   KeysResult,
   KeyType,
-  RsaKeyOptions,   
-
+  RsaKeyOptions,
 };

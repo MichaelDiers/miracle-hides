@@ -8,7 +8,6 @@ describe('RsaKeyGeneratorService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      exports: [RSA_KEY_GENERATOR],
       imports: [UtilsModule],
       providers: [
         {

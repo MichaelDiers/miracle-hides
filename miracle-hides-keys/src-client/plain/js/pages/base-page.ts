@@ -25,22 +25,22 @@ export default abstract class BasePage {
   }
 
   get source() : string {
-    return this.sourceName;  
+    return this.sourceName;
   }
 
   async setupAsync(translator: Translator) : Promise<BasePage> {
     const div = document.createElement('div');
-    div.innerHTML = this.setupHtml();    
+    div.innerHTML = this.setupHtml();
     await translator.translate(div);
     this.html = [...div.children];
 
     document.body.addEventListener(BasePage.constructor.name, (e) => {
       e.preventDefault();
-      this.display();      
+      this.display();
     });
 
     return this;
   }
 
   abstract setupHtml() : string;
-};
+}

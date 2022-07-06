@@ -6,7 +6,7 @@ export default class CustomEventRaiser {
         {
           bubbles: true,
           cancelable: true,
-          detail
+          detail,
         },
       ),
     );

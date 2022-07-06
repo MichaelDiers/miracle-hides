@@ -15,7 +15,6 @@ export default class App {
   private async setupAsync() : Promise<void> {
     const pagePromises = this.setupPages();
     await Promise.all(pagePromises);
-
   }
 
   private setupPages() : Promise<BasePage>[] {
