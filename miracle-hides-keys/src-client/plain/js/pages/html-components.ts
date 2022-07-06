@@ -1,4 +1,9 @@
-import { TRANSLATION_VALUE_NAME, TRANSLATION_DESTINATION_PLACEHOLDER, TRANSLATION_DESTINATION_TEXT_CONTENT } from '../translations/translation-constants';
+import {
+  TRANSLATION_VALUE_NAME,
+  TRANSLATION_DESTINATION_PLACEHOLDER,
+  TRANSLATION_DESTINATION_TEXT_CONTENT,
+  TRANSLATION_DESTINATION_VALUE,
+} from '../translations/translation-constants';
 
 export default class HtmlComponents {
   static form({ action = '', content = [], method = '', id = '' } : { action?: string, content?: string[], method?: string, id?: string } = {}) : string {
@@ -22,8 +27,50 @@ export default class HtmlComponents {
     });
   }
 
-  public static inputText({ id = '', label = '', name = id, placeholder = '', source = '' } : { id?: string, name?: string, label?: string, placeholder?: string, source?: string }) : string {
+  static inputText({ id = '', label = '', name = id, placeholder = '', source = '' } : { id?: string, name?: string, label?: string, placeholder?: string, source?: string }) : string {
     return HtmlComponents.input({ id, label, name, placeholder, source, type: 'text' });
+  }
+
+  static select({ id = '', label = '', name = id, placeholder = '', source = '', options = [] } : { id?: string, name?: string, label?: string, placeholder?: string, source?: string, options?: string[] }) : string {
+    return `
+      ${HtmlComponents.label({ label, source, id })}
+      <select
+        ${HtmlComponents.add('id', id)}
+        ${HtmlComponents.add('name', name)}
+        ${HtmlComponents.translationValue({ source, value: placeholder, destination: TRANSLATION_DESTINATION_PLACEHOLDER })}
+      >
+        ${options.join('')}
+      </select>
+    `;
+  }
+
+  static selectOption(value: string, label: string, source: string) : string {
+    return `
+      <option
+        value='${value}'
+        ${HtmlComponents.translationValue({ source, value: label, destination: TRANSLATION_DESTINATION_TEXT_CONTENT })}
+      ></option>
+    `;
+  }
+
+  static submit({ label = '', source = '', type = 'submit' } : { label?: string, source?: string, type?: string } = {}) : string {
+    return `
+      <input
+        type='${type}'
+        ${HtmlComponents.translationValue({ source, value: label, destination: TRANSLATION_DESTINATION_VALUE })}
+      ></input>
+    `;
+  }
+
+  static textarea({ id = '', label = '', name = id, placeholder = '', source = '' } : { id?: string, name?: string, label?: string, placeholder?: string, source?: string }) : string {
+    return `
+      ${HtmlComponents.label({ label, source, id })}
+      <textarea
+        ${HtmlComponents.add('id', id)}
+        ${HtmlComponents.add('name', name)}
+        ${HtmlComponents.translationValue({ source, value: placeholder, destination: TRANSLATION_DESTINATION_PLACEHOLDER })}
+      ></textarea>
+    `;
   }
 
   private static add(attributeName: string, attributeValue: string) : string {
@@ -36,7 +83,11 @@ export default class HtmlComponents {
       <input
         ${HtmlComponents.add('id', id)}
         ${HtmlComponents.add('name', name)}
-        ${HtmlComponents.translationValue({ source, value: placeholder, destination: TRANSLATION_DESTINATION_PLACEHOLDER })}
+        ${HtmlComponents.translationValue({
+    source,
+    value: placeholder,
+    destination: TRANSLATION_DESTINATION_PLACEHOLDER,
+  })}
         type='${type}'
       ></input>
     `;

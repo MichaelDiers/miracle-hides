@@ -12,7 +12,7 @@ export default abstract class BasePage {
 
   display() : void {
     const main = document.querySelector('main');
-    main.id = this.constructor.name;
+    main.id = this.source;
     this.html.forEach((element: Element) => main.appendChild(element));
   }
 

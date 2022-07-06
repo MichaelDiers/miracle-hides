@@ -20,6 +20,8 @@ export default class Translator {
         element.textContent = translated;
       } else if (destination === constants.TRANSLATION_DESTINATION_PLACEHOLDER) {        
         element.setAttribute('placeholder', translated);
+      } else if (destination === constants.TRANSLATION_DESTINATION_VALUE) {
+        element.setAttribute('value', translated);
       }
     });
   }
