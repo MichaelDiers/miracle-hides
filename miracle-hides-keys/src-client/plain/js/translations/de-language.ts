@@ -6,7 +6,8 @@ export default class DeLanguage extends BaseLanguage {
       'de',
       {
         rsaPage: {
-          headline: 'RSA Generator'
+          headline: 'RSA Generator',
+          keySize: 'Schlüssellänge',
         }
       });
   }

@@ -4,5 +4,8 @@ import KeyType from './key-type.enum';
 import RsaKeyOptions from './rsa-key-options';
 
 export {
- KeyOptions, KeysResult, KeyType, RsaKeyOptions 
+  KeyOptions,
+  KeysResult,
+  KeyType,
+  RsaKeyOptions,
 };

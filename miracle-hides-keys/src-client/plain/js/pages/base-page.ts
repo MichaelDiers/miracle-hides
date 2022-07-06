@@ -1,13 +1,13 @@
 import Translator from '../translations/translator';
 
 export default abstract class BasePage {
-  private __html: Element[];
+  private content: Element[];
 
-  private readonly __source: string;
+  private readonly sourceName: string;
 
   constructor() {
-    this.__source = this.constructor.name;
-    this.__source = `${this.source[0].toLowerCase()}${this.__source.substring(1)}`;
+    this.sourceName = this.constructor.name;
+    this.sourceName = `${this.source[0].toLowerCase()}${this.sourceName.substring(1)}`;
   }
 
   display() : void {
@@ -17,22 +17,20 @@ export default abstract class BasePage {
   }
 
   get html() : Element[] {
-    return this.__html;
+    return this.content;
   }
 
   set html(content: Element[]) {
-    this.__html = content;
+    this.content = content;
   }
 
   get source() : string {
-    return this.__source;  
+    return this.sourceName;  
   }
 
   async setupAsync(translator: Translator) : Promise<BasePage> {
     const div = document.createElement('div');
-    div.innerHTML = this.setupHtml();
-    console.log(this.setupHtml())
-    console.log(div)
+    div.innerHTML = this.setupHtml();    
     await translator.translate(div);
     this.html = [...div.children];
 
