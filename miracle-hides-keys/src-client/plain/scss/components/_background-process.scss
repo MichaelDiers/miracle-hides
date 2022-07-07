@@ -1,0 +1,15 @@
+.background-process-active {
+  cursor: wait;
+  position: relative;
+}
+
+.background-process-active::before {
+  content:"";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(10, 10, 10, .2);
+}

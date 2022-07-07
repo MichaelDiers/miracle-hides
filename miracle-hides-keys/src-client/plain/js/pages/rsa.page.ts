@@ -1,17 +1,34 @@
+import Ajax from '../infrastructure/ajax';
 import BasePage from './base-page';
 import HtmlComponents from './html-components';
 
+const PRIVATE_KEY_ID : string = 'privateKey';
+
+const PUBLIC_KEY_ID : string = 'publicKey';
+
+const GENERATE_FORM_ID : string = 'generateForm';
+
+const KEY_SIZE_ID : string = 'keySize';
+
+const KEY_TYPE_ID: string = 'type';
+
 export default class RsaPage extends BasePage {
-  private readonly generateFormId = 'generate';
-
-  private readonly keySizeId = 'keySize';
-
   setupEvents(element: HTMLElement) : void {
-    element.querySelector(`#${this.generateFormId}`).addEventListener('submit', (e) => {
+    element.querySelector(`#${GENERATE_FORM_ID}`).addEventListener('submit', (e) => {
       e.preventDefault();
+      document.getElementById(PRIVATE_KEY_ID).textContent = '';
+      document.getElementById(PUBLIC_KEY_ID).textContent = '';           
 
-      const keySize = (document.getElementById(this.keySizeId) as HTMLSelectElement).value;
-      console.log(keySize);
+      Ajax.sendFormAsync({ formElement: e.target as HTMLFormElement })
+        .then(({ data, success }) => {
+          if (!success || !data) {
+            // todo
+          } else {
+            document.getElementById(PRIVATE_KEY_ID).textContent = data['privateKey'];
+            document.getElementById(PUBLIC_KEY_ID).textContent = data['publicKey'];            
+          }
+        })
+        .catch((x) => console.log('error', x));        
     });
   }
 
@@ -21,12 +38,13 @@ export default class RsaPage extends BasePage {
     return `
       ${HtmlComponents.h1({ source, value: 'headline' })}
       ${HtmlComponents.form({
-    action: 'action',
-    id: this.generateFormId,
+    action: '/keys',
+    id: GENERATE_FORM_ID,
     method: 'post',
     content: [
+      HtmlComponents.inputHidden({ id: KEY_TYPE_ID, value: 'RSA' }),
       HtmlComponents.select({
-        id: this.keySizeId,
+        id: KEY_SIZE_ID,
         label: 'keySize',
         placeholder: 'keySize',
         source,
@@ -43,10 +61,10 @@ export default class RsaPage extends BasePage {
     ],
   })}
       ${HtmlComponents.textarea({
-    id: 'privateKey', label: 'privateKey', placeholder: 'privateKeyPlaceholder', source,
+    id: PRIVATE_KEY_ID, label: 'privateKey', placeholder: 'privateKeyPlaceholder', source,
   })}
       ${HtmlComponents.textarea({
-    id: 'publicKey', label: 'publicKey', placeholder: 'publicKeyPlaceholder', source,
+    id: PUBLIC_KEY_ID, label: 'publicKey', placeholder: 'publicKeyPlaceholder', source,
   })}
     `;
   }

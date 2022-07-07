@@ -43,6 +43,18 @@ export default class HtmlComponents {
     });
   }
 
+  static inputHidden({
+    id = '',    
+    name = id,    
+    value = '',
+  } : {
+    id?: string,
+    name?: string,
+    value?: string,
+  }) : string {
+    return this.input({ id, name, type: 'hidden', value });
+  }
+
   static inputText({
     id = '',
     label = '',
@@ -148,19 +160,22 @@ export default class HtmlComponents {
     placeholder = '',
     source = '',
     type,
+    value = '',
   } : {
     id: string,
-    label: string,
+    label?: string,
     name: string,
     placeholder?: string,
     source?: string,
     type: string,
+    value?: string,
   }) : string {
     return `
       ${HtmlComponents.label({ label, source, id })}
       <input
         ${HtmlComponents.add('id', id)}
         ${HtmlComponents.add('name', name)}
+        ${HtmlComponents.add('value', value)}
         ${HtmlComponents.translationValue({
     source,
     value: placeholder,
