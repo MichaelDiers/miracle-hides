@@ -61,10 +61,18 @@ export default class RsaPage extends BasePage {
     ],
   })}
       ${HtmlComponents.textarea({
-    id: PRIVATE_KEY_ID, label: 'privateKey', placeholder: 'privateKeyPlaceholder', source,
+    id: PRIVATE_KEY_ID,
+    label: 'privateKey',
+    placeholder: 'privateKeyPlaceholder',
+    source,
+    rows: '15',
   })}
       ${HtmlComponents.textarea({
-    id: PUBLIC_KEY_ID, label: 'publicKey', placeholder: 'publicKeyPlaceholder', source,
+    id: PUBLIC_KEY_ID,
+    label: 'publicKey',
+    placeholder: 'publicKeyPlaceholder',
+    source,
+    rows: '6',
   })}
     `;
   }

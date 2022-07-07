@@ -1,0 +1,8 @@
+form {
+  display: grid;
+  grid-template-columns: min-content auto;
+}
+
+form input[type=submit] {
+  grid-column-start: 2;
+}

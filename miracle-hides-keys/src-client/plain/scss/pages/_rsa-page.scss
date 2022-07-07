@@ -1,0 +1,7 @@
+#rsaPage form {
+  grid-template-columns: min-content auto auto;  
+}
+
+#rsaPage form input[type=submit] {
+  grid-column-start: 3;
+}

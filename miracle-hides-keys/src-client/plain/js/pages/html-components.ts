@@ -132,18 +132,21 @@ export default class HtmlComponents {
     name = id,
     placeholder = '',
     source = '',
+    rows = '5',
   } : {
     id?: string,
     name?: string,
     label?: string,
     placeholder?: string,
-    source?: string
+    source?: string,
+    rows?: string,
   }) : string {
     return `
       ${HtmlComponents.label({ label, source, id })}
       <textarea
         ${HtmlComponents.add('id', id)}
         ${HtmlComponents.add('name', name)}
+        ${HtmlComponents.add('rows', rows)}
         ${HtmlComponents.translationValue({ source, value: placeholder, destination: TRANSLATION_DESTINATION_PLACEHOLDER })}
       ></textarea>
     `;
