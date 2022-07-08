@@ -1,6 +1,6 @@
 import Ajax from '../infrastructure/ajax';
 import { LanguagePageKeys } from '../translations/language-page';
-import { RsaLanguageKeys } from '../translations/language-rsa';
+import { AsymmetricLanguageKeys } from '../translations/language-asymmetric';
 import { TRANSLATION_DESTINATION_TEXT_CONTENT } from '../translations/translation-constants';
 import BasePage from './base-page';
 import HtmlComponents from './html-components';
@@ -19,7 +19,7 @@ const RSA_KEY_SIZE_ID = 'rsaKeySize';
 
 const KEY_TYPE_ID = 'type';
 
-export default class RsaPage extends BasePage {
+export default class AsymmetricPage extends BasePage {
   // eslint-disable-next-line class-methods-use-this
   setupEvents(element: HTMLElement) : void {
     element.querySelector(`#${GENERATE_FORM_ID}`).addEventListener('submit', (e) => {
@@ -58,32 +58,32 @@ export default class RsaPage extends BasePage {
       HtmlComponents.inputHidden({ id: KEY_TYPE_ID, value: 'RSA' }),
       HtmlComponents.select({
         id: RSA_KEY_SIZE_ID,
-        label: RsaLanguageKeys.KEY_SIZE,
-        placeholder: RsaLanguageKeys.KEY_SIZE,
+        label: AsymmetricLanguageKeys.KEY_SIZE,
+        placeholder: AsymmetricLanguageKeys.KEY_SIZE,
         source,
         options: [
-          HtmlComponents.selectOption('1024', RsaLanguageKeys.KEY_SIZE_1024, source),
-          HtmlComponents.selectOption('2048', RsaLanguageKeys.KEY_SIZE_2048, source),
-          HtmlComponents.selectOption('4096', RsaLanguageKeys.KEY_SIZE_4096, source),
+          HtmlComponents.selectOption('1024', AsymmetricLanguageKeys.KEY_SIZE_1024, source),
+          HtmlComponents.selectOption('2048', AsymmetricLanguageKeys.KEY_SIZE_2048, source),
+          HtmlComponents.selectOption('4096', AsymmetricLanguageKeys.KEY_SIZE_4096, source),
         ],
       }),
       HtmlComponents.submit({
-        label: RsaLanguageKeys.SUBMIT,
+        label: AsymmetricLanguageKeys.SUBMIT,
         source,
       }),
     ],
   })}
       ${HtmlComponents.textarea({
     id: PRIVATE_KEY_ID,
-    label: RsaLanguageKeys.PRIVATE_KEY,
-    placeholder: RsaLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
+    label: AsymmetricLanguageKeys.PRIVATE_KEY,
+    placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
     source,
     rows: '15',
   })}
       ${HtmlComponents.textarea({
     id: PUBLIC_KEY_ID,
-    label: RsaLanguageKeys.PUBLIC_KEY,
-    placeholder: RsaLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
+    label: AsymmetricLanguageKeys.PUBLIC_KEY,
+    placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
     source,
     rows: '6',
   })}
@@ -95,7 +95,7 @@ export default class RsaPage extends BasePage {
     HtmlHelper.addTranslationValue({
       element: errorElement,
       source: this.source,
-      value: RsaLanguageKeys.UNABLE_TO_GENERATE_KEYS,
+      value: AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
       destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
     });
 

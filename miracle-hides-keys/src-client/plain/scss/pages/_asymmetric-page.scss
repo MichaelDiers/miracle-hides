@@ -1,7 +1,7 @@
-#rsaPage form {
+#asymmetricPage form {
   grid-template-columns: min-content auto auto;  
 }
 
-#rsaPage form input[type=submit] {
+#asymmetricPage form input[type=submit] {
   grid-column-start: 3;
 }

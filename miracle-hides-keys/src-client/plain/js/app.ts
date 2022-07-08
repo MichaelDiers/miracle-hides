@@ -1,5 +1,5 @@
 import BasePage from './pages/base-page';
-import RsaPage from './pages/rsa.page';
+import AsymmetricPage from './pages/asymmetric.page';
 import CustomEventRaise from './infrastructure/custom-event-raiser';
 import Translator from './translations/translator';
 import DeLanguage from './translations/de-language';
@@ -9,7 +9,7 @@ export default class App {
 
   async startAsync() : Promise<void> {
     await this.setupAsync();
-    CustomEventRaise.raise(RsaPage.constructor.name);
+    CustomEventRaise.raise(AsymmetricPage.constructor.name);
   }
 
   private async setupAsync() : Promise<void> {
@@ -20,7 +20,7 @@ export default class App {
   private setupPages() : Promise<BasePage>[] {
     const promises : Promise<BasePage>[] = [];
 
-    promises.push(new RsaPage(this.translator).setupAsync());
+    promises.push(new AsymmetricPage(this.translator).setupAsync());
 
     return promises;
   }

@@ -4,6 +4,11 @@ export default abstract class BaseLanguage {
   constructor(public readonly lang: string, private readonly language: Language) {}
 
   get(source: string, entry: string) : string {
-    return this.language[source][entry];
+    try {
+      return this.language[source][entry];
+    } catch (err) {
+      console.error(source, entry);
+      throw err;
+    }
   }
 }

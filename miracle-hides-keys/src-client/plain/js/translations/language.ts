@@ -1,5 +1,5 @@
-import { RsaLanguage } from './language-rsa';
+import { AsymmetricLanguage } from './language-asymmetric';
 
 export default interface Language {
-  rsaPage: RsaLanguage;
+  asymmetricPage: AsymmetricLanguage;
 }
