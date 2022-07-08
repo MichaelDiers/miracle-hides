@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { generateKey, KeyObject } from 'crypto';
-import { ALGORITHM_AES, ALGORITHM_AES_DEFAULT_KEY_SIZE } from 'src/core/interfaces/data/data-constants';
-import { AesKeySize, SupportedSymmetricAlgorithms } from 'src/core/interfaces/data/data-types';
-import { SymmetricKeyGenerator } from 'src/core/interfaces/services/symmetric-key-generator.interface';
+import { ALGORITHM_AES, ALGORITHM_AES_DEFAULT_KEY_SIZE } from '../../core/interfaces/data/data-constants';
+import { AesKeySize, SupportedSymmetricAlgorithms } from '../../core/interfaces/data/data-types';
+import { SymmetricKeyGenerator } from '../../core/interfaces/services/symmetric-key-generator.interface';
 
 @Injectable()
 export default class SymmetricKeyGeneratorService implements SymmetricKeyGenerator {

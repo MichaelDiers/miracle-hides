@@ -1,24 +1,25 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RSA_KEY_GENERATOR } from '../../../../src/core/interfaces/services/asymmetric-key-generator.interface';
+import { ALGORITHM_RSA } from '../../../../src/core/interfaces/data/data-constants';
+import { ASYMMETRIC_KEY_GENERATOR } from '../../../../src/core/interfaces/services/asymmetric-key-generator.interface';
 import { UtilsModule } from '../../../../src/core/utils/utils.module';
-import RsaKeyGeneratorService from '../../../../src/use-cases/asymmetric-key-generator/asymmetric-key-generator.service';
+import AsymmetricKeyGeneratorService from '../../../../src/use-cases/asymmetric-key-generator/asymmetric-key-generator.service';
 
 describe('RsaKeyGeneratorService', () => {
-  let service: RsaKeyGeneratorService;
+  let service: AsymmetricKeyGeneratorService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [UtilsModule],
       providers: [
         {
-          provide: RSA_KEY_GENERATOR,
-          useClass: RsaKeyGeneratorService,
+          provide: ASYMMETRIC_KEY_GENERATOR,
+          useClass: AsymmetricKeyGeneratorService,
         },
-        RsaKeyGeneratorService,
+        AsymmetricKeyGeneratorService,
       ],
     }).compile();
 
-    service = module.get<RsaKeyGeneratorService>(RsaKeyGeneratorService);
+    service = module.get<AsymmetricKeyGeneratorService>(AsymmetricKeyGeneratorService);
   });
 
   it('should be defined', () => {
@@ -26,7 +27,7 @@ describe('RsaKeyGeneratorService', () => {
   });
 
   it('should generate private and public key', async () => {
-    const result = await service.generateAsync({ keySize: 1024 });
+    const result = await service.generateAsync({ type: ALGORITHM_RSA,  rsaKeySize: 1024 });
 
     expect(result).toBeTruthy();
 

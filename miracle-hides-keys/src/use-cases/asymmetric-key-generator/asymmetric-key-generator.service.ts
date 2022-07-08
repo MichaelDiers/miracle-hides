@@ -4,10 +4,10 @@
 
 import { generateKeyPair, KeyObject } from 'crypto';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { RsaKeySize, SupportedAsymmetricAlgorithms } from 'src/core/interfaces/data/data-types';
-import { ALGORITHM_RSA, ALGORITHM_RSA_DEFAULT_KEY_SIZE } from 'src/core/interfaces/data/data-constants';
+import { RsaKeySize, SupportedAsymmetricAlgorithms } from '../../core/interfaces/data/data-types';
 import { KeysResult } from '../../core/interfaces/data/data';
 import { AsymmetricKeyGenerator } from '../../core/interfaces/services/services';
+import { ALGORITHM_RSA, ALGORITHM_RSA_DEFAULT_KEY_SIZE } from '../../core/interfaces/data/data-constants';
 
 @Injectable()
 export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGenerator {
@@ -19,9 +19,9 @@ export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGener
    */
   // eslint-disable-next-line class-methods-use-this
   generateAsync({
-    rsaKeySize,
+    rsaKeySize = ALGORITHM_RSA_DEFAULT_KEY_SIZE,
     type,
-  } : {    
+  } : {
     rsaKeySize?: RsaKeySize,
     type: SupportedAsymmetricAlgorithms,
   }): Promise<KeysResult> {

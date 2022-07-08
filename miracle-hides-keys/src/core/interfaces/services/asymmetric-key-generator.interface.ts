@@ -5,7 +5,7 @@ export interface AsymmetricKeyGenerator {
   generateAsync({
     rsaKeySize,
     type,
-  } : {    
+  } : {
     rsaKeySize?: types.RsaKeySize,
     type: SupportedAsymmetricAlgorithms,
   }): Promise<KeysResult>;

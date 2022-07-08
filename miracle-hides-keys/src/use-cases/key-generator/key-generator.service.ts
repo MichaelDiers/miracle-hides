@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { SymmetricKeyGenerator, SYMMETRIC_KEY_GENERATOR } from 'src/core/interfaces/services/symmetric-key-generator.interface';
-import { ALGORITHM_AES, ALGORITHM_RSA } from 'src/core/interfaces/data/data-constants';
+import { SymmetricKeyGenerator, SYMMETRIC_KEY_GENERATOR } from '../../core/interfaces/services/symmetric-key-generator.interface';
+import { ALGORITHM_AES, ALGORITHM_RSA } from '../../core/interfaces/data/data-constants';
 import {
   KeyGenerator,
   AsymmetricKeyGenerator,
