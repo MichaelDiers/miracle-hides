@@ -3,14 +3,14 @@
  */
 
 import { generateKeyPair, KeyObject } from 'crypto';
-import { Injectable } from '@nestjs/common';
-import { RsaKeySize } from 'src/core/interfaces/data/data-types';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { RsaKeySize, SupportedAsymmetricAlgorithms } from 'src/core/interfaces/data/data-types';
 import { ALGORITHM_RSA, ALGORITHM_RSA_DEFAULT_KEY_SIZE } from 'src/core/interfaces/data/data-constants';
 import { KeysResult } from '../../core/interfaces/data/data';
-import { RsaKeyGenerator } from '../../core/interfaces/services/services';
+import { AsymmetricKeyGenerator } from '../../core/interfaces/services/services';
 
 @Injectable()
-export default class RsaKeyGeneratorService implements RsaKeyGenerator {
+export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGenerator {
   /**
    *
    * @param rsaKeyOptions {KeyOptions} Options for generating rsa keys.
@@ -19,13 +19,19 @@ export default class RsaKeyGeneratorService implements RsaKeyGenerator {
    */
   // eslint-disable-next-line class-methods-use-this
   generateAsync({
-    rsaKeySize = ALGORITHM_RSA_DEFAULT_KEY_SIZE,
-  } : {
+    rsaKeySize,
+    type,
+  } : {    
     rsaKeySize?: RsaKeySize,
-  } = {}): Promise<KeysResult> {
+    type: SupportedAsymmetricAlgorithms,
+  }): Promise<KeysResult> {
     return new Promise((resolve, reject) => {
+      if (type !== ALGORITHM_RSA) {
+        throw new BadRequestException(`unsupported algorithm: ${type}`);
+      }
+
       generateKeyPair(
-        ALGORITHM_RSA,
+        type,
         {
           modulusLength: rsaKeySize,
         },
@@ -36,7 +42,7 @@ export default class RsaKeyGeneratorService implements RsaKeyGenerator {
 
           try {
             return resolve(
-              RsaKeyGeneratorService.handleGenerateResult(
+              AsymmetricKeyGeneratorService.handleGenerateResult(
                 publicKey,
                 privateKey,
               ),

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { KEY_GENERATOR } from '../../../../src/core/interfaces/services/key-generator.interface';
 import { UtilsModule } from '../../../../src/core/utils/utils.module';
-import { RsaKeyGeneratorModule } from '../../../../src/use-cases/rsa-key-generator/rsa-key-generator.module';
+import { RsaKeyGeneratorModule } from '../../../../src/use-cases/asymmetric-key-generator/asymmetric-key-generator.module';
 import KeyGeneratorService from '../../../../src/use-cases/key-generator/key-generator.service';
 import { SymmetricKeyGeneratorModule } from '../../../../src/use-cases/symmetric-key-generator/symmetric-key-generator.module';
 

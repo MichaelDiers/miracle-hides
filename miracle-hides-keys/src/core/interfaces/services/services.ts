@@ -1,9 +1,9 @@
 import { KeyGenerator, KEY_GENERATOR } from './key-generator.interface';
 import { LOGGER, Logger } from './logger.interface';
 import {
-  RsaKeyGenerator,
-  RSA_KEY_GENERATOR,
-} from './rsa-key-generator.interface';
+  AsymmetricKeyGenerator,
+  ASYMMETRIC_KEY_GENERATOR,
+} from './asymmetric-key-generator.interface';
 import { Transformer, TRANSFRORMER } from './transformer.interface';
 
 export {
@@ -11,8 +11,8 @@ export {
   KEY_GENERATOR,
   LOGGER,
   Logger,
-  RsaKeyGenerator,
-  RSA_KEY_GENERATOR,
+  AsymmetricKeyGenerator,
+  ASYMMETRIC_KEY_GENERATOR,
   Transformer,
   TRANSFRORMER,
 };

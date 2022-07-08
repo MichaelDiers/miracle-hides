@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RSA_KEY_GENERATOR } from '../../../../src/core/interfaces/services/rsa-key-generator.interface';
+import { RSA_KEY_GENERATOR } from '../../../../src/core/interfaces/services/asymmetric-key-generator.interface';
 import { UtilsModule } from '../../../../src/core/utils/utils.module';
-import RsaKeyGeneratorService from '../../../../src/use-cases/rsa-key-generator/rsa-key-generator.service';
+import RsaKeyGeneratorService from '../../../../src/use-cases/asymmetric-key-generator/asymmetric-key-generator.service';
 
 describe('RsaKeyGeneratorService', () => {
   let service: RsaKeyGeneratorService;

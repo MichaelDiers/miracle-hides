@@ -3,8 +3,8 @@ import { SymmetricKeyGenerator, SYMMETRIC_KEY_GENERATOR } from 'src/core/interfa
 import { ALGORITHM_AES, ALGORITHM_RSA } from 'src/core/interfaces/data/data-constants';
 import {
   KeyGenerator,
-  RsaKeyGenerator,
-  RSA_KEY_GENERATOR,
+  AsymmetricKeyGenerator,
+  ASYMMETRIC_KEY_GENERATOR,
 } from '../../core/interfaces/services/services';
 import {
   KeyOptions,
@@ -14,8 +14,8 @@ import {
 @Injectable()
 export default class KeyGeneratorService implements KeyGenerator {
   constructor(
-    @Inject(RSA_KEY_GENERATOR)
-    private readonly rsaKeyGenerator: RsaKeyGenerator,
+    @Inject(ASYMMETRIC_KEY_GENERATOR)
+    private readonly asymmetricKeyGenerator: AsymmetricKeyGenerator,
     @Inject(SYMMETRIC_KEY_GENERATOR)
     private readonly symmetricKeyGenerator: SymmetricKeyGenerator,
   ) {}
@@ -23,8 +23,9 @@ export default class KeyGeneratorService implements KeyGenerator {
   async generateAsync(keyOptions: KeyOptions): Promise<KeysResult> {
     switch (keyOptions.type) {
       case ALGORITHM_RSA:
-        return this.rsaKeyGenerator.generateAsync({
+        return this.asymmetricKeyGenerator.generateAsync({
           rsaKeySize: keyOptions.rsaKeySize,
+          type: keyOptions.type,
         });
       case ALGORITHM_AES:
         return {
