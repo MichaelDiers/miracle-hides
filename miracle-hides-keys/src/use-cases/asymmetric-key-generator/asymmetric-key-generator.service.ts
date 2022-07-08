@@ -4,10 +4,10 @@
 
 import { generateKeyPair, KeyObject } from 'crypto';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { RsaKeySize, SupportedAsymmetricAlgorithms } from '../../core/interfaces/data/data-types';
+import { EcNamedCurve, RsaKeySize, SupportedAsymmetricAlgorithms } from '../../core/interfaces/data/data-types';
 import { KeysResult } from '../../core/interfaces/data/data';
 import { AsymmetricKeyGenerator } from '../../core/interfaces/services/services';
-import { ALGORITHM_RSA, ALGORITHM_RSA_DEFAULT_KEY_SIZE } from '../../core/interfaces/data/data-constants';
+import { ALGORITHM_EC, ALGORITHM_RSA, ALGORITHM_RSA_DEFAULT_KEY_SIZE } from '../../core/interfaces/data/data-constants';
 
 @Injectable()
 export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGenerator {
@@ -19,65 +19,74 @@ export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGener
    */
   // eslint-disable-next-line class-methods-use-this
   generateAsync({
+    ecNamedCurve,
     rsaKeySize = ALGORITHM_RSA_DEFAULT_KEY_SIZE,
     type,
   } : {
+    ecNamedCurve?: EcNamedCurve,
     rsaKeySize?: RsaKeySize,
     type: SupportedAsymmetricAlgorithms,
   }): Promise<KeysResult> {
     return new Promise((resolve, reject) => {
-      if (type !== ALGORITHM_RSA) {
-        throw new BadRequestException(`unsupported algorithm: ${type}`);
+      if (type === ALGORITHM_RSA) {
+        generateKeyPair(
+          type,
+          { modulusLength: rsaKeySize },
+          AsymmetricKeyGeneratorService.createCallback(resolve, reject, type)
+        );
+      } else if (type === ALGORITHM_EC) {
+        generateKeyPair(
+          type,
+          { namedCurve: ecNamedCurve },
+          AsymmetricKeyGeneratorService.createCallback(resolve, reject, type)
+        );
+      }
+    });
+  } 
+
+  private static createCallback(resolve, reject, algorithm) {
+    const callback = (err: Error, publicKey: KeyObject, privateKey: KeyObject) => {
+      if (err) {
+        return reject(err);
       }
 
-      generateKeyPair(
-        type,
-        {
-          modulusLength: rsaKeySize,
-        },
-        (err: Error, publicKey: KeyObject, privateKey: KeyObject) => {
-          if (err) {
-            return reject(err);
-          }
+      try {
+        let optionsPrivate;
+        let optionsPublic;
+        if (algorithm === ALGORITHM_EC) {
+          optionsPrivate = {
+            type: 'sec1',
+            format: 'pem',
+          };
 
-          try {
-            return resolve(
-              AsymmetricKeyGeneratorService.handleGenerateResult(
-                publicKey,
-                privateKey,
-              ),
-            );
-          } catch (error: any) {
-            return reject(error);
-          }
-        },
-      );
-    });
-  }
+          optionsPublic = {
+            type: 'spki',
+            format: 'pem',  
+          };
+        } else if (algorithm === ALGORITHM_RSA) {
+          optionsPrivate = {
+            type: 'pkcs1',
+            format: 'pem',
+          };
 
-  /**
-   * Callback function for generating rsa keys.
-   * @param publicKey {KeyObject} The public rsa key.
-   * @param privateKey {KeyObject} The private rsa key.
-   * @returns {KeysResult} The private and public key as a string.
-   */
-  private static handleGenerateResult(
-    publicKey: KeyObject,
-    privateKey: KeyObject,
-  ): KeysResult {
-    const publicKeyString = publicKey.export({
-      type: 'pkcs1',
-      format: 'pem',
-    }) as string;
+          optionsPublic = {
+            type: 'pkcs1',
+            format: 'pem',  
+          };
+        }
 
-    const privateKeyString = privateKey.export({
-      type: 'pkcs1',
-      format: 'pem',
-    }) as string;
-
-    return {
-      publicKey: publicKeyString,
-      privateKey: privateKeyString,
+        const publicKeyString = publicKey.export(optionsPublic) as string;
+        const privateKeyString = privateKey.export(optionsPrivate) as string;
+    
+        return resolve({
+          publicKey: publicKeyString,
+          privateKey: privateKeyString,
+        });
+      } catch (error: any) {
+        return reject(error);        
+      }
     };
+
+    return callback;
   }
 }

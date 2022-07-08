@@ -9,6 +9,12 @@ export default class CreateKeysRequestDto {
   @IsIn(['128', '192', '256'])
     aesKeySize: string;
 
+    @ValidateIf((obj) => obj.type === 'EC')
+    @IsNotEmpty()
+    @IsString()
+    @IsIn(['sect239k1'])
+      ecNamedCurve: string;
+
   @ValidateIf((obj) => obj.type === 'RSA')
   @IsNotEmpty()
   @IsNumberString()
@@ -17,6 +23,6 @@ export default class CreateKeysRequestDto {
 
   @IsNotEmpty()
   @IsString()
-  @IsIn(['AES', 'RSA'])
+  @IsIn(['AES', 'EC', 'RSA'])
     type: string;
 }
