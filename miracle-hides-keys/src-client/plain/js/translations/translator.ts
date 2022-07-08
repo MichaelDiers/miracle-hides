@@ -8,10 +8,15 @@ export default class Translator {
     this.languages = languages;
   }
 
-  async translate(htmlElement: HTMLElement = undefined): Promise<void> {
+  async translateAsync(htmlElement: HTMLElement = undefined): Promise<void> {
     const lang = this.language();
     const root = htmlElement || document;
-    root.querySelectorAll(`[${constants.TRANSLATION_VALUE_NAME}]`).forEach((element) => {
+    const elements = [...root.querySelectorAll(`[${constants.TRANSLATION_VALUE_NAME}]`)];
+    if (htmlElement.hasAttribute(constants.TRANSLATION_VALUE_NAME)) {
+      elements.push(htmlElement);
+    }
+
+    elements.forEach((element) => {
       const translationValue = element.getAttribute(constants.TRANSLATION_VALUE_NAME);
       const [source, value, destination] = translationValue.split('.');
       const translated = lang.get(source, value);

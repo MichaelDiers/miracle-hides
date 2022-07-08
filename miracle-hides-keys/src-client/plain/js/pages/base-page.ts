@@ -5,9 +5,9 @@ export default abstract class BasePage {
 
   private readonly sourceName: string;
 
-  constructor() {
-    this.sourceName = this.constructor.name;
-    this.sourceName = `${this.source[0].toLowerCase()}${this.sourceName.substring(1)}`;
+  constructor(private readonly translator: Translator) {
+    const { name } = this.constructor;
+    this.sourceName = `${name[0].toLowerCase()}${name.substring(1)}`;
   }
 
   display() : void {
@@ -28,11 +28,11 @@ export default abstract class BasePage {
     return this.sourceName;
   }
 
-  async setupAsync(translator: Translator) : Promise<BasePage> {
+  async setupAsync() : Promise<BasePage> {
     const div = document.createElement('div');
     div.innerHTML = this.setupHtml();
     this.setupEvents(div);
-    await translator.translate(div);
+    await this.translateAsync(div);
     this.html = [...div.children];
 
     document.body.addEventListener(BasePage.constructor.name, (e) => {
@@ -46,4 +46,8 @@ export default abstract class BasePage {
   abstract setupHtml() : string;
 
   abstract setupEvents(element: HTMLElement) : void;
+
+  translateAsync(element?: HTMLElement) : Promise<void> {
+    return this.translator.translateAsync(element);
+  }
 }

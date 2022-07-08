@@ -1,9 +1,9 @@
-import KeyType from './key-type.enum';
+import { AesKeySize, RsaKeySize, SupportedAlgorithms } from './data-types';
 
 export default interface KeyOptions {
-  aesKeySize?: 128 | 196 | 256;
+  aesKeySize?: AesKeySize;
 
-  keySize: number;
+  rsaKeySize?: RsaKeySize;
 
-  type: KeyType;
+  type: SupportedAlgorithms;
 }

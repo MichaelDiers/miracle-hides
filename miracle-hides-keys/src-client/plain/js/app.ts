@@ -20,7 +20,7 @@ export default class App {
   private setupPages() : Promise<BasePage>[] {
     const promises : Promise<BasePage>[] = [];
 
-    promises.push(new RsaPage().setupAsync(this.translator));
+    promises.push(new RsaPage(this.translator).setupAsync());
 
     return promises;
   }

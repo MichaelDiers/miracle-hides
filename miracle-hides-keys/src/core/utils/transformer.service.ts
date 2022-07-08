@@ -1,7 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import CreateKeysRequestDto from '../dtos/create-keys-request.dto';
 import CreateKeysResponseDto from '../dtos/create-keys-response.dto';
-import { KeyOptions, KeyType, KeysResult } from '../interfaces/data/data';
+import { KeyOptions, KeysResult } from '../interfaces/data/data';
+import { ALGORITHM_AES, ALGORITHM_RSA } from '../interfaces/data/data-constants';
+import { AesKeySize, RsaKeySize, SupportedAlgorithms } from '../interfaces/data/data-types';
 import { Transformer } from '../interfaces/services/services';
 
 @Injectable()
@@ -10,26 +12,13 @@ export default class TransformerService implements Transformer {
   createKeysRequestDtoToKeyOptions(
     createKeysRequestDto: CreateKeysRequestDto,
   ): KeyOptions {
-    const type = TransformerService.stringToKeyType(createKeysRequestDto.type);
-    let aesKeySize;
-    if (type === KeyType.Aes) {
-      switch (createKeysRequestDto.aesKeySize) {
-        case '128':
-          aesKeySize = 128;
-          break;
-        case '196':
-          aesKeySize = 196;
-          break;
-        case '256':
-          aesKeySize = 256;
-          break;
-        default:
-          throw new BadRequestException('invalid value for aes key size');
-      }
-    }
+    const type = TransformerService.stringToAlgorithmName(createKeysRequestDto.type);
+    const aesKeySize = TransformerService.aesKeySize(type, createKeysRequestDto.aesKeySize);
+    const rsaKeySize = TransformerService.rsaKeySize(type, createKeysRequestDto.rsaKeySize);
+
     return {
       aesKeySize,
-      keySize: parseInt(createKeysRequestDto.keySize, 10),
+      rsaKeySize,
       type,
     };
   }
@@ -44,12 +33,46 @@ export default class TransformerService implements Transformer {
     };
   }
 
-  private static stringToKeyType(type: string): KeyType {
+  private static aesKeySize(type: string, keySize: string) : AesKeySize | undefined {
+    if (type !== ALGORITHM_AES) {
+      return undefined;
+    }
+
+    switch (keySize) {
+      case '128':
+        return 128;
+      case '196':
+        return 196;
+      case '256':
+        return 256;
+      default:
+        throw new BadRequestException(`invalid aes key size: ${keySize}`);
+    }
+  }
+
+  private static rsaKeySize(type: string, keySize: string) : RsaKeySize | undefined {
+    if (type !== ALGORITHM_RSA) {
+      return undefined;
+    }
+
+    switch (keySize) {
+      case '1024':
+        return 1024;
+      case '2048':
+        return 2048;
+      case '4096':
+        return 4096;
+      default:
+        throw new BadRequestException(`invalid rsa key size: ${keySize}`);
+    }
+  }
+
+  private static stringToAlgorithmName(type: string): SupportedAlgorithms {
     switch (type.toUpperCase()) {
-      case 'AES':
-        return KeyType.Aes;
-      case 'RSA':
-        return KeyType.Rsa;
+      case ALGORITHM_AES.toUpperCase():
+        return ALGORITHM_AES;
+      case ALGORITHM_RSA.toUpperCase():
+        return ALGORITHM_RSA;
       default:
         throw new Error(`Unknown key type: '${type}'`);
     }

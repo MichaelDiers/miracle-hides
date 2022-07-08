@@ -1,4 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { SymmetricKeyGenerator, SYMMETRIC_KEY_GENERATOR } from 'src/core/interfaces/services/symmetric-key-generator.interface';
+import { ALGORITHM_AES, ALGORITHM_RSA } from 'src/core/interfaces/data/data-constants';
 import {
   KeyGenerator,
   RsaKeyGenerator,
@@ -7,9 +9,7 @@ import {
 import {
   KeyOptions,
   KeysResult,
-  KeyType,
 } from '../../core/interfaces/data/data';
-import { SymmetricKeyGenerator, SYMMETRIC_KEY_GENERATOR } from '../../../src/core/interfaces/services/symmetric-key-generator.interface';
 
 @Injectable()
 export default class KeyGeneratorService implements KeyGenerator {
@@ -22,16 +22,17 @@ export default class KeyGeneratorService implements KeyGenerator {
 
   async generateAsync(keyOptions: KeyOptions): Promise<KeysResult> {
     switch (keyOptions.type) {
-      case KeyType.Rsa:
+      case ALGORITHM_RSA:
         return this.rsaKeyGenerator.generateAsync({
-          keySize: keyOptions.keySize,
+          rsaKeySize: keyOptions.rsaKeySize,
         });
-      case KeyType.Aes:
-        const result = await this.symmetricKeyGenerator.generateAsync(
-          'aes', 
-          keyOptions.aesKeySize,
-        );
-        return { privateKey: result };
+      case ALGORITHM_AES:
+        return {
+          privateKey: await this.symmetricKeyGenerator.generateAsync({
+            type: keyOptions.type,
+            aesKeySize: keyOptions.aesKeySize,
+          }),
+        };
       default:
         throw new BadRequestException(`Unknown key type '${keyOptions.type}'`);
     }

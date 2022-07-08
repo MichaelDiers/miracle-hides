@@ -6,6 +6,18 @@ import {
 } from '../translations/translation-constants';
 
 export default class HtmlComponents {
+  static div({
+    id = '',
+  } : {
+    id?: string
+  } = {}) : string {
+    return `
+      <div
+        ${HtmlComponents.add('id', id)}
+      ></div>
+    `;
+  }
+
   static form({
     action = '',
     content = [],
@@ -44,15 +56,17 @@ export default class HtmlComponents {
   }
 
   static inputHidden({
-    id = '',    
-    name = id,    
+    id = '',
+    name = id,
     value = '',
   } : {
     id?: string,
     name?: string,
     value?: string,
   }) : string {
-    return this.input({ id, name, type: 'hidden', value });
+    return this.input({
+      id, name, type: 'hidden', value,
+    });
   }
 
   static inputText({

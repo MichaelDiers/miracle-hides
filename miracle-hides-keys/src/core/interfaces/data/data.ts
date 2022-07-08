@@ -1,11 +1,9 @@
 import KeyOptions from './key-options.interface';
 import KeysResult from './keys-result.interface';
-import KeyType from './key-type.enum';
-import RsaKeyOptions from './rsa-key-options';
+import * as types from './data-types';
 
 export {
   KeyOptions,
   KeysResult,
-  KeyType,
-  RsaKeyOptions,
+  types,
 };

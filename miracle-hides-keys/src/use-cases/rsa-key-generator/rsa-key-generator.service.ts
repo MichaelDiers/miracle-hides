@@ -4,7 +4,9 @@
 
 import { generateKeyPair, KeyObject } from 'crypto';
 import { Injectable } from '@nestjs/common';
-import { RsaKeyOptions, KeysResult } from '../../core/interfaces/data/data';
+import { RsaKeySize } from 'src/core/interfaces/data/data-types';
+import { ALGORITHM_RSA, ALGORITHM_RSA_DEFAULT_KEY_SIZE } from 'src/core/interfaces/data/data-constants';
+import { KeysResult } from '../../core/interfaces/data/data';
 import { RsaKeyGenerator } from '../../core/interfaces/services/services';
 
 @Injectable()
@@ -16,12 +18,16 @@ export default class RsaKeyGeneratorService implements RsaKeyGenerator {
    * @returns {Promise<KeysResult>} A promise whose result contains the public and private rsa key.
    */
   // eslint-disable-next-line class-methods-use-this
-  generateAsync(rsaKeyOptions: RsaKeyOptions): Promise<KeysResult> {
+  generateAsync({
+    rsaKeySize = ALGORITHM_RSA_DEFAULT_KEY_SIZE,
+  } : {
+    rsaKeySize?: RsaKeySize,
+  } = {}): Promise<KeysResult> {
     return new Promise((resolve, reject) => {
       generateKeyPair(
-        'rsa',
+        ALGORITHM_RSA,
         {
-          modulusLength: rsaKeyOptions.keySize,
+          modulusLength: rsaKeySize,
         },
         (err: Error, publicKey: KeyObject, privateKey: KeyObject) => {
           if (err) {
