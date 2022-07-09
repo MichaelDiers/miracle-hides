@@ -32,6 +32,6 @@ export default class CreateKeysRequestDto {
 
   @IsNotEmpty()
   @IsString()
-  @IsIn(SUPPORTED_ALGORITHMS)
+  @IsIn(SUPPORTED_ALGORITHMS.map((algorithm) => algorithm.toUpperCase()))
     type: string;
 }

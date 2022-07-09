@@ -24,7 +24,7 @@ export default class KeyGeneratorService implements KeyGenerator {
   async generateAsync(keyOptions: KeyOptions): Promise<KeysResult> {
     if (SUPPORTED_ASYMMETRIC_ALGORITHMS.findIndex(
       (algorithm) => algorithm === keyOptions.type,
-    ) > 0) {
+    ) > -1) {
       return this.asymmetricKeyGenerator.generateAsync({
         ecNamedCurve: keyOptions.ecNamedCurve,
         rsaKeySize: keyOptions.rsaKeySize,
@@ -32,7 +32,7 @@ export default class KeyGeneratorService implements KeyGenerator {
       });
     } if (SUPPORTED_SYMMETRIC_ALGORITHMS.findIndex(
       (algorithm) => algorithm === keyOptions.type,
-    ) > 0) {
+    ) > -1) {
       return {
         privateKey: await this.symmetricKeyGenerator.generateAsync({
           type: keyOptions.type as SupportedSymmetricAlgorithms,
