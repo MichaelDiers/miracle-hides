@@ -10,10 +10,11 @@ export default abstract class BasePage {
     this.sourceName = `${name[0].toLowerCase()}${name.substring(1)}`;
   }
 
-  display() : void {
+  async displayAsync() : Promise<void> {
     const main = document.querySelector('main');
     main.id = this.source;
     this.html.forEach((element: Element) => main.appendChild(element));
+    return this.initializeOnDisplayAsync();
   }
 
   get html() : Element[] {
@@ -28,6 +29,8 @@ export default abstract class BasePage {
     return this.sourceName;
   }
 
+  abstract initializeOnDisplayAsync() : Promise<void>;
+
   async setupAsync() : Promise<BasePage> {
     const div = document.createElement('div');
     div.innerHTML = this.setupHtml();
@@ -37,7 +40,7 @@ export default abstract class BasePage {
 
     document.body.addEventListener(BasePage.constructor.name, (e) => {
       e.preventDefault();
-      this.display();
+      this.displayAsync().catch((err) => console.error(err));
     });
 
     return this;
