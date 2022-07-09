@@ -3,11 +3,11 @@
  */
 
 import { generateKeyPair, KeyObject } from 'crypto';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { EcNamedCurve, RsaKeySize, SupportedAsymmetricAlgorithms } from '../../core/interfaces/data/data-types';
 import { KeysResult } from '../../core/interfaces/data/data';
 import { AsymmetricKeyGenerator } from '../../core/interfaces/services/services';
-import { ALGORITHM_EC, ALGORITHM_RSA, ALGORITHM_RSA_DEFAULT_KEY_SIZE } from '../../core/interfaces/data/data-constants';
+import { ALGORITHM_EC, ALGORITHM_RSA } from '../../core/interfaces/data/data-constants';
 
 @Injectable()
 export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGenerator {
@@ -20,7 +20,7 @@ export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGener
   // eslint-disable-next-line class-methods-use-this
   generateAsync({
     ecNamedCurve,
-    rsaKeySize = ALGORITHM_RSA_DEFAULT_KEY_SIZE,
+    rsaKeySize,
     type,
   } : {
     ecNamedCurve?: EcNamedCurve,
@@ -32,17 +32,17 @@ export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGener
         generateKeyPair(
           type,
           { modulusLength: rsaKeySize },
-          AsymmetricKeyGeneratorService.createCallback(resolve, reject, type)
+          AsymmetricKeyGeneratorService.createCallback(resolve, reject, type),
         );
       } else if (type === ALGORITHM_EC) {
         generateKeyPair(
           type,
           { namedCurve: ecNamedCurve },
-          AsymmetricKeyGeneratorService.createCallback(resolve, reject, type)
+          AsymmetricKeyGeneratorService.createCallback(resolve, reject, type),
         );
       }
     });
-  } 
+  }
 
   private static createCallback(resolve, reject, algorithm) {
     const callback = (err: Error, publicKey: KeyObject, privateKey: KeyObject) => {
@@ -61,7 +61,7 @@ export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGener
 
           optionsPublic = {
             type: 'spki',
-            format: 'pem',  
+            format: 'pem',
           };
         } else if (algorithm === ALGORITHM_RSA) {
           optionsPrivate = {
@@ -71,19 +71,19 @@ export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGener
 
           optionsPublic = {
             type: 'pkcs1',
-            format: 'pem',  
+            format: 'pem',
           };
         }
 
         const publicKeyString = publicKey.export(optionsPublic) as string;
         const privateKeyString = privateKey.export(optionsPrivate) as string;
-    
+
         return resolve({
           publicKey: publicKeyString,
           privateKey: privateKeyString,
         });
       } catch (error: any) {
-        return reject(error);        
+        return reject(error);
       }
     };
 

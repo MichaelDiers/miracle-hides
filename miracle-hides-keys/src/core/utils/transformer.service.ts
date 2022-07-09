@@ -2,8 +2,12 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import CreateKeysRequestDto from '../dtos/create-keys-request.dto';
 import CreateKeysResponseDto from '../dtos/create-keys-response.dto';
 import { KeyOptions, KeysResult } from '../interfaces/data/data';
-import { ALGORITHM_AES, ALGORITHM_EC, ALGORITHM_RSA } from '../interfaces/data/data-constants';
-import { AesKeySize, EcNamedCurve, EcNamedCurveSect239k1, RsaKeySize, SupportedAlgorithms } from '../interfaces/data/data-types';
+import {
+  ALGORITHM_AES, ALGORITHM_EC, ALGORITHM_HMAC, ALGORITHM_RSA,
+} from '../interfaces/data/data-constants';
+import {
+  AesKeySize, EcNamedCurve, RsaKeySize, SupportedAlgorithms,
+} from '../interfaces/data/data-types';
 import { Transformer } from '../interfaces/services/services';
 
 @Injectable()
@@ -15,11 +19,13 @@ export default class TransformerService implements Transformer {
     const type = TransformerService.stringToAlgorithmName(createKeysRequestDto.type);
     const aesKeySize = TransformerService.aesKeySize(type, createKeysRequestDto.aesKeySize);
     const ecNamedCurve = TransformerService.ecNamedCurve(type, createKeysRequestDto.ecNamedCurve);
+    const hmacKeySize = TransformerService.hmacKeySize(type, createKeysRequestDto.hmacKeySize);
     const rsaKeySize = TransformerService.rsaKeySize(type, createKeysRequestDto.rsaKeySize);
 
     return {
       aesKeySize,
       ecNamedCurve,
+      hmacKeySize,
       rsaKeySize,
       type,
     };
@@ -39,7 +45,7 @@ export default class TransformerService implements Transformer {
     if (type !== ALGORITHM_EC) {
       return undefined;
     }
-    
+
     return ecNamedCurveValue as EcNamedCurve;
   }
 
@@ -58,6 +64,14 @@ export default class TransformerService implements Transformer {
       default:
         throw new BadRequestException(`invalid aes key size: ${keySize}`);
     }
+  }
+
+  private static hmacKeySize(type: string, keySize: string) : number | undefined {
+    if (type !== ALGORITHM_HMAC) {
+      return undefined;
+    }
+
+    return parseInt(keySize, 10);
   }
 
   private static rsaKeySize(type: string, keySize: string) : RsaKeySize | undefined {
@@ -83,6 +97,8 @@ export default class TransformerService implements Transformer {
         return ALGORITHM_AES;
       case ALGORITHM_EC.toUpperCase():
         return ALGORITHM_EC;
+      case ALGORITHM_HMAC.toUpperCase():
+        return ALGORITHM_HMAC;
       case ALGORITHM_RSA.toUpperCase():
         return ALGORITHM_RSA;
       default:

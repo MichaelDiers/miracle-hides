@@ -1,21 +1,30 @@
 import {
-  IsIn, IsNotEmpty, IsNumberString, IsString, ValidateIf,
+  IsIn, IsNotEmpty, IsNumberString, IsString, MinLength, ValidateIf,
 } from 'class-validator';
+import {
+  ALGORITHM_AES, ALGORITHM_EC, ALGORITHM_HMAC, ALGORITHM_RSA, SUPPORTED_ALGORITHMS,
+} from '../interfaces/data/data-constants';
 
 export default class CreateKeysRequestDto {
-  @ValidateIf((obj) => obj.type === 'AES')
+  @ValidateIf((obj) => obj.type === ALGORITHM_AES)
   @IsNotEmpty()
   @IsNumberString()
   @IsIn(['128', '192', '256'])
     aesKeySize: string;
 
-    @ValidateIf((obj) => obj.type === 'EC')
-    @IsNotEmpty()
-    @IsString()
-    @IsIn(['sect239k1'])
-      ecNamedCurve: string;
+  @ValidateIf((obj) => obj.type === ALGORITHM_EC)
+  @IsNotEmpty()
+  @IsString()
+  @IsIn(['sect239k1'])
+    ecNamedCurve: string;
 
-  @ValidateIf((obj) => obj.type === 'RSA')
+  @ValidateIf((obj) => obj.type === ALGORITHM_HMAC)
+  @IsNotEmpty()
+  @IsNumberString()
+  @MinLength(1)
+    hmacKeySize: string;
+
+  @ValidateIf((obj) => obj.type === ALGORITHM_RSA)
   @IsNotEmpty()
   @IsNumberString()
   @IsIn(['1024', '2048', '4096'])
@@ -23,6 +32,6 @@ export default class CreateKeysRequestDto {
 
   @IsNotEmpty()
   @IsString()
-  @IsIn(['AES', 'EC', 'RSA'])
+  @IsIn(SUPPORTED_ALGORITHMS)
     type: string;
 }

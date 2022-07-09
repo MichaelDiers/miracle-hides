@@ -1,6 +1,6 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { generateKey, KeyObject } from 'crypto';
-import { ALGORITHM_AES, ALGORITHM_AES_DEFAULT_KEY_SIZE } from '../../core/interfaces/data/data-constants';
+import { ALGORITHM_AES } from '../../core/interfaces/data/data-constants';
 import { AesKeySize, SupportedSymmetricAlgorithms } from '../../core/interfaces/data/data-types';
 import { SymmetricKeyGenerator } from '../../core/interfaces/services/symmetric-key-generator.interface';
 
@@ -9,20 +9,19 @@ export default class SymmetricKeyGeneratorService implements SymmetricKeyGenerat
   // eslint-disable-next-line class-methods-use-this
   generateAsync({
     type,
-    aesKeySize = ALGORITHM_AES_DEFAULT_KEY_SIZE,
+    aesKeySize,
+    hmacKeySize,
   }:{
     type: SupportedSymmetricAlgorithms,
     aesKeySize?: AesKeySize,
+    hmacKeySize?: number,
   }): Promise<string> {
     return new Promise((resolve, reject) => {
-      if (type !== ALGORITHM_AES) {
-        throw new BadRequestException(`unsupported algorithm: ${type}`);
-      }
-
+      const length = type === ALGORITHM_AES ? aesKeySize : hmacKeySize;
       generateKey(
         type,
         {
-          length: aesKeySize,
+          length,
         },
         (err: Error, key: KeyObject) => {
           if (err) {

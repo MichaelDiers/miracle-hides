@@ -1,7 +1,7 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { SymmetricKeyGenerator, SYMMETRIC_KEY_GENERATOR } from '../../core/interfaces/services/symmetric-key-generator.interface';
-import { ALGORITHM_AES, ALGORITHM_EC, ALGORITHM_RSA } from '../../core/interfaces/data/data-constants';
-import { SupportedAlgorithms, SupportedAsymmetricAlgorithms, SupportedSymmetricAlgorithms } from '../../core/interfaces/data/data-types';
+import { SUPPORTED_ASYMMETRIC_ALGORITHMS, SUPPORTED_SYMMETRIC_ALGORITHMS } from '../../core/interfaces/data/data-constants';
+import { SupportedAsymmetricAlgorithms, SupportedSymmetricAlgorithms } from '../../core/interfaces/data/data-types';
 import {
   KeyGenerator,
   AsymmetricKeyGenerator,
@@ -11,7 +11,6 @@ import {
   KeyOptions,
   KeysResult,
 } from '../../core/interfaces/data/data';
-import { isInstance } from 'class-validator';
 
 @Injectable()
 export default class KeyGeneratorService implements KeyGenerator {
@@ -23,25 +22,26 @@ export default class KeyGeneratorService implements KeyGenerator {
   ) {}
 
   async generateAsync(keyOptions: KeyOptions): Promise<KeysResult> {
-    switch (keyOptions.type) {
-      case ALGORITHM_RSA:
-      case ALGORITHM_EC:        
-        return this.asymmetricKeyGenerator.generateAsync({
-          ecNamedCurve: keyOptions.ecNamedCurve,
-          rsaKeySize: keyOptions.rsaKeySize,
-          type: keyOptions.type as SupportedAsymmetricAlgorithms,
-        });
-      case ALGORITHM_AES:
-        return {
-          privateKey: await this.symmetricKeyGenerator.generateAsync({
-            type: keyOptions.type as SupportedSymmetricAlgorithms,
-            aesKeySize: keyOptions.aesKeySize,
-          }),
-        };
-      default:
-        throw new BadRequestException(`unsupported algorithm: ${keyOptions.type}`);
+    if (SUPPORTED_ASYMMETRIC_ALGORITHMS.findIndex(
+      (algorithm) => algorithm === keyOptions.type,
+    ) > 0) {
+      return this.asymmetricKeyGenerator.generateAsync({
+        ecNamedCurve: keyOptions.ecNamedCurve,
+        rsaKeySize: keyOptions.rsaKeySize,
+        type: keyOptions.type as SupportedAsymmetricAlgorithms,
+      });
+    } if (SUPPORTED_SYMMETRIC_ALGORITHMS.findIndex(
+      (algorithm) => algorithm === keyOptions.type,
+    ) > 0) {
+      return {
+        privateKey: await this.symmetricKeyGenerator.generateAsync({
+          type: keyOptions.type as SupportedSymmetricAlgorithms,
+          aesKeySize: keyOptions.aesKeySize,
+          hmacKeySize: keyOptions.hmacKeySize,
+        }),
+      };
     }
-    
-    
+
+    throw new BadRequestException(`unsupported algorithm: ${keyOptions.type}`);
   }
 }
