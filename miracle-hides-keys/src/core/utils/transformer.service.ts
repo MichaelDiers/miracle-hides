@@ -57,8 +57,8 @@ export default class TransformerService implements Transformer {
     switch (keySize) {
       case '128':
         return 128;
-      case '196':
-        return 196;
+      case '192':
+        return 192;
       case '256':
         return 256;
       default:
