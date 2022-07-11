@@ -17,7 +17,7 @@ export default abstract class AlgorithmBasePage extends BasePage {
     private readonly privateKeyId: string,
     private readonly publicKeyId?: string,
   ) {
-    super(translator, logger);
+    super(translator, logger, 'main');
   }
 
   async initializeOnDisplayAsync() : Promise<void> {

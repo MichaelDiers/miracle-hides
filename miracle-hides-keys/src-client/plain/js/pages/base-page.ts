@@ -9,15 +9,16 @@ export default abstract class BasePage {
   constructor(
     private readonly translator: Translator,
     protected readonly logger: Logger,
+    private readonly displayInRegion: string,
   ) {
     const { name } = this.constructor;
     this.sourceName = `${name[0].toLowerCase()}${name.substring(1)}`;
   }
 
   async displayAsync() : Promise<void> {
-    const main = document.querySelector('main');
-    main.id = this.source;
-    this.html.forEach((element: Element) => main.appendChild(element));
+    const region = document.querySelector(this.displayInRegion);
+    region.id = this.source;
+    this.html.forEach((element: Element) => region.appendChild(element));
     return this.initializeOnDisplayAsync();
   }
 
