@@ -69,6 +69,30 @@ export default class HtmlComponents {
     });
   }
 
+  static inputNumber({
+    id = '',
+    label = '',
+    name = id,
+    placeholder = '',
+    source = '',
+    min = '',
+    max = '',
+    value = '',
+  } : {
+    id?: string,
+    name?: string,
+    label?: string,
+    placeholder?: string,
+    source?: string,
+    min?: string,
+    max?: string,
+    value?: string,
+  }) : string {
+    return HtmlComponents.input({
+      id, label, name, placeholder, source, type: 'number', min, max, value,
+    });
+  }
+
   static inputText({
     id = '',
     label = '',
@@ -178,6 +202,8 @@ export default class HtmlComponents {
     source = '',
     type,
     value = '',
+    min = '',
+    max = '',
   } : {
     id: string,
     label?: string,
@@ -186,6 +212,8 @@ export default class HtmlComponents {
     source?: string,
     type: string,
     value?: string,
+    min?: string,
+    max?: string,
   }) : string {
     return `
       ${HtmlComponents.label({ label, source, id })}
@@ -193,6 +221,8 @@ export default class HtmlComponents {
         ${HtmlComponents.add('id', id)}
         ${HtmlComponents.add('name', name)}
         ${HtmlComponents.add('value', value)}
+        ${HtmlComponents.add('min', min)}
+        ${HtmlComponents.add('max', max)}
         ${HtmlComponents.translationValue({
     source,
     value: placeholder,

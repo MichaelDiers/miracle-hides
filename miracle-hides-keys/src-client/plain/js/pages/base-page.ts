@@ -45,8 +45,7 @@ export default abstract class BasePage {
     this.setupEvents(div);
     await this.translateAsync(div);
     this.html = [...div.children];
-
-    document.body.addEventListener(BasePage.constructor.name, (e) => {
+    document.body.addEventListener(this.constructor.name, (e) => {
       e.preventDefault();
       this.displayAsync().catch((err) => this.exception(err.message, err.stack));
     });

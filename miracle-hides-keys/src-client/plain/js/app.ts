@@ -4,6 +4,7 @@ import CustomEventRaise from './infrastructure/custom-event-raiser';
 import Translator from './translations/translator';
 import DeLanguage from './translations/de-language';
 import Logger from './infrastructure/logger';
+import SymmetricPage from './pages/symmetric.page';
 
 export default class App {
   private readonly translator : Translator = new Translator(new DeLanguage(this.logger));
@@ -15,7 +16,7 @@ export default class App {
 
   async startAsync() : Promise<void> {
     await this.setupAsync();
-    CustomEventRaise.raise(AsymmetricPage.constructor.name);
+    CustomEventRaise.raise(SymmetricPage.name);
   }
 
   private async setupAsync() : Promise<void> {
@@ -26,7 +27,10 @@ export default class App {
   private setupPages() : Promise<BasePage>[] {
     const promises : Promise<BasePage>[] = [];
 
-    promises.push(new AsymmetricPage(this.translator, this.logger).setupAsync());
+    promises.push(
+      new AsymmetricPage(this.translator, this.logger).setupAsync(),
+      new SymmetricPage(this.translator, this.logger).setupAsync(),
+    );
 
     return promises;
   }
