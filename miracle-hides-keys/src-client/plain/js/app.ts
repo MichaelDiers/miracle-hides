@@ -16,7 +16,7 @@ export default class App {
 
   async startAsync() : Promise<void> {
     await this.setupAsync();
-    CustomEventRaise.raise(SymmetricPage.name);
+    CustomEventRaise.raise(AsymmetricPage.name);
   }
 
   private async setupAsync() : Promise<void> {

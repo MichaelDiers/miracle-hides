@@ -1,11 +1,13 @@
 import Ajax from '../infrastructure/ajax';
 import { LanguagePageKeys } from '../translations/language-page';
 import { TRANSLATION_DESTINATION_TEXT_CONTENT } from '../translations/translation-constants';
-import BasePage from './base-page';
 import HtmlComponents from './html-components';
 import HtmlHelper from './html-helper';
 import KeysResponse from './keys-response';
 import { SymmetricLanguageKeys } from '../translations/language-symmetric';
+import AlgorithmBasePage from './algorithm-base.page';
+import Translator from '../translations/translator';
+import Logger from '../infrastructure/logger';
 
 const AES_KEY_SIZE_ID = 'aesKeySize';
 
@@ -29,55 +31,19 @@ const KEY_TYPE_OPTION_HMAC = 'HMAC';
 
 const PRIVATE_KEY_ID = 'privateKey';
 
-export default class SymmetricPage extends BasePage {
-  async initializeOnDisplayAsync() : Promise<void> {
-    return this.submitFormAsync();
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  setupEvents(element: HTMLElement) : void {
-    element.querySelector(`#${GENERATE_FORM_ID}`).addEventListener('submit', (e) => {
-      e.preventDefault();
-      document.getElementById(PRIVATE_KEY_ID).textContent = '';
-
-      Ajax.sendFormAsync({ formElement: e.target as HTMLFormElement })
-        .then(({ data, success }) => {
-          if (!success || !data) {
-            this.setErrorAsync()
-              .catch((err) => this.exception(err.message, err.stack));
-          } else {
-            const { privateKey } = data as KeysResponse;
-            document.getElementById(PRIVATE_KEY_ID).textContent = privateKey;
-          }
-        })
-        .catch((err) => {
-          this.exception(err.message, err.stack);
-          this.setErrorAsync()
-            .catch((error) => this.exception(error.message, error.stack));
-        });
-    });
-
-    element.querySelector(`#${KEY_TYPE_ID}`).addEventListener('change', (e) => {
-      document.getElementById(PRIVATE_KEY_ID).textContent = '';
-
-      SymmetricPage.handleKeyTypeAndSize(
-        document.body,
-        e.target as HTMLSelectElement,
-      );
-    });
-
-    element.querySelectorAll(
-      `#${KEY_TYPE_ID}, #${AES_KEY_SIZE_ID}, #${HMAC_KEY_SIZE_ID}`,
-    ).forEach((selectElement) => {
-      selectElement.addEventListener('change', () => {
-        this.submitFormAsync()
-          .catch((err) => this.exception(err.message, err.stack));
-      });
-    });
-
-    SymmetricPage.handleKeyTypeAndSize(
-      element,
-      element.querySelector(`#${KEY_TYPE_ID}`) as HTMLSelectElement,
+export default class SymmetricPage extends AlgorithmBasePage {
+  constructor(
+    translator: Translator,
+    logger: Logger,
+  ) {
+    super(
+      translator,
+      logger,
+      [
+        { id: AES_KEY_SIZE_ID, value: KEY_TYPE_OPTION_AES },
+        { id: HMAC_KEY_SIZE_ID, value: KEY_TYPE_OPTION_HMAC },
+      ],
+      KEY_TYPE_ID,
     );
   }
 
@@ -144,22 +110,6 @@ export default class SymmetricPage extends BasePage {
     `;
   }
 
-  private static handleKeyTypeAndSize(root: HTMLElement, element: HTMLSelectElement) : void {
-    if (element.value === KEY_TYPE_OPTION_AES) {
-      root.querySelector(`#${HMAC_KEY_SIZE_ID}`).classList.add('hidden');
-      root.querySelector(`label[for=${HMAC_KEY_SIZE_ID}]`).classList.add('hidden');
-
-      root.querySelector(`#${AES_KEY_SIZE_ID}`).classList.remove('hidden');
-      root.querySelector(`label[for=${AES_KEY_SIZE_ID}]`).classList.remove('hidden');
-    } else if (element.value === KEY_TYPE_OPTION_HMAC) {
-      root.querySelector(`#${HMAC_KEY_SIZE_ID}`).classList.remove('hidden');
-      root.querySelector(`label[for=${HMAC_KEY_SIZE_ID}]`).classList.remove('hidden');
-
-      root.querySelector(`#${AES_KEY_SIZE_ID}`).classList.add('hidden');
-      root.querySelector(`label[for=${AES_KEY_SIZE_ID}]`).classList.add('hidden');
-    }
-  }
-
   private setErrorAsync() : Promise<void> {
     const errorElement = document.getElementById(ERROR_MESSAGE_ID);
     HtmlHelper.addTranslationValue({
@@ -172,7 +122,7 @@ export default class SymmetricPage extends BasePage {
     return this.translateAsync(errorElement);
   }
 
-  private async submitFormAsync() : Promise<void> {
+  protected async submitFormAsync() : Promise<void> {
     const formElement = document.getElementById(GENERATE_FORM_ID) as HTMLFormElement;
 
     document.querySelector(`#${PRIVATE_KEY_ID}`).textContent = '';

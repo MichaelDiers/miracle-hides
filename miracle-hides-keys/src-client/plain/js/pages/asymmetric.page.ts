@@ -2,10 +2,12 @@ import Ajax from '../infrastructure/ajax';
 import { LanguagePageKeys } from '../translations/language-page';
 import { AsymmetricLanguageKeys } from '../translations/language-asymmetric';
 import { TRANSLATION_DESTINATION_TEXT_CONTENT } from '../translations/translation-constants';
-import BasePage from './base-page';
 import HtmlComponents from './html-components';
 import HtmlHelper from './html-helper';
 import KeysResponse from './keys-response';
+import AlgorithmBasePage from './algorithm-base.page';
+import Translator from '../translations/translator';
+import Logger from '../infrastructure/logger';
 
 const EC_NAMED_CURVE_ID = 'ecNamedCurve';
 
@@ -27,58 +29,19 @@ const PUBLIC_KEY_ID = 'publicKey';
 
 const RSA_KEY_SIZE_ID = 'rsaKeySize';
 
-export default class AsymmetricPage extends BasePage {
-  async initializeOnDisplayAsync() : Promise<void> {
-    return this.submitFormAsync();
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  setupEvents(element: HTMLElement) : void {
-    element.querySelector(`#${GENERATE_FORM_ID}`).addEventListener('submit', (e) => {
-      e.preventDefault();
-      document.getElementById(PRIVATE_KEY_ID).textContent = '';
-      document.getElementById(PUBLIC_KEY_ID).textContent = '';
-
-      Ajax.sendFormAsync({ formElement: e.target as HTMLFormElement })
-        .then(({ data, success }) => {
-          if (!success || !data) {
-            this.setErrorAsync()
-              .catch((err) => this.exception(err.message, err.stack));
-          } else {
-            const { privateKey, publicKey } = data as KeysResponse;
-            document.getElementById(PRIVATE_KEY_ID).textContent = privateKey;
-            document.getElementById(PUBLIC_KEY_ID).textContent = publicKey;
-          }
-        })
-        .catch((err) => {
-          this.exception(err.message, err.stack);
-          this.setErrorAsync()
-            .catch((error) => this.exception(error.message, error.stack));
-        });
-    });
-
-    element.querySelector(`#${KEY_TYPE_ID}`).addEventListener('change', (e) => {
-      document.getElementById(PRIVATE_KEY_ID).textContent = '';
-      document.getElementById(PUBLIC_KEY_ID).textContent = '';
-
-      AsymmetricPage.handleKeyTypeAndSize(
-        document.body,
-        e.target as HTMLSelectElement,
-      );
-    });
-
-    element.querySelectorAll(
-      `#${KEY_TYPE_ID}, #${RSA_KEY_SIZE_ID}, #${EC_NAMED_CURVE_ID}`,
-    ).forEach((selectElement) => {
-      selectElement.addEventListener('change', () => {
-        this.submitFormAsync()
-          .catch((err) => this.exception(err.message, err.stack));
-      });
-    });
-
-    AsymmetricPage.handleKeyTypeAndSize(
-      element,
-      element.querySelector(`#${KEY_TYPE_ID}`) as HTMLSelectElement,
+export default class AsymmetricPage extends AlgorithmBasePage {
+  constructor(
+    translator: Translator,
+    logger: Logger,
+  ) {
+    super(
+      translator,
+      logger,
+      [
+        { id: RSA_KEY_SIZE_ID, value: KEY_TYPE_RSA },
+        { id: EC_NAMED_CURVE_ID, value: KEY_TYPE_EC },
+      ],
+      KEY_TYPE_ID,
     );
   }
 
@@ -156,22 +119,6 @@ export default class AsymmetricPage extends BasePage {
     `;
   }
 
-  private static handleKeyTypeAndSize(root: HTMLElement, element: HTMLSelectElement) : void {
-    if (element.value === KEY_TYPE_EC) {
-      root.querySelector(`#${RSA_KEY_SIZE_ID}`).classList.add('hidden');
-      root.querySelector(`label[for=${RSA_KEY_SIZE_ID}]`).classList.add('hidden');
-
-      root.querySelector(`#${EC_NAMED_CURVE_ID}`).classList.remove('hidden');
-      root.querySelector(`label[for=${EC_NAMED_CURVE_ID}]`).classList.remove('hidden');
-    } else if (element.value === KEY_TYPE_RSA) {
-      root.querySelector(`#${RSA_KEY_SIZE_ID}`).classList.remove('hidden');
-      root.querySelector(`label[for=${RSA_KEY_SIZE_ID}]`).classList.remove('hidden');
-
-      root.querySelector(`#${EC_NAMED_CURVE_ID}`).classList.add('hidden');
-      root.querySelector(`label[for=${EC_NAMED_CURVE_ID}]`).classList.add('hidden');
-    }
-  }
-
   private setErrorAsync() : Promise<void> {
     const errorElement = document.getElementById(ERROR_MESSAGE_ID);
     HtmlHelper.addTranslationValue({
@@ -184,7 +131,7 @@ export default class AsymmetricPage extends BasePage {
     return this.translateAsync(errorElement);
   }
 
-  private async submitFormAsync() : Promise<void> {
+  protected async submitFormAsync() : Promise<void> {
     const formElement = document.getElementById(GENERATE_FORM_ID) as HTMLFormElement;
 
     document.querySelector(`#${PRIVATE_KEY_ID}`).textContent = '';
