@@ -18,7 +18,7 @@ export default class Ajax {
     return new Promise((resolve, reject) => {
       const xhttp = new XMLHttpRequest();
       // eslint-disable-next-line consistent-return
-      xhttp.onreadystatechange = function () {
+      xhttp.onreadystatechange = function handleStateChange() {
         if (this.readyState === 4) {
           const responseData = Ajax.parseResponse(this.responseText, this.responseType);
           const response = new AjaxResponse(this.status, responseData);

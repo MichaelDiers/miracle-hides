@@ -1,3 +1,4 @@
+import Logger from '../infrastructure/logger';
 import Translator from '../translations/translator';
 
 export default abstract class BasePage {
@@ -5,7 +6,10 @@ export default abstract class BasePage {
 
   private readonly sourceName: string;
 
-  constructor(private readonly translator: Translator) {
+  constructor(
+    private readonly translator: Translator,
+    protected readonly logger: Logger,
+  ) {
     const { name } = this.constructor;
     this.sourceName = `${name[0].toLowerCase()}${name.substring(1)}`;
   }
@@ -15,6 +19,10 @@ export default abstract class BasePage {
     main.id = this.source;
     this.html.forEach((element: Element) => main.appendChild(element));
     return this.initializeOnDisplayAsync();
+  }
+
+  exception(message, stack) : void {
+    this.logger.exceptionAsync(message, stack).catch(() => {});
   }
 
   get html() : Element[] {
@@ -40,7 +48,7 @@ export default abstract class BasePage {
 
     document.body.addEventListener(BasePage.constructor.name, (e) => {
       e.preventDefault();
-      this.displayAsync().catch((err) => console.error(err));
+      this.displayAsync().catch((err) => this.exception(err.message, err.stack));
     });
 
     return this;

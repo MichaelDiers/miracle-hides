@@ -1,3 +1,9 @@
+import Logger from './infrastructure/logger';
 import App from './app';
 
-new App().startAsync().catch((err) => console.error(err));
+const logger = new Logger();
+new App(logger)
+  .startAsync()
+  .catch(
+    (err) => logger.exceptionAsync(err.message, err.stack).catch(() => {}),
+  );

@@ -1,9 +1,10 @@
+import Logger from '../infrastructure/logger';
 import BaseLanguage from './base-language';
 import { AsymmetricLanguageKeys } from './language-asymmetric';
 import { LanguagePageKeys } from './language-page';
 
 export default class DeLanguage extends BaseLanguage {
-  constructor() {
+  constructor(logger: Logger) {
     super(
       'de',
       {
@@ -26,6 +27,7 @@ export default class DeLanguage extends BaseLanguage {
           [AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: 'Schlüssel können zur Zeit nicht genriert werden.',
         },
       },
+      logger,
     );
   }
 }

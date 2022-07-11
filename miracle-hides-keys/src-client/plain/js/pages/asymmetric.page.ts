@@ -42,7 +42,8 @@ export default class AsymmetricPage extends BasePage {
       Ajax.sendFormAsync({ formElement: e.target as HTMLFormElement })
         .then(({ data, success }) => {
           if (!success || !data) {
-            this.setErrorAsync().catch((err) => console.error(err));
+            this.setErrorAsync()
+              .catch((err) => this.exception(err.message, err.stack));
           } else {
             const { privateKey, publicKey } = data as KeysResponse;
             document.getElementById(PRIVATE_KEY_ID).textContent = privateKey;
@@ -50,8 +51,9 @@ export default class AsymmetricPage extends BasePage {
           }
         })
         .catch((err) => {
-          console.error(err);
-          this.setErrorAsync().catch((error) => console.error(error));
+          this.exception(err.message, err.stack);
+          this.setErrorAsync()
+            .catch((error) => this.exception(error.message, error.stack));
         });
     });
 
@@ -69,7 +71,8 @@ export default class AsymmetricPage extends BasePage {
       `#${KEY_TYPE_ID}, #${RSA_KEY_SIZE_ID}, #${EC_NAMED_CURVE_ID}`,
     ).forEach((selectElement) => {
       selectElement.addEventListener('change', () => {
-        this.submitFormAsync().catch((err) => console.error(err));
+        this.submitFormAsync()
+          .catch((err) => this.exception(err.message, err.stack));
       });
     });
 
@@ -190,7 +193,7 @@ export default class AsymmetricPage extends BasePage {
     Ajax.sendFormAsync({ formElement })
       .then(({ data, success }) => {
         if (!success || !data) {
-          this.setErrorAsync().catch((err) => console.error(err));
+          this.setErrorAsync().catch((err) => this.exception(err.message, err.stack));
         } else {
           const { privateKey, publicKey } = data as KeysResponse;
           document.querySelector(`#${PRIVATE_KEY_ID}`).textContent = privateKey;
@@ -198,8 +201,8 @@ export default class AsymmetricPage extends BasePage {
         }
       })
       .catch((err) => {
-        console.error(err);
-        this.setErrorAsync().catch((error) => console.error(error));
+        this.exception(err.message, err.stack);
+        this.setErrorAsync().catch((error) => this.exception(error.message, error.stack));
       });
   }
 }

@@ -1,6 +1,6 @@
 export interface Logger {
-  error(message: string): Promise<void>;
-  exception(message: string, stack: string): Promise<void>;
+  errorAsync(message: string): Promise<void>;
+  exceptionAsync(message: string, stack: string): Promise<void>;
 }
 
 export const LOGGER = 'LOGGER';

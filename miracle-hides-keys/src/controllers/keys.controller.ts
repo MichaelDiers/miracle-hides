@@ -39,7 +39,7 @@ export default class KeysController {
 
       return this.transformer.keysResultToCreateKeysResponseDto(result);
     } catch (err: any) {
-      this.logger.exception(err.message, err.stack).catch(() => {});
+      this.logger.exceptionAsync(err.message, err.stack).catch(() => {});
 
       if (err instanceof HttpException) {
         throw err;

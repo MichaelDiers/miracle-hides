@@ -1,8 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { Logger } from '../interfaces/services/logger.interface';
-
-@Injectable()
-export default class LoggerService implements Logger {
+export default class Logger {
   async errorAsync(message: string): Promise<void> {
     return this.exceptionAsync(message, undefined);
   }
