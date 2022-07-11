@@ -1,9 +1,5 @@
-import Ajax from '../infrastructure/ajax';
 import { LanguagePageKeys } from '../translations/language-page';
-import { TRANSLATION_DESTINATION_TEXT_CONTENT } from '../translations/translation-constants';
 import HtmlComponents from './html-components';
-import HtmlHelper from './html-helper';
-import KeysResponse from './keys-response';
 import { SymmetricLanguageKeys } from '../translations/language-symmetric';
 import AlgorithmBasePage from './algorithm-base.page';
 import Translator from '../translations/translator';
@@ -44,6 +40,9 @@ export default class SymmetricPage extends AlgorithmBasePage {
         { id: HMAC_KEY_SIZE_ID, value: KEY_TYPE_OPTION_HMAC },
       ],
       KEY_TYPE_ID,
+      ERROR_MESSAGE_ID,
+      SymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
+      PRIVATE_KEY_ID,
     );
   }
 
@@ -108,37 +107,5 @@ export default class SymmetricPage extends AlgorithmBasePage {
     rows: '15',
   })}
     `;
-  }
-
-  private setErrorAsync() : Promise<void> {
-    const errorElement = document.getElementById(ERROR_MESSAGE_ID);
-    HtmlHelper.addTranslationValue({
-      element: errorElement,
-      source: this.source,
-      value: SymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
-      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
-    });
-
-    return this.translateAsync(errorElement);
-  }
-
-  protected async submitFormAsync() : Promise<void> {
-    const formElement = document.getElementById(GENERATE_FORM_ID) as HTMLFormElement;
-
-    document.querySelector(`#${PRIVATE_KEY_ID}`).textContent = '';
-
-    Ajax.sendFormAsync({ formElement })
-      .then(({ data, success }) => {
-        if (!success || !data) {
-          this.setErrorAsync().catch((err) => this.exception(err.message, err.stack));
-        } else {
-          const { privateKey } = data as KeysResponse;
-          document.querySelector(`#${PRIVATE_KEY_ID}`).textContent = privateKey;
-        }
-      })
-      .catch((err) => {
-        this.exception(err.message, err.stack);
-        this.setErrorAsync().catch((error) => this.exception(error.message, error.stack));
-      });
   }
 }

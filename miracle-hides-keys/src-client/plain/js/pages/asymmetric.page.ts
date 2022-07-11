@@ -1,10 +1,6 @@
-import Ajax from '../infrastructure/ajax';
 import { LanguagePageKeys } from '../translations/language-page';
 import { AsymmetricLanguageKeys } from '../translations/language-asymmetric';
-import { TRANSLATION_DESTINATION_TEXT_CONTENT } from '../translations/translation-constants';
 import HtmlComponents from './html-components';
-import HtmlHelper from './html-helper';
-import KeysResponse from './keys-response';
 import AlgorithmBasePage from './algorithm-base.page';
 import Translator from '../translations/translator';
 import Logger from '../infrastructure/logger';
@@ -42,6 +38,10 @@ export default class AsymmetricPage extends AlgorithmBasePage {
         { id: EC_NAMED_CURVE_ID, value: KEY_TYPE_EC },
       ],
       KEY_TYPE_ID,
+      ERROR_MESSAGE_ID,
+      AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
+      PRIVATE_KEY_ID,
+      PUBLIC_KEY_ID,
     );
   }
 
@@ -117,39 +117,5 @@ export default class AsymmetricPage extends AlgorithmBasePage {
     rows: '6',
   })}
     `;
-  }
-
-  private setErrorAsync() : Promise<void> {
-    const errorElement = document.getElementById(ERROR_MESSAGE_ID);
-    HtmlHelper.addTranslationValue({
-      element: errorElement,
-      source: this.source,
-      value: AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
-      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
-    });
-
-    return this.translateAsync(errorElement);
-  }
-
-  protected async submitFormAsync() : Promise<void> {
-    const formElement = document.getElementById(GENERATE_FORM_ID) as HTMLFormElement;
-
-    document.querySelector(`#${PRIVATE_KEY_ID}`).textContent = '';
-    document.querySelector(`#${PUBLIC_KEY_ID}`).textContent = '';
-
-    Ajax.sendFormAsync({ formElement })
-      .then(({ data, success }) => {
-        if (!success || !data) {
-          this.setErrorAsync().catch((err) => this.exception(err.message, err.stack));
-        } else {
-          const { privateKey, publicKey } = data as KeysResponse;
-          document.querySelector(`#${PRIVATE_KEY_ID}`).textContent = privateKey;
-          document.querySelector(`#${PUBLIC_KEY_ID}`).textContent = publicKey;
-        }
-      })
-      .catch((err) => {
-        this.exception(err.message, err.stack);
-        this.setErrorAsync().catch((error) => this.exception(error.message, error.stack));
-      });
   }
 }
