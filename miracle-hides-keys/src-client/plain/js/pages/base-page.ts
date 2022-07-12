@@ -17,6 +17,7 @@ export default abstract class BasePage {
 
   async displayAsync() : Promise<void> {
     const region = document.querySelector(this.displayInRegion);
+    region.innerHTML = '';
     region.id = this.source;
     this.html.forEach((element: Element) => region.appendChild(element));
     return this.initializeOnDisplayAsync();

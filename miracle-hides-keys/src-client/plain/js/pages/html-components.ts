@@ -6,6 +6,33 @@ import {
 } from '../translations/translation-constants';
 
 export default class HtmlComponents {
+  static anchor({
+    id = '',
+    href = '',
+    source = '',
+    label = '',
+    content = '',
+    css = [],
+  } : {
+    id?: string,
+    href?: string,
+    source?: string,
+    label?: string,
+    content?: string,
+    css?: string[],
+  }) {
+    return `
+      <a
+        ${HtmlComponents.add('id', id)}
+        ${HtmlComponents.add('href', href)}
+        ${HtmlComponents.translationValue({ source, value: label, destination: TRANSLATION_DESTINATION_TEXT_CONTENT })}
+        ${HtmlComponents.add('class', css.join(' '))}
+      >
+        ${content}
+      </a>
+    `;
+  }
+
   static div({
     id = '',
   } : {
@@ -109,6 +136,62 @@ export default class HtmlComponents {
     return HtmlComponents.input({
       id, label, name, placeholder, source, type: 'text',
     });
+  }
+
+  static list({
+    id = '',
+    ordered = true,
+    items = [],
+  } : {
+    id?: string,
+    ordered?: boolean,
+    items?,
+  }) {
+    return `
+      <${ordered ? 'ol' : 'ul'} ${id ? ` id='${id}'` : ''}>
+        ${items.join('')}
+      </${ordered ? 'ol' : 'ul'}>
+    `;
+  }
+
+  static listItem({
+    source = '',
+    label = '',
+    content = '',
+  } : {
+    source?: string,
+    label?: string,
+    content?: string,
+  }) {
+    return `
+      <li
+        ${HtmlComponents.translationValue({
+    source,
+    value: label,
+    destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+  })}>
+        ${content}
+      </li>`;
+  }
+
+  static listOrdered({
+    id = '',
+    items = [],
+  } : {
+    id?: string,
+    items?,
+  }) {
+    return HtmlComponents.list({ id, ordered: true, items });
+  }
+
+  static listUnordered({
+    id = '',
+    items = [],
+  } : {
+    id?: string,
+    items?,
+  }) {
+    return HtmlComponents.list({ id, ordered: false, items });
   }
 
   static select({

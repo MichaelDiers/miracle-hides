@@ -1,6 +1,8 @@
 import Logger from '../infrastructure/logger';
 import BaseLanguage from './base-language';
 import { AsymmetricLanguageKeys } from './language-asymmetric';
+import { FooterLanguageKeys } from './language-footer';
+import { HeaderLanguageKeys } from './language-header';
 import { LanguagePageKeys } from './language-page';
 import { SymmetricLanguageKeys } from './language-symmetric';
 
@@ -26,6 +28,13 @@ export default class DeLanguage extends BaseLanguage {
           [AsymmetricLanguageKeys.PRIVATE_KEY]: 'Privater Schlüssel',
           [AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER]: 'noch kein Schlüssel generiert',
           [AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: 'Schlüssel können zur Zeit nicht genriert werden.',
+        },
+        footerPage: {
+          [FooterLanguageKeys.LICENSES]: 'Lizenzen',
+        },
+        headerPage: {
+          [HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS]: 'asymmetrische Algorithmen',
+          [HeaderLanguageKeys.SYMMETRIC_ALGORITHMS]: 'symmetrische Algorithmen',
         },
         symmetricPage: {
           [LanguagePageKeys.HEADLINE]: 'Symmetric Keys Generator',
