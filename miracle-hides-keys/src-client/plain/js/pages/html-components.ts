@@ -11,14 +11,14 @@ export default class HtmlComponents {
     href = '',
     source = '',
     label = '',
-    content = '',
+    content = [],
     css = [],
   } : {
     id?: string,
     href?: string,
     source?: string,
     label?: string,
-    content?: string,
+    content?: string[],
     css?: string[],
   }) {
     return `
@@ -28,21 +28,21 @@ export default class HtmlComponents {
         ${HtmlComponents.translationValue({ source, value: label, destination: TRANSLATION_DESTINATION_TEXT_CONTENT })}
         ${HtmlComponents.add('class', css.join(' '))}
       >
-        ${content}
+        ${content.join('')}
       </a>
     `;
   }
 
   static div({
     id = '',
+    css = [],
+    content = [],
   } : {
-    id?: string
+    id?: string,
+    css?: string[],
+    content?: string[],
   } = {}) : string {
-    return `
-      <div
-        ${HtmlComponents.add('id', id)}
-      ></div>
-    `;
+    return HtmlComponents.component({ tag: 'div', id, content, css });
   }
 
   static form({
@@ -230,6 +230,18 @@ export default class HtmlComponents {
     `;
   }
 
+  static span({
+    id = '',
+    css = [],
+    content = '',
+  } : {
+    id?: string,
+    css?: string[],
+    content?: string,
+  }) {
+    return HtmlComponents.component({ tag: 'span', id, css, content: [content]});
+  }
+
   static submit({
     label = '',
     source = '',
@@ -275,6 +287,27 @@ export default class HtmlComponents {
 
   private static add(attributeName: string, attributeValue: string) : string {
     return attributeValue ? ` ${attributeName}='${attributeValue}'` : '';
+  }
+
+  private static component({
+    tag,
+    id = '',
+    css = [],
+    content = [],
+  } : {
+    tag: string,
+    id?: string,
+    css?: string[],
+    content?: string[],
+  }) {
+    return `
+      <${tag}
+        ${HtmlComponents.add('id', id)}
+        ${HtmlComponents.add('class', css.join(' '))}
+      >
+        ${content.join('')}
+      </${tag}>
+    `;
   }
 
   private static input({

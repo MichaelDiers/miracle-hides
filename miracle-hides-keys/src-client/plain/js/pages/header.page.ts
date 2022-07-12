@@ -26,7 +26,14 @@ export default class HeaderPage extends BasePage {
 
   setupHtml() : string {
     return `
-      <h1>Hello World</h1>
+      ${HtmlComponents.anchor({
+        css: [Css.LOGO],
+        href: AsymmetricPage.name,
+        content: [
+          HtmlComponents.span({ content: 'mhk' }),
+          HtmlComponents.span({ content: 'eys' })
+        ]
+      })}
       ${HtmlComponents.listUnordered({
     items: [
       HtmlComponents.listItem({
@@ -53,11 +60,18 @@ export default class HeaderPage extends BasePage {
   }
 
   setupEvents(element: HTMLElement) : void {
-    element.querySelectorAll(`.${Css.MENU_LINK}`).forEach((elem) => {
+    element.querySelectorAll(`.${Css.MENU_LINK}, .${Css.LOGO}`).forEach((elem) => {
       elem.addEventListener('click', (e) => {
-        e.preventDefault();
-        const href = (e.target as HTMLElement).getAttribute('href');
-        CustomEventRaiser.raise(href);
+        let node = e.target as HTMLElement;
+        while (node.tagName.toUpperCase() !== 'A' && node.tagName.toUpperCase() !== 'BODY') {
+          node = node.parentElement;
+        }
+
+        if (node.tagName.toUpperCase() === 'A') {
+          e.preventDefault();
+          const href = node.getAttribute('href');
+          CustomEventRaiser.raise(href);
+        }
       });
     });
   }
