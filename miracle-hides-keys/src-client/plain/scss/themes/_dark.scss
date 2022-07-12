@@ -1,0 +1,21 @@
+body {
+  background: $body-background-dark;
+  color: $body-color-dark;
+}
+
+header {
+  background: $header-background-dark;
+  color: $header-color-dark;
+}
+
+.menu li {
+  color: $header-link-inactive-dark;
+}
+
+.menu li:hover {
+  color: $header-color-dark;
+}
+
+.menu li::after {
+  background-color: $header-color-dark;  
+}

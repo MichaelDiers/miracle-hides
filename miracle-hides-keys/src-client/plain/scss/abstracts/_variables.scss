@@ -1,0 +1,11 @@
+// global
+$default-padding: 30px;
+
+// header
+$header-background-dark: radial-gradient(circle, rgba(5,5,125,1) 0%, rgba(9,30,121,1) 35%, rgba(44,153,185,1) 100%);
+$header-color-dark: rgb(239, 241, 198);
+$header-link-inactive-dark: rgb(161, 163, 120);
+
+// body
+$body-background-dark: radial-gradient(circle, rgba(8,24,163,0.6474789744999563) 0%, rgba(27,100,121,1) 100%);
+$body-color-dark: $header-color-dark;

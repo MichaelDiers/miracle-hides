@@ -1,0 +1,26 @@
+.menu ul {
+  list-style: none;
+}
+
+.menu li {
+  float: left;
+  margin-left: 20px;
+}
+
+.menu li:first-child {
+  margin-left: 0;
+}
+
+.menu li::after {
+  content: "";
+  height: 2px;
+  display: block;
+  transition: transform 0.2s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.menu li:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}

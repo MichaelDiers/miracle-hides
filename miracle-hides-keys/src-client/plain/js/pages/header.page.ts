@@ -20,46 +20,61 @@ export default class HeaderPage extends BasePage {
     super(translator, logger, 'header');
   }
 
-  async initializeOnDisplayAsync() : Promise<void> {
+  async initializeOnDisplayAsync(): Promise<void> {
 
   }
 
-  setupHtml() : string {
+  setupHtml(): string {
+    const logo = HtmlComponents.anchor({
+      css: [Css.LOGO],
+      href: AsymmetricPage.name,
+      content: [
+        HtmlComponents.span({ content: 'mhk' }),
+        HtmlComponents.span({ content: 'eys' }),
+      ],
+    });
+
+    const headline = HtmlComponents.h1({
+      source: this.source,
+      value: HeaderLanguageKeys.MENU_HEADLINE,
+    })
+
+    const menu = HtmlComponents.div({
+      css: [Css.MENU],
+      content: [
+        HtmlComponents.listUnordered({
+          items: [
+            HtmlComponents.listItem({
+              content: HtmlComponents.anchor({
+                id: ASYMMETRIC_ALGORITHMS_LINK_ID,
+                source: this.source,
+                label: HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS,
+                href: AsymmetricPage.name,
+                css: [Css.MENU_LINK],
+              }),
+            }),
+            HtmlComponents.listItem({
+              content: HtmlComponents.anchor({
+                id: SYMMETRIC_ALGORITHMS_LINK_ID,
+                source: this.source,
+                label: HeaderLanguageKeys.SYMMETRIC_ALGORITHMS,
+                href: SymmetricPage.name,
+                css: [Css.MENU_LINK],
+              }),
+            }),
+          ],
+        }),
+      ],
+    });
+
     return `
-      ${HtmlComponents.anchor({
-        css: [Css.LOGO],
-        href: AsymmetricPage.name,
-        content: [
-          HtmlComponents.span({ content: 'mhk' }),
-          HtmlComponents.span({ content: 'eys' })
-        ]
-      })}
-      ${HtmlComponents.listUnordered({
-    items: [
-      HtmlComponents.listItem({
-        content: HtmlComponents.anchor({
-          id: ASYMMETRIC_ALGORITHMS_LINK_ID,
-          source: this.source,
-          label: HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS,
-          href: AsymmetricPage.name,
-          css: [Css.MENU_LINK],
-        }),
-      }),
-      HtmlComponents.listItem({
-        content: HtmlComponents.anchor({
-          id: SYMMETRIC_ALGORITHMS_LINK_ID,
-          source: this.source,
-          label: HeaderLanguageKeys.SYMMETRIC_ALGORITHMS,
-          href: SymmetricPage.name,
-          css: [Css.MENU_LINK],
-        }),
-      }),
-    ],
-  })}
+      ${logo}
+      ${headline}
+      ${menu}      
     `;
   }
 
-  setupEvents(element: HTMLElement) : void {
+  setupEvents(element: HTMLElement): void {
     element.querySelectorAll(`.${Css.MENU_LINK}, .${Css.LOGO}`).forEach((elem) => {
       elem.addEventListener('click', (e) => {
         let node = e.target as HTMLElement;

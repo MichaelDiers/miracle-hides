@@ -34,6 +34,7 @@ export default class DeLanguage extends BaseLanguage {
         },
         headerPage: {
           [HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS]: 'asymmetrische Algorithmen',
+          [HeaderLanguageKeys.MENU_HEADLINE]: 'Miracle Hides Keys',
           [HeaderLanguageKeys.SYMMETRIC_ALGORITHMS]: 'symmetrische Algorithmen',
         },
         symmetricPage: {

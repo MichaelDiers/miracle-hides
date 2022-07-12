@@ -42,7 +42,9 @@ export default class HtmlComponents {
     css?: string[],
     content?: string[],
   } = {}) : string {
-    return HtmlComponents.component({ tag: 'div', id, content, css });
+    return HtmlComponents.component({
+      tag: 'div', id, content, css,
+    });
   }
 
   static form({
@@ -239,7 +241,9 @@ export default class HtmlComponents {
     css?: string[],
     content?: string,
   }) {
-    return HtmlComponents.component({ tag: 'span', id, css, content: [content]});
+    return HtmlComponents.component({
+      tag: 'span', id, css, content: [content],
+    });
   }
 
   static submit({

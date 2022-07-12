@@ -1,5 +1,6 @@
 const enum Css {
-  LOGO = 'logo',  
+  LOGO = 'logo',
+  MENU = 'menu',
   MENU_LINK = 'menuLink',
 }
 
