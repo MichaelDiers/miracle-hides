@@ -1,20 +1,29 @@
 header {
+  background-image: url('oie_s2jJAf6Yofsz.png');
   display: grid;
-  gap: 20px;
-  grid-template-areas: 'logo headline .' 'menu menu menu';
-  grid-template-columns: 1fr 10fr 1fr;
+  gap: 30px;
+  grid-template-columns: auto;
   padding: $default-padding;
   place-items: center;
 }
 
-header .logo {
+navbar {
+  display: grid;
+  grid-template-columns: 1fr 12fr 1fr;
+  grid-template-areas: 'logo menu .';
+  place-items: center;
+}
+
+navbar .logo {
   grid-area: logo;
 }
 
-header h1 {
-  grid-area: headline;
+navbar .menu {
+  grid-area: menu;
+  justify-self: end;
 }
 
-header .menu {
-  grid-area: menu;
+header #foo {
+  grid-column: 1;
+  grid-row: 1 2;
 }

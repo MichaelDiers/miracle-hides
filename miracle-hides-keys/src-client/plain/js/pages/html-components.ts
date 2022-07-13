@@ -196,6 +196,23 @@ export default class HtmlComponents {
     return HtmlComponents.list({ id, ordered: false, items });
   }
 
+  static navbar({
+    css = [],
+    id = '',
+    content = [],
+  } : {
+    css?: string[],
+    id?: string,
+    content?: string[],
+  }) : string {
+    return HtmlComponents.component({
+      tag: 'navbar',
+      id,
+      css,
+      content,
+    });
+  }
+
   static select({
     id = '',
     label = '',
