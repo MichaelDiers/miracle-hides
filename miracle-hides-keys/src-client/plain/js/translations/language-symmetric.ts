@@ -1,4 +1,4 @@
-import LanguagePage from './language-page';
+import { LanguagePage } from './language-page';
 
 export enum SymmetricLanguageKeys {
   AES_KEY_SIZE = 'aesKeySize',

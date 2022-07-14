@@ -1,3 +1,7 @@
 footer {
   padding: $default-padding;
 }
+
+footer.welcome {
+  display: none;
+}

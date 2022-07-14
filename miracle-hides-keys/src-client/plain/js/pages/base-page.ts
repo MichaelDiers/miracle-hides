@@ -1,3 +1,4 @@
+import Css from './css';
 import Logger from '../infrastructure/logger';
 import Translator from '../translations/translator';
 
@@ -9,37 +10,22 @@ export default abstract class BasePage {
   constructor(
     private readonly translator: Translator,
     protected readonly logger: Logger,
-    private readonly displayInRegion: string,
   ) {
     const { name } = this.constructor;
     this.sourceName = `${name[0].toLowerCase()}${name.substring(1)}`;
   }
 
-  async displayAsync() : Promise<void> {
-    const region = document.querySelector(this.displayInRegion);
-    region.innerHTML = '';
-    region.id = this.source;
-    this.html.forEach((element: Element) => region.appendChild(element));
-    return this.initializeOnDisplayAsync();
-  }
-
-  exception(message, stack) : void {
-    this.logger.exceptionAsync(message, stack).catch(() => {});
-  }
-
-  get html() : Element[] {
+  private get html() : Element[] {
     return this.content;
   }
 
-  set html(content: Element[]) {
+  private set html(content: Element[]) {
     this.content = content;
   }
 
-  get source() : string {
+  protected get source() : string {
     return this.sourceName;
   }
-
-  abstract initializeOnDisplayAsync() : Promise<void>;
 
   async setupAsync() : Promise<BasePage> {
     const div = document.createElement('div');
@@ -55,11 +41,33 @@ export default abstract class BasePage {
     return this;
   }
 
-  abstract setupHtml() : string;
+  protected abstract get displayInRegion() : string;
 
-  abstract setupEvents(element: HTMLElement) : void;
+  protected exception(message, stack) : void {
+    this.logger.exceptionAsync(message, stack).catch(() => {});
+  }
 
-  translateAsync(element?: HTMLElement) : Promise<void> {
+  // eslint-disable-next-line class-methods-use-this
+  protected async initializeOnDisplayAsync(): Promise<void> {
+    ['header', 'footer'].forEach((selector) => {
+      const element = document.querySelector(selector);
+      element.classList.remove(Css.HIDDEN);
+    });
+  }
+
+  protected abstract setupEvents(element: HTMLElement) : void;
+
+  protected abstract setupHtml() : string;
+
+  protected translateAsync(element?: HTMLElement) : Promise<void> {
     return this.translator.translateAsync(element);
+  }
+
+  private async displayAsync() : Promise<void> {
+    const region = document.querySelector(this.displayInRegion);
+    region.innerHTML = '';
+    region.id = this.source;
+    this.html.forEach((element: Element) => region.appendChild(element));
+    return this.initializeOnDisplayAsync();
   }
 }

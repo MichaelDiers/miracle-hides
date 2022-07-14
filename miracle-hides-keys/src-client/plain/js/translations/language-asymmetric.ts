@@ -1,4 +1,4 @@
-import LanguagePage from './language-page';
+import { LanguagePage } from './language-page';
 
 export enum AsymmetricLanguageKeys {
   EC_NAMED_CURVE = 'ecNamedCurve',

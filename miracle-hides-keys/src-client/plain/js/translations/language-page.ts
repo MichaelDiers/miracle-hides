@@ -2,6 +2,6 @@ export enum LanguagePageKeys {
   HEADLINE = 'headline',
 }
 
-export default interface LanguagePage {
+export interface LanguagePage {
   [LanguagePageKeys.HEADLINE]: string;
 }

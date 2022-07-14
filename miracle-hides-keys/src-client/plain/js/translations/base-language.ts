@@ -1,5 +1,5 @@
 import Logger from '../infrastructure/logger';
-import Language from './language';
+import { Language } from './language';
 
 export default abstract class BaseLanguage {
   constructor(

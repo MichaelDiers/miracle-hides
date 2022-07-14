@@ -1,3 +1,34 @@
+#welcomePage {
+  background-color: #271b1b;
+  color: #747474;
+}
+
+#welcomePage .asymmetric,
+#welcomePage .asymmetric button {
+  border-color: #21b27b;  
+  color: #21b27b;
+}
+
+#welcomePage .symmetric,
+#welcomePage .symmetric button {
+  border-color: #b23721;
+  color: #b23721;
+}
+
+#welcomePage button:hover {  
+  border-color: #271b1b;
+  color: #271b1b;  
+}
+
+#welcomePage .asymmetric button:hover {
+  background-color: #21b27b;
+}
+
+#welcomePage .symmetric button:hover {
+  background-color: #b23721;
+}
+
+/*
 body {
   //background: $body-background-dark;
   color: $body-color-dark;
@@ -19,3 +50,4 @@ header {
 .menu li::after {
   background-color: $header-color-dark;  
 }
+*/

@@ -1,4 +1,8 @@
-header {
+header.welcome {
+  display: none;
+}
+
+header div {
   background-image: url('oie_s2jJAf6Yofsz.png');
   display: grid;
   gap: 30px;
@@ -23,7 +27,7 @@ navbar .menu {
   justify-self: end;
 }
 
-header #foo {
+header div #foo {
   grid-column: 1;
   grid-row: 1 2;
 }

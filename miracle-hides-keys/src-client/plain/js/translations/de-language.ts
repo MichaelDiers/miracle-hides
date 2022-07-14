@@ -1,6 +1,8 @@
 import Logger from '../infrastructure/logger';
 import BaseLanguage from './base-language';
+import { COMMON_SOURCE } from './language';
 import { AsymmetricLanguageKeys } from './language-asymmetric';
+import { CommonLanguageKeys } from './language-common';
 import { FooterLanguageKeys } from './language-footer';
 import { HeaderLanguageKeys } from './language-header';
 import { LanguagePageKeys } from './language-page';
@@ -28,6 +30,16 @@ export default class DeLanguage extends BaseLanguage {
           [AsymmetricLanguageKeys.PRIVATE_KEY]: 'Privater Schlüssel',
           [AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER]: 'noch kein Schlüssel generiert',
           [AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: 'Schlüssel können zur Zeit nicht genriert werden.',
+        },
+        [COMMON_SOURCE]: {
+          [CommonLanguageKeys.ALGORITHM_AES]: 'AES',
+          [CommonLanguageKeys.ALGORITHM_EC]: 'EC',
+          [CommonLanguageKeys.ALGORITHM_HMAC]: 'HMAC',
+          [CommonLanguageKeys.ALGORITHM_RSA]: 'RSA',
+          [CommonLanguageKeys.ASYMMETRIC_ENCRYPTION]: 'asymmetrische Verschlüsselung',
+          [CommonLanguageKeys.GENERATE]: 'Generieren',
+          [CommonLanguageKeys.MIRACLE_HIDES_KEYS]: 'Miracle Hides Keys',
+          [CommonLanguageKeys.SYMMETRIC_ENCRYPTION]: 'symmetrische Verschlüsselung',
         },
         footerPage: {
           [FooterLanguageKeys.LICENSES]: 'Lizenzen',

@@ -17,26 +17,20 @@ export default abstract class AlgorithmBasePage extends BasePage {
     private readonly privateKeyId: string,
     private readonly publicKeyId?: string,
   ) {
-    super(translator, logger, 'main');
+    super(translator, logger);
   }
 
-  async initializeOnDisplayAsync() : Promise<void> {
+  // eslint-disable-next-line class-methods-use-this
+  protected get displayInRegion() : string {
+    return 'main';
+  }
+
+  protected async initializeOnDisplayAsync() : Promise<void> {
+    await super.initializeOnDisplayAsync();
     return this.submitFormAsync();
   }
 
-  protected setErrorAsync() : Promise<void> {
-    const errorElement = document.getElementById(this.errorElementId);
-    HtmlHelper.addTranslationValue({
-      element: errorElement,
-      source: this.source,
-      value: this.defaultErrorMessage,
-      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
-    });
-
-    return this.translateAsync(errorElement);
-  }
-
-  setupEvents(element: HTMLElement) : void {
+  protected setupEvents(element: HTMLElement) : void {
     element.querySelector('form').addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -60,6 +54,18 @@ export default abstract class AlgorithmBasePage extends BasePage {
       element,
       element.querySelector(`#${this.keyTypeId}`) as HTMLSelectElement,
     );
+  }
+
+  protected setErrorAsync() : Promise<void> {
+    const errorElement = document.getElementById(this.errorElementId);
+    HtmlHelper.addTranslationValue({
+      element: errorElement,
+      source: this.source,
+      value: this.defaultErrorMessage,
+      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+    });
+
+    return this.translateAsync(errorElement);
   }
 
   protected async submitFormAsync() : Promise<void> {

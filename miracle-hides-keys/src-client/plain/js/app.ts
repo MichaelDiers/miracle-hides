@@ -7,6 +7,7 @@ import Logger from './infrastructure/logger';
 import SymmetricPage from './pages/symmetric.page';
 import HeaderPage from './pages/header.page';
 import FooterPage from './pages/footer.page';
+import WelcomePage from './pages/welcome-page';
 
 export default class App {
   private readonly translator : Translator = new Translator(new DeLanguage(this.logger));
@@ -18,7 +19,7 @@ export default class App {
 
   async startAsync() : Promise<void> {
     await this.setupAsync();
-    CustomEventRaise.raise(AsymmetricPage.name);
+    CustomEventRaise.raise(WelcomePage.name);
     CustomEventRaise.raise(HeaderPage.name);
     CustomEventRaise.raise(FooterPage.name);
   }
@@ -36,6 +37,7 @@ export default class App {
       new SymmetricPage(this.translator, this.logger).setupAsync(),
       new HeaderPage(this.translator, this.logger).setupAsync(),
       new FooterPage(this.translator, this.logger).setupAsync(),
+      new WelcomePage(this.translator, this.logger).setupAsync(),
     );
 
     return promises;

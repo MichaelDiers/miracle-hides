@@ -33,6 +33,27 @@ export default class HtmlComponents {
     `;
   }
 
+  static button({
+    css = ['button'],
+    id = '',
+    source = '',
+    text = '',
+  } : {
+    css?: string[],
+    id?: string,
+    source?: string,
+    text?: string,
+  }) : string {
+    return HtmlComponents.component({
+      tag: 'button',
+      id,
+      css,
+      source,
+      text,
+      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+    });
+  }
+
   static div({
     id = '',
     css = [],
@@ -78,6 +99,21 @@ export default class HtmlComponents {
   } = {}) : string {
     return HtmlComponents.tag({
       tagName: 'h1',
+      source,
+      value,
+      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+    });
+  }
+
+  static h2({
+    source = '',
+    value = '',
+  } : {
+    source?: string,
+    value?: string,
+  } = {}) : string {
+    return HtmlComponents.tag({
+      tagName: 'h2',
       source,
       value,
       destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
@@ -213,6 +249,27 @@ export default class HtmlComponents {
     });
   }
 
+  static p({
+    css = [],
+    id = '',
+    source = '',
+    text = '',
+  } : {
+    css?: string[],
+    id?: string,
+    source?: string,
+    text?: string,
+  }) : string {
+    return HtmlComponents.component({
+      tag: 'p',
+      id,
+      css,
+      source,
+      text,
+      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+    });
+  }
+
   static select({
     id = '',
     label = '',
@@ -315,16 +372,23 @@ export default class HtmlComponents {
     id = '',
     css = [],
     content = [],
+    source = '',
+    text = '',
+    destination = '',
   } : {
     tag: string,
     id?: string,
     css?: string[],
     content?: string[],
+    source?: string,
+    text?: string,
+    destination?: string,
   }) {
     return `
       <${tag}
         ${HtmlComponents.add('id', id)}
         ${HtmlComponents.add('class', css.join(' '))}
+        ${HtmlComponents.translationValue({ source, value: text, destination })}
       >
         ${content.join('')}
       </${tag}>

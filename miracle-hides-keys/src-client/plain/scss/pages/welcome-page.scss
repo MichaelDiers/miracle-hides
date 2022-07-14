@@ -1,0 +1,47 @@
+#welcomePage {
+  display: grid;
+  gap: 40px;
+  grid-template-areas: 'headline headline' 'asymmetric symmetric';
+  grid-template-columns: auto auto;  
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  place-items: stretch;
+}
+
+#welcomePage h1 {
+  grid-area: headline;
+  padding: 20px;
+}
+
+#welcomePage .asymmetric {
+  grid-area: asymmetric;
+}
+
+#welcomePage .symmetric {
+  grid-area: symmetric;
+}
+
+#welcomePage .asymmetric,
+#welcomePage .symmetric {
+  border: 1px solid;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 25px;
+  display: grid;
+  grid-template-columns: auto;
+  padding: 50px;
+  place-items: center;
+}
+
+#welcomePage ol {
+  list-style: none;
+}
+
+#welcomePage li {
+  text-align: center;
+  margin: 30px;
+}
+
+#welcomePage button {
+  border: 1px solid;
+}
