@@ -1,8 +1,10 @@
 const enum Css {
+  ASYMMETRIC_COLOR = 'asymmetric-color',
   HIDDEN = 'hidden',
-  LOGO = 'logo',
-  MENU = 'menu',
-  MENU_LINK = 'menuLink',
+  LOGO = 'logo',  
+  MENU_LINK = 'menu-link',
+  NAVBAR = 'navbar',
+  SYMMETRIC_COLOR = 'symmetric-color',
 }
 
 export default Css;

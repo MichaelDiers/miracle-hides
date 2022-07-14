@@ -193,23 +193,24 @@ export default class HtmlComponents {
   }
 
   static listItem({
+    css = [],
     source = '',
     label = '',
     content = '',
   } : {
+    css?: string[],
     source?: string,
     label?: string,
     content?: string,
   }) {
-    return `
-      <li
-        ${HtmlComponents.translationValue({
-    source,
-    value: label,
-    destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
-  })}>
-        ${content}
-      </li>`;
+    return HtmlComponents.component({
+      tag: 'li',
+      css,
+      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+      source,
+      text: label,
+      content: [content],
+    });
   }
 
   static listOrdered({

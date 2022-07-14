@@ -2,32 +2,22 @@ header.welcome {
   display: none;
 }
 
-header div {
-  background-image: url('oie_s2jJAf6Yofsz.png');
+header {
   display: grid;
-  gap: 30px;
-  grid-template-columns: auto;
+  grid-template-columns: 1fr 12fr 1fr;
+  grid-template-areas: 'logo headline .' 'navbar navbar navbar';
   padding: $default-padding;
   place-items: center;
 }
 
-navbar {
-  display: grid;
-  grid-template-columns: 1fr 12fr 1fr;
-  grid-template-areas: 'logo menu .';
-  place-items: center;
-}
-
-navbar .logo {
+header .logo {
   grid-area: logo;
 }
 
-navbar .menu {
-  grid-area: menu;
-  justify-self: end;
+header h1 {
+  grid-area: headline;
 }
 
-header div #foo {
-  grid-column: 1;
-  grid-row: 1 2;
+header .navbar {
+  grid-area: navbar;
 }

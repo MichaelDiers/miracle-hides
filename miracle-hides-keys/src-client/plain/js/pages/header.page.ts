@@ -5,6 +5,7 @@ import BasePage from './base-page';
 import HtmlComponents from './html-components';
 import SymmetricPage from './symmetric.page';
 import CustomEventRaiser from '../infrastructure/custom-event-raiser';
+import WelcomePage from './welcome-page';
 
 const ASYMMETRIC_ALGORITHMS_LINK_ID = 'asymmetricAlgorithmsLink';
 
@@ -44,7 +45,7 @@ export default class HeaderPage extends BasePage {
     return [
       HtmlComponents.anchor({
         css: [Css.LOGO],
-        href: AsymmetricPage.name,
+        href: WelcomePage.name,
         content: [
           HtmlComponents.span({ content: 'mhk' }),
           HtmlComponents.span({ content: 'eys' }),
@@ -54,12 +55,13 @@ export default class HeaderPage extends BasePage {
         source: this.source,
         value: HeaderLanguageKeys.MENU_HEADLINE,
       }),
-      HtmlComponents.div({
-        css: [Css.MENU],
+      HtmlComponents.navbar({
+        css: [Css.NAVBAR],
         content: [
           HtmlComponents.listUnordered({
             items: [
               HtmlComponents.listItem({
+                css: [Css.ASYMMETRIC_COLOR],
                 content: HtmlComponents.anchor({
                   id: ASYMMETRIC_ALGORITHMS_LINK_ID,
                   source: this.source,
@@ -69,6 +71,7 @@ export default class HeaderPage extends BasePage {
                 }),
               }),
               HtmlComponents.listItem({
+                css: [Css.SYMMETRIC_COLOR],
                 content: HtmlComponents.anchor({
                   id: SYMMETRIC_ALGORITHMS_LINK_ID,
                   source: this.source,

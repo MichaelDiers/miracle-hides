@@ -7,7 +7,7 @@ import Logger from '../infrastructure/logger';
 
 const AES_KEY_SIZE_ID = 'aesKeySize';
 
-const ERROR_MESSAGE_ID = 'errorMessage';
+const ERROR_MESSAGE_ID = 'symmetricErrorMessage';
 
 const GENERATE_FORM_ID = 'generateForm';
 
@@ -25,7 +25,7 @@ const KEY_TYPE_OPTION_AES = 'AES';
 
 const KEY_TYPE_OPTION_HMAC = 'HMAC';
 
-const PRIVATE_KEY_ID = 'privateKey';
+const PRIVATE_KEY_ID = 'symmetricPrivateKey';
 
 export default class SymmetricPage extends AlgorithmBasePage {
   constructor(
@@ -96,14 +96,15 @@ export default class SymmetricPage extends AlgorithmBasePage {
             label: SymmetricLanguageKeys.SUBMIT,
             source,
           }),
+          HtmlComponents.textarea({
+            id: PRIVATE_KEY_ID,
+            label: SymmetricLanguageKeys.PRIVATE_KEY,
+            placeholder: SymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
+            source,
+            rows: '3',
+          }),
         ],
       }),
-      HtmlComponents.textarea({
-        id: PRIVATE_KEY_ID,
-        label: SymmetricLanguageKeys.PRIVATE_KEY,
-        placeholder: SymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
-        source,
-        rows: '15',
-      })].join('');
+    ].join('');
   }
 }

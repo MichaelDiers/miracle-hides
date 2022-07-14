@@ -9,7 +9,7 @@ const EC_NAMED_CURVE_ID = 'ecNamedCurve';
 
 const EC_NAMED_CURVE_SECT239K1 = 'sect239k1';
 
-const ERROR_MESSAGE_ID = 'errorMessage';
+const ERROR_MESSAGE_ID = 'asymmetricErrorMessage';
 
 const GENERATE_FORM_ID = 'generateForm';
 
@@ -19,9 +19,9 @@ const KEY_TYPE_EC = 'EC';
 
 const KEY_TYPE_RSA = 'RSA';
 
-const PRIVATE_KEY_ID = 'privateKey';
+const PRIVATE_KEY_ID = 'asymmetricPrivateKey';
 
-const PUBLIC_KEY_ID = 'publicKey';
+const PUBLIC_KEY_ID = 'asymmetricPublicKey';
 
 const RSA_KEY_SIZE_ID = 'rsaKeySize';
 
@@ -100,21 +100,21 @@ export default class AsymmetricPage extends AlgorithmBasePage {
             label: AsymmetricLanguageKeys.SUBMIT,
             source,
           }),
+          HtmlComponents.textarea({
+            id: PRIVATE_KEY_ID,
+            label: AsymmetricLanguageKeys.PRIVATE_KEY,
+            placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
+            source,
+            rows: '15',
+          }),
+          HtmlComponents.textarea({
+            id: PUBLIC_KEY_ID,
+            label: AsymmetricLanguageKeys.PUBLIC_KEY,
+            placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
+            source,
+            rows: '6',
+          }),
         ],
-      }),
-      HtmlComponents.textarea({
-        id: PRIVATE_KEY_ID,
-        label: AsymmetricLanguageKeys.PRIVATE_KEY,
-        placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
-        source,
-        rows: '15',
-      }),
-      HtmlComponents.textarea({
-        id: PUBLIC_KEY_ID,
-        label: AsymmetricLanguageKeys.PUBLIC_KEY,
-        placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
-        source,
-        rows: '6',
       }),
     ].join('');
   }

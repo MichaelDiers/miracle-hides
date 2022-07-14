@@ -1,53 +1,53 @@
-#welcomePage {
-  background-color: #271b1b;
-  color: #747474;
+body {
+  background-color: $background-color-dark;
+  color: $color-dark;
+}
+
+.asymmetric-color {
+  color: $asymmetric-color-dark;
+}
+
+#asymmetricPage {
+  color: $asymmetric-color-dark;
+}
+
+.navbar li.asymmetric-color::after {
+  color: $asymmetric-color-dark;
+}
+
+.navbar li.symmetric-color::after {
+  color: $symmetric-color-dark;
+}
+
+.symmetric-color {
+  color: $symmetric-color-dark;
+}
+
+#symmetricPage {
+  color: $symmetric-color-dark;
 }
 
 #welcomePage .asymmetric,
 #welcomePage .asymmetric button {
-  border-color: #21b27b;  
-  color: #21b27b;
+  border-color: $asymmetric-color-dark;
+  color: $asymmetric-color-dark;
 }
 
 #welcomePage .symmetric,
 #welcomePage .symmetric button {
-  border-color: #b23721;
-  color: #b23721;
+  border-color: $symmetric-color-dark;
+  color: $symmetric-color-dark;
 }
 
 #welcomePage button:hover {  
-  border-color: #271b1b;
-  color: #271b1b;  
+  border-color: $background-color-dark;
+  color: $background-color-dark;  
 }
 
 #welcomePage .asymmetric button:hover {
-  background-color: #21b27b;
+  background-color: $asymmetric-color-dark;
 }
 
 #welcomePage .symmetric button:hover {
-  background-color: #b23721;
+  background-color: $symmetric-color-dark;
 }
-
-/*
-body {
-  //background: $body-background-dark;
-  color: $body-color-dark;
-}
-
-header {
-  background: $header-background-dark;
-  color: $header-color-dark;
-}
-
-.menu li {
-  color: $header-link-inactive-dark;
-}
-
-.menu li:hover {
-  color: $header-color-dark;
-}
-
-.menu li::after {
-  background-color: $header-color-dark;  
-}
-*/
