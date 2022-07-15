@@ -58,13 +58,23 @@ export default class HtmlComponents {
     id = '',
     css = [],
     content = [],
+    source = '',
+    text = '',
   } : {
     id?: string,
     css?: string[],
     content?: string[],
+    source?: string,
+    text?: string,
   } = {}) : string {
     return HtmlComponents.component({
-      tag: 'div', id, content, css,
+      tag: 'div',
+      id,
+      content,
+      css,
+      source,
+      text,
+      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
     });
   }
 

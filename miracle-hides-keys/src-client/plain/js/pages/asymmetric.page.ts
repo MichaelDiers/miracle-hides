@@ -25,7 +25,9 @@ const PUBLIC_KEY_ID = 'asymmetricPublicKey';
 
 const RSA_KEY_SIZE_ID = 'rsaKeySize';
 
-export default class AsymmetricPage extends AlgorithmBasePage {
+export const AsymmetricPageEvent = "asymmetricPage";
+
+export class AsymmetricPage extends AlgorithmBasePage {
   constructor(
     translator: Translator,
     logger: Logger,
@@ -33,6 +35,7 @@ export default class AsymmetricPage extends AlgorithmBasePage {
     super(
       translator,
       logger,
+      AsymmetricPageEvent,
       [
         { id: RSA_KEY_SIZE_ID, value: KEY_TYPE_RSA },
         { id: EC_NAMED_CURVE_ID, value: KEY_TYPE_EC },
@@ -40,6 +43,7 @@ export default class AsymmetricPage extends AlgorithmBasePage {
       KEY_TYPE_ID,
       ERROR_MESSAGE_ID,
       AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
+      AsymmetricPageEvent,
       PRIVATE_KEY_ID,
       PUBLIC_KEY_ID,
     );

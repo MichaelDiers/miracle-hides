@@ -10,14 +10,16 @@ export default abstract class AlgorithmBasePage extends BasePage {
   constructor(
     translator: Translator,
     logger: Logger,
+    eventName: string,
     private readonly keyTypes : { id: string, value: string }[],
     private readonly keyTypeId: string,
     private readonly errorElementId: string,
     private readonly defaultErrorMessage: string,
-    private readonly privateKeyId: string,
-    private readonly publicKeyId?: string,
+    protected readonly source: string,
+    private readonly privateKeyId: string,    
+    private readonly publicKeyId?: string,    
   ) {
-    super(translator, logger);
+    super(translator, logger, eventName);
   }
 
   // eslint-disable-next-line class-methods-use-this

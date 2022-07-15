@@ -1,10 +1,15 @@
 import Logger from '../infrastructure/logger';
+import { AsymmetricPageEvent } from '../pages/asymmetric.page';
+import { FooterPageEvent } from '../pages/footer.page';
+import { HeaderPageEvent } from '../pages/header.page';
+import { LicensePageEvent } from '../pages/license-page';
+import { SymmetricPageEvent } from '../pages/symmetric.page';
 import BaseLanguage from './base-language';
-import { COMMON_SOURCE } from './language';
 import { AsymmetricLanguageKeys } from './language-asymmetric';
-import { CommonLanguageKeys } from './language-common';
+import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from './language-common';
 import { FooterLanguageKeys } from './language-footer';
 import { HeaderLanguageKeys } from './language-header';
+import { LicenseLanguageKeys } from './language-license';
 import { LanguagePageKeys } from './language-page';
 import { SymmetricLanguageKeys } from './language-symmetric';
 
@@ -13,7 +18,7 @@ export default class DeLanguage extends BaseLanguage {
     super(
       'de',
       {
-        asymmetricPage: {
+        [AsymmetricPageEvent]: {
           [LanguagePageKeys.HEADLINE]: 'Asymmetric Keys Generator',
           [AsymmetricLanguageKeys.EC_NAMED_CURVE]: 'Named Curve',
           [AsymmetricLanguageKeys.EC_NAMED_CURVE_SECT239K1]: 'sect239k1',
@@ -31,7 +36,7 @@ export default class DeLanguage extends BaseLanguage {
           [AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER]: 'noch kein Schlüssel generiert',
           [AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: 'Schlüssel können zur Zeit nicht genriert werden.',
         },
-        [COMMON_SOURCE]: {
+        [COMMON_LANGUAGE_SOURCE]: {
           [CommonLanguageKeys.ALGORITHM_AES]: 'AES',
           [CommonLanguageKeys.ALGORITHM_EC]: 'EC',
           [CommonLanguageKeys.ALGORITHM_HMAC]: 'HMAC',
@@ -41,15 +46,15 @@ export default class DeLanguage extends BaseLanguage {
           [CommonLanguageKeys.MIRACLE_HIDES_KEYS]: 'Miracle Hides Keys',
           [CommonLanguageKeys.SYMMETRIC_ENCRYPTION]: 'symmetrische Verschlüsselung',
         },
-        footerPage: {
+        [FooterPageEvent]: {
           [FooterLanguageKeys.LICENSES]: 'Lizenzen',
         },
-        headerPage: {
+        [HeaderPageEvent]: {
           [HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS]: 'asymmetrische Algorithmen',
           [HeaderLanguageKeys.MENU_HEADLINE]: 'Miracle Hides Keys',
           [HeaderLanguageKeys.SYMMETRIC_ALGORITHMS]: 'symmetrische Algorithmen',
         },
-        symmetricPage: {
+        [SymmetricPageEvent]: {
           [LanguagePageKeys.HEADLINE]: 'Symmetric Keys Generator',
           [SymmetricLanguageKeys.AES_KEY_SIZE]: 'Schlüssellänge',
           [SymmetricLanguageKeys.AES_KEY_SIZE_128]: '128',
@@ -65,6 +70,26 @@ export default class DeLanguage extends BaseLanguage {
           [SymmetricLanguageKeys.SUBMIT]: 'Generieren',
           [SymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: 'Schlüssel können zur Zeit nicht genriert werden.',
         },
+        [LicensePageEvent]: {
+          [LicenseLanguageKeys.LICENSES]: 'Lizenzen',
+          [LicenseLanguageKeys.LICENSES_FONTS]: 'Schriftarten',
+          [LicenseLanguageKeys.LICENSES_NODE]: 'Bibliotheken',
+          [LicenseLanguageKeys.NODE_DEPARTMENT]: 'Department',
+          [LicenseLanguageKeys.NODE_RELATED_TO]: 'Related To',
+          [LicenseLanguageKeys.NODE_NAME]: 'Name',
+          [LicenseLanguageKeys.NODE_LICENSE_PERIOD]: 'License Period',
+          [LicenseLanguageKeys.NODE_MATERIAL]: 'Material',
+          [LicenseLanguageKeys.NODE_LICENSE_TYPE]: 'License Type',
+          [LicenseLanguageKeys.NODE_LINK]: 'Link',
+          [LicenseLanguageKeys.NODE_REMOTE_VERSION]: 'Remote Version',
+          [LicenseLanguageKeys.NODE_INSTALLED_VERSION]: 'Installed Version',
+          [LicenseLanguageKeys.NODE_DEFINED_VERSION]: 'Defined Version',
+          [LicenseLanguageKeys.NODE_AUTHOR]: 'Author',
+          [LicenseLanguageKeys.FONT_FONT]: 'Schrift',
+          [LicenseLanguageKeys.FONT_LICENSE]: 'Lizenz',
+          [LicenseLanguageKeys.FONT_AUTHOR]: 'Autor',
+          [LicenseLanguageKeys.FONT_LINK]: 'Link',
+        }
       },
       logger,
     );

@@ -27,7 +27,9 @@ const KEY_TYPE_OPTION_HMAC = 'HMAC';
 
 const PRIVATE_KEY_ID = 'symmetricPrivateKey';
 
-export default class SymmetricPage extends AlgorithmBasePage {
+export const SymmetricPageEvent = 'symmetricPage';
+
+export class SymmetricPage extends AlgorithmBasePage {
   constructor(
     translator: Translator,
     logger: Logger,
@@ -35,6 +37,7 @@ export default class SymmetricPage extends AlgorithmBasePage {
     super(
       translator,
       logger,
+      SymmetricPageEvent,
       [
         { id: AES_KEY_SIZE_ID, value: KEY_TYPE_OPTION_AES },
         { id: HMAC_KEY_SIZE_ID, value: KEY_TYPE_OPTION_HMAC },
@@ -42,6 +45,7 @@ export default class SymmetricPage extends AlgorithmBasePage {
       KEY_TYPE_ID,
       ERROR_MESSAGE_ID,
       SymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
+      SymmetricPageEvent,
       PRIVATE_KEY_ID,
     );
   }

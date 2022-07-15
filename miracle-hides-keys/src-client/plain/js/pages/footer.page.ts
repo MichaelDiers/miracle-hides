@@ -1,6 +1,21 @@
+import Logger from '../infrastructure/logger';
+import Translator from '../translations/translator';
 import BasePage from './base-page';
 
-export default class FooterPage extends BasePage {
+export const FooterPageEvent = 'footerPage';
+
+export class FooterPage extends BasePage {
+  constructor(
+    translator: Translator,
+    logger: Logger,
+  ) {
+    super(
+      translator,
+      logger,
+      FooterPageEvent,
+    );
+  }
+
   // eslint-disable-next-line class-methods-use-this
   protected get displayInRegion() : string {
     return 'footer';

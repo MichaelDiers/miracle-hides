@@ -1,0 +1,14 @@
+#licensePage .license-data-fonts,
+#licensePage .license-data-node {
+  display: grid;
+  gap: 5px;  
+  place-items: center;
+}
+
+#licensePage .license-data-node {  
+  grid-template-columns: repeat(11, auto);
+}
+
+#licensePage .license-data-fonts {  
+  grid-template-columns: repeat(4, auto);
+}

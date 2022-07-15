@@ -9,6 +9,8 @@ export enum CommonLanguageKeys {
   SYMMETRIC_ENCRYPTION = 'symmetricEncryption',
 }
 
+export const COMMON_LANGUAGE_SOURCE = 'commonLanguageSource';
+
 export interface CommonLanguage {
   [CommonLanguageKeys.ALGORITHM_AES]: string;
   [CommonLanguageKeys.ALGORITHM_EC]: string;

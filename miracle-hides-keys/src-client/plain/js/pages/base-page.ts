@@ -5,14 +5,11 @@ import Translator from '../translations/translator';
 export default abstract class BasePage {
   private content: Element[];
 
-  private readonly sourceName: string;
-
   constructor(
     private readonly translator: Translator,
     protected readonly logger: Logger,
+    private readonly eventName: string,
   ) {
-    const { name } = this.constructor;
-    this.sourceName = `${name[0].toLowerCase()}${name.substring(1)}`;
   }
 
   private get html() : Element[] {
@@ -23,17 +20,13 @@ export default abstract class BasePage {
     this.content = content;
   }
 
-  protected get source() : string {
-    return this.sourceName;
-  }
-
   async setupAsync() : Promise<BasePage> {
     const div = document.createElement('div');
     div.innerHTML = this.setupHtml();
     this.setupEvents(div);
     await this.translateAsync(div);
     this.html = [...div.children];
-    document.body.addEventListener(this.constructor.name, (e) => {
+    document.body.addEventListener(this.eventName, (e) => {
       e.preventDefault();
       this.displayAsync().catch((err) => this.exception(err.message, err.stack));
     });
@@ -66,7 +59,7 @@ export default abstract class BasePage {
   private async displayAsync() : Promise<void> {
     const region = document.querySelector(this.displayInRegion);
     region.innerHTML = '';
-    region.id = this.source;
+    region.id = this.eventName;
     this.html.forEach((element: Element) => region.appendChild(element));
     return this.initializeOnDisplayAsync();
   }
