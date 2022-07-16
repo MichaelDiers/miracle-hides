@@ -3,6 +3,18 @@ body {
   color: $color-dark;
 }
 
+a::after {
+  background-color: $color-dark;
+}
+
+.asymmetric-color .menu-link::after {
+  background-color: $asymmetric-color-dark;
+}
+
+.symmetric-color .menu-link::after {
+  background-color: $symmetric-color-dark;
+}
+
 .asymmetric-color {
   color: $asymmetric-color-dark;
 }

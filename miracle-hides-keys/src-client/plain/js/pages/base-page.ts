@@ -42,7 +42,7 @@ export default abstract class BasePage {
 
   // eslint-disable-next-line class-methods-use-this
   protected async initializeOnDisplayAsync(): Promise<void> {
-    ['header', 'footer'].forEach((selector) => {
+    ['header'].forEach((selector) => {
       const element = document.querySelector(selector);
       element.classList.remove(Css.HIDDEN);
     });
@@ -61,6 +61,7 @@ export default abstract class BasePage {
     region.innerHTML = '';
     region.id = this.eventName;
     this.html.forEach((element: Element) => region.appendChild(element));
+    window.scrollTo(0, 0);
     return this.initializeOnDisplayAsync();
   }
 }

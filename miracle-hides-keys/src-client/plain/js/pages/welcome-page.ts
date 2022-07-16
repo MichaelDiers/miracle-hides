@@ -29,7 +29,7 @@ export class WelcomePage extends BasePage {
   // eslint-disable-next-line class-methods-use-this
   protected async initializeOnDisplayAsync(): Promise<void> {
     await super.initializeOnDisplayAsync();
-    ['header', 'footer'].forEach((selector) => {
+    ['header'].forEach((selector) => {
       const element = document.querySelector(selector);
       element.classList.add('hidden');
     });

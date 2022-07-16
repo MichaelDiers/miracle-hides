@@ -1,7 +1,5 @@
 footer {
+  display: grid;
   padding: $default-padding;
-}
-
-footer.welcome {
-  display: none;
+  place-items: center;
 }

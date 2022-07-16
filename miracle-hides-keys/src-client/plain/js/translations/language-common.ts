@@ -5,6 +5,7 @@ export enum CommonLanguageKeys {
   ALGORITHM_RSA = 'algorithmRsa',
   ASYMMETRIC_ENCRYPTION = 'asymmetricEncryption',
   GENERATE = 'generate',
+  LICENSES = 'licenses',
   MIRACLE_HIDES_KEYS = 'miracleHidesKeys',
   SYMMETRIC_ENCRYPTION = 'symmetricEncryption',
 }
@@ -18,6 +19,7 @@ export interface CommonLanguage {
   [CommonLanguageKeys.ALGORITHM_RSA]: string;
   [CommonLanguageKeys.ASYMMETRIC_ENCRYPTION]: string;
   [CommonLanguageKeys.GENERATE]: string;
+  [CommonLanguageKeys.LICENSES]: string;
   [CommonLanguageKeys.MIRACLE_HIDES_KEYS]: string;
   [CommonLanguageKeys.SYMMETRIC_ENCRYPTION]: string;
 }

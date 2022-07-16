@@ -7,8 +7,8 @@ import Logger from './infrastructure/logger';
 import { SymmetricPage } from './pages/symmetric.page';
 import { HeaderPage, HeaderPageEvent } from './pages/header.page';
 import { FooterPage, FooterPageEvent } from './pages/footer.page';
-import { WelcomePage } from './pages/welcome-page';
-import { LicensePage, LicensePageEvent } from './pages/license-page';
+import { WelcomePage, WelcomePageEvent } from './pages/welcome-page';
+import { LicensePage } from './pages/license-page';
 
 export default class App {
   private readonly translator : Translator = new Translator(new DeLanguage(this.logger));
@@ -20,7 +20,7 @@ export default class App {
 
   async startAsync() : Promise<void> {
     await this.setupAsync();
-    CustomEventRaise.raise(LicensePageEvent);
+    CustomEventRaise.raise(WelcomePageEvent);
     CustomEventRaise.raise(HeaderPageEvent);
     CustomEventRaise.raise(FooterPageEvent);
   }

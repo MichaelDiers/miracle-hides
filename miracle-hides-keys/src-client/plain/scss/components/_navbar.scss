@@ -10,28 +10,3 @@
 .navbar li:first-child {
   margin-left: 0;
 }
-
-.navbar li .menu-link::after {
-  bottom: 0;
-  content: '';
-  display: block;
-  height: 2px;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: bottom right;
-  transition: transform 0.3s ease-out;
-  width: 100%;
-}
-
-.navbar li.asymmetric-color .menu-link::after {
-  background-color: $asymmetric-color-dark;
-}
-
-.navbar li.symmetric-color .menu-link::after {
-  background-color: $symmetric-color-dark;
-}
-
-.navbar li:hover .menu-link::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}

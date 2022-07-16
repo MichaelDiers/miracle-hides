@@ -43,6 +43,7 @@ export default class DeLanguage extends BaseLanguage {
           [CommonLanguageKeys.ALGORITHM_RSA]: 'RSA',
           [CommonLanguageKeys.ASYMMETRIC_ENCRYPTION]: 'asymmetrische Verschlüsselung',
           [CommonLanguageKeys.GENERATE]: 'Generieren',
+          [CommonLanguageKeys.LICENSES]: 'Lizenzen',
           [CommonLanguageKeys.MIRACLE_HIDES_KEYS]: 'Miracle Hides Keys',
           [CommonLanguageKeys.SYMMETRIC_ENCRYPTION]: 'symmetrische Verschlüsselung',
         },
