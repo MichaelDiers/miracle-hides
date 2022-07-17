@@ -5,6 +5,7 @@ const enum Css {
   MENU_LINK = 'menu-link',
   NAVBAR = 'navbar',
   SYMMETRIC_COLOR = 'symmetric-color',
+  TEXTAREA_CONTAINER = 'textarea-container',
 }
 
 export default Css;

@@ -4,6 +4,7 @@ import {
   TRANSLATION_DESTINATION_TEXT_CONTENT,
   TRANSLATION_DESTINATION_VALUE,
 } from '../translations/translation-constants';
+import Css from './css';
 
 export default class HtmlComponents {
   static anchor({
@@ -363,15 +364,24 @@ export default class HtmlComponents {
     source?: string,
     rows?: string,
   }) : string {
-    return `
-      ${HtmlComponents.label({ label, source, id })}
-      <textarea
-        ${HtmlComponents.add('id', id)}
-        ${HtmlComponents.add('name', name)}
-        ${HtmlComponents.add('rows', rows)}
-        ${HtmlComponents.translationValue({ source, value: placeholder, destination: TRANSLATION_DESTINATION_PLACEHOLDER })}
-      ></textarea>
-    `;
+    return [
+      HtmlComponents.label({ label, source, id }),
+      HtmlComponents.div({
+        css: [Css.TEXTAREA_CONTAINER],
+        content: [
+          HtmlComponents.div(),
+          HtmlComponents.component({
+            tag: 'textarea',
+            id,
+            name,
+            rows,
+            source,
+            text: placeholder,
+            destination: TRANSLATION_DESTINATION_PLACEHOLDER,
+          }),
+        ],
+      }),
+    ].join('');
   }
 
   private static add(attributeName: string, attributeValue: string) : string {
@@ -386,6 +396,8 @@ export default class HtmlComponents {
     source = '',
     text = '',
     destination = '',
+    name = '',
+    rows = '',
   } : {
     tag: string,
     id?: string,
@@ -394,10 +406,14 @@ export default class HtmlComponents {
     source?: string,
     text?: string,
     destination?: string,
+    name?: string,
+    rows?: string,
   }) {
     return `
       <${tag}
         ${HtmlComponents.add('id', id)}
+        ${HtmlComponents.add('name', name)}
+        ${HtmlComponents.add('rows', rows)}
         ${HtmlComponents.add('class', css.join(' '))}
         ${HtmlComponents.translationValue({ source, value: text, destination })}
       >

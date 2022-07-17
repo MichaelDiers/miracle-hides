@@ -3,7 +3,9 @@ $default-padding: 30px;
 
 // colors
 $asymmetric-color-dark: hsl(157, 69%, 41%);
+$asymmetric-color-dark-lighter: hsl(157, 69%, 41%, 0.4);
 $background-color-dark: hsl(0, 18%, 13%);
 $color-dark: hsl(0, 0%, 45%);
 $overlay-color: hsla(0, 0%, 4%, 0.2);
-$symmetric-color-dark: hsl(9, 69%, 41%); 
+$symmetric-color-dark: hsl(9, 69%, 41%);
+$symmetric-color-dark-lighter: hsla(9, 69%, 41%, 0.4);

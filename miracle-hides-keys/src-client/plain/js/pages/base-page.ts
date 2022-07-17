@@ -26,9 +26,27 @@ export default abstract class BasePage {
     this.setupEvents(div);
     await this.translateAsync(div);
     this.html = [...div.children];
+    
     document.body.addEventListener(this.eventName, (e) => {
       e.preventDefault();
       this.displayAsync().catch((err) => this.exception(err.message, err.stack));
+    });
+
+    this.html.forEach((element) => {
+      let textareaContainers = [...element.querySelectorAll(`.${Css.TEXTAREA_CONTAINER}`)];
+      if (element.hasAttribute(Css.TEXTAREA_CONTAINER)) {
+        textareaContainers.push(element);        
+      }
+
+      textareaContainers.forEach((textareaContainer) => {        
+        textareaContainer.querySelector('div').addEventListener('click', (e) => {
+          e.preventDefault();
+          const textarea = (e.target as HTMLElement).parentElement.querySelector('textarea');
+          if (textarea) {
+            navigator.clipboard.writeText(textarea.textContent);
+          }
+        });
+      });
     });
 
     return this;

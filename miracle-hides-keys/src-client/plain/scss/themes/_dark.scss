@@ -1,26 +1,22 @@
-body {
-  background-color: $background-color-dark;
-  color: $color-dark;
-}
+/** element specific colors **/
 
 a::after {
   background-color: $color-dark;
 }
 
-.asymmetric-color .menu-link::after {
-  background-color: $asymmetric-color-dark;
+body {
+  background-color: $background-color-dark;
+  color: $color-dark;
 }
 
-.symmetric-color .menu-link::after {
-  background-color: $symmetric-color-dark;
-}
+/** class selectors **/
 
 .asymmetric-color {
   color: $asymmetric-color-dark;
 }
 
-#asymmetricPage {
-  color: $asymmetric-color-dark;
+.asymmetric-color .menu-link::after {
+  background-color: $asymmetric-color-dark;
 }
 
 .navbar li.asymmetric-color::after {
@@ -35,7 +31,32 @@ a::after {
   color: $symmetric-color-dark;
 }
 
+.symmetric-color .menu-link::after {
+  background-color: $symmetric-color-dark;
+}
+
+/** page specific colors **/
+#asymmetricPage {
+  color: $asymmetric-color-dark;
+}
+
+#asymmetricPage .textarea-container div {
+  color: $asymmetric-color-dark-lighter;
+}
+
+#asymmetricPage .textarea-container div:hover {
+  color: $asymmetric-color-dark;
+}
+
 #symmetricPage {
+  color: $symmetric-color-dark;
+}
+
+#symmetricPage .textarea-container div {
+  color: $symmetric-color-dark-lighter;
+}
+
+#symmetricPage .textarea-container div:hover {
   color: $symmetric-color-dark;
 }
 
@@ -45,21 +66,21 @@ a::after {
   color: $asymmetric-color-dark;
 }
 
+#welcomePage .asymmetric button:hover {
+  background-color: $asymmetric-color-dark;
+}
+
 #welcomePage .symmetric,
 #welcomePage .symmetric button {
   border-color: $symmetric-color-dark;
   color: $symmetric-color-dark;
 }
 
+#welcomePage .symmetric button:hover {
+  background-color: $symmetric-color-dark;
+}
+
 #welcomePage button:hover {  
   border-color: $background-color-dark;
   color: $background-color-dark;  
-}
-
-#welcomePage .asymmetric button:hover {
-  background-color: $asymmetric-color-dark;
-}
-
-#welcomePage .symmetric button:hover {
-  background-color: $symmetric-color-dark;
 }
