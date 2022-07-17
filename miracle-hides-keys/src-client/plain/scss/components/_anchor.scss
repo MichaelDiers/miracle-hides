@@ -1,10 +1,8 @@
 
 a::after {
-  bottom: 0;
   content: '';
   display: block;
   height: 2px;
-  left: 0;
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-out;
