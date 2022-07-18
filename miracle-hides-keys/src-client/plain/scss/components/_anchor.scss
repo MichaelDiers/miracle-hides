@@ -1,8 +1,15 @@
+a {
+  border: solid 2px transparent;
+  border-radius: $default-border-radius;
+  position: relative;
+}
 
 a::after {
+  bottom: -2px;
   content: '';
-  display: block;
   height: 2px;
+  left: 0;
+  position: absolute;
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-out;
