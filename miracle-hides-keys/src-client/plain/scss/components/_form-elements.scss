@@ -7,6 +7,19 @@ textarea {
 }
 
 input[type='number'],
+input[type='text'],
 select {
   text-align: center;
+}
+
+textarea,
+input[type='text'] {
+  border: 2px solid;
+  border-radius: 4px;
+}
+
+textarea:focus,
+input[type='text']:focus {
+  outline: 3px solid;
+  border-width: 3px;  
 }

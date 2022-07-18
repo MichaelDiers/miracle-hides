@@ -13,6 +13,17 @@ input[type='radio'] {
   background-color: $background-color-dark;  
 }
 
+textarea,
+input[type='text'] {
+  background-color: $background-color-dark-lighter;
+  color: inherit;  
+}
+
+textarea:focus,
+input[type='text']:focus {
+  outline-color: transparent;
+}
+
 /** class selectors **/
 
 .asymmetric-color {
@@ -48,8 +59,18 @@ input[type='radio'] {
   border-color: $asymmetric-color-dark;  
 }
 
+#asymmetricPage textarea,
+#asymmetricPage input[type='text'] {
+  border-color: $asymmetric-color-dark;
+}
+
 #asymmetricPage input[type="radio"]::after {
   background-color: $asymmetric-color-dark;
+}
+
+#asymmetricPage textarea:focus,
+#asymmetricPage input[type='text']:focus {
+  box-shadow: 0 0 0 3px $asymmetric-color-shadow-dark;
 }
 
 #asymmetricPage .textarea-container div {
@@ -70,6 +91,16 @@ input[type='radio'] {
 
 #symmetricPage input[type="radio"]::after {
   background-color: $symmetric-color-dark;
+}
+
+#symmetricPage textarea,
+#symmetricPage input[type='text'] {
+  border-color: $symmetric-color-dark;
+}
+
+#symmetricPage textarea:focus,
+#symmetricPage input[type='text']:focus {
+  box-shadow: 0 0 0 3px $symmetric-color-shadow-dark;
 }
 
 #symmetricPage .textarea-container div {

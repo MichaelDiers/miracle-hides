@@ -165,7 +165,17 @@ export default class HtmlComponents {
     value?: string,
   }) : string {
     return HtmlComponents.input({
-      id, label, name, placeholder, source, type: 'number', min, max, value,
+      id,
+      label,
+      name,
+      placeholder,
+      source,
+      type: 'text',
+      min,
+      max,
+      value,
+      pattern: '[0-9]*',
+      inputMode: 'numeric',
     });
   }
 
@@ -459,6 +469,8 @@ export default class HtmlComponents {
     min = '',
     max = '',
     isChecked = undefined,
+    inputMode = '',
+    pattern = '',
   } : {
     id: string,
     label?: string,
@@ -470,24 +482,30 @@ export default class HtmlComponents {
     min?: string,
     max?: string,
     isChecked?: boolean,
+    inputMode?: string,
+    pattern?: string,
   }) : string {
-    return `
-      ${HtmlComponents.label({ label, source, id })}
-      <input
-        ${HtmlComponents.add('id', id)}
-        ${HtmlComponents.add('name', name)}
-        ${HtmlComponents.add('value', value)}
-        ${HtmlComponents.add('min', min)}
-        ${HtmlComponents.add('max', max)}
-        ${HtmlComponents.add('checked', (isChecked || isChecked === false) ? `${isChecked}` : '')}
-        ${HtmlComponents.translationValue({
-    source,
-    value: placeholder,
-    destination: TRANSLATION_DESTINATION_PLACEHOLDER,
-  })}
-        type='${type}'
-      ></input>
-    `;
+    return [
+      HtmlComponents.label({ label, source, id }),
+      '<input',
+      [
+        HtmlComponents.add('id', id),
+        HtmlComponents.add('name', name),
+        HtmlComponents.add('value', value),
+        HtmlComponents.add('min', min),
+        HtmlComponents.add('max', max),
+        HtmlComponents.add('checked', (isChecked || isChecked === false) ? `${isChecked}` : ''),
+        HtmlComponents.add('inputMode', inputMode),
+        HtmlComponents.add('pattern', pattern),
+        HtmlComponents.translationValue({
+          source,
+          value: placeholder,
+          destination: TRANSLATION_DESTINATION_PLACEHOLDER,
+        }),
+        HtmlComponents.add('type', type),       
+      ].join(''),
+      '></input>',
+    ].join('');
   }
 
   private static label({
