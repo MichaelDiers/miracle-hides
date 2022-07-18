@@ -1,14 +1,42 @@
 // global
+$default-border-radius: 4px;
 $default-padding: 30px;
 
 // colors
-$asymmetric-color-dark: hsl(157, 69%, 41%);
-$asymmetric-color-shadow-dark: hsl(157, 59%, 53%);
-$asymmetric-color-dark-lighter: hsl(157, 69%, 41%, 0.4);
-$background-color-dark: hsl(0, 18%, 13%);
-$background-color-dark-lighter: rgb(52, 40, 40);
-$color-dark: hsl(0, 0%, 45%);
 $overlay-color: hsla(0, 0%, 4%, 0.2);
-$symmetric-color-dark: hsl(9, 69%, 41%);
-$symmetric-color-shadow-dark: hsla(9, 69%, 41%, 0.5);
-$symmetric-color-dark-lighter: hsla(9, 69%, 41%, 0.4);
+
+$focus-correction: 30%;
+$lighter-correction: 0.65;
+$shadow-correction: 10%;
+
+$asymmetric-color-h-dark: 157;
+$asymmetric-color-s-dark: 69%;
+$asymmetric-color-l-dark: 41%;
+
+$background-color-h-dark: 0;
+$background-color-s-dark: 18%;
+$background-color-l-dark: 13%;
+
+$color-h-dark: 0;
+$color-s-dark: 0%;
+$color-l-dark: 45%;
+
+$symmetric-color-h-dark: 9;
+$symmetric-color-s-dark: 69%;
+$symmetric-color-l-dark: 41%;
+
+$asymmetric-color-dark: hsl($asymmetric-color-h-dark, $asymmetric-color-s-dark, $asymmetric-color-l-dark);
+$asymmetric-color-focus-dark: hsl($asymmetric-color-h-dark, $asymmetric-color-s-dark, $asymmetric-color-l-dark + $focus-correction);
+$asymmetric-color-lighter-dark: hsla($asymmetric-color-h-dark, $asymmetric-color-s-dark, $asymmetric-color-l-dark, $lighter-correction);
+$asymmetric-color-shadow-dark: hsl($asymmetric-color-h-dark, $asymmetric-color-s-dark, $asymmetric-color-l-dark + $shadow-correction);
+
+$background-color-dark: hsl($background-color-h-dark, $background-color-s-dark, $background-color-l-dark);
+$background-color-lighter-dark: hsl($background-color-h-dark, $background-color-s-dark, $background-color-l-dark + $shadow-correction);
+
+$color-dark: hsl($color-h-dark, $color-s-dark, $color-l-dark);
+$color-focus-dark: hsl($color-h-dark, $color-s-dark, $color-l-dark + $focus-correction);
+
+$symmetric-color-dark: hsl($symmetric-color-h-dark, $symmetric-color-s-dark, $symmetric-color-l-dark);
+$symmetric-color-focus-dark: hsl($symmetric-color-h-dark, $symmetric-color-s-dark, $symmetric-color-l-dark + $focus-correction);
+$symmetric-color-lighter-dark: hsla($symmetric-color-h-dark, $symmetric-color-s-dark, $symmetric-color-l-dark, $lighter-correction);
+$symmetric-color-shadow-dark: hsl($symmetric-color-h-dark, $symmetric-color-s-dark, $symmetric-color-l-dark + $shadow-correction);

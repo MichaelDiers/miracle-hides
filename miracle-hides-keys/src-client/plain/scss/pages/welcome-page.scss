@@ -12,16 +12,16 @@
   padding: 20px;
 }
 
-#welcomePage .asymmetric {
+#welcomePage .asymmetric-color {
   grid-area: asymmetric;
 }
 
-#welcomePage .symmetric {
+#welcomePage .symmetric-color {
   grid-area: symmetric;
 }
 
-#welcomePage .asymmetric,
-#welcomePage .symmetric {
+#welcomePage .asymmetric-color,
+#welcomePage .symmetric-color {
   border: 1px solid;
   border-left: none;
   border-top: none;

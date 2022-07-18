@@ -7,11 +7,6 @@ input[type='radio'] {
   border-radius: 50%;
 }
 
-input[type='radio']:focus {
-    outline: none;
-    border-width: 0.3em;
-}
-
 input[type='radio'] + label {
   margin-left: 0;
 }

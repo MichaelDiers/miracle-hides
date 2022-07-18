@@ -4,6 +4,7 @@ import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from '../translations/lang
 import Translator from '../translations/translator';
 import { AsymmetricPageEvent } from './asymmetric.page';
 import BasePage from './base-page';
+import Css from './css';
 import HtmlComponents from './html-components';
 import { SymmetricPageEvent } from './symmetric.page';
 
@@ -31,18 +32,18 @@ export class WelcomePage extends BasePage {
     await super.initializeOnDisplayAsync();
     ['header'].forEach((selector) => {
       const element = document.querySelector(selector);
-      element.classList.add('hidden');
+      element.classList.add(Css.HIDDEN);
     });
   }
 
   // eslint-disable-next-line class-methods-use-this
   protected setupEvents(element: HTMLElement): void {
-    element.querySelector('.asymmetric button').addEventListener('click', (e) => {
+    element.querySelector('.asymmetric-color button').addEventListener('click', (e) => {
       e.preventDefault();
       CustomEventRaiser.raise(AsymmetricPageEvent);
     });
 
-    element.querySelector('.symmetric button').addEventListener('click', (e) => {
+    element.querySelector('.symmetric-color button').addEventListener('click', (e) => {
       e.preventDefault();
       CustomEventRaiser.raise(SymmetricPageEvent);
     });
@@ -56,7 +57,7 @@ export class WelcomePage extends BasePage {
         value: CommonLanguageKeys.MIRACLE_HIDES_KEYS,
       }),
       HtmlComponents.div({
-        css: ['asymmetric'],
+        css: [Css.ASYMMETRIC_COLOR],
         content: [
           HtmlComponents.h2({
             source: COMMON_LANGUAGE_SOURCE,
@@ -81,7 +82,7 @@ export class WelcomePage extends BasePage {
         ],
       }),
       HtmlComponents.div({
-        css: ['symmetric'],
+        css: [Css.SYMMETRIC_COLOR],
         content: [
           HtmlComponents.h2({
             source: COMMON_LANGUAGE_SOURCE,
