@@ -22,7 +22,7 @@ export default class Translator {
       const translated = lang.get(source, value);
       if (destination === constants.TRANSLATION_DESTINATION_TEXT_CONTENT) {
         // eslint-disable-next-line no-param-reassign
-        element.textContent = translated;
+        element.innerHTML = translated;
       } else if (destination === constants.TRANSLATION_DESTINATION_PLACEHOLDER) {
         element.setAttribute('placeholder', translated);
       } else if (destination === constants.TRANSLATION_DESTINATION_VALUE) {
