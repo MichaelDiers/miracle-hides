@@ -43,7 +43,7 @@ export default abstract class BasePage {
           e.preventDefault();
           const textarea = (e.target as HTMLElement).parentElement.querySelector('textarea');
           if (textarea) {
-            navigator.clipboard.writeText(textarea.textContent);
+            navigator.clipboard.writeText(textarea.value);
           }
         });
       });
