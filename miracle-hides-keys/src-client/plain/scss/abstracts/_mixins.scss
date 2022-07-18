@@ -1,0 +1,17 @@
+@use "sass:string";
+
+@mixin grid($columnsCount, $columnsSize: 'min-content', $placeItems: 'center') {
+  display: grid;
+
+  @if $columnsCount > 0 and $columnsSize {
+    grid-template-columns: repeat($columnsCount, string.unquote($columnsSize));  
+  }
+  
+  @if $placeItems {
+    place-items: string.unquote($placeItems);
+  }
+
+  &.hidden {
+    display: none;
+  }
+}

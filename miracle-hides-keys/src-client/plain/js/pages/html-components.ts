@@ -282,6 +282,32 @@ export default class HtmlComponents {
     });
   }
 
+  static radio({
+    id,
+    label,
+    name = id,
+    source,
+    options = [],
+  } : {
+    id: string,
+    label: string,
+    name?: string,
+    source: string,
+    options: { isChecked?: boolean, source: string, text: string, value: string }[],
+  }) : string {
+    return [
+      HtmlComponents.label({ label, source, id }),
+      HtmlComponents.div({
+        id,
+        css: [`grid-${options.length * 2}-1-mc`],
+        content: options.map((option, i) => [
+          HtmlComponents.input({ id: `${id}_${i}`, name, type: 'radio', value: option.value, isChecked: option.isChecked }),
+          HtmlComponents.label({ id: `${id}_${i}`, source: option.source, label: option.text }),
+        ].join('')),
+      }),
+    ].join('');
+  }
+
   static select({
     id = '',
     label = '',
@@ -432,6 +458,7 @@ export default class HtmlComponents {
     value = '',
     min = '',
     max = '',
+    isChecked = undefined,
   } : {
     id: string,
     label?: string,
@@ -442,6 +469,7 @@ export default class HtmlComponents {
     value?: string,
     min?: string,
     max?: string,
+    isChecked?: boolean,
   }) : string {
     return `
       ${HtmlComponents.label({ label, source, id })}
@@ -451,6 +479,7 @@ export default class HtmlComponents {
         ${HtmlComponents.add('value', value)}
         ${HtmlComponents.add('min', min)}
         ${HtmlComponents.add('max', max)}
+        ${HtmlComponents.add('checked', (isChecked || isChecked === false) ? `${isChecked}` : '')}
         ${HtmlComponents.translationValue({
     source,
     value: placeholder,

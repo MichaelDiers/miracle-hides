@@ -111,4 +111,15 @@ export class SymmetricPage extends AlgorithmBasePage {
       }),
     ].join('');
   }
+
+  protected updateElementsOnKeyTypeChangedAsync({
+    root,
+    checkedElement,
+  } : {
+    root?: HTMLElement,
+    checkedElement?: HTMLElement,
+  }) : Promise<void>
+  {
+    return;
+  }
 }

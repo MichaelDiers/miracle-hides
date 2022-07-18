@@ -62,10 +62,18 @@ export default class Ajax {
   }: {
     formElement: HTMLFormElement,
   }) : Promise<AjaxResponse> {
-    const { method } = formElement;
-    const { action } = formElement;
+    const { action, method } = formElement;
     const data = {};
-    formElement.querySelectorAll('input[type=hidden], input[type=number], input[type=password], input[type=text], select').forEach((element) => {
+    const selectors = `
+      input[type=hidden],
+      input[type=number],
+      input[type=password],
+      input[type=text],
+      input[type=radio]:checked,
+      select
+    `;
+
+    formElement.querySelectorAll(selectors).forEach((element) => {
       const select = element as HTMLSelectElement;
       if (select) {
         data[select.name] = select.value;

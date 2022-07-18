@@ -60,44 +60,58 @@ export class AsymmetricPage extends AlgorithmBasePage {
         id: GENERATE_FORM_ID,
         method: 'post',
         content: [
-          HtmlComponents.select({
+          HtmlComponents.radio({
             id: KEY_TYPE_ID,
             label: AsymmetricLanguageKeys.KEY_TYPE,
             source: this.source,
             options: [
-              HtmlComponents.selectOption(
-                KEY_TYPE_EC,
-                AsymmetricLanguageKeys.KEY_TYPE_EC,
-                this.source,
-              ),
-              HtmlComponents.selectOption(
-                KEY_TYPE_RSA,
-                AsymmetricLanguageKeys.KEY_TYPE_RSA,
-                this.source,
-              ),
+              {
+                value: KEY_TYPE_EC,
+                source,
+                text: AsymmetricLanguageKeys.KEY_TYPE_EC,
+                isChecked: true,
+              },
+              {
+                value: KEY_TYPE_RSA,
+                source,
+                text: AsymmetricLanguageKeys.KEY_TYPE_RSA
+              },
             ],
           }),
-          HtmlComponents.select({
+          HtmlComponents.radio({
             id: RSA_KEY_SIZE_ID,
             label: AsymmetricLanguageKeys.KEY_SIZE,
-            placeholder: AsymmetricLanguageKeys.KEY_SIZE,
             source,
             options: [
-              HtmlComponents.selectOption('1024', AsymmetricLanguageKeys.KEY_SIZE_1024, source),
-              HtmlComponents.selectOption('2048', AsymmetricLanguageKeys.KEY_SIZE_2048, source),
-              HtmlComponents.selectOption('4096', AsymmetricLanguageKeys.KEY_SIZE_4096, source),
+              {
+                value: '1024',
+                source,
+                text: AsymmetricLanguageKeys.KEY_SIZE_1024,
+              },
+              {
+                value: '2048',
+                source,
+                text: AsymmetricLanguageKeys.KEY_SIZE_2048,
+                isChecked: true,
+              },
+              {
+                value: '4096',
+                source,
+                text: AsymmetricLanguageKeys.KEY_SIZE_4096,
+              },
             ],
           }),
-          HtmlComponents.select({
+          HtmlComponents.radio({
             id: EC_NAMED_CURVE_ID,
             label: AsymmetricLanguageKeys.EC_NAMED_CURVE,
-            source: this.source,
+            source,
             options: [
-              HtmlComponents.selectOption(
-                EC_NAMED_CURVE_SECT239K1,
-                AsymmetricLanguageKeys.EC_NAMED_CURVE_SECT239K1,
-                this.source,
-              ),
+              {
+                value: EC_NAMED_CURVE_SECT239K1,
+                source,
+                text: AsymmetricLanguageKeys.EC_NAMED_CURVE_SECT239K1,
+                isChecked: true,
+              },
             ],
           }),
           HtmlComponents.submit({
@@ -121,5 +135,46 @@ export class AsymmetricPage extends AlgorithmBasePage {
         ],
       }),
     ].join('');
+  }
+
+  protected setupEvents(element: HTMLElement): void {
+    super.setupEvents(element);
+
+    element.querySelectorAll(`[name=${KEY_TYPE_ID}]`).forEach((radio) => {
+      radio.addEventListener('change', (e) => {
+        const promises = [
+          this.updateElementsOnKeyTypeChangedAsync({ checkedElement: e.target as HTMLElement }),
+          this.submitFormAsync().catch((err) => this.exception(err.message, err.stack))
+        ];
+        Promise.all(promises).catch((err) => this.exception(err.message, err.stack));
+      });
+    });
+  }
+
+  protected async updateElementsOnKeyTypeChangedAsync({
+    root = document.body,
+    checkedElement = document.querySelector(`[name=${KEY_TYPE_ID}]:checked`) as HTMLElement,
+  } : {
+    root?: HTMLElement,
+    checkedElement?: HTMLElement,
+  }) : Promise<void> {    
+    const value = checkedElement.getAttribute('value');
+    if (value === KEY_TYPE_RSA) {
+      root.querySelectorAll(`#${RSA_KEY_SIZE_ID}, label[for=${RSA_KEY_SIZE_ID}]`).forEach((elem) => {
+        elem.classList.remove('hidden');
+      });
+
+      root.querySelectorAll(`#${EC_NAMED_CURVE_ID}, label[for=${EC_NAMED_CURVE_ID}]`).forEach((elem) => {
+        elem.classList.add('hidden');
+      });
+    } else if (value == KEY_TYPE_EC) {
+      root.querySelectorAll(`#${RSA_KEY_SIZE_ID}, label[for=${RSA_KEY_SIZE_ID}]`).forEach((elem) => {
+        elem.classList.add('hidden');
+      });
+
+      root.querySelectorAll(`#${EC_NAMED_CURVE_ID}, label[for=${EC_NAMED_CURVE_ID}]`).forEach((elem) => {
+        elem.classList.remove('hidden');
+      });
+    }
   }
 }

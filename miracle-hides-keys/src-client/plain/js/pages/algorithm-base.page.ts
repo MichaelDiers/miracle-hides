@@ -27,9 +27,12 @@ export default abstract class AlgorithmBasePage extends BasePage {
     return 'main';
   }
 
-  protected async initializeOnDisplayAsync() : Promise<void> {
-    await super.initializeOnDisplayAsync();
-    return this.submitFormAsync();
+  protected async initializeOnDisplayAsync() : Promise<void> {    
+    Promise.all([
+      super.initializeOnDisplayAsync(),
+      this.submitFormAsync(),
+      this.updateElementsOnKeyTypeChangedAsync({}),
+    ]).catch((err) => this.exception(err.message, err.stack));
   }
 
   protected setupEvents(element: HTMLElement) : void {
@@ -39,23 +42,20 @@ export default abstract class AlgorithmBasePage extends BasePage {
       this.submitFormAsync().catch((err) => this.exception(err.message, err.stack));
     });
 
-    element.querySelector(`#${this.keyTypeId}`).addEventListener('change', (e) => {
-      this.updateDisplayOnKeyTypeChange(document.body, e.target as HTMLSelectElement);
-    });
-
-    element.querySelectorAll(
-      [`#${this.keyTypeId}`, ...this.keyTypes.map(({ id }) => `#${id}`)].join(', '),
-    ).forEach((selectElement) => {
-      selectElement.addEventListener('change', () => {
+    element.querySelectorAll(`[name=type]`).forEach((elem) => {
+      elem.addEventListener('input', (e) => {
+        e.preventDefault();
         this.submitFormAsync()
           .catch((err) => this.exception(err.message, err.stack));
       });
     });
 
-    this.updateDisplayOnKeyTypeChange(
-      element,
-      element.querySelector(`#${this.keyTypeId}`) as HTMLSelectElement,
-    );
+    element.querySelectorAll([...this.keyTypes.map(({ id }) => `#${id}`)].join(', ')).forEach((selectElement) => {
+      selectElement.addEventListener('change', () => {
+        this.submitFormAsync()
+          .catch((err) => this.exception(err.message, err.stack));
+      });
+    });    
   }
 
   protected setErrorAsync() : Promise<void> {
@@ -96,18 +96,11 @@ export default abstract class AlgorithmBasePage extends BasePage {
       });
   }
 
-  protected updateDisplayOnKeyTypeChange(
-    root: HTMLElement,
-    element: HTMLSelectElement,
-  ) : void {
-    this.keyTypes.forEach(({ id, value }) => {
-      if (element.value === value) {
-        root.querySelector(`#${id}`).classList.remove('hidden');
-        root.querySelector(`label[for=${id}`).classList.remove('hidden');
-      } else {
-        root.querySelector(`#${id}`).classList.add('hidden');
-        root.querySelector(`label[for=${id}`).classList.add('hidden');
-      }
-    });
-  }
+  protected abstract updateElementsOnKeyTypeChangedAsync({
+    root,
+    checkedElement,
+  } : {
+    root?: HTMLElement,
+    checkedElement?: HTMLElement,
+  }) : Promise<void>;
 }
