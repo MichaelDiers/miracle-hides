@@ -73,9 +73,9 @@ export default abstract class AlgorithmBasePage extends BasePage {
   protected async submitFormAsync() : Promise<void> {
     const formElement = document.querySelector(`#${this.source} form`) as HTMLFormElement;
 
-    document.getElementById(this.privateKeyId).textContent = '';
+    (document.getElementById(this.privateKeyId) as HTMLTextAreaElement).value = '';
     if (this.publicKeyId) {
-      document.getElementById(this.publicKeyId).textContent = '';
+      (document.getElementById(this.publicKeyId) as HTMLTextAreaElement).value = '';
     }
 
     Ajax.sendFormAsync({ formElement })
@@ -84,9 +84,9 @@ export default abstract class AlgorithmBasePage extends BasePage {
           this.setErrorAsync().catch((err) => this.exception(err.message, err.stack));
         } else {
           const { privateKey, publicKey } = data as KeysResponse;
-          document.getElementById(this.privateKeyId).textContent = privateKey;
+          (document.getElementById(this.privateKeyId) as HTMLTextAreaElement).value = privateKey;
           if (this.publicKeyId) {
-            document.getElementById(this.publicKeyId).textContent = publicKey;
+            (document.getElementById(this.publicKeyId) as HTMLTextAreaElement).value = publicKey;
           }
         }
       })

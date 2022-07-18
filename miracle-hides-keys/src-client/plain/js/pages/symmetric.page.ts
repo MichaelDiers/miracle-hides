@@ -60,32 +60,45 @@ export class SymmetricPage extends AlgorithmBasePage {
         id: GENERATE_FORM_ID,
         method: 'post',
         content: [
-          HtmlComponents.select({
+          HtmlComponents.radio({
             id: KEY_TYPE_ID,
             label: SymmetricLanguageKeys.KEY_TYPE,
             source: this.source,
             options: [
-              HtmlComponents.selectOption(
-                KEY_TYPE_OPTION_AES,
-                SymmetricLanguageKeys.KEY_TYPE_AES,
-                this.source,
-              ),
-              HtmlComponents.selectOption(
-                KEY_TYPE_OPTION_HMAC,
-                SymmetricLanguageKeys.KEY_TYPE_HMAC,
-                this.source,
-              ),
-            ],
+              {
+                source: this.source,
+                text: SymmetricLanguageKeys.KEY_TYPE_AES,
+                value: KEY_TYPE_OPTION_AES,
+                isChecked: true,
+              },
+              {
+                source: this.source,
+                text: SymmetricLanguageKeys.KEY_TYPE_HMAC,
+                value: KEY_TYPE_OPTION_HMAC,
+              },
+            ]
           }),
-          HtmlComponents.select({
+          HtmlComponents.radio({
             id: AES_KEY_SIZE_ID,
-            label: SymmetricLanguageKeys.AES_KEY_SIZE,
-            placeholder: SymmetricLanguageKeys.AES_KEY_SIZE_PLACEHOLDER,
+            label: SymmetricLanguageKeys.AES_KEY_SIZE,            
             source,
             options: [
-              HtmlComponents.selectOption('128', SymmetricLanguageKeys.AES_KEY_SIZE_128, source),
-              HtmlComponents.selectOption('192', SymmetricLanguageKeys.AES_KEY_SIZE_192, source),
-              HtmlComponents.selectOption('256', SymmetricLanguageKeys.AES_KEY_SIZE_256, source),
+              {
+                source: this.source,
+                text: SymmetricLanguageKeys.AES_KEY_SIZE_128,
+                value: '128',
+                isChecked: true,
+              },
+              {
+                source: this.source,
+                text: SymmetricLanguageKeys.AES_KEY_SIZE_192,
+                value: '192',
+              },
+              {
+                source: this.source,
+                text: SymmetricLanguageKeys.AES_KEY_SIZE_256,
+                value: '256',
+              },
             ],
           }),
           HtmlComponents.inputNumber({
@@ -112,14 +125,40 @@ export class SymmetricPage extends AlgorithmBasePage {
     ].join('');
   }
 
-  protected updateElementsOnKeyTypeChangedAsync({
-    root,
-    checkedElement,
+  protected setupEvents(element: HTMLElement): void {
+    super.setupEvents(element);
+
+    element.querySelectorAll(`[name=${KEY_TYPE_ID}]`).forEach((radio) => {
+      radio.addEventListener('change', (e) => {
+        const promises = [
+          this.updateElementsOnKeyTypeChangedAsync({ checkedElement: e.target as HTMLElement }),
+          this.submitFormAsync().catch((err) => this.exception(err.message, err.stack))
+        ];
+        
+        Promise.all(promises).catch((err) => this.exception(err.message, err.stack));
+      });
+    });
+  }
+
+  protected async updateElementsOnKeyTypeChangedAsync({
+    root = document.body,
+    checkedElement = document.querySelector(`[name='${KEY_TYPE_ID}']:checked`),
   } : {
     root?: HTMLElement,
     checkedElement?: HTMLElement,
   }) : Promise<void>
   {
-    return;
+    const checkedValue = checkedElement.getAttribute('value');
+    
+    [
+      { value: KEY_TYPE_OPTION_AES,  selector: `label[for=${AES_KEY_SIZE_ID}], #${AES_KEY_SIZE_ID}`},
+      { value: KEY_TYPE_OPTION_HMAC,  selector: `label[for=${HMAC_KEY_SIZE_ID}], #${HMAC_KEY_SIZE_ID}`},
+    ].forEach(({ value, selector }) => {
+      if (value === checkedValue) {
+        root.querySelectorAll(selector).forEach((elem) => elem.classList.remove('hidden'));
+      } else {
+        root.querySelectorAll(selector).forEach((elem) => elem.classList.add('hidden'));
+      }
+    });
   }
 }

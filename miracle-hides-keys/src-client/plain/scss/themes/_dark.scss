@@ -9,6 +9,10 @@ body {
   color: $color-dark;
 }
 
+input[type='radio'] {
+  background-color: $background-color-dark;  
+}
+
 /** class selectors **/
 
 .asymmetric-color {
@@ -40,6 +44,14 @@ body {
   color: $asymmetric-color-dark;
 }
 
+#asymmetricPage input[type='radio'] {
+  border-color: $asymmetric-color-dark;  
+}
+
+#asymmetricPage input[type="radio"]::after {
+  background-color: $asymmetric-color-dark;
+}
+
 #asymmetricPage .textarea-container div {
   color: $asymmetric-color-dark-lighter;
 }
@@ -50,6 +62,14 @@ body {
 
 #symmetricPage {
   color: $symmetric-color-dark;
+}
+
+#symmetricPage input[type='radio'] {
+  border-color: $symmetric-color-dark;  
+}
+
+#symmetricPage input[type="radio"]::after {
+  background-color: $symmetric-color-dark;
 }
 
 #symmetricPage .textarea-container div {
