@@ -11,8 +11,7 @@ export default abstract class AlgorithmBasePage extends BasePage {
     translator: Translator,
     logger: Logger,
     eventName: string,
-    private readonly keyTypes : { id: string, value: string }[],
-    private readonly keyTypeId: string,
+    private readonly keyNames : { keyTypeName: string, keyTypeValueNames: string[] },
     private readonly errorElementId: string,
     private readonly defaultErrorMessage: string,
     protected readonly source: string,
@@ -42,18 +41,20 @@ export default abstract class AlgorithmBasePage extends BasePage {
       this.submitFormAsync().catch((err) => this.exception(err.message, err.stack));
     });
 
-    element.querySelectorAll('[name=type]').forEach((elem) => {
-      elem.addEventListener('input', (e) => {
-        e.preventDefault();
-        this.submitFormAsync()
-          .catch((err) => this.exception(err.message, err.stack));
-      });
-    });
+    const selector = [
+      this.keyNames.keyTypeName,
+      ...this.keyNames.keyTypeValueNames,
+    ].map((name) => `[name=${name}]`).join(',');
+    element.querySelectorAll(selector).forEach((elem) => {
+      elem.addEventListener('change', (e) => {
+        const promises = [this.submitFormAsync()];
+        if ((e.target as HTMLElement).getAttribute('name') === this.keyNames.keyTypeName) {
+          promises.push(
+            this.updateElementsOnKeyTypeChangedAsync({ checkedElement: e.target as HTMLElement }),
+          );
+        }
 
-    element.querySelectorAll([...this.keyTypes.map(({ id }) => `#${id}`)].join(', ')).forEach((selectElement) => {
-      selectElement.addEventListener('change', () => {
-        this.submitFormAsync()
-          .catch((err) => this.exception(err.message, err.stack));
+        Promise.all(promises).catch((err) => this.exception(err.message, err.stack));
       });
     });
   }

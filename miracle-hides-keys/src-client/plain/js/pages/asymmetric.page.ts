@@ -7,25 +7,26 @@ import Logger from '../infrastructure/logger';
 import Css from './css';
 import PageEvents from './page-events';
 
-const EC_NAMED_CURVE_ID = 'ecNamedCurve';
+const enum PageIds {
+  EC_NAMED_CURVE_ID = 'ecNamedCurve',
+  ERROR_MESSAGE_ID = 'asymmetricErrorMessage',
+  GENERATE_FORM_ID = 'generateForm',
+  KEY_TYPE_ID = 'type',
+  PRIVATE_KEY_ID = 'asymmetricPrivateKey',
+  PUBLIC_KEY_ID = 'asymmetricPublicKey',
+  RSA_KEY_SIZE_ID = 'rsaKeySize',
+}
 
-const EC_NAMED_CURVE_SECT239K1 = 'sect239k1';
-
-const ERROR_MESSAGE_ID = 'asymmetricErrorMessage';
-
-const GENERATE_FORM_ID = 'generateForm';
-
-const KEY_TYPE_ID = 'type';
-
-const KEY_TYPE_EC = 'EC';
-
-const KEY_TYPE_RSA = 'RSA';
-
-const PRIVATE_KEY_ID = 'asymmetricPrivateKey';
-
-const PUBLIC_KEY_ID = 'asymmetricPublicKey';
-
-const RSA_KEY_SIZE_ID = 'rsaKeySize';
+const enum PageValues {
+  EC_NAMED_CURVE_SECT239K1 = 'sect239k1',
+  KEY_SIZE_1024 = '1024',
+  KEY_SIZE_2048 = '2048',
+  KEY_SIZE_4096 = '4096',
+  KEY_TYPE_EC = 'EC',
+  KEY_TYPE_RSA = 'RSA',
+  PRIVATE_KEY_ROWS = '15',
+  PUBLIC_KEY_ROWS = '6',
+}
 
 export default class AsymmetricPage extends AlgorithmBasePage {
   constructor(
@@ -36,16 +37,15 @@ export default class AsymmetricPage extends AlgorithmBasePage {
       translator,
       logger,
       PageEvents.ASYMMETRIC_PAGE,
-      [
-        { id: RSA_KEY_SIZE_ID, value: KEY_TYPE_RSA },
-        { id: EC_NAMED_CURVE_ID, value: KEY_TYPE_EC },
-      ],
-      KEY_TYPE_ID,
-      ERROR_MESSAGE_ID,
+      {
+        keyTypeName: PageIds.KEY_TYPE_ID,
+        keyTypeValueNames: [PageIds.RSA_KEY_SIZE_ID, PageIds.EC_NAMED_CURVE_ID],
+      },
+      PageIds.ERROR_MESSAGE_ID,
       AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
       PageEvents.ASYMMETRIC_PAGE,
-      PRIVATE_KEY_ID,
-      PUBLIC_KEY_ID,
+      PageIds.PRIVATE_KEY_ID,
+      PageIds.PUBLIC_KEY_ID,
     );
   }
 
@@ -56,60 +56,60 @@ export default class AsymmetricPage extends AlgorithmBasePage {
       css: [Css.ASYMMETRIC_COLOR],
       content: [
         HtmlComponents.h1({ source, value: LanguagePageKeys.HEADLINE }),
-        HtmlComponents.div({ id: ERROR_MESSAGE_ID }),
+        HtmlComponents.div({ id: PageIds.ERROR_MESSAGE_ID }),
         HtmlComponents.form({
           action: '/keys',
-          id: GENERATE_FORM_ID,
+          id: PageIds.GENERATE_FORM_ID,
           method: 'post',
           content: [
             HtmlComponents.radio({
-              id: KEY_TYPE_ID,
+              id: PageIds.KEY_TYPE_ID,
               label: AsymmetricLanguageKeys.KEY_TYPE,
               source: this.source,
               options: [
                 {
-                  value: KEY_TYPE_EC,
+                  value: PageValues.KEY_TYPE_EC,
                   source,
                   text: AsymmetricLanguageKeys.KEY_TYPE_EC,
                   isChecked: true,
                 },
                 {
-                  value: KEY_TYPE_RSA,
+                  value: PageValues.KEY_TYPE_RSA,
                   source,
                   text: AsymmetricLanguageKeys.KEY_TYPE_RSA,
                 },
               ],
             }),
             HtmlComponents.radio({
-              id: RSA_KEY_SIZE_ID,
+              id: PageIds.RSA_KEY_SIZE_ID,
               label: AsymmetricLanguageKeys.KEY_SIZE,
               source,
               options: [
                 {
-                  value: '1024',
+                  value: PageValues.KEY_SIZE_1024,
                   source,
                   text: AsymmetricLanguageKeys.KEY_SIZE_1024,
                 },
                 {
-                  value: '2048',
+                  value: PageValues.KEY_SIZE_2048,
                   source,
                   text: AsymmetricLanguageKeys.KEY_SIZE_2048,
                   isChecked: true,
                 },
                 {
-                  value: '4096',
+                  value: PageValues.KEY_SIZE_4096,
                   source,
                   text: AsymmetricLanguageKeys.KEY_SIZE_4096,
                 },
               ],
             }),
             HtmlComponents.radio({
-              id: EC_NAMED_CURVE_ID,
+              id: PageIds.EC_NAMED_CURVE_ID,
               label: AsymmetricLanguageKeys.EC_NAMED_CURVE,
               source,
               options: [
                 {
-                  value: EC_NAMED_CURVE_SECT239K1,
+                  value: PageValues.EC_NAMED_CURVE_SECT239K1,
                   source,
                   text: AsymmetricLanguageKeys.EC_NAMED_CURVE_SECT239K1,
                   isChecked: true,
@@ -121,18 +121,18 @@ export default class AsymmetricPage extends AlgorithmBasePage {
               source,
             }),
             HtmlComponents.textarea({
-              id: PRIVATE_KEY_ID,
+              id: PageIds.PRIVATE_KEY_ID,
               label: AsymmetricLanguageKeys.PRIVATE_KEY,
               placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
               source,
-              rows: '15',
+              rows: PageValues.PRIVATE_KEY_ROWS,
             }),
             HtmlComponents.textarea({
-              id: PUBLIC_KEY_ID,
+              id: PageIds.PUBLIC_KEY_ID,
               label: AsymmetricLanguageKeys.PUBLIC_KEY,
               placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
               source,
-              rows: '6',
+              rows: PageValues.PUBLIC_KEY_ROWS,
             }),
           ],
         }),
@@ -140,43 +140,29 @@ export default class AsymmetricPage extends AlgorithmBasePage {
     });
   }
 
-  protected setupEvents(element: HTMLElement): void {
-    super.setupEvents(element);
-
-    element.querySelectorAll(`[name=${KEY_TYPE_ID}]`).forEach((radio) => {
-      radio.addEventListener('change', (e) => {
-        const promises = [
-          this.updateElementsOnKeyTypeChangedAsync({ checkedElement: e.target as HTMLElement }),
-          this.submitFormAsync().catch((err) => this.exception(err.message, err.stack)),
-        ];
-        Promise.all(promises).catch((err) => this.exception(err.message, err.stack));
-      });
-    });
-  }
-
   // eslint-disable-next-line class-methods-use-this
   protected async updateElementsOnKeyTypeChangedAsync({
     root = document.body,
-    checkedElement = document.querySelector(`[name=${KEY_TYPE_ID}]:checked`) as HTMLElement,
+    checkedElement = document.querySelector(`[name=${PageIds.KEY_TYPE_ID}]:checked`) as HTMLElement,
   }: {
     root?: HTMLElement,
     checkedElement?: HTMLElement,
   }): Promise<void> {
     const value = checkedElement.getAttribute('value');
-    if (value === KEY_TYPE_RSA) {
-      root.querySelectorAll(`#${RSA_KEY_SIZE_ID}, label[for=${RSA_KEY_SIZE_ID}]`).forEach((elem) => {
+    if (value === PageValues.KEY_TYPE_RSA) {
+      root.querySelectorAll(`#${PageIds.RSA_KEY_SIZE_ID}, label[for=${PageIds.RSA_KEY_SIZE_ID}]`).forEach((elem) => {
         elem.classList.remove('hidden');
       });
 
-      root.querySelectorAll(`#${EC_NAMED_CURVE_ID}, label[for=${EC_NAMED_CURVE_ID}]`).forEach((elem) => {
+      root.querySelectorAll(`#${PageIds.EC_NAMED_CURVE_ID}, label[for=${PageIds.EC_NAMED_CURVE_ID}]`).forEach((elem) => {
         elem.classList.add('hidden');
       });
-    } else if (value === KEY_TYPE_EC) {
-      root.querySelectorAll(`#${RSA_KEY_SIZE_ID}, label[for=${RSA_KEY_SIZE_ID}]`).forEach((elem) => {
+    } else if (value === PageValues.KEY_TYPE_EC) {
+      root.querySelectorAll(`#${PageIds.RSA_KEY_SIZE_ID}, label[for=${PageIds.RSA_KEY_SIZE_ID}]`).forEach((elem) => {
         elem.classList.add('hidden');
       });
 
-      root.querySelectorAll(`#${EC_NAMED_CURVE_ID}, label[for=${EC_NAMED_CURVE_ID}]`).forEach((elem) => {
+      root.querySelectorAll(`#${PageIds.EC_NAMED_CURVE_ID}, label[for=${PageIds.EC_NAMED_CURVE_ID}]`).forEach((elem) => {
         elem.classList.remove('hidden');
       });
     }
