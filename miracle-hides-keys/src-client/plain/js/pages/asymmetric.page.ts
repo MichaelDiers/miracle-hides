@@ -5,6 +5,7 @@ import AlgorithmBasePage from './algorithm-base.page';
 import Translator from '../translations/translator';
 import Logger from '../infrastructure/logger';
 import Css from './css';
+import PageEvents from './page-events';
 
 const EC_NAMED_CURVE_ID = 'ecNamedCurve';
 
@@ -26,9 +27,7 @@ const PUBLIC_KEY_ID = 'asymmetricPublicKey';
 
 const RSA_KEY_SIZE_ID = 'rsaKeySize';
 
-export const AsymmetricPageEvent = "asymmetricPage";
-
-export class AsymmetricPage extends AlgorithmBasePage {
+export default class AsymmetricPage extends AlgorithmBasePage {
   constructor(
     translator: Translator,
     logger: Logger,
@@ -36,7 +35,7 @@ export class AsymmetricPage extends AlgorithmBasePage {
     super(
       translator,
       logger,
-      AsymmetricPageEvent,
+      PageEvents.ASYMMETRIC_PAGE,
       [
         { id: RSA_KEY_SIZE_ID, value: KEY_TYPE_RSA },
         { id: EC_NAMED_CURVE_ID, value: KEY_TYPE_EC },
@@ -44,7 +43,7 @@ export class AsymmetricPage extends AlgorithmBasePage {
       KEY_TYPE_ID,
       ERROR_MESSAGE_ID,
       AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
-      AsymmetricPageEvent,
+      PageEvents.ASYMMETRIC_PAGE,
       PRIVATE_KEY_ID,
       PUBLIC_KEY_ID,
     );
@@ -77,7 +76,7 @@ export class AsymmetricPage extends AlgorithmBasePage {
                 {
                   value: KEY_TYPE_RSA,
                   source,
-                  text: AsymmetricLanguageKeys.KEY_TYPE_RSA
+                  text: AsymmetricLanguageKeys.KEY_TYPE_RSA,
                 },
               ],
             }),
@@ -137,7 +136,7 @@ export class AsymmetricPage extends AlgorithmBasePage {
             }),
           ],
         }),
-      ]
+      ],
     });
   }
 
@@ -148,13 +147,14 @@ export class AsymmetricPage extends AlgorithmBasePage {
       radio.addEventListener('change', (e) => {
         const promises = [
           this.updateElementsOnKeyTypeChangedAsync({ checkedElement: e.target as HTMLElement }),
-          this.submitFormAsync().catch((err) => this.exception(err.message, err.stack))
+          this.submitFormAsync().catch((err) => this.exception(err.message, err.stack)),
         ];
         Promise.all(promises).catch((err) => this.exception(err.message, err.stack));
       });
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   protected async updateElementsOnKeyTypeChangedAsync({
     root = document.body,
     checkedElement = document.querySelector(`[name=${KEY_TYPE_ID}]:checked`) as HTMLElement,
@@ -171,7 +171,7 @@ export class AsymmetricPage extends AlgorithmBasePage {
       root.querySelectorAll(`#${EC_NAMED_CURVE_ID}, label[for=${EC_NAMED_CURVE_ID}]`).forEach((elem) => {
         elem.classList.add('hidden');
       });
-    } else if (value == KEY_TYPE_EC) {
+    } else if (value === KEY_TYPE_EC) {
       root.querySelectorAll(`#${RSA_KEY_SIZE_ID}, label[for=${RSA_KEY_SIZE_ID}]`).forEach((elem) => {
         elem.classList.add('hidden');
       });

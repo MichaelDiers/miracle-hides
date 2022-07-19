@@ -1,9 +1,5 @@
 import Logger from '../infrastructure/logger';
-import { AsymmetricPageEvent } from '../pages/asymmetric.page';
-import { FooterPageEvent } from '../pages/footer.page';
-import { HeaderPageEvent } from '../pages/header.page';
-import { LicensePageEvent } from '../pages/license-page';
-import { SymmetricPageEvent } from '../pages/symmetric.page';
+import PageEvents from '../pages/page-events';
 import BaseLanguage from './base-language';
 import { AsymmetricLanguageKeys } from './language-asymmetric';
 import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from './language-common';
@@ -18,7 +14,7 @@ export default class DeLanguage extends BaseLanguage {
     super(
       'de',
       {
-        [AsymmetricPageEvent]: {
+        [PageEvents.ASYMMETRIC_PAGE]: {
           [LanguagePageKeys.HEADLINE]: 'Asymmetric Keys Generator',
           [AsymmetricLanguageKeys.EC_NAMED_CURVE]: 'Named Curve',
           [AsymmetricLanguageKeys.EC_NAMED_CURVE_SECT239K1]: 'sect239k1',
@@ -47,15 +43,15 @@ export default class DeLanguage extends BaseLanguage {
           [CommonLanguageKeys.MIRACLE_HIDES_KEYS]: 'Miracle Hides Keys',
           [CommonLanguageKeys.SYMMETRIC_ENCRYPTION]: 'symmetrische Verschlüsselung',
         },
-        [FooterPageEvent]: {
+        [PageEvents.FOOTER_PAGE]: {
           [FooterLanguageKeys.LICENSES]: 'Lizenzen',
         },
-        [HeaderPageEvent]: {
+        [PageEvents.HEADER_PAGE]: {
           [HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS]: 'asymmetrische Algorithmen',
           [HeaderLanguageKeys.MENU_HEADLINE]: 'Miracle Hides Keys',
           [HeaderLanguageKeys.SYMMETRIC_ALGORITHMS]: 'symmetrische Algorithmen',
         },
-        [SymmetricPageEvent]: {
+        [PageEvents.SYMMETRIC_PAGE]: {
           [LanguagePageKeys.HEADLINE]: 'Symmetric Keys Generator',
           [SymmetricLanguageKeys.AES_KEY_SIZE]: 'Schlüssel&shy;länge',
           [SymmetricLanguageKeys.AES_KEY_SIZE_128]: '128',
@@ -71,7 +67,7 @@ export default class DeLanguage extends BaseLanguage {
           [SymmetricLanguageKeys.SUBMIT]: 'Generieren',
           [SymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: 'Schlüssel können zur Zeit nicht genriert werden.',
         },
-        [LicensePageEvent]: {
+        [PageEvents.LICENSE_PAGE]: {
           [LicenseLanguageKeys.LICENSES]: 'Lizenzen',
           [LicenseLanguageKeys.LICENSES_FONTS]: 'Schriftarten',
           [LicenseLanguageKeys.LICENSES_NODE]: 'Bibliotheken',
@@ -90,7 +86,7 @@ export default class DeLanguage extends BaseLanguage {
           [LicenseLanguageKeys.FONT_LICENSE]: 'Lizenz',
           [LicenseLanguageKeys.FONT_AUTHOR]: 'Autor',
           [LicenseLanguageKeys.FONT_LINK]: 'Link',
-        }
+        },
       },
       logger,
     );

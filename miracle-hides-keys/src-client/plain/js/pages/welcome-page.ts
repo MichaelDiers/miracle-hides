@@ -2,15 +2,12 @@ import CustomEventRaiser from '../infrastructure/custom-event-raiser';
 import Logger from '../infrastructure/logger';
 import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from '../translations/language-common';
 import Translator from '../translations/translator';
-import { AsymmetricPageEvent } from './asymmetric.page';
 import BasePage from './base-page';
 import Css from './css';
 import HtmlComponents from './html-components';
-import { SymmetricPageEvent } from './symmetric.page';
+import PageEvents from './page-events';
 
-export const WelcomePageEvent : string = 'welcomePage';
-
-export class WelcomePage extends BasePage {
+export default class WelcomePage extends BasePage {
   constructor(
     translator: Translator,
     logger: Logger,
@@ -18,10 +15,10 @@ export class WelcomePage extends BasePage {
     super(
       translator,
       logger,
-      WelcomePageEvent,
+      PageEvents.WELCOME_PAGE,
     );
   }
-  
+
   // eslint-disable-next-line class-methods-use-this
   protected get displayInRegion(): string {
     return 'main';
@@ -40,12 +37,12 @@ export class WelcomePage extends BasePage {
   protected setupEvents(element: HTMLElement): void {
     element.querySelector('.asymmetric-color button').addEventListener('click', (e) => {
       e.preventDefault();
-      CustomEventRaiser.raise(AsymmetricPageEvent);
+      CustomEventRaiser.raise(PageEvents.ASYMMETRIC_PAGE);
     });
 
     element.querySelector('.symmetric-color button').addEventListener('click', (e) => {
       e.preventDefault();
-      CustomEventRaiser.raise(SymmetricPageEvent);
+      CustomEventRaiser.raise(PageEvents.SYMMETRIC_PAGE);
     });
   }
 

@@ -5,6 +5,7 @@ import AlgorithmBasePage from './algorithm-base.page';
 import Translator from '../translations/translator';
 import Logger from '../infrastructure/logger';
 import Css from './css';
+import PageEvents from './page-events';
 
 const AES_KEY_SIZE_ID = 'aesKeySize';
 
@@ -28,9 +29,7 @@ const KEY_TYPE_OPTION_HMAC = 'HMAC';
 
 const PRIVATE_KEY_ID = 'symmetricPrivateKey';
 
-export const SymmetricPageEvent = 'symmetricPage';
-
-export class SymmetricPage extends AlgorithmBasePage {
+export default class SymmetricPage extends AlgorithmBasePage {
   constructor(
     translator: Translator,
     logger: Logger,
@@ -38,7 +37,7 @@ export class SymmetricPage extends AlgorithmBasePage {
     super(
       translator,
       logger,
-      SymmetricPageEvent,
+      PageEvents.SYMMETRIC_PAGE,
       [
         { id: AES_KEY_SIZE_ID, value: KEY_TYPE_OPTION_AES },
         { id: HMAC_KEY_SIZE_ID, value: KEY_TYPE_OPTION_HMAC },
@@ -46,7 +45,7 @@ export class SymmetricPage extends AlgorithmBasePage {
       KEY_TYPE_ID,
       ERROR_MESSAGE_ID,
       SymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
-      SymmetricPageEvent,
+      PageEvents.SYMMETRIC_PAGE,
       PRIVATE_KEY_ID,
     );
   }
@@ -79,7 +78,7 @@ export class SymmetricPage extends AlgorithmBasePage {
                   text: SymmetricLanguageKeys.KEY_TYPE_HMAC,
                   value: KEY_TYPE_OPTION_HMAC,
                 },
-              ]
+              ],
             }),
             HtmlComponents.radio({
               id: AES_KEY_SIZE_ID,
@@ -125,7 +124,7 @@ export class SymmetricPage extends AlgorithmBasePage {
             }),
           ],
         }),
-      ]
+      ],
     });
   }
 
@@ -136,7 +135,7 @@ export class SymmetricPage extends AlgorithmBasePage {
       radio.addEventListener('change', (e) => {
         const promises = [
           this.updateElementsOnKeyTypeChangedAsync({ checkedElement: e.target as HTMLElement }),
-          this.submitFormAsync().catch((err) => this.exception(err.message, err.stack))
+          this.submitFormAsync().catch((err) => this.exception(err.message, err.stack)),
         ];
 
         Promise.all(promises).catch((err) => this.exception(err.message, err.stack));
@@ -144,6 +143,7 @@ export class SymmetricPage extends AlgorithmBasePage {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   protected async updateElementsOnKeyTypeChangedAsync({
     root = document.body,
     checkedElement = document.querySelector(`[name='${KEY_TYPE_ID}']:checked`),

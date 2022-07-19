@@ -311,7 +311,9 @@ export default class HtmlComponents {
         id,
         css: [`grid-${options.length * 2}-1-mc`],
         content: options.map((option, i) => [
-          HtmlComponents.input({ id: `${id}_${i}`, name, type: 'radio', value: option.value, isChecked: option.isChecked }),
+          HtmlComponents.input({
+            id: `${id}_${i}`, name, type: 'radio', value: option.value, isChecked: option.isChecked,
+          }),
           HtmlComponents.label({ id: `${id}_${i}`, source: option.source, label: option.text }),
         ].join('')),
       }),
@@ -502,7 +504,7 @@ export default class HtmlComponents {
           value: placeholder,
           destination: TRANSLATION_DESTINATION_PLACEHOLDER,
         }),
-        HtmlComponents.add('type', type),       
+        HtmlComponents.add('type', type),
       ].join(''),
       '></input>',
     ].join('');

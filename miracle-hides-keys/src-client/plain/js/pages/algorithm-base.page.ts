@@ -16,8 +16,8 @@ export default abstract class AlgorithmBasePage extends BasePage {
     private readonly errorElementId: string,
     private readonly defaultErrorMessage: string,
     protected readonly source: string,
-    private readonly privateKeyId: string,    
-    private readonly publicKeyId?: string,    
+    private readonly privateKeyId: string,
+    private readonly publicKeyId?: string,
   ) {
     super(translator, logger, eventName);
   }
@@ -27,7 +27,7 @@ export default abstract class AlgorithmBasePage extends BasePage {
     return 'main';
   }
 
-  protected async initializeOnDisplayAsync() : Promise<void> {    
+  protected async initializeOnDisplayAsync() : Promise<void> {
     Promise.all([
       super.initializeOnDisplayAsync(),
       this.submitFormAsync(),
@@ -42,7 +42,7 @@ export default abstract class AlgorithmBasePage extends BasePage {
       this.submitFormAsync().catch((err) => this.exception(err.message, err.stack));
     });
 
-    element.querySelectorAll(`[name=type]`).forEach((elem) => {
+    element.querySelectorAll('[name=type]').forEach((elem) => {
       elem.addEventListener('input', (e) => {
         e.preventDefault();
         this.submitFormAsync()
@@ -55,7 +55,7 @@ export default abstract class AlgorithmBasePage extends BasePage {
         this.submitFormAsync()
           .catch((err) => this.exception(err.message, err.stack));
       });
-    });    
+    });
   }
 
   protected setErrorAsync() : Promise<void> {

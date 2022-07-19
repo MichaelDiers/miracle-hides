@@ -4,11 +4,9 @@ import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from '../translations/lang
 import Translator from '../translations/translator';
 import BasePage from './base-page';
 import HtmlComponents from './html-components';
-import { LicensePageEvent } from './license-page';
+import PageEvents from './page-events';
 
-export const FooterPageEvent = 'footerPage';
-
-export class FooterPage extends BasePage {
+export default class FooterPage extends BasePage {
   constructor(
     translator: Translator,
     logger: Logger,
@@ -16,7 +14,7 @@ export class FooterPage extends BasePage {
     super(
       translator,
       logger,
-      FooterPageEvent,
+      PageEvents.FOOTER_PAGE,
     );
   }
 
@@ -45,7 +43,7 @@ export class FooterPage extends BasePage {
   protected setupHtml(): string {
     return [
       HtmlComponents.anchor({
-        href: LicensePageEvent,
+        href: PageEvents.LICENSE_PAGE,
         source: COMMON_LANGUAGE_SOURCE,
         label: CommonLanguageKeys.LICENSES,
       }),

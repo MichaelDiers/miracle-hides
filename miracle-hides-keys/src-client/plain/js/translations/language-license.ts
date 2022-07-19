@@ -16,7 +16,7 @@ export enum LicenseLanguageKeys {
   FONT_FONT = 'fontFont',
   FONT_LICENSE = 'fontLicense',
   FONT_AUTHOR = 'fontAuthor',
-  FONT_LINK = 'fontLink'
+  FONT_LINK = 'fontLink',
 }
 
 export interface LicenseLanguage {

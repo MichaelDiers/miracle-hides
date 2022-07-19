@@ -1,7 +1,7 @@
 const enum Css {
   ASYMMETRIC_COLOR = 'asymmetric-color',
   HIDDEN = 'hidden',
-  LOGO = 'logo',  
+  LOGO = 'logo',
   MENU_LINK = 'menu-link',
   NAVBAR = 'navbar',
   SYMMETRIC_COLOR = 'symmetric-color',

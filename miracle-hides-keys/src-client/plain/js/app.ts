@@ -1,14 +1,15 @@
 import BasePage from './pages/base-page';
-import { AsymmetricPage } from './pages/asymmetric.page';
+import AsymmetricPage from './pages/asymmetric.page';
 import CustomEventRaise from './infrastructure/custom-event-raiser';
 import Translator from './translations/translator';
 import DeLanguage from './translations/de-language';
 import Logger from './infrastructure/logger';
-import { SymmetricPage } from './pages/symmetric.page';
-import { HeaderPage, HeaderPageEvent } from './pages/header.page';
-import { FooterPage, FooterPageEvent } from './pages/footer.page';
-import { WelcomePage, WelcomePageEvent } from './pages/welcome-page';
-import { LicensePage } from './pages/license-page';
+import SymmetricPage from './pages/symmetric.page';
+import HeaderPage from './pages/header.page';
+import FooterPage from './pages/footer.page';
+import WelcomePage from './pages/welcome-page';
+import LicensePage from './pages/license-page';
+import PageEvents from './pages/page-events';
 
 export default class App {
   private readonly translator : Translator = new Translator(new DeLanguage(this.logger));
@@ -20,9 +21,9 @@ export default class App {
 
   async startAsync() : Promise<void> {
     await this.setupAsync();
-    CustomEventRaise.raise(WelcomePageEvent);
-    CustomEventRaise.raise(HeaderPageEvent);
-    CustomEventRaise.raise(FooterPageEvent);
+    CustomEventRaise.raise(PageEvents.WELCOME_PAGE);
+    CustomEventRaise.raise(PageEvents.HEADER_PAGE);
+    CustomEventRaise.raise(PageEvents.FOOTER_PAGE);
   }
 
   private async setupAsync() : Promise<void> {
