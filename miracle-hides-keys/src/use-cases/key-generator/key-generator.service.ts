@@ -47,13 +47,12 @@ export default class KeyGeneratorService implements KeyGenerator {
     } if (SUPPORTED_SYMMETRIC_ALGORITHMS.findIndex(
       (algorithm) => algorithm === keyOptions.type,
     ) > -1) {
-      return {
-        privateKey: await this.symmetricKeyGenerator.generateAsync({
-          type: keyOptions.type as SupportedSymmetricAlgorithms,
-          aesKeySize: keyOptions.aesKeySize,
-          hmacKeySize: keyOptions.hmacKeySize,
-        }),
-      };
+      return this.symmetricKeyGenerator.generateAsync({
+        type: keyOptions.type as SupportedSymmetricAlgorithms,
+        aesKeySize: keyOptions.aesKeySize,
+        hmacKeySize: keyOptions.hmacKeySize,
+        testInput: keyOptions.testInput,
+      });
     }
 
     throw new BadRequestException(`unsupported algorithm: ${keyOptions.type}`);
