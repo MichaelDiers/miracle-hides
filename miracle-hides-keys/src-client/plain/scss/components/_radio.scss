@@ -1,28 +1,28 @@
 input[type='radio'] {
   appearance: none;
-  margin-right: 0;
-  width: 1.15em;
-  height: 1.15em;
   border: 0.15em solid;
   border-radius: 50%;
+  height: 1.15em;
+  margin-right: 0;
+  width: 1.15em;
 }
 
 input[type='radio'] + label {
   margin-left: 0;
 }
 
-input[type="radio"]::after {
-  content: "";
-  width: 0.65em;
-  height: 0.65em;
+input[type='radio']::after {
   border-radius: 50%;
+  content: '';
+  display: block;
+  height: 0.65em;
+  margin-left: -0.325em;
+  margin-top: -0.325em;
   transform: scale(0);
   transition: 120ms transform ease-in-out;
-  display: block;
-  margin-top: -0.325em;
-  margin-left: -0.325em;
+  width: 0.65em;
 }
 
-input[type="radio"]:checked::after {
+input[type='radio']:checked::after {
   transform: scale(1);
 }

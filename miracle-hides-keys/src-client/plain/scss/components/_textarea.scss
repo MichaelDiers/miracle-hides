@@ -1,3 +1,7 @@
+textarea {
+  min-width: $default-textarea-min-width;
+}
+
 .textarea-container {
   display: grid;
   grid-template-areas: 'content';
@@ -24,7 +28,12 @@
 .textarea-container div::after {
   content: 'content_copy';
   direction: ltr;
-  font-family: 'Material Symbols Outlined';  
+  font-family: 'Material Symbols Outlined';
+
+  font-feature-settings: 'liga' 1;
+  font-feature-settings: 'liga' 1;
+  font-feature-settings: 'liga' 1;
+  font-feature-settings: 'liga' 1;
   font-size: 24px;
   font-style: normal;
   font-weight: normal;
@@ -33,11 +42,6 @@
   text-transform: none;
   white-space: nowrap;
   word-wrap: normal;
-
-  -webkit-font-feature-settings: 'liga' 1;
-  -moz-font-feature-settings:    'liga' 1;
-  -ms-font-feature-settings:     'liga' 1;
-  font-feature-settings:         'liga' 1;
 }
 
 .textarea-container:hover div {

@@ -6,6 +6,7 @@ const enum Css {
   NAVBAR = 'navbar',
   SYMMETRIC_COLOR = 'symmetric-color',
   TEXTAREA_CONTAINER = 'textarea-container',
+  WELCOME = 'welcome',
 }
 
 export default Css;

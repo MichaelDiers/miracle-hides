@@ -4,12 +4,12 @@
 }
 
 .background-process-active::before {
-  content:"";
+  background-color: $overlay-color;
+  content: '';
   display: block;
   height: 100%;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
-  background-color: $overlay-color;
 }

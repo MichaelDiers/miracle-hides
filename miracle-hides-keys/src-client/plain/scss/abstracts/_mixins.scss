@@ -1,4 +1,4 @@
-@use "sass:string";
+@use 'sass:string';
 
 @mixin grid($columnsCount, $columnsSize: 'min-content', $placeItems: 'center') {
   display: grid;

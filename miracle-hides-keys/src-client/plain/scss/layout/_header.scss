@@ -4,8 +4,8 @@ header.welcome {
 
 header {
   display: grid;
-  grid-template-columns: 1fr 12fr 1fr;
   grid-template-areas: 'logo headline .' 'navbar navbar navbar';
+  grid-template-columns: 1fr 12fr 1fr;
   padding: $default-padding;
   place-items: center;
 }

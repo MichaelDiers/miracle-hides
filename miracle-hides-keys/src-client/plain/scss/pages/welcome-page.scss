@@ -1,47 +1,46 @@
-#welcomePage {
+.welcome {
   display: grid;
   gap: 40px;
   grid-template-areas: 'headline headline' 'asymmetric symmetric';
-  grid-template-columns: auto auto;  
+  grid-template-columns: auto auto;
   grid-template-rows: auto 1fr;
   place-items: stretch;
 }
 
-#welcomePage h1 {
+.welcome h1 {
   grid-area: headline;
   padding: 20px;
 }
 
-#welcomePage .asymmetric-color {
+.welcome .asymmetric-color {
   grid-area: asymmetric;
 }
 
-#welcomePage .symmetric-color {
+.welcome .symmetric-color {
   grid-area: symmetric;
 }
 
-#welcomePage .asymmetric-color,
-#welcomePage .symmetric-color {
-  border: 1px solid;
-  border-left: none;
-  border-top: none;
+.welcome .asymmetric-color,
+.welcome .symmetric-color {
+  border-bottom: 1px solid;
   border-bottom-right-radius: 25px;
+  border-right: 1px solid;
   display: grid;
   grid-template-columns: auto;
   padding: 50px;
   place-items: center;
 }
 
-#welcomePage ol {
+.welcome ol {
   list-style: none;
 }
 
-#welcomePage li {
-  text-align: center;
+.welcome li {
   margin: 30px;
+  text-align: center;
 }
 
-#welcomePage button {
+.welcome button {
   border: 1px solid;
   border-radius: 15px;
 }

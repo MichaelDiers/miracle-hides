@@ -48,61 +48,65 @@ export default class WelcomePage extends BasePage {
 
   // eslint-disable-next-line class-methods-use-this
   protected setupHtml(): string {
-    return [
-      HtmlComponents.h1({
-        source: COMMON_LANGUAGE_SOURCE,
-        value: CommonLanguageKeys.MIRACLE_HIDES_KEYS,
-      }),
-      HtmlComponents.div({
-        css: [Css.ASYMMETRIC_COLOR],
-        content: [
-          HtmlComponents.h2({
-            source: COMMON_LANGUAGE_SOURCE,
-            value: CommonLanguageKeys.ASYMMETRIC_ENCRYPTION,
-          }),
-          HtmlComponents.list({
-            items: [
-              HtmlComponents.listItem({
-                source: COMMON_LANGUAGE_SOURCE,
-                label: CommonLanguageKeys.ALGORITHM_EC,
-              }),
-              HtmlComponents.listItem({
-                source: COMMON_LANGUAGE_SOURCE,
-                label: CommonLanguageKeys.ALGORITHM_RSA,
-              }),
-            ],
-          }),
-          HtmlComponents.button({
-            source: COMMON_LANGUAGE_SOURCE,
-            text: CommonLanguageKeys.GENERATE,
-          }),
-        ],
-      }),
-      HtmlComponents.div({
-        css: [Css.SYMMETRIC_COLOR],
-        content: [
-          HtmlComponents.h2({
-            source: COMMON_LANGUAGE_SOURCE,
-            value: CommonLanguageKeys.SYMMETRIC_ENCRYPTION,
-          }),
-          HtmlComponents.list({
-            items: [
-              HtmlComponents.listItem({
-                source: COMMON_LANGUAGE_SOURCE,
-                label: CommonLanguageKeys.ALGORITHM_AES,
-              }),
-              HtmlComponents.listItem({
-                source: COMMON_LANGUAGE_SOURCE,
-                label: CommonLanguageKeys.ALGORITHM_HMAC,
-              }),
-            ],
-          }),
-          HtmlComponents.button({
-            source: COMMON_LANGUAGE_SOURCE,
-            text: CommonLanguageKeys.GENERATE,
-          }),
-        ],
-      }),
-    ].join('');
+    return HtmlComponents.div({
+      css: [Css.WELCOME],
+      content: [
+
+        HtmlComponents.h1({
+          source: COMMON_LANGUAGE_SOURCE,
+          value: CommonLanguageKeys.MIRACLE_HIDES_KEYS,
+        }),
+        HtmlComponents.div({
+          css: [Css.ASYMMETRIC_COLOR],
+          content: [
+            HtmlComponents.h2({
+              source: COMMON_LANGUAGE_SOURCE,
+              value: CommonLanguageKeys.ASYMMETRIC_ENCRYPTION,
+            }),
+            HtmlComponents.list({
+              items: [
+                HtmlComponents.listItem({
+                  source: COMMON_LANGUAGE_SOURCE,
+                  label: CommonLanguageKeys.ALGORITHM_EC,
+                }),
+                HtmlComponents.listItem({
+                  source: COMMON_LANGUAGE_SOURCE,
+                  label: CommonLanguageKeys.ALGORITHM_RSA,
+                }),
+              ],
+            }),
+            HtmlComponents.button({
+              source: COMMON_LANGUAGE_SOURCE,
+              text: CommonLanguageKeys.GENERATE,
+            }),
+          ],
+        }),
+        HtmlComponents.div({
+          css: [Css.SYMMETRIC_COLOR],
+          content: [
+            HtmlComponents.h2({
+              source: COMMON_LANGUAGE_SOURCE,
+              value: CommonLanguageKeys.SYMMETRIC_ENCRYPTION,
+            }),
+            HtmlComponents.list({
+              items: [
+                HtmlComponents.listItem({
+                  source: COMMON_LANGUAGE_SOURCE,
+                  label: CommonLanguageKeys.ALGORITHM_AES,
+                }),
+                HtmlComponents.listItem({
+                  source: COMMON_LANGUAGE_SOURCE,
+                  label: CommonLanguageKeys.ALGORITHM_HMAC,
+                }),
+              ],
+            }),
+            HtmlComponents.button({
+              source: COMMON_LANGUAGE_SOURCE,
+              text: CommonLanguageKeys.GENERATE,
+            }),
+          ],
+        }),
+      ]
+    });
   }
 }

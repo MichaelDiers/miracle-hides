@@ -4,6 +4,14 @@ a::after {
   background-color: $color-dark;
 }
 
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+  outline: solid $color-focus-dark 2px;
+  outline-offset: 1px;
+}
+
 body {
   background-color: $background-color-dark;
   color: $color-dark;
@@ -13,24 +21,18 @@ body * {
   color: inherit;
 }
 
-input[type='radio'] {
-  background-color: $background-color-dark;  
-}
-
 textarea,
 input[type='text'] {
   background-color: $background-color-lighter-dark;
 }
 
-/** class selectors **/
-a:focus,
 button:focus,
-input:focus,
-textarea:focus {
-  outline: solid $color-focus-dark 2px;
-  outline-offset: 1px;
+button:hover {  
+  border-color: $background-color-dark;
+  color: $background-color-dark;  
 }
 
+/** class selectors **/
 .asymmetric-color {
   color: $asymmetric-color-dark;
 }
@@ -52,8 +54,26 @@ textarea:focus {
   outline: solid $asymmetric-color-focus-dark 3px;  
 }
 
-.asymmetric-color .menu-link::after {
+.asymmetric-color .menu-link::after,
+.asymmetric-color input[type='radio']::after,
+//.asymmetric-color .textarea-container div:hover,
+.asymmetric-color button:focus,
+.asymmetric-color button:hover {
   background-color: $asymmetric-color-dark;
+}
+
+.asymmetric-color input[type='submit'] {
+  background-color: $asymmetric-color-dark;
+  border-color: $asymmetric-color-lighter-dark;
+  color: $background-color-dark;
+}
+
+.asymmetric-color .textarea-container div {
+  color: $asymmetric-color-lighter-dark;
+}
+
+.asymmetric-color .textarea-container div:hover {
+  color: $asymmetric-color-dark;
 }
 
 .symmetric-color {
@@ -77,77 +97,23 @@ textarea:focus {
   outline: solid $symmetric-color-focus-dark 3px;  
 }
 
-.symmetric-color .menu-link::after {
+.symmetric-color .menu-link::after,
+.symmetric-color input[type='radio']::after,
+.symmetric-color button:focus,
+.symmetric-color button:hover {
   background-color: $symmetric-color-dark;
 }
 
-/** page specific colors **/
-#asymmetricPage {
-  color: $asymmetric-color-dark;
-}
-
-#asymmetricPage input[type="radio"]::after {
-  background-color: $asymmetric-color-dark;
-}
-
-//#asymmetricPage textarea:focus,
-//#asymmetricPage input[type='text']:focus {
-//  box-shadow: 0 0 0 3px $asymmetric-color-shadow-dark;
-//}
-
-#asymmetricPage input[type='submit'] {
-  background-color: $asymmetric-color-dark;
-  border-color: $asymmetric-color-lighter-dark;
-  color: $background-color-dark;
-}
-
-#asymmetricPage .textarea-container div {
-  color: $asymmetric-color-lighter-dark;
-}
-
-#asymmetricPage .textarea-container div:hover {
-  color: $asymmetric-color-dark;
-}
-
-#symmetricPage {
-  color: $symmetric-color-dark;
-}
-
-#symmetricPage input[type="radio"]::after {
-  background-color: $symmetric-color-dark;
-}
-
-//#symmetricPage textarea:focus,
-//#symmetricPage input[type='text']:focus {
-//  box-shadow: 0 0 0 3px $symmetric-color-shadow-dark;
-//}
-
-#symmetricPage input[type='submit'] {
+.symmetric-color input[type='submit'] {
   background-color: $symmetric-color-dark;
   border-color: $symmetric-color-lighter-dark;
   color: $background-color-dark;
 }
 
-#symmetricPage .textarea-container div {
+.symmetric-color .textarea-container div {
   color: $symmetric-color-lighter-dark;
 }
 
-#symmetricPage .textarea-container div:hover {
+.symmetric-color .textarea-container div:hover {
   color: $symmetric-color-dark;
-}
-
-#welcomePage .asymmetric-color button:focus,
-#welcomePage .asymmetric-color button:hover {
-  background-color: $asymmetric-color-dark;  
-}
-
-#welcomePage .symmetric-color button:focus,
-#welcomePage .symmetric-color button:hover {
-  background-color: $symmetric-color-dark;
-}
-
-#welcomePage button:focus,
-#welcomePage button:hover {  
-  border-color: $background-color-dark;
-  color: $background-color-dark;  
 }
