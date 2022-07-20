@@ -38,7 +38,7 @@ export default class App {
 
   // eslint-disable-next-line class-methods-use-this
   private async setupLanguageAsync() : Promise<void> {
-    const language = window.navigator.language || 'de';
+    const language = window.navigator.language || document.documentElement.lang;
     document.body.setAttribute('lang', language.split('-')[0].toLowerCase());
   }
 
