@@ -6,6 +6,7 @@ import Translator from '../translations/translator';
 import Logger from '../infrastructure/logger';
 import Css from './css';
 import PageEvents from './page-events';
+import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from '../translations/language-common';
 
 const enum PageIds {
   AES_KEY_SIZE_ID = 'aesKeySize',
@@ -14,11 +15,14 @@ const enum PageIds {
   HMAC_KEY_SIZE_ID = 'hmacKeySize',
   KEY_TYPE_ID = 'type',
   PRIVATE_KEY_ID = 'symmetricPrivateKey',
+  TEST_INPUT_ID = 'testInput',
+  TEST_INPUT_ENCRYPTED_ID = 'symmetricTestInputEncrypted',
+  TEST_INPUT_DECRYPTED_ID = 'symmetricTestInputDecrypted',
 }
 
 const enum PageValues {
   AES_KEY_SIZE_128 = '128',
-  AES_KEY_SIZE_196 = '196',
+  AES_KEY_SIZE_192 = '192',
   AES_KEY_SIZE_256 = '256',
   HMAC_KEY_SIZE_DEFAULT = '128',
   HMAC_KEY_SIZE_MIN = '8',
@@ -26,6 +30,9 @@ const enum PageValues {
   KEY_TYPE_OPTION_AES = 'AES',
   KEY_TYPE_OPTION_HMAC = 'HMAC',
   PRIVATE_KEY_ROWS = '3',
+  TEST_INPUT_ROWS = '1',
+  TEST_INPUT_ENCRYPTED_ROWS = '1',
+  TEST_INPUT_DECRYPTED_ROWS = '1',
 }
 
 export default class SymmetricPage extends AlgorithmBasePage {
@@ -46,6 +53,9 @@ export default class SymmetricPage extends AlgorithmBasePage {
       PageEvents.SYMMETRIC_PAGE,
       {
         privateKeyId: PageIds.PRIVATE_KEY_ID,
+        testInputId: PageIds.TEST_INPUT_ID,
+        encryptedId: PageIds.TEST_INPUT_ENCRYPTED_ID,
+        decryptedId: PageIds.TEST_INPUT_DECRYPTED_ID,
       },
     );
   }
@@ -94,7 +104,7 @@ export default class SymmetricPage extends AlgorithmBasePage {
                 {
                   source: this.source,
                   text: SymmetricLanguageKeys.AES_KEY_SIZE_192,
-                  value: PageValues.AES_KEY_SIZE_196,
+                  value: PageValues.AES_KEY_SIZE_192,
                 },
                 {
                   source: this.source,
@@ -122,6 +132,39 @@ export default class SymmetricPage extends AlgorithmBasePage {
               placeholderText: SymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
               placeholderSource: source,
               rows: PageValues.PRIVATE_KEY_ROWS,
+              readonly: true,
+            }),
+            HtmlComponents.textarea({
+              id: PageIds.TEST_INPUT_ID,
+              labelText: SymmetricLanguageKeys.TEST_INPUT,
+              labelSource: source,
+              placeholderText: SymmetricLanguageKeys.TEST_INPUT_PLACEHOLDER,
+              placeholderSource: source,
+              textareaText: CommonLanguageKeys.TEST_INPUT,
+              textareaSource: COMMON_LANGUAGE_SOURCE,
+              rows: PageValues.TEST_INPUT_ROWS,
+              name: PageIds.TEST_INPUT_ID,
+              readonly: true,
+            }),
+            HtmlComponents.textarea({
+              id: PageIds.TEST_INPUT_ENCRYPTED_ID,
+              labelText: SymmetricLanguageKeys.TEST_INPUT_ENCRYPTED,
+              labelSource: source,
+              placeholderText: SymmetricLanguageKeys.TEST_INPUT_ENCRYPTED_PLACEHOLDER,
+              placeholderSource: source,
+              rows: PageValues.TEST_INPUT_ENCRYPTED_ROWS,
+              name: '',
+              readonly: true,
+            }),
+            HtmlComponents.textarea({
+              id: PageIds.TEST_INPUT_DECRYPTED_ID,
+              labelText: SymmetricLanguageKeys.TEST_INPUT_DECRYPTED,
+              labelSource: source,
+              placeholderText: SymmetricLanguageKeys.TEST_INPUT_DECRYPTED_PLACEHOLDER,
+              placeholderSource: source,
+              rows: PageValues.TEST_INPUT_DECRYPTED_ROWS,
+              name: '',
+              readonly: true,
             }),
           ],
         }),

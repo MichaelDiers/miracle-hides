@@ -139,6 +139,7 @@ export default class AsymmetricPage extends AlgorithmBasePage {
               placeholderText: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
               placeholderSource: source,
               rows: PageValues.PRIVATE_KEY_ROWS,
+              readonly: true,
             }),
             HtmlComponents.textarea({
               id: PageIds.PUBLIC_KEY_ID,
@@ -147,6 +148,7 @@ export default class AsymmetricPage extends AlgorithmBasePage {
               placeholderText: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
               placeholderSource: source,
               rows: PageValues.PUBLIC_KEY_ROWS,
+              readonly: true,
             }),
             HtmlComponents.textarea({
               id: PageIds.TEST_INPUT_ID,
@@ -158,6 +160,7 @@ export default class AsymmetricPage extends AlgorithmBasePage {
               textareaSource: COMMON_LANGUAGE_SOURCE,
               rows: PageValues.TEST_INPUT_ROWS,
               name: PageIds.TEST_INPUT_ID,
+              readonly: true,
             }),
             HtmlComponents.textarea({
               id: PageIds.TEST_INPUT_ENCRYPTED_ID,
@@ -167,6 +170,7 @@ export default class AsymmetricPage extends AlgorithmBasePage {
               placeholderSource: source,
               rows: PageValues.TEST_INPUT_ENCRYPTED_ROWS,
               name: '',
+              readonly: true,
             }),
             HtmlComponents.textarea({
               id: PageIds.TEST_INPUT_DECRYPTED_ID,
@@ -176,6 +180,7 @@ export default class AsymmetricPage extends AlgorithmBasePage {
               placeholderSource: source,
               rows: PageValues.TEST_INPUT_DECRYPTED_ROWS,
               name: '',
+              readonly: true,
             }),
           ],
         }),

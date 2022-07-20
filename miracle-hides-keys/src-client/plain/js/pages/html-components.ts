@@ -397,7 +397,7 @@ export default class HtmlComponents {
     textareaText = '',
     textareaSource = '',
     rows = '5',
-
+    readonly = false,
   }: {
     id?: string,
     name?: string,
@@ -408,6 +408,7 @@ export default class HtmlComponents {
     textareaText?: string,
     textareaSource?: string,
     rows?: string,
+    readonly?: boolean,
   }): string {
     return [
       HtmlComponents.label({ label: labelText, source: labelSource, id }),
@@ -420,6 +421,7 @@ export default class HtmlComponents {
             id,
             name,
             rows,
+            readonly,
             translationValue: HtmlComponents.translationValues(
               {
                 source: placeholderSource,
@@ -453,6 +455,7 @@ export default class HtmlComponents {
     name = '',
     rows = '',
     translationValue = '',
+    readonly = false,
   }: {
     tag: string,
     id?: string,
@@ -464,6 +467,7 @@ export default class HtmlComponents {
     name?: string,
     rows?: string,
     translationValue?: string,
+    readonly?: boolean,
   }) {
     return [
       `<${tag}`,
@@ -471,6 +475,7 @@ export default class HtmlComponents {
       HtmlComponents.add('name', name),
       HtmlComponents.add('rows', rows),
       HtmlComponents.add('class', css.join(' ')),
+      readonly ? ' readonly' : '',
       translationValue ? ` ${translationValue}` : HtmlComponents.translationValue({ source, value: text, destination }),
       '>',
       content.join(''),

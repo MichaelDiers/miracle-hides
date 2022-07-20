@@ -14,6 +14,12 @@ export enum SymmetricLanguageKeys {
   PRIVATE_KEY_PLACEHOLDER = 'privateKeyPlaceholder',
   SUBMIT = 'submit',
   UNABLE_TO_GENERATE_KEYS = 'unableToGenerateKeys',
+  TEST_INPUT = 'testInput',
+  TEST_INPUT_PLACEHOLDER = 'testInputPlaceholder',
+  TEST_INPUT_ENCRYPTED = 'testInputEncrypted',
+  TEST_INPUT_ENCRYPTED_PLACEHOLDER = 'testInputEncryptedPlaceholder',
+  TEST_INPUT_DECRYPTED = 'testInputDecrypted',
+  TEST_INPUT_DECRYPTED_PLACEHOLDER = 'testInputDecryptedPlaceholder',
 }
 
 export interface SymmetricLanguage extends LanguagePage {
@@ -30,4 +36,10 @@ export interface SymmetricLanguage extends LanguagePage {
   [SymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER]: string;
   [SymmetricLanguageKeys.SUBMIT]: string;
   [SymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: string;
+  [SymmetricLanguageKeys.TEST_INPUT]: string;
+  [SymmetricLanguageKeys.TEST_INPUT_PLACEHOLDER]: string;
+  [SymmetricLanguageKeys.TEST_INPUT_ENCRYPTED]: string;
+  [SymmetricLanguageKeys.TEST_INPUT_ENCRYPTED_PLACEHOLDER]: string;
+  [SymmetricLanguageKeys.TEST_INPUT_DECRYPTED]: string;
+  [SymmetricLanguageKeys.TEST_INPUT_DECRYPTED_PLACEHOLDER]: string;
 }
