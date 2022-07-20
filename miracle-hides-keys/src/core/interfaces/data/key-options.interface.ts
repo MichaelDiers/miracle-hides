@@ -1,5 +1,8 @@
 import {
-  AesKeySize, EcNamedCurve, RsaKeySize, SupportedAlgorithms,
+  AesKeySize,
+  EcNamedCurve,
+  RsaKeySize,
+  SupportedAlgorithms,
 } from './data-types';
 
 export default interface KeyOptions {
@@ -10,6 +13,8 @@ export default interface KeyOptions {
   hmacKeySize?: number;
 
   rsaKeySize?: RsaKeySize;
+
+  testInput?: string;
 
   type: SupportedAlgorithms;
 }

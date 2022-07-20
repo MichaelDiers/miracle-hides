@@ -5,10 +5,12 @@ export interface AsymmetricKeyGenerator {
   generateAsync({
     ecNamedCurve,
     rsaKeySize,
+    testInput,
     type,
   } : {
     ecNamedCurve?: types.EcNamedCurve,
     rsaKeySize?: types.RsaKeySize,
+    testInput?: string,
     type: SupportedAsymmetricAlgorithms,
   }): Promise<KeysResult>;
 }

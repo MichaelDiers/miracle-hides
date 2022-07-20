@@ -1,8 +1,18 @@
 import {
-  IsIn, IsNotEmpty, IsNumberString, IsString, MinLength, ValidateIf,
+  IsIn,
+  IsNotEmpty,
+  IsNumberString,
+  IsOptional,
+  IsString,
+  MinLength,
+  ValidateIf,
 } from 'class-validator';
 import {
-  ALGORITHM_AES, ALGORITHM_EC, ALGORITHM_HMAC, ALGORITHM_RSA, SUPPORTED_ALGORITHMS,
+  ALGORITHM_AES,
+  ALGORITHM_EC,
+  ALGORITHM_HMAC,
+  ALGORITHM_RSA,
+  SUPPORTED_ALGORITHMS,
 } from '../interfaces/data/data-constants';
 
 export default class CreateKeysRequestDto {
@@ -23,6 +33,11 @@ export default class CreateKeysRequestDto {
   @IsNumberString()
   @MinLength(1)
     hmacKeySize: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+    testInput?: string;
 
   @ValidateIf((obj) => obj.type === ALGORITHM_RSA)
   @IsNotEmpty()

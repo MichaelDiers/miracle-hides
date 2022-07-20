@@ -2,7 +2,14 @@
  * Generator for rsa public and private keys.
  */
 
-import { generateKeyPair, KeyObject } from 'crypto';
+import {
+  generateKeyPair,
+  KeyObject,
+  publicEncrypt,
+  privateDecrypt,
+  createSign,
+  createVerify,
+} from 'crypto';
 import { Injectable } from '@nestjs/common';
 import { EcNamedCurve, RsaKeySize, SupportedAsymmetricAlgorithms } from '../../core/interfaces/data/data-types';
 import { KeysResult } from '../../core/interfaces/data/data';
@@ -21,10 +28,12 @@ export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGener
   generateAsync({
     ecNamedCurve,
     rsaKeySize,
+    testInput,
     type,
   } : {
     ecNamedCurve?: EcNamedCurve,
     rsaKeySize?: RsaKeySize,
+    testInput?: string,
     type: SupportedAsymmetricAlgorithms,
   }): Promise<KeysResult> {
     return new Promise((resolve, reject) => {
@@ -32,55 +41,99 @@ export default class AsymmetricKeyGeneratorService implements AsymmetricKeyGener
         generateKeyPair(
           type,
           { modulusLength: rsaKeySize },
-          AsymmetricKeyGeneratorService.createCallback(resolve, reject, type),
+          AsymmetricKeyGeneratorService.createCallbackRsa(resolve, reject, testInput),
         );
       } else if (type === ALGORITHM_EC) {
         generateKeyPair(
           type,
           { namedCurve: ecNamedCurve },
-          AsymmetricKeyGeneratorService.createCallback(resolve, reject, type),
+          AsymmetricKeyGeneratorService.createCallbackEc(resolve, reject, testInput),
         );
       }
     });
   }
 
-  private static createCallback(resolve, reject, algorithm) {
+  private static createCallbackEc(resolve, reject, testInput) {
     const callback = (err: Error, publicKey: KeyObject, privateKey: KeyObject) => {
       if (err) {
         return reject(err);
       }
 
       try {
-        let optionsPrivate;
-        let optionsPublic;
-        if (algorithm === ALGORITHM_EC) {
-          optionsPrivate = {
-            type: 'sec1',
-            format: 'pem',
-          };
+        const publicKeyString = publicKey.export({
+          type: 'spki',
+          format: 'pem',
+        }) as string;
 
-          optionsPublic = {
-            type: 'spki',
-            format: 'pem',
-          };
-        } else if (algorithm === ALGORITHM_RSA) {
-          optionsPrivate = {
-            type: 'pkcs1',
-            format: 'pem',
-          };
+        const privateKeyString = privateKey.export({
+          type: 'sec1',
+          format: 'pem',
+        }) as string;
 
-          optionsPublic = {
-            type: 'pkcs1',
-            format: 'pem',
-          };
+        if (!testInput) {
+          return resolve({
+            publicKey: publicKeyString,
+            privateKey: privateKeyString,
+          });
         }
 
-        const publicKeyString = publicKey.export(optionsPublic) as string;
-        const privateKeyString = privateKey.export(optionsPrivate) as string;
+        const sign = createSign('SHA256');
+        sign.write(testInput);
+        sign.end();
+        const encrypted = sign.sign(privateKey, 'hex');
+
+        const verify = createVerify('SHA256');
+        verify.write(testInput);
+        verify.end();
+        const decrypted = verify.verify(publicKey, encrypted, 'hex');
 
         return resolve({
           publicKey: publicKeyString,
           privateKey: privateKeyString,
+          testInput,
+          encrypted,
+          decrypted,
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    };
+
+    return callback;
+  }
+
+  private static createCallbackRsa(resolve, reject, testInput) {
+    const callback = (err: Error, publicKey: KeyObject, privateKey: KeyObject) => {
+      if (err) {
+        return reject(err);
+      }
+
+      try {
+        const publicKeyString = publicKey.export({
+          type: 'pkcs1',
+          format: 'pem',
+        }) as string;
+        const privateKeyString = privateKey.export({
+          type: 'pkcs1',
+          format: 'pem',
+        }) as string;
+
+        if (!testInput) {
+          return resolve({
+            publicKey: publicKeyString,
+            privateKey: privateKeyString,
+          });
+        }
+
+        const encrypted = publicEncrypt(publicKey, Buffer.from(testInput, 'utf8')).toString('base64');
+        const decrypted = privateDecrypt(privateKey, Buffer.from(encrypted, 'base64')).toString('utf-8');
+
+        return resolve({
+          publicKey: publicKeyString,
+          privateKey: privateKeyString,
+          testInput,
+          encrypted,
+          decrypted,
         });
       } catch (error: any) {
         return reject(error);

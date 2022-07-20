@@ -3,10 +3,16 @@ import CreateKeysRequestDto from '../dtos/create-keys-request.dto';
 import CreateKeysResponseDto from '../dtos/create-keys-response.dto';
 import { KeyOptions, KeysResult } from '../interfaces/data/data';
 import {
-  ALGORITHM_AES, ALGORITHM_EC, ALGORITHM_HMAC, ALGORITHM_RSA,
+  ALGORITHM_AES,
+  ALGORITHM_EC,
+  ALGORITHM_HMAC,
+  ALGORITHM_RSA,
 } from '../interfaces/data/data-constants';
 import {
-  AesKeySize, EcNamedCurve, RsaKeySize, SupportedAlgorithms,
+  AesKeySize,
+  EcNamedCurve,
+  RsaKeySize,
+  SupportedAlgorithms,
 } from '../interfaces/data/data-types';
 import { Transformer } from '../interfaces/services/services';
 
@@ -27,6 +33,7 @@ export default class TransformerService implements Transformer {
       ecNamedCurve,
       hmacKeySize,
       rsaKeySize,
+      testInput: createKeysRequestDto.testInput,
       type,
     };
   }
@@ -38,6 +45,9 @@ export default class TransformerService implements Transformer {
     return {
       privateKey: keysResult.privateKey,
       publicKey: keysResult.publicKey,
+      testInput: keysResult.testInput,
+      encrypted: keysResult.encrypted,
+      decrypted: keysResult.decrypted,
     };
   }
 

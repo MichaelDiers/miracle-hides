@@ -1,7 +1,20 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { SymmetricKeyGenerator, SYMMETRIC_KEY_GENERATOR } from '../../core/interfaces/services/symmetric-key-generator.interface';
-import { SUPPORTED_ASYMMETRIC_ALGORITHMS, SUPPORTED_SYMMETRIC_ALGORITHMS } from '../../core/interfaces/data/data-constants';
-import { SupportedAsymmetricAlgorithms, SupportedSymmetricAlgorithms } from '../../core/interfaces/data/data-types';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
+import {
+  SymmetricKeyGenerator,
+  SYMMETRIC_KEY_GENERATOR,
+} from '../../core/interfaces/services/symmetric-key-generator.interface';
+import {
+  SUPPORTED_ASYMMETRIC_ALGORITHMS,
+  SUPPORTED_SYMMETRIC_ALGORITHMS,
+} from '../../core/interfaces/data/data-constants';
+import {
+  SupportedAsymmetricAlgorithms,
+  SupportedSymmetricAlgorithms,
+} from '../../core/interfaces/data/data-types';
 import {
   KeyGenerator,
   AsymmetricKeyGenerator,
@@ -28,6 +41,7 @@ export default class KeyGeneratorService implements KeyGenerator {
       return this.asymmetricKeyGenerator.generateAsync({
         ecNamedCurve: keyOptions.ecNamedCurve,
         rsaKeySize: keyOptions.rsaKeySize,
+        testInput: keyOptions.testInput,
         type: keyOptions.type as SupportedAsymmetricAlgorithms,
       });
     } if (SUPPORTED_SYMMETRIC_ALGORITHMS.findIndex(
