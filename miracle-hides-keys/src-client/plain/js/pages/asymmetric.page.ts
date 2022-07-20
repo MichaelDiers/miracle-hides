@@ -6,6 +6,7 @@ import Translator from '../translations/translator';
 import Logger from '../infrastructure/logger';
 import Css from './css';
 import PageEvents from './page-events';
+import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from '../translations/language-common';
 
 const enum PageIds {
   EC_NAMED_CURVE_ID = 'ecNamedCurve',
@@ -15,6 +16,9 @@ const enum PageIds {
   PRIVATE_KEY_ID = 'asymmetricPrivateKey',
   PUBLIC_KEY_ID = 'asymmetricPublicKey',
   RSA_KEY_SIZE_ID = 'rsaKeySize',
+  TEST_INPUT_ID = 'testInput',
+  TEST_INPUT_ENCRYPTED_ID = 'testInputEncrypted',
+  TEST_INPUT_DECRYPTED_ID = 'testInputDecrypted',
 }
 
 const enum PageValues {
@@ -26,6 +30,9 @@ const enum PageValues {
   KEY_TYPE_RSA = 'RSA',
   PRIVATE_KEY_ROWS = '15',
   PUBLIC_KEY_ROWS = '6',
+  TEST_INPUT_ROWS = '2',
+  TEST_INPUT_ENCRYPTED_ROWS = '2',
+  TEST_INPUT_DECRYPTED_ROWS = '2',
 }
 
 export default class AsymmetricPage extends AlgorithmBasePage {
@@ -44,8 +51,13 @@ export default class AsymmetricPage extends AlgorithmBasePage {
       PageIds.ERROR_MESSAGE_ID,
       AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
       PageEvents.ASYMMETRIC_PAGE,
-      PageIds.PRIVATE_KEY_ID,
-      PageIds.PUBLIC_KEY_ID,
+      {
+        privateKeyId: PageIds.PRIVATE_KEY_ID,
+        publicKeyId: PageIds.PUBLIC_KEY_ID,
+        testInputId: PageIds.TEST_INPUT_ID,
+        encryptedId: PageIds.TEST_INPUT_ENCRYPTED_ID,
+        decryptedId: PageIds.TEST_INPUT_DECRYPTED_ID,
+      },
     );
   }
 
@@ -122,17 +134,48 @@ export default class AsymmetricPage extends AlgorithmBasePage {
             }),
             HtmlComponents.textarea({
               id: PageIds.PRIVATE_KEY_ID,
-              label: AsymmetricLanguageKeys.PRIVATE_KEY,
-              placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
-              source,
+              labelText: AsymmetricLanguageKeys.PRIVATE_KEY,
+              labelSource: source,
+              placeholderText: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
+              placeholderSource: source,
               rows: PageValues.PRIVATE_KEY_ROWS,
             }),
             HtmlComponents.textarea({
               id: PageIds.PUBLIC_KEY_ID,
-              label: AsymmetricLanguageKeys.PUBLIC_KEY,
-              placeholder: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
-              source,
+              labelText: AsymmetricLanguageKeys.PUBLIC_KEY,
+              labelSource: source,
+              placeholderText: AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
+              placeholderSource: source,
               rows: PageValues.PUBLIC_KEY_ROWS,
+            }),
+            HtmlComponents.textarea({
+              id: PageIds.TEST_INPUT_ID,
+              labelText: AsymmetricLanguageKeys.TEST_INPUT,
+              labelSource: source,
+              placeholderText: AsymmetricLanguageKeys.TEST_INPUT_PLACEHOLDER,
+              placeholderSource: source,
+              textareaText: CommonLanguageKeys.TEST_INPUT,
+              textareaSource: COMMON_LANGUAGE_SOURCE,
+              rows: PageValues.TEST_INPUT_ROWS,
+              name: PageIds.TEST_INPUT_ID,
+            }),
+            HtmlComponents.textarea({
+              id: PageIds.TEST_INPUT_ENCRYPTED_ID,
+              labelText: AsymmetricLanguageKeys.TEST_INPUT_ENCRYPTED,
+              labelSource: source,
+              placeholderText: AsymmetricLanguageKeys.TEST_INPUT_ENCRYPTED_PLACEHOLDER,
+              placeholderSource: source,
+              rows: PageValues.TEST_INPUT_ENCRYPTED_ROWS,
+              name: '',
+            }),
+            HtmlComponents.textarea({
+              id: PageIds.TEST_INPUT_DECRYPTED_ID,
+              labelText: AsymmetricLanguageKeys.TEST_INPUT_DECRYPTED,
+              labelSource: source,
+              placeholderText: AsymmetricLanguageKeys.TEST_INPUT_DECRYPTED_PLACEHOLDER,
+              placeholderSource: source,
+              rows: PageValues.TEST_INPUT_DECRYPTED_ROWS,
+              name: '',
             }),
           ],
         }),

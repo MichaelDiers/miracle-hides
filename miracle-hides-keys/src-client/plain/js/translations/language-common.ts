@@ -8,6 +8,7 @@ export enum CommonLanguageKeys {
   LICENSES = 'licenses',
   MIRACLE_HIDES_KEYS = 'miracleHidesKeys',
   SYMMETRIC_ENCRYPTION = 'symmetricEncryption',
+  TEST_INPUT = 'testInput',
 }
 
 export const COMMON_LANGUAGE_SOURCE = 'commonLanguageSource';
@@ -22,4 +23,5 @@ export interface CommonLanguage {
   [CommonLanguageKeys.LICENSES]: string;
   [CommonLanguageKeys.MIRACLE_HIDES_KEYS]: string;
   [CommonLanguageKeys.SYMMETRIC_ENCRYPTION]: string;
+  [CommonLanguageKeys.TEST_INPUT]: string;
 }

@@ -44,7 +44,9 @@ export default class SymmetricPage extends AlgorithmBasePage {
       PageIds.ERROR_MESSAGE_ID,
       SymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS,
       PageEvents.SYMMETRIC_PAGE,
-      PageIds.PRIVATE_KEY_ID,
+      {
+        privateKeyId: PageIds.PRIVATE_KEY_ID,
+      },
     );
   }
 
@@ -115,9 +117,10 @@ export default class SymmetricPage extends AlgorithmBasePage {
             }),
             HtmlComponents.textarea({
               id: PageIds.PRIVATE_KEY_ID,
-              label: SymmetricLanguageKeys.PRIVATE_KEY,
-              placeholder: SymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
-              source,
+              labelText: SymmetricLanguageKeys.PRIVATE_KEY,
+              labelSource: source,
+              placeholderText: SymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER,
+              placeholderSource: source,
               rows: PageValues.PRIVATE_KEY_ROWS,
             }),
           ],

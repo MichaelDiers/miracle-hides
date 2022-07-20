@@ -31,6 +31,12 @@ export default class DeLanguage extends BaseLanguage {
           [AsymmetricLanguageKeys.PRIVATE_KEY]: 'Privater Schlüssel',
           [AsymmetricLanguageKeys.PRIVATE_KEY_PLACEHOLDER]: 'noch kein Schlüssel generiert',
           [AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: 'Schlüssel können zur Zeit nicht genriert werden.',
+          [AsymmetricLanguageKeys.TEST_INPUT]: 'Original Text',
+          [AsymmetricLanguageKeys.TEST_INPUT_PLACEHOLDER]: 'Der zu verschlüsselnde Text',
+          [AsymmetricLanguageKeys.TEST_INPUT_ENCRYPTED]: 'Verschlüsselter Text',
+          [AsymmetricLanguageKeys.TEST_INPUT_ENCRYPTED_PLACEHOLDER]: 'Original Text in verschlüsselter Form',
+          [AsymmetricLanguageKeys.TEST_INPUT_DECRYPTED]: 'Entschlüsselter Text',
+          [AsymmetricLanguageKeys.TEST_INPUT_DECRYPTED_PLACEHOLDER]: 'Der entschlüsselte ursprüngliche Text',
         },
         [COMMON_LANGUAGE_SOURCE]: {
           [CommonLanguageKeys.ALGORITHM_AES]: 'AES',
@@ -42,6 +48,7 @@ export default class DeLanguage extends BaseLanguage {
           [CommonLanguageKeys.LICENSES]: 'Lizenzen',
           [CommonLanguageKeys.MIRACLE_HIDES_KEYS]: 'Miracle Hides Keys',
           [CommonLanguageKeys.SYMMETRIC_ENCRYPTION]: 'symmetrische Verschlüsselung',
+          [CommonLanguageKeys.TEST_INPUT]: 'Hallo Welt!',
         },
         [PageEvents.FOOTER_PAGE]: {
           [FooterLanguageKeys.LICENSES]: 'Lizenzen',

@@ -64,22 +64,26 @@ export default class Ajax {
   }) : Promise<AjaxResponse> {
     const { action, method } = formElement;
     const data = {};
-    const selectors = `
-      input[type=hidden],
-      input[type=number],
-      input[type=password],
-      input[type=text],
-      input[type=radio]:checked,
-      select
-    `;
+    const selectors = [
+      'input[type=hidden]',
+      'input[type=number]',
+      'input[type=password]',
+      'input[type=text]',
+      'input[type=radio]:checked',
+      'select',
+      'textarea',
+    ].join(',');
 
     formElement.querySelectorAll(selectors).forEach((element) => {
-      const select = element as HTMLSelectElement;
-      if (select) {
-        data[select.name] = select.value;
-      } else {
-        const input = element as HTMLInputElement;
-        data[input.name] = input.value;
+      const dataElement = element as HTMLElement;
+      const name = dataElement.getAttribute('name');
+      let value = dataElement.getAttribute('value');
+      if (!value && dataElement.tagName.toUpperCase() === 'TEXTAREA') {
+        value = (dataElement as HTMLTextAreaElement).value;
+      }
+
+      if (name && value) {
+        data[name] = value;
       }
     });
 

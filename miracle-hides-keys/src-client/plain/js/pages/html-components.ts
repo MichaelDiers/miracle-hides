@@ -14,7 +14,7 @@ export default class HtmlComponents {
     label = '',
     content = [],
     css = [],
-  } : {
+  }: {
     id?: string,
     href?: string,
     source?: string,
@@ -39,12 +39,12 @@ export default class HtmlComponents {
     id = '',
     source = '',
     text = '',
-  } : {
+  }: {
     css?: string[],
     id?: string,
     source?: string,
     text?: string,
-  }) : string {
+  }): string {
     return HtmlComponents.component({
       tag: 'button',
       id,
@@ -61,13 +61,13 @@ export default class HtmlComponents {
     content = [],
     source = '',
     text = '',
-  } : {
+  }: {
     id?: string,
     css?: string[],
     content?: string[],
     source?: string,
     text?: string,
-  } = {}) : string {
+  } = {}): string {
     return HtmlComponents.component({
       tag: 'div',
       id,
@@ -84,12 +84,12 @@ export default class HtmlComponents {
     content = [],
     method = '',
     id = '',
-  } : {
+  }: {
     action?: string,
     content?: string[],
     method?: string,
     id?: string,
-  } = {}) : string {
+  } = {}): string {
     return `
       <form
         ${HtmlComponents.add('action', action)}
@@ -104,10 +104,10 @@ export default class HtmlComponents {
   static h1({
     source = '',
     value = '',
-  } : {
+  }: {
     source?: string,
     value?: string,
-  } = {}) : string {
+  } = {}): string {
     return HtmlComponents.tag({
       tagName: 'h1',
       source,
@@ -119,10 +119,10 @@ export default class HtmlComponents {
   static h2({
     source = '',
     value = '',
-  } : {
+  }: {
     source?: string,
     value?: string,
-  } = {}) : string {
+  } = {}): string {
     return HtmlComponents.tag({
       tagName: 'h2',
       source,
@@ -135,11 +135,11 @@ export default class HtmlComponents {
     id = '',
     name = id,
     value = '',
-  } : {
+  }: {
     id?: string,
     name?: string,
     value?: string,
-  }) : string {
+  }): string {
     return this.input({
       id, name, type: 'hidden', value,
     });
@@ -154,7 +154,7 @@ export default class HtmlComponents {
     min = '',
     max = '',
     value = '',
-  } : {
+  }: {
     id?: string,
     name?: string,
     label?: string,
@@ -163,7 +163,7 @@ export default class HtmlComponents {
     min?: string,
     max?: string,
     value?: string,
-  }) : string {
+  }): string {
     return HtmlComponents.input({
       id,
       label,
@@ -185,13 +185,13 @@ export default class HtmlComponents {
     name = id,
     placeholder = '',
     source = '',
-  } : {
+  }: {
     id?: string,
     name?: string,
     label?: string,
     placeholder?: string,
     source?: string,
-  }) : string {
+  }): string {
     return HtmlComponents.input({
       id, label, name, placeholder, source, type: 'text',
     });
@@ -201,7 +201,7 @@ export default class HtmlComponents {
     id = '',
     ordered = true,
     items = [],
-  } : {
+  }: {
     id?: string,
     ordered?: boolean,
     items?,
@@ -218,7 +218,7 @@ export default class HtmlComponents {
     source = '',
     label = '',
     content = '',
-  } : {
+  }: {
     css?: string[],
     source?: string,
     label?: string,
@@ -237,7 +237,7 @@ export default class HtmlComponents {
   static listOrdered({
     id = '',
     items = [],
-  } : {
+  }: {
     id?: string,
     items?,
   }) {
@@ -247,7 +247,7 @@ export default class HtmlComponents {
   static listUnordered({
     id = '',
     items = [],
-  } : {
+  }: {
     id?: string,
     items?,
   }) {
@@ -258,11 +258,11 @@ export default class HtmlComponents {
     css = [],
     id = '',
     content = [],
-  } : {
+  }: {
     css?: string[],
     id?: string,
     content?: string[],
-  }) : string {
+  }): string {
     return HtmlComponents.component({
       tag: 'navbar',
       id,
@@ -276,12 +276,12 @@ export default class HtmlComponents {
     id = '',
     source = '',
     text = '',
-  } : {
+  }: {
     css?: string[],
     id?: string,
     source?: string,
     text?: string,
-  }) : string {
+  }): string {
     return HtmlComponents.component({
       tag: 'p',
       id,
@@ -298,13 +298,13 @@ export default class HtmlComponents {
     name = id,
     source,
     options = [],
-  } : {
+  }: {
     id: string,
     label: string,
     name?: string,
     source: string,
     options: { isChecked?: boolean, source: string, text: string, value: string }[],
-  }) : string {
+  }): string {
     return [
       HtmlComponents.label({ label, source, id }),
       HtmlComponents.div({
@@ -327,14 +327,14 @@ export default class HtmlComponents {
     placeholder = '',
     source = '',
     options = [],
-  } : {
+  }: {
     id?: string,
     name?: string,
     label?: string,
     placeholder?: string,
     source?: string,
     options?: string[],
-  }) : string {
+  }): string {
     return `
       ${HtmlComponents.label({ label, source, id })}
       <select
@@ -347,7 +347,7 @@ export default class HtmlComponents {
     `;
   }
 
-  static selectOption(value: string, label: string, source: string) : string {
+  static selectOption(value: string, label: string, source: string): string {
     return `
       <option
         value='${value}'
@@ -360,7 +360,7 @@ export default class HtmlComponents {
     id = '',
     css = [],
     content = '',
-  } : {
+  }: {
     id?: string,
     css?: string[],
     content?: string,
@@ -374,11 +374,11 @@ export default class HtmlComponents {
     label = '',
     source = '',
     type = 'submit',
-  } : {
+  }: {
     label?: string,
     source?: string,
     type?: string,
-  } = {}) : string {
+  } = {}): string {
     return `
       <input
         type='${type}'
@@ -389,21 +389,28 @@ export default class HtmlComponents {
 
   static textarea({
     id = '',
-    label = '',
+    labelText = '',
+    labelSource = '',
     name = id,
-    placeholder = '',
-    source = '',
+    placeholderText = '',
+    placeholderSource = '',
+    textareaText = '',
+    textareaSource = '',
     rows = '5',
-  } : {
+
+  }: {
     id?: string,
     name?: string,
-    label?: string,
-    placeholder?: string,
-    source?: string,
+    labelText?: string,
+    labelSource?: string,
+    placeholderText?: string,
+    placeholderSource?: string,
+    textareaText?: string,
+    textareaSource?: string,
     rows?: string,
-  }) : string {
+  }): string {
     return [
-      HtmlComponents.label({ label, source, id }),
+      HtmlComponents.label({ label: labelText, source: labelSource, id }),
       HtmlComponents.div({
         css: [Css.TEXTAREA_CONTAINER],
         content: [
@@ -413,16 +420,25 @@ export default class HtmlComponents {
             id,
             name,
             rows,
-            source,
-            text: placeholder,
-            destination: TRANSLATION_DESTINATION_PLACEHOLDER,
+            translationValue: HtmlComponents.translationValues(
+              {
+                source: placeholderSource,
+                value: placeholderText,
+                destination: TRANSLATION_DESTINATION_PLACEHOLDER,
+              },
+              {
+                source: textareaSource,
+                value: textareaText,
+                destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+              },
+            ),
           }),
         ],
       }),
     ].join('');
   }
 
-  private static add(attributeName: string, attributeValue: string) : string {
+  private static add(attributeName: string, attributeValue: string): string {
     return attributeValue ? ` ${attributeName}='${attributeValue}'` : '';
   }
 
@@ -436,7 +452,8 @@ export default class HtmlComponents {
     destination = '',
     name = '',
     rows = '',
-  } : {
+    translationValue = '',
+  }: {
     tag: string,
     id?: string,
     css?: string[],
@@ -446,18 +463,19 @@ export default class HtmlComponents {
     destination?: string,
     name?: string,
     rows?: string,
+    translationValue?: string,
   }) {
-    return `
-      <${tag}
-        ${HtmlComponents.add('id', id)}
-        ${HtmlComponents.add('name', name)}
-        ${HtmlComponents.add('rows', rows)}
-        ${HtmlComponents.add('class', css.join(' '))}
-        ${HtmlComponents.translationValue({ source, value: text, destination })}
-      >
-        ${content.join('')}
-      </${tag}>
-    `;
+    return [
+      `<${tag}`,
+      HtmlComponents.add('id', id),
+      HtmlComponents.add('name', name),
+      HtmlComponents.add('rows', rows),
+      HtmlComponents.add('class', css.join(' ')),
+      translationValue ? ` ${translationValue}` : HtmlComponents.translationValue({ source, value: text, destination }),
+      '>',
+      content.join(''),
+      `</${tag}>`,
+    ].join('');
   }
 
   private static input({
@@ -473,7 +491,7 @@ export default class HtmlComponents {
     isChecked = undefined,
     inputMode = '',
     pattern = '',
-  } : {
+  }: {
     id: string,
     label?: string,
     name: string,
@@ -486,7 +504,7 @@ export default class HtmlComponents {
     isChecked?: boolean,
     inputMode?: string,
     pattern?: string,
-  }) : string {
+  }): string {
     return [
       HtmlComponents.label({ label, source, id }),
       '<input',
@@ -514,11 +532,11 @@ export default class HtmlComponents {
     label = '',
     source = '',
     id = '',
-  } : {
+  }: {
     label?: string,
     source?: string,
     id?: string,
-  } = {}) : string {
+  } = {}): string {
     if (!label) {
       return '';
     }
@@ -536,24 +554,36 @@ export default class HtmlComponents {
     source,
     value,
     destination,
-  } : {
+  }: {
     tagName: string,
     source: string,
     value: string,
     destination: string,
-  }) : string {
+  }): string {
     return `<${tagName} ${TRANSLATION_VALUE_NAME}='${source}.${value}.${destination}'></${tagName}>`;
+  }
+
+  private static translationValues(...args : {
+    source?: string,
+    value?: string,
+    destination?: string,
+  }[]) : string {
+    const translationValue = args
+      .filter(({ source, value, destination }) => source && value && destination)
+      .map(({ source, value, destination }) => `${source}.${value}.${destination}`)
+      .join(',');
+    return HtmlComponents.add(TRANSLATION_VALUE_NAME, translationValue);
   }
 
   private static translationValue({
     source = '',
     value = '',
     destination = '',
-  } : {
+  }: {
     source?: string,
     value?: string,
     destination?: string,
-  } = {}) :string {
+  } = {}): string {
     if (!value) {
       return '';
     }

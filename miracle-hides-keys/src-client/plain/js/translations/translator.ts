@@ -17,17 +17,19 @@ export default class Translator {
     }
 
     elements.forEach((element) => {
-      const translationValue = element.getAttribute(constants.TRANSLATION_VALUE_NAME);
-      const [source, value, destination] = translationValue.split('.');
-      const translated = lang.get(source, value);
-      if (destination === constants.TRANSLATION_DESTINATION_TEXT_CONTENT) {
-        // eslint-disable-next-line no-param-reassign
-        element.innerHTML = translated;
-      } else if (destination === constants.TRANSLATION_DESTINATION_PLACEHOLDER) {
-        element.setAttribute('placeholder', translated);
-      } else if (destination === constants.TRANSLATION_DESTINATION_VALUE) {
-        element.setAttribute('value', translated);
-      }
+      const translationValues = element.getAttribute(constants.TRANSLATION_VALUE_NAME);
+      translationValues.split(',').forEach((translationValue) => {
+        const [source, value, destination] = translationValue.split('.');
+        const translated = lang.get(source, value);
+        if (destination === constants.TRANSLATION_DESTINATION_TEXT_CONTENT) {
+          // eslint-disable-next-line no-param-reassign
+          element.innerHTML = translated;
+        } else if (destination === constants.TRANSLATION_DESTINATION_PLACEHOLDER) {
+          element.setAttribute('placeholder', translated);
+        } else if (destination === constants.TRANSLATION_DESTINATION_VALUE) {
+          element.setAttribute('value', translated);
+        }
+      });
     });
   }
 

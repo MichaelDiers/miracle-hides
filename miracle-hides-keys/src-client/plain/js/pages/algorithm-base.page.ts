@@ -15,8 +15,13 @@ export default abstract class AlgorithmBasePage extends BasePage {
     private readonly errorElementId: string,
     private readonly defaultErrorMessage: string,
     protected readonly source: string,
-    private readonly privateKeyId: string,
-    private readonly publicKeyId?: string,
+    private readonly keyGeneratorResultIds: {
+      privateKeyId: string,
+      publicKeyId?: string,
+      testInputId?: string,
+      encryptedId?: string,
+      decryptedId?: string,
+    },
   ) {
     super(translator, logger, eventName);
   }
@@ -74,9 +79,9 @@ export default abstract class AlgorithmBasePage extends BasePage {
   protected async submitFormAsync() : Promise<void> {
     const formElement = document.querySelector(`#${this.source} form`) as HTMLFormElement;
 
-    (document.getElementById(this.privateKeyId) as HTMLTextAreaElement).value = '';
-    if (this.publicKeyId) {
-      (document.getElementById(this.publicKeyId) as HTMLTextAreaElement).value = '';
+    (document.getElementById(this.keyGeneratorResultIds.privateKeyId) as HTMLTextAreaElement).value = '';
+    if (this.keyGeneratorResultIds.publicKeyId) {
+      (document.getElementById(this.keyGeneratorResultIds.publicKeyId) as HTMLTextAreaElement).value = '';
     }
 
     Ajax.sendFormAsync({ formElement })
@@ -84,11 +89,20 @@ export default abstract class AlgorithmBasePage extends BasePage {
         if (!success || !data) {
           this.setErrorAsync().catch((err) => this.exception(err.message, err.stack));
         } else {
-          const { privateKey, publicKey } = data as KeysResponse;
-          (document.getElementById(this.privateKeyId) as HTMLTextAreaElement).value = privateKey;
-          if (this.publicKeyId) {
-            (document.getElementById(this.publicKeyId) as HTMLTextAreaElement).value = publicKey;
-          }
+          const {
+            privateKey, publicKey, testInput, encrypted, decrypted,
+          } = data as KeysResponse;
+          [
+            { id: this.keyGeneratorResultIds.privateKeyId, value: privateKey },
+            { id: this.keyGeneratorResultIds.publicKeyId, value: publicKey },
+            { id: this.keyGeneratorResultIds.testInputId, value: testInput },
+            { id: this.keyGeneratorResultIds.encryptedId, value: encrypted },
+            { id: this.keyGeneratorResultIds.decryptedId, value: decrypted },
+          ].forEach(({ id, value }) => {
+            if (id && value) {
+              (document.getElementById(id) as HTMLTextAreaElement).value = value;
+            }
+          });
         }
       })
       .catch((err) => {

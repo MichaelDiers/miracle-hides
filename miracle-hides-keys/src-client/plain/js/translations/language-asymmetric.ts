@@ -16,6 +16,12 @@ export enum AsymmetricLanguageKeys {
   KEY_TYPE_EC = 'keyTypeEc',
   SUBMIT = 'submit',
   UNABLE_TO_GENERATE_KEYS = 'unableToGenerateKeys',
+  TEST_INPUT = 'testInput',
+  TEST_INPUT_PLACEHOLDER = 'testInputPlaceholder',
+  TEST_INPUT_ENCRYPTED = 'testInputEncrypted',
+  TEST_INPUT_ENCRYPTED_PLACEHOLDER = 'testInputEncryptedPlaceholder',
+  TEST_INPUT_DECRYPTED = 'testInputDecrypted',
+  TEST_INPUT_DECRYPTED_PLACEHOLDER = 'testInputDecryptedPlaceholder',
 }
 
 export interface AsymmetricLanguage extends LanguagePage {
@@ -34,4 +40,10 @@ export interface AsymmetricLanguage extends LanguagePage {
   [AsymmetricLanguageKeys.PUBLIC_KEY_PLACEHOLDER]: string;
   [AsymmetricLanguageKeys.SUBMIT]: string;
   [AsymmetricLanguageKeys.UNABLE_TO_GENERATE_KEYS]: string;
+  [AsymmetricLanguageKeys.TEST_INPUT]: string;
+  [AsymmetricLanguageKeys.TEST_INPUT_PLACEHOLDER]: string;
+  [AsymmetricLanguageKeys.TEST_INPUT_ENCRYPTED]: string;
+  [AsymmetricLanguageKeys.TEST_INPUT_ENCRYPTED_PLACEHOLDER]: string;
+  [AsymmetricLanguageKeys.TEST_INPUT_DECRYPTED]: string;
+  [AsymmetricLanguageKeys.TEST_INPUT_DECRYPTED_PLACEHOLDER]: string;
 }
