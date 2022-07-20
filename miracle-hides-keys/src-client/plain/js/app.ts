@@ -10,29 +10,40 @@ import FooterPage from './pages/footer.page';
 import WelcomePage from './pages/welcome-page';
 import LicensePage from './pages/license-page';
 import PageEvents from './pages/page-events';
+import EnLanguage from './translations/en-language';
 
 export default class App {
-  private readonly translator : Translator = new Translator(new DeLanguage(this.logger));
+  private readonly translator: Translator = new Translator(
+    new DeLanguage(this.logger),
+    new EnLanguage(this.logger),
+  );
 
   constructor(
     private readonly logger: Logger,
   ) {
   }
 
-  async startAsync() : Promise<void> {
+  async startAsync(): Promise<void> {
+    await this.setupLanguageAsync();
     await this.setupAsync();
     CustomEventRaise.raise(PageEvents.WELCOME_PAGE);
     CustomEventRaise.raise(PageEvents.HEADER_PAGE);
     CustomEventRaise.raise(PageEvents.FOOTER_PAGE);
   }
 
-  private async setupAsync() : Promise<void> {
+  private async setupAsync(): Promise<void> {
     const pagePromises = this.setupPages();
     await Promise.all(pagePromises);
   }
 
-  private setupPages() : Promise<BasePage>[] {
-    const promises : Promise<BasePage>[] = [];
+  // eslint-disable-next-line class-methods-use-this
+  private async setupLanguageAsync() : Promise<void> {
+    const language = window.navigator.language || 'de';
+    document.body.setAttribute('lang', language.split('-')[0].toLowerCase());
+  }
+
+  private setupPages(): Promise<BasePage>[] {
+    const promises: Promise<BasePage>[] = [];
 
     promises.push(
       new AsymmetricPage(this.translator, this.logger).setupAsync(),

@@ -34,7 +34,7 @@ export default class Translator {
   }
 
   private language(): BaseLanguage {
-    const { lang } = document.documentElement;
+    const lang = document.body.getAttribute('lang');
     if (lang) {
       const language = this.languages.find((l) => l.lang.toUpperCase() === lang.toUpperCase());
       return language || this.languages[0];

@@ -106,7 +106,7 @@ export default class WelcomePage extends BasePage {
             }),
           ],
         }),
-      ]
+      ],
     });
   }
 }
