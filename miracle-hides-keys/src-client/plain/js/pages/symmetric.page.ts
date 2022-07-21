@@ -15,6 +15,7 @@ const enum PageIds {
   HMAC_KEY_SIZE_ID = 'hmacKeySize',
   KEY_TYPE_ID = 'type',
   PRIVATE_KEY_ID = 'symmetricPrivateKey',
+  SUBMIT = 'symmetricSubmit',
   TEST_INPUT_ID = 'testInput',
   TEST_INPUT_ENCRYPTED_ID = 'symmetricTestInputEncrypted',
   TEST_INPUT_DECRYPTED_ID = 'symmetricTestInputDecrypted',
@@ -122,8 +123,10 @@ export default class SymmetricPage extends AlgorithmBasePage {
               value: PageValues.HMAC_KEY_SIZE_DEFAULT,
             }),
             HtmlComponents.submit({
-              label: SymmetricLanguageKeys.SUBMIT,
+              id: PageIds.SUBMIT,
+              text: SymmetricLanguageKeys.SUBMIT,
               source,
+              css: [Css.COL_2],
             }),
             HtmlComponents.textarea({
               id: PageIds.PRIVATE_KEY_ID,

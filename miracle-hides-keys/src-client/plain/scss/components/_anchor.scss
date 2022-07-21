@@ -1,7 +1,15 @@
 a {
-  border: solid 2px transparent;
-  border-radius: $default-border-radius;
+  border-radius: 10px;
+  outline-offset: 8px;
   position: relative;
+}
+
+a:focus {
+  outline: solid $default-outline-width-focus;  
+}
+
+a:focus:hover {
+  outline-width: $default-outline-width-focus-hover;
 }
 
 a::after {

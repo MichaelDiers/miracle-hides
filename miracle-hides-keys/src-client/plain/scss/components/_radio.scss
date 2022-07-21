@@ -1,28 +1,41 @@
-input[type='radio'] {
+.radio {
   appearance: none;
   border: 0.15em solid;
   border-radius: 50%;
-  height: 1.15em;
+  height: 1.45em;
   margin-right: 0;
-  width: 1.15em;
+  width: 1.45em;
 }
 
-input[type='radio'] + label {
+.radio + label {
   margin-left: 0;
 }
 
-input[type='radio']::after {
+.radio::after {
   border-radius: 50%;
   content: '';
   display: block;
   height: 0.65em;
+  left: 50%;
   margin-left: -0.325em;
   margin-top: -0.325em;
+  position: relative;
+  top: 50%;
   transform: scale(0);
   transition: 120ms transform ease-in-out;
   width: 0.65em;
 }
 
-input[type='radio']:checked::after {
+.radio:checked::after {
   transform: scale(1);
+}
+
+.radio:focus,
+.radio:hover {
+  outline: solid $default-outline-width-focus;
+  outline-offset: $default-outline-offset;
+}
+
+.radio:focus:hover {
+  outline-width: $default-outline-width-focus-hover;  
 }

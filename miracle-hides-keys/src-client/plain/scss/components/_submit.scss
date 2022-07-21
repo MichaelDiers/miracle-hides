@@ -1,0 +1,15 @@
+.submit {
+  border-radius: $default-element-border-radius;
+  margin: $default-element-margin;
+  padding: $default-element-padding;
+}
+
+.submit:focus,
+.submit:hover {
+  outline: solid $default-outline-width-focus;
+  outline-offset: $default-outline-offset;
+}
+
+.submit:focus:hover {
+  outline-width: $default-outline-width-focus-hover;  
+}

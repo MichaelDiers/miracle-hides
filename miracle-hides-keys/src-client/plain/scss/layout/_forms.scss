@@ -1,9 +1,0 @@
-form {
-  align-items: center;
-  display: grid;
-  grid-template-columns: min-content min-content;
-}
-
-form input[type=submit] {
-  grid-column-start: 2;
-}

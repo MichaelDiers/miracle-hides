@@ -1,11 +1,15 @@
-.grid-2-1-mc {
-  @include grid(2);
+.col-2 {
+  grid-column-start: 2;
 }
 
-.grid-4-1-mc {
-  @include grid(4);
+.grid-form {
+  align-items: center;
+  display: grid;
+  grid-template-columns: min-content min-content;
 }
 
-.grid-6-1-mc {
-  @include grid(6);
+@for $i from 1 through 3 {
+  .grid-form-row-#{$i * 2} {
+    @include grid(('columnsCount': #{$i * 2}, 'columnsSize': 'min-content', 'placeItems': 'center')...);
+  }
 }

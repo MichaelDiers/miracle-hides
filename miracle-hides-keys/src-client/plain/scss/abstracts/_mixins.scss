@@ -1,14 +1,23 @@
 @use 'sass:string';
 
-@mixin grid($columnsCount, $columnsSize: 'min-content', $placeItems: 'center') {
+@mixin grid(
+  $columnsCount: '',
+  $columnsSize: '',
+  $placeItems: '',
+  $alignItems: '',
+) {
   display: grid;
 
-  @if $columnsCount > 0 and $columnsSize {
+  @if $columnsCount and $columnsSize {
     grid-template-columns: repeat($columnsCount, string.unquote($columnsSize));  
   }
   
   @if $placeItems {
     place-items: string.unquote($placeItems);
+  } 
+
+  @if not $placeItems and $alignItems {
+    align-items: string.unquote($alignItems);
   }
 
   &.hidden {

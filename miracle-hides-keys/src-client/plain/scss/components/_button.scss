@@ -2,9 +2,16 @@
   background: transparent;
   border: 1px solid;
   border-radius: 15px;
+  outline-offset: $default-outline-offset;
   padding: 10px;
 }
 
+.button:focus,
 .button:hover {
   cursor: pointer;
+  outline: solid $default-outline-width-focus;
+}
+
+.button:focus:hover {
+  outline-width: $default-outline-width-focus-hover;
 }

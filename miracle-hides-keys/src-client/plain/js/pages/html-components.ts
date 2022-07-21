@@ -11,27 +11,30 @@ export default class HtmlComponents {
     id = '',
     href = '',
     source = '',
-    label = '',
+    text = '',
     content = [],
     css = [],
+    view = '',
   }: {
     id?: string,
     href?: string,
     source?: string,
-    label?: string,
+    text?: string,
     content?: string[],
     css?: string[],
+    view?: string,
   }) {
-    return `
-      <a
-        ${HtmlComponents.add('id', id)}
-        ${HtmlComponents.add('href', href)}
-        ${HtmlComponents.translationValue({ source, value: label, destination: TRANSLATION_DESTINATION_TEXT_CONTENT })}
-        ${HtmlComponents.add('class', css.join(' '))}
-      >
-        ${content.join('')}
-      </a>
-    `;
+    return HtmlComponents.component({
+      tag: 'a',
+      id,
+      href,
+      source,
+      text,
+      content,
+      css,
+      view,
+      destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+    });
   }
 
   static button({
@@ -93,15 +96,14 @@ export default class HtmlComponents {
     method?: string,
     id?: string,
   } = {}): string {
-    return `
-      <form
-        ${HtmlComponents.add('action', action)}
-        ${HtmlComponents.add('method', method)}
-        ${HtmlComponents.add('id', id)}        
-      >
-        ${content.join('')}
-      </form>
-    `;
+    return HtmlComponents.component({
+      tag: 'form',
+      action,
+      method,
+      id,
+      css: [Css.GRID_FORM],
+      content,
+    });
   }
 
   static h1({
@@ -179,6 +181,7 @@ export default class HtmlComponents {
       value,
       pattern: '[0-9]*',
       inputMode: 'numeric',
+      css: [Css.TEXT, Css.TEXT_CENTER],
     });
   }
 
@@ -196,7 +199,13 @@ export default class HtmlComponents {
     source?: string,
   }): string {
     return HtmlComponents.input({
-      id, label, name, placeholder, source, type: 'text',
+      id,
+      label,
+      name,
+      placeholder,
+      source,
+      type: 'text',
+      css: [Css.TEXT],
     });
   }
 
@@ -312,12 +321,21 @@ export default class HtmlComponents {
       HtmlComponents.label({ label, source, id }),
       HtmlComponents.div({
         id,
-        css: [`grid-${options.length * 2}-1-mc`],
+        css: [`grid-form-row-${options.length * 2}`],
         content: options.map((option, i) => [
           HtmlComponents.input({
-            id: `${id}_${i}`, name, type: 'radio', value: option.value, isChecked: option.isChecked,
+            id: `${id}_${i}`,
+            name,
+            type: 'radio',
+            value: option.value,
+            isChecked: option.isChecked,
+            css: [Css.RADIO],
           }),
-          HtmlComponents.label({ id: `${id}_${i}`, source: option.source, label: option.text }),
+          HtmlComponents.label({
+            id: `${id}_${i}`,
+            source: option.source,
+            label: option.text,
+          }),
         ].join('')),
       }),
     ].join('');
@@ -374,20 +392,24 @@ export default class HtmlComponents {
   }
 
   static submit({
-    label = '',
+    id,
+    text = '',
     source = '',
-    type = 'submit',
+    css = [],
   }: {
-    label?: string,
+    id: string,
+    text?: string,
     source?: string,
-    type?: string,
-  } = {}): string {
-    return `
-      <input
-        type='${type}'
-        ${HtmlComponents.translationValue({ source, value: label, destination: TRANSLATION_DESTINATION_VALUE })}
-      ></input>
-    `;
+    css?: string[],
+  }): string {
+    return HtmlComponents.input({
+      id,
+      type: 'submit',
+      name: '',
+      value: text,
+      source,
+      css: [Css.SUBMIT, ...css],
+    });
   }
 
   static textarea({
@@ -425,6 +447,7 @@ export default class HtmlComponents {
             name,
             rows,
             readonly,
+            css: [Css.TEXT],
             translationValue: HtmlComponents.translationValues(
               {
                 source: placeholderSource,
@@ -460,6 +483,9 @@ export default class HtmlComponents {
     translationValue = '',
     readonly = false,
     view = '',
+    action = '',
+    method = '',
+    href = '',
   }: {
     tag: string,
     id?: string,
@@ -473,6 +499,9 @@ export default class HtmlComponents {
     translationValue?: string,
     readonly?: boolean,
     view?: string,
+    action?: string,
+    method?: string,
+    href?: string,
   }) {
     return [
       `<${tag}`,
@@ -481,6 +510,9 @@ export default class HtmlComponents {
       HtmlComponents.add('rows', rows),
       HtmlComponents.add('class', css.join(' ')),
       HtmlComponents.add('view', view),
+      HtmlComponents.add('action', action),
+      HtmlComponents.add('method', method),
+      HtmlComponents.add('href', href),
       readonly ? ' readonly' : '',
       translationValue ? ` ${translationValue}` : HtmlComponents.translationValue({ source, value: text, destination }),
       '>',
@@ -502,6 +534,7 @@ export default class HtmlComponents {
     isChecked = undefined,
     inputMode = '',
     pattern = '',
+    css = [],
   }: {
     id: string,
     label?: string,
@@ -515,6 +548,7 @@ export default class HtmlComponents {
     isChecked?: boolean,
     inputMode?: string,
     pattern?: string,
+    css?: string[],
   }): string {
     return [
       HtmlComponents.label({ label, source, id }),
@@ -528,6 +562,7 @@ export default class HtmlComponents {
         HtmlComponents.add('checked', (isChecked || isChecked === false) ? `${isChecked}` : ''),
         HtmlComponents.add('inputMode', inputMode),
         HtmlComponents.add('pattern', pattern),
+        HtmlComponents.add('class', css.join(' ')),
         HtmlComponents.translationValue({
           source,
           value: placeholder,

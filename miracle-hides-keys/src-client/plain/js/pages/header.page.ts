@@ -76,7 +76,7 @@ export default class HeaderPage extends BasePage {
                 content: HtmlComponents.anchor({
                   id: ASYMMETRIC_ALGORITHMS_LINK_ID,
                   source: PageEvents.HEADER_PAGE,
-                  label: HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS,
+                  text: HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS,
                   href: PageEvents.ASYMMETRIC_PAGE,
                   css: [Css.MENU_LINK],
                 }),
@@ -86,7 +86,7 @@ export default class HeaderPage extends BasePage {
                 content: HtmlComponents.anchor({
                   id: SYMMETRIC_ALGORITHMS_LINK_ID,
                   source: PageEvents.HEADER_PAGE,
-                  label: HeaderLanguageKeys.SYMMETRIC_ALGORITHMS,
+                  text: HeaderLanguageKeys.SYMMETRIC_ALGORITHMS,
                   href: PageEvents.SYMMETRIC_PAGE,
                   css: [Css.MENU_LINK],
                 }),

@@ -70,11 +70,12 @@ export default class FooterPage extends BasePage {
         source: PageEvents.FOOTER_PAGE,
         text: label,
       }),
-      HtmlComponents.button({
+      HtmlComponents.anchor({
         css: [Css.FOOTER_LINK],
         view: PageEvents.LICENSE_PAGE,
         source: COMMON_LANGUAGE_SOURCE,
         text: CommonLanguageKeys.LICENSES,
+        href: 'anchor',
       }),
     ].join('');
   }

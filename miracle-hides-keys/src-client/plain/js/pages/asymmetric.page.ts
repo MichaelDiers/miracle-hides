@@ -16,6 +16,7 @@ const enum PageIds {
   PRIVATE_KEY_ID = 'asymmetricPrivateKey',
   PUBLIC_KEY_ID = 'asymmetricPublicKey',
   RSA_KEY_SIZE_ID = 'rsaKeySize',
+  SUBMIT = 'asymmetricSubmit',
   TEST_INPUT_ID = 'testInput',
   TEST_INPUT_ENCRYPTED_ID = 'testInputEncrypted',
   TEST_INPUT_DECRYPTED_ID = 'testInputDecrypted',
@@ -129,8 +130,10 @@ export default class AsymmetricPage extends AlgorithmBasePage {
               ],
             }),
             HtmlComponents.submit({
-              label: AsymmetricLanguageKeys.SUBMIT,
+              id: PageIds.SUBMIT,
+              text: AsymmetricLanguageKeys.SUBMIT,
               source,
+              css: [Css.COL_2],
             }),
             HtmlComponents.textarea({
               id: PageIds.PRIVATE_KEY_ID,

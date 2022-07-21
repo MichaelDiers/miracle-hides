@@ -1,7 +1,17 @@
 // global
 $default-border-radius: 4px;
+
+$default-outline-width-focus: 2px;
+$default-outline-width-focus-hover: $default-outline-width-focus + 1px;
+$default-outline-width-hover: $default-outline-width-focus;
+$default-outline-offset: 1px;
+
 $default-padding: 30px;
 $default-textarea-min-width: 540px;
+
+$default-element-border-radius: 4px;
+$default-element-margin: 20px;
+$default-element-padding: 10px;
 
 // colors
 $overlay-color: hsla(0, 0%, 4%, 0.2);
