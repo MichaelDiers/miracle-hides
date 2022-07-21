@@ -121,3 +121,11 @@ a::after,
 .symmetric-color .textarea-container div {
   color: $symmetric-color-lighter-dark;
 }
+
+.background-process-active::before {
+  background-color: $overlay-color;
+}
+
+.button {
+  background: transparent;
+}

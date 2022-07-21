@@ -1,9 +1,8 @@
 .button {
-  background: transparent;
   border: 1px solid;
   border-radius: 15px;
   outline-offset: $default-outline-offset;
-  padding: 10px;
+  padding: $default-element-padding;
 }
 
 .button:focus,
