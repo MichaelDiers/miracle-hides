@@ -434,7 +434,7 @@ export default class HtmlComponents {
               {
                 source: textareaSource,
                 value: textareaText,
-                destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+                destination: TRANSLATION_DESTINATION_VALUE,
               },
             ),
           }),

@@ -27,7 +27,7 @@ export default class Translator {
         } else if (destination === constants.TRANSLATION_DESTINATION_PLACEHOLDER) {
           element.setAttribute('placeholder', translated);
         } else if (destination === constants.TRANSLATION_DESTINATION_VALUE) {
-          element.setAttribute('value', translated);
+          Translator.setValue(element, translated);
         }
       });
     });
@@ -41,5 +41,19 @@ export default class Translator {
     }
 
     return this.languages[0];
+  }
+
+  private static setValue(element: Element, value: string) : void {
+    const htmlElement = element as HTMLElement;
+    switch (htmlElement.tagName.toUpperCase()) {
+      case 'INPUT':
+        (htmlElement as HTMLInputElement).value = value;
+        break;
+      case 'TEXTAREA':
+        (htmlElement as HTMLTextAreaElement).value = value;
+        break;
+      default:
+        throw new Error(`not supported element: ${htmlElement.tagName}`);
+    }
   }
 }
