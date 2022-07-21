@@ -13,7 +13,7 @@ export default class Ajax {
     method: string,
     data?: object,
     token?: string,
-  }) : Promise<AjaxResponse> {
+  }): Promise<AjaxResponse> {
     Ajax.startProcess();
     return new Promise((resolve, reject) => {
       const xhttp = new XMLHttpRequest();
@@ -41,7 +41,7 @@ export default class Ajax {
     });
   }
 
-  private static parseResponse(text: string, type: string) : object {
+  private static parseResponse(text: string, type: string): object {
     if (!text) {
       return {};
     }
@@ -61,7 +61,7 @@ export default class Ajax {
     formElement,
   }: {
     formElement: HTMLFormElement,
-  }) : Promise<AjaxResponse> {
+  }): Promise<AjaxResponse> {
     const { action, method } = formElement;
     const data = {};
     const selectors = [
@@ -75,11 +75,17 @@ export default class Ajax {
     ].join(',');
 
     formElement.querySelectorAll(selectors).forEach((element) => {
-      const dataElement = element as HTMLElement;
-      const name = dataElement.getAttribute('name');
-      let value = dataElement.getAttribute('value');
-      if (!value && dataElement.tagName.toUpperCase() === 'TEXTAREA') {
-        value = (dataElement as HTMLTextAreaElement).value;
+      const name = element.getAttribute('name');
+      let value;
+      if (element.tagName.toUpperCase() === 'INPUT') {
+        const input = element as HTMLInputElement;
+        value = input.value;
+      } else if (element.tagName.toUpperCase() === 'SELECT') {
+        const input = element as HTMLSelectElement;
+        value = input.value;
+      } else if (element.tagName.toUpperCase() === 'TEXTAREA') {
+        const textarea = element as HTMLTextAreaElement;
+        value = textarea.value;
       }
 
       if (name && value) {
@@ -90,7 +96,7 @@ export default class Ajax {
     return Ajax.sendAsync({ action, method, data });
   }
 
-  private static endProcess() : void {
+  private static endProcess(): void {
     const main = document.querySelector('main');
     const count = main.getAttribute(BACKGROUND_PROCESS_RUNNING_NAME);
     if (count) {
@@ -104,7 +110,7 @@ export default class Ajax {
     }
   }
 
-  private static startProcess() : void {
+  private static startProcess(): void {
     const main = document.querySelector('main');
     const count = main.getAttribute(BACKGROUND_PROCESS_RUNNING_NAME);
     const newCount = count ? parseInt(count, 10) + 1 : 1;
@@ -116,7 +122,7 @@ export default class Ajax {
     main.classList.add(BACKGROUND_PROCESS_RUNNING_NAME);
   }
 
-  private static handleTabs(event: KeyboardEvent) : void {
+  private static handleTabs(event: KeyboardEvent): void {
     if (event.key === 'Tab') {
       event.preventDefault();
     }
