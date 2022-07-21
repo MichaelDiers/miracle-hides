@@ -52,6 +52,8 @@ export default class EnLanguage extends BaseLanguage {
         },
         [PageEvents.FOOTER_PAGE]: {
           [FooterLanguageKeys.LICENSES]: 'Licenses',
+          [FooterLanguageKeys.LANGUAGE_TOGGLE_DE]: 'Deutsch',
+          [FooterLanguageKeys.LANGUAGE_TOGGLE_EN]: 'English',
         },
         [PageEvents.HEADER_PAGE]: {
           [HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS]: 'Asymmetric Algorithms',

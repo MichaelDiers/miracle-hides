@@ -24,7 +24,6 @@ export default class App {
   }
 
   async startAsync(): Promise<void> {
-    await this.setupLanguageAsync();
     await this.setupAsync();
     CustomEventRaise.raise(PageEvents.WELCOME_PAGE);
     CustomEventRaise.raise(PageEvents.HEADER_PAGE);
@@ -32,14 +31,18 @@ export default class App {
   }
 
   private async setupAsync(): Promise<void> {
+    await this.setupLanguageAsync();
+
     const pagePromises = this.setupPages();
     await Promise.all(pagePromises);
   }
 
   // eslint-disable-next-line class-methods-use-this
   private async setupLanguageAsync() : Promise<void> {
-    const language = window.navigator.language || document.documentElement.lang;
-    document.body.setAttribute('lang', language.split('-')[0].toLowerCase());
+    const language = window.navigator.language || document.documentElement.lang || 'en';
+    const lang = language.split('-')[0].toLowerCase();
+    document.body.setAttribute('lang', lang);
+    document.body.setAttribute('lang-toggle', lang === 'en' ? 'de' : 'en');
   }
 
   private setupPages(): Promise<BasePage>[] {

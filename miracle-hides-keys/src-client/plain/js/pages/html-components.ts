@@ -35,23 +35,26 @@ export default class HtmlComponents {
   }
 
   static button({
-    css = ['button'],
+    css = [],
     id = '',
     source = '',
     text = '',
+    view = '',
   }: {
     css?: string[],
     id?: string,
     source?: string,
     text?: string,
+    view?: string,
   }): string {
     return HtmlComponents.component({
       tag: 'button',
       id,
-      css,
+      css: [Css.BUTTON, ...css],
       source,
       text,
       destination: TRANSLATION_DESTINATION_TEXT_CONTENT,
+      view,
     });
   }
 
@@ -456,6 +459,7 @@ export default class HtmlComponents {
     rows = '',
     translationValue = '',
     readonly = false,
+    view = '',
   }: {
     tag: string,
     id?: string,
@@ -468,6 +472,7 @@ export default class HtmlComponents {
     rows?: string,
     translationValue?: string,
     readonly?: boolean,
+    view?: string,
   }) {
     return [
       `<${tag}`,
@@ -475,6 +480,7 @@ export default class HtmlComponents {
       HtmlComponents.add('name', name),
       HtmlComponents.add('rows', rows),
       HtmlComponents.add('class', css.join(' ')),
+      HtmlComponents.add('view', view),
       readonly ? ' readonly' : '',
       translationValue ? ` ${translationValue}` : HtmlComponents.translationValue({ source, value: text, destination }),
       '>',
