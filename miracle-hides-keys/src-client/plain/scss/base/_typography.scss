@@ -1,5 +1,6 @@
 body {
   font-family: 'Orbitron', sans-serif;
+  font-size: 100%;
 }
 
 body * {
@@ -7,12 +8,40 @@ body * {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
 }
 
 h1,
 h2 {
   text-align: center;
+}
+
+.submit {
+  font-size: 1rem;
+}
+
+textarea {
+  font-size: 0.9rem;
+}
+
+.textarea-container div::after {
+  content: 'content_copy';
+  direction: ltr;
+  font-family: 'Material Symbols Outlined';
+
+  font-feature-settings: 'liga' 1;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
 }
 
 .license-data,
@@ -21,9 +50,10 @@ textarea {
 }
 
 .license-data {
-  font-size: 10px;
+  font-size: 0.7rem;
 }
 
-.side-menu *:after {
-  font-size: 10px;
+.side-menu button,
+.side-menu button::after {
+  font-size: 0.6rem;
 }

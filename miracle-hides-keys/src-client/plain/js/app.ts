@@ -50,14 +50,14 @@ export default class App {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private async setupThemeAsync() : Promise<void> { 
-    let theme  = Css.THEME_LIGHT;
+  private async setupThemeAsync() : Promise<void> {
+    let theme = Css.THEME_LIGHT;
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      theme  = Css.THEME_DARK;
+      theme = Css.THEME_DARK;
     }
-    
+
     document.body.classList.add(theme);
-    
+
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
       if (e.matches) {
         document.body.classList.remove(Css.THEME_LIGHT);

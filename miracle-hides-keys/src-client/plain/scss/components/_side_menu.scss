@@ -1,12 +1,21 @@
 .side-menu {
   bottom: 0;
-  left: 0;
-  margin-bottom: 120px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: min-content min-content;
+  left: 15px;
   position: fixed;
   transform: rotate(-90deg);
-  display: grid;
-  grid-template-columns: min-content min-content;
-  gap:10px;
+  transform-origin: left top;
+}
+
+.side-menu button {
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.side-menu-theme::after {
+  white-space: nowrap;
 }
 
 .light .side-menu-theme::after {

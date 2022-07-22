@@ -21,25 +21,6 @@
   z-index: 2;
 }
 
-.textarea-container div::after {
-  content: 'content_copy';
-  direction: ltr;
-  font-family: 'Material Symbols Outlined';
-
-  font-feature-settings: 'liga' 1;
-  font-feature-settings: 'liga' 1;
-  font-feature-settings: 'liga' 1;
-  font-feature-settings: 'liga' 1;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: normal;
-  letter-spacing: normal;
-  line-height: 1;
-  text-transform: none;
-  white-space: nowrap;
-  word-wrap: normal;
-}
-
 .textarea-container:hover div {
   transform: scale(1);
 }

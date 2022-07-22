@@ -84,14 +84,14 @@ export default class FooterPage extends BasePage {
         css: [Css.SIDE_MENU],
         content: [
           HtmlComponents.button({
-            css: [Css.SIDE_MENU_LANGUAGE],
-            source: PageEvents.FOOTER_PAGE,
-            text: langLabel,
-          }),
-          HtmlComponents.button({
             css: [Css.SIDE_MENU_THEME],
             source: PageEvents.FOOTER_PAGE,
             text: themeLabel,
+          }),
+          HtmlComponents.button({
+            css: [Css.SIDE_MENU_LANGUAGE],
+            source: PageEvents.FOOTER_PAGE,
+            text: langLabel,
           }),
         ],
       }),
