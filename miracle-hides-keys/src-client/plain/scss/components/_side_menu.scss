@@ -1,0 +1,18 @@
+.side-menu {
+  bottom: 0;
+  left: 0;
+  margin-bottom: 120px;
+  position: fixed;
+  transform: rotate(-90deg);
+  display: grid;
+  grid-template-columns: min-content min-content;
+  gap:10px;
+}
+
+.light .side-menu-theme::after {
+  content: 'Dark Mode';
+}
+
+.dark .side-menu-theme::after {
+  content: 'Light Mode';
+}

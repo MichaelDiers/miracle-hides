@@ -41,7 +41,7 @@ export default class FooterPage extends BasePage {
       });
     });
 
-    element.querySelectorAll(`.${Css.LANGUAGE_TOGGLE}`).forEach((elem) => {
+    element.querySelectorAll(`.${Css.SIDE_MENU_LANGUAGE}`).forEach((elem) => {
       elem.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -58,17 +58,42 @@ export default class FooterPage extends BasePage {
         this.translateAsync(document.body).catch((err) => this.exception(err.message, err.stack));
       });
     });
+
+    element.querySelectorAll(`.${Css.SIDE_MENU_THEME}`).forEach((elem) => {
+      elem.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (document.body.classList.contains(Css.THEME_LIGHT)) {
+          document.body.classList.remove(Css.THEME_LIGHT);
+          document.body.classList.add(Css.THEME_DARK);
+        } else {
+          document.body.classList.remove(Css.THEME_DARK);
+          document.body.classList.add(Css.THEME_LIGHT);
+        }
+      });
+    });
   }
 
   // eslint-disable-next-line class-methods-use-this
   protected setupHtml(): string {
-    const label = document.body.getAttribute('lang-toggle');
+    const langLabel = document.body.getAttribute('lang-toggle');
+    const themeLabel = document.body.getAttribute('theme-toggle');
 
     return [
-      HtmlComponents.button({
-        css: [Css.LANGUAGE_TOGGLE],
-        source: PageEvents.FOOTER_PAGE,
-        text: label,
+      HtmlComponents.div({
+        css: [Css.SIDE_MENU],
+        content: [
+          HtmlComponents.button({
+            css: [Css.SIDE_MENU_LANGUAGE],
+            source: PageEvents.FOOTER_PAGE,
+            text: langLabel,
+          }),
+          HtmlComponents.button({
+            css: [Css.SIDE_MENU_THEME],
+            source: PageEvents.FOOTER_PAGE,
+            text: themeLabel,
+          }),
+        ],
       }),
       HtmlComponents.anchor({
         css: [Css.FOOTER_LINK],

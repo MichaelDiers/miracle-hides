@@ -8,7 +8,6 @@ const enum Css {
   GRID_FORM_ROW_4 = 'grid-row-4',
   GRID_FORM_ROW_6 = 'grid-row-6',
   HIDDEN = 'hidden',
-  LANGUAGE_TOGGLE = 'language-toggle',
   LOGO = 'logo',
   MENU_LINK = 'menu-link',
   NAVBAR = 'navbar',
@@ -18,6 +17,11 @@ const enum Css {
   TEXT = 'text',
   TEXT_CENTER = 'text-center',
   TEXTAREA_CONTAINER = 'textarea-container',
+  SIDE_MENU_LANGUAGE = 'side-menu-language',
+  SIDE_MENU_THEME = 'side-menu-theme',
+  SIDE_MENU = 'side-menu',
+  THEME_LIGHT = 'light',
+  THEME_DARK = 'dark',
   WELCOME = 'welcome',
 }
 

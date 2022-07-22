@@ -11,6 +11,7 @@ import WelcomePage from './pages/welcome-page';
 import LicensePage from './pages/license-page';
 import PageEvents from './pages/page-events';
 import EnLanguage from './translations/en-language';
+import Css from './pages/css';
 
 export default class App {
   private readonly translator: Translator = new Translator(
@@ -31,7 +32,10 @@ export default class App {
   }
 
   private async setupAsync(): Promise<void> {
-    await this.setupLanguageAsync();
+    await Promise.all([
+      this.setupLanguageAsync(),
+      this.setupThemeAsync(),
+    ]);
 
     const pagePromises = this.setupPages();
     await Promise.all(pagePromises);
@@ -43,6 +47,26 @@ export default class App {
     const lang = language.split('-')[0].toLowerCase();
     document.body.setAttribute('lang', lang);
     document.body.setAttribute('lang-toggle', lang === 'en' ? 'de' : 'en');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  private async setupThemeAsync() : Promise<void> { 
+    let theme  = Css.THEME_LIGHT;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme  = Css.THEME_DARK;
+    }
+    
+    document.body.classList.add(theme);
+    
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (e.matches) {
+        document.body.classList.remove(Css.THEME_LIGHT);
+        document.body.classList.add(Css.THEME_DARK);
+      } else {
+        document.body.classList.remove(Css.THEME_DARK);
+        document.body.classList.add(Css.THEME_LIGHT);
+      }
+    });
   }
 
   private setupPages(): Promise<BasePage>[] {
