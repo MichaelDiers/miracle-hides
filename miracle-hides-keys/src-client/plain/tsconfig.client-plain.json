@@ -8,5 +8,5 @@
     "noEmitOnError": true
   },
   "include": ["./js/**/*"],
-  "exclude": [".vscode", "node_modules", "src", "test", "helper", "dist"],
+  "exclude": [".vscode", "node_modules", "src", "test", "helper", "dist", "test-client"],
 }

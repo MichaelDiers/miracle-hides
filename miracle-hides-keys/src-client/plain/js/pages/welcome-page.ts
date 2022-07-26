@@ -7,6 +7,11 @@ import Css from './css';
 import HtmlComponents from './html-components';
 import PageEvents from './page-events';
 
+const enum PageIds {
+  GENERATE_ASYNC_BUTTON = 'generateAsync',
+  GENERATE_SYNC_BUTTON = 'generateSync',
+}
+
 export default class WelcomePage extends BasePage {
   constructor(
     translator: Translator,
@@ -76,6 +81,7 @@ export default class WelcomePage extends BasePage {
               ],
             }),
             HtmlComponents.button({
+              id: PageIds.GENERATE_ASYNC_BUTTON,
               source: COMMON_LANGUAGE_SOURCE,
               text: CommonLanguageKeys.GENERATE,
             }),
@@ -101,6 +107,7 @@ export default class WelcomePage extends BasePage {
               ],
             }),
             HtmlComponents.button({
+              id: PageIds.GENERATE_SYNC_BUTTON,
               source: COMMON_LANGUAGE_SOURCE,
               text: CommonLanguageKeys.GENERATE,
             }),
