@@ -1,6 +1,4 @@
-import CustomEventRaiser from '../infrastructure/custom-event-raiser';
 import Logger from '../infrastructure/logger';
-import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from '../translations/language-common';
 import { TRANSLATION_DESTINATION_TEXT_CONTENT } from '../translations/translation-constants';
 import Translator from '../translations/translator';
 import BasePage from './base-page';
@@ -8,7 +6,7 @@ import Css from './css';
 import HtmlComponents from './html-components';
 import PageEvents from './page-events';
 
-export default class FooterPage extends BasePage {
+export default class SideMenuPage extends BasePage {
   constructor(
     translator: Translator,
     logger: Logger,
@@ -16,13 +14,13 @@ export default class FooterPage extends BasePage {
     super(
       translator,
       logger,
-      PageEvents.FOOTER_PAGE,
+      PageEvents.SIDE_MENU_PAGE,
     );
   }
 
   // eslint-disable-next-line class-methods-use-this
   protected get displayInRegion(): string {
-    return 'footer';
+    return '.side-menu';
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -32,15 +30,6 @@ export default class FooterPage extends BasePage {
 
   // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
   protected setupEvents(element: HTMLElement): void {
-    element.querySelectorAll(`.${Css.FOOTER_LINK}`).forEach((elem) => {
-      elem.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        const view = (e.target as HTMLElement).getAttribute('view');
-        CustomEventRaiser.raise(view);
-      });
-    });
-
     element.querySelectorAll(`.${Css.SIDE_MENU_LANGUAGE}`).forEach((elem) => {
       elem.addEventListener('click', (e) => {
         e.preventDefault();
@@ -76,13 +65,19 @@ export default class FooterPage extends BasePage {
 
   // eslint-disable-next-line class-methods-use-this
   protected setupHtml(): string {
+    const langLabel = document.body.getAttribute('lang-toggle');
+    const themeLabel = document.body.getAttribute('theme-toggle');
+
     return [
-      HtmlComponents.anchor({
-        css: [Css.FOOTER_LINK],
-        view: PageEvents.LICENSE_PAGE,
-        source: COMMON_LANGUAGE_SOURCE,
-        text: CommonLanguageKeys.LICENSES,
-        href: 'anchor',
+      HtmlComponents.button({
+        css: [Css.SIDE_MENU_THEME],
+        source: PageEvents.SIDE_MENU_PAGE,
+        text: themeLabel,
+      }),
+      HtmlComponents.button({
+        css: [Css.SIDE_MENU_LANGUAGE],
+        source: PageEvents.SIDE_MENU_PAGE,
+        text: langLabel,
       }),
     ].join('');
   }

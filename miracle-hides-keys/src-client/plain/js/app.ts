@@ -12,6 +12,7 @@ import LicensePage from './pages/license-page';
 import PageEvents from './pages/page-events';
 import EnLanguage from './translations/en-language';
 import Css from './pages/css';
+import SideMenuPage from './pages/side-menu-page';
 
 export default class App {
   private readonly translator: Translator = new Translator(
@@ -29,6 +30,7 @@ export default class App {
     CustomEventRaise.raise(PageEvents.WELCOME_PAGE);
     CustomEventRaise.raise(PageEvents.HEADER_PAGE);
     CustomEventRaise.raise(PageEvents.FOOTER_PAGE);
+    CustomEventRaise.raise(PageEvents.SIDE_MENU_PAGE);
   }
 
   private async setupAsync(): Promise<void> {
@@ -79,6 +81,7 @@ export default class App {
       new FooterPage(this.translator, this.logger).setupAsync(),
       new WelcomePage(this.translator, this.logger).setupAsync(),
       new LicensePage(this.translator, this.logger).setupAsync(),
+      new SideMenuPage(this.translator, this.logger).setupAsync(),
     );
 
     return promises;

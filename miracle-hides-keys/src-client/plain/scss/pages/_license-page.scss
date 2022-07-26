@@ -1,14 +1,29 @@
-.license-data-fonts,
-.license-data-node {
+.license-data > .mobile {
   display: grid;
-  gap: 5px;
-  place-items: center;
+  gap: 10px;
+  grid-template-columns: auto;
+  place-items: stretch;
 }
 
-.license-data-node {  
+.license-data > .mobile > div {
+  border: 1px solid;
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 1fr;
+  padding: 10px;
+}
+
+.license-data-node > .desktop {
+  display: grid;
+  gap: 10px;
   grid-template-columns: repeat(11, auto);
+  place-items: stretch;
 }
 
-.license-data-fonts {  
+.license-data-fonts > .desktop {
+  display: grid;
+  gap: 10px;
   grid-template-columns: repeat(4, auto);
+  place-items: stretch;
 }

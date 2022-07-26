@@ -30,21 +30,23 @@ export default class LicensePage extends BasePage {
 
   // eslint-disable-next-line class-methods-use-this
   protected setupHtml(): string {
-    return [
-      HtmlComponents.h1({
-        source: PageEvents.LICENSE_PAGE,
-        value: LicenseLanguageKeys.LICENSES,
-      }),
-      HtmlComponents.h2({
-        source: PageEvents.LICENSE_PAGE,
-        value: LicenseLanguageKeys.LICENSES_NODE,
-      }),
-      LICENSE_DATA_NODE,
-      HtmlComponents.h1({
-        source: PageEvents.LICENSE_PAGE,
-        value: LicenseLanguageKeys.LICENSES_FONTS,
-      }),
-      LICENSE_DATA_FONTS,
-    ].join('');
+    return HtmlComponents.div({
+      content: [
+        HtmlComponents.h1({
+          source: PageEvents.LICENSE_PAGE,
+          value: LicenseLanguageKeys.LICENSES,
+        }),
+        HtmlComponents.h2({
+          source: PageEvents.LICENSE_PAGE,
+          value: LicenseLanguageKeys.LICENSES_NODE,
+        }),
+        LICENSE_DATA_NODE,
+        HtmlComponents.h1({
+          source: PageEvents.LICENSE_PAGE,
+          value: LicenseLanguageKeys.LICENSES_FONTS,
+        }),
+        LICENSE_DATA_FONTS,
+      ],
+    });
   }
 }

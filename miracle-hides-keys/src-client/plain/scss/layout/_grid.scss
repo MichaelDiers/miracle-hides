@@ -1,11 +1,6 @@
-.col-2 {
-  grid-column-start: 2;
-}
-
 .grid-form {
   align-items: center;
   display: grid;
-  grid-template-columns: min-content min-content;
 }
 
 @for $i from 1 through 3 {

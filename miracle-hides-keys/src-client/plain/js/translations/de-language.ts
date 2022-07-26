@@ -3,7 +3,7 @@ import PageEvents from '../pages/page-events';
 import BaseLanguage from './base-language';
 import { AsymmetricLanguageKeys } from './language-asymmetric';
 import { CommonLanguageKeys, COMMON_LANGUAGE_SOURCE } from './language-common';
-import { FooterLanguageKeys } from './language-footer';
+import { SideMenuLanguageKeys } from './language-side-menu';
 import { HeaderLanguageKeys } from './language-header';
 import { LicenseLanguageKeys } from './language-license';
 import { LanguagePageKeys } from './language-page';
@@ -50,10 +50,9 @@ export default class DeLanguage extends BaseLanguage {
           [CommonLanguageKeys.SYMMETRIC_ENCRYPTION]: 'symmetrische Verschlüsselung',
           [CommonLanguageKeys.TEST_INPUT]: 'Hallo Welt!',
         },
-        [PageEvents.FOOTER_PAGE]: {
-          [FooterLanguageKeys.LICENSES]: 'Lizenzen',
-          [FooterLanguageKeys.LANGUAGE_TOGGLE_DE]: 'Deutsch',
-          [FooterLanguageKeys.LANGUAGE_TOGGLE_EN]: 'English',
+        [PageEvents.SIDE_MENU_PAGE]: {
+          [SideMenuLanguageKeys.LANGUAGE_TOGGLE_DE]: 'Deutsch',
+          [SideMenuLanguageKeys.LANGUAGE_TOGGLE_EN]: 'English',
         },
         [PageEvents.HEADER_PAGE]: {
           [HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS]: 'asymmetrische Algorithmen',
