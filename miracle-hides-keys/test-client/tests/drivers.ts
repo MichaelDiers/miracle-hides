@@ -16,17 +16,23 @@ export class Drivers {
     firefox = true,
     edge = true,
     enableLogging = false,
+    headless = true,
   }: {
     chrome?: boolean,
     firefox?: boolean,
     edge?: boolean,
     enableLogging?: boolean,
+    headless?: boolean,
   } = {}): DriversEntry[] {
     const drivers: DriversEntry[] = [];
     if (chrome) {
       const options = new ChromeOptions();
       if (!enableLogging) {
         options.excludeSwitches('enable-logging');
+      }
+
+      if (headless) {
+        options.headless();        
       }
 
       drivers.push({
@@ -39,10 +45,15 @@ export class Drivers {
     }
 
     if (firefox) {
+      const options = new FirefoxOptions();
+      if (headless) {
+        options.headless();
+      }
+
       drivers.push({
         displayName: 'firefox',
         createDriverAsync: () => new Builder()
-          .setFirefoxOptions(new FirefoxOptions())
+          .setFirefoxOptions(options)
           .forBrowser('firefox')
           .build(),
       });
@@ -52,6 +63,10 @@ export class Drivers {
       const options = new EdgeOptions();
       if (!enableLogging) {
         options.excludeSwitches('enable-logging');
+      }
+
+      if (headless) {
+        options.headless();
       }
 
       drivers.push({

@@ -5,11 +5,12 @@ import AsymmetricPage from './asymmetric-page';
 import BasePage from './base-page';
 import Footer from './footer';
 import Page from './page';
+import SideMenu from './side-menu';
 import SymmetricPage from './symmetric-page';
 
 export default class WelcomePage extends Page {
-  private constructor(driver: WebDriver | BasePage, footer: Footer) {
-    super(driver, 'main#welcomePage', footer);
+  private constructor(driver: WebDriver | BasePage, footer: Footer, sideMenu: SideMenu) {
+    super(driver, 'main#welcomePage', footer, sideMenu);
   }
 
   static async initializeAsync(
@@ -18,7 +19,9 @@ export default class WelcomePage extends Page {
     size?: WindowSize,
   ) : Promise<WelcomePage> {
     const footer = await Footer.initializeAsync(driver);
-    const page = new WelcomePage(driver, footer);
+    const sideMenu = await SideMenu.initializeAsync(driver);
+
+    const page = new WelcomePage(driver, footer, sideMenu);
     if (url) {
       await page.getAsync(url);
     }
@@ -29,10 +32,6 @@ export default class WelcomePage extends Page {
 
     await page.verifyOnPageAsync();
     return page;
-  }
-
-  async getBackgroundColorAsync() : Promise<string> {
-    return super.getBackgroundColorAsync('body');
   }
 
   async getLanguageTextAsync() : Promise<string> {
@@ -47,13 +46,5 @@ export default class WelcomePage extends Page {
   async toSymmetricPageAsync() : Promise<SymmetricPage> {
     await this.clickAsync('#generateSync');
     return SymmetricPage.initializeAsync(this);
-  }
-
-  async toggleLanguageAsync() : Promise<void> {
-    await this.clickAsync('.button.side-menu-language');
-  }
-
-  async toggleThemeAsync() : Promise<void> {
-    await this.clickAsync('.button.side-menu-theme');
   }
 }

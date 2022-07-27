@@ -2,16 +2,27 @@
 import { WebDriver } from 'selenium-webdriver';
 import BasePage from './base-page';
 import Footer from './footer';
+import SideMenu from './side-menu';
 
-export default class Page extends BasePage {
+export default abstract class Page extends BasePage {
   public readonly footer: Footer;
+
+  public readonly sideMenu: SideMenu;
 
   protected constructor(
     driver: WebDriver | BasePage,
     verifyOnPageSelector: string,
     footer: Footer,
+    sideMenu: SideMenu,
   ) {
     super(driver, verifyOnPageSelector);
     this.footer = footer;
+    this.sideMenu = sideMenu;
   }
+
+  async getBackgroundColorAsync() : Promise<string> {
+    return super.getBackgroundColorAsync('body');
+  }
+
+  abstract getLanguageTextAsync() : Promise<string>;
 }

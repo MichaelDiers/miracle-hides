@@ -24,13 +24,15 @@ export class TestFrame {
     enableLogging = false,
     windowSizes = 'all',
     addresses = 'all',
+    headless = true,
   } : {
     chrome?: boolean,
     firefox?: boolean,
     edge?: boolean,
     enableLogging?: boolean,
     windowSizes?: 'fullscreen' | 'all',
-    addresses?: string | 'all'
+    addresses?: string | 'all',
+    headless?: boolean,
   } = {}) : TestFrameEntry[] {
     const entries : TestFrameEntry[] = [];
 
@@ -45,7 +47,11 @@ export class TestFrame {
     }
 
     Drivers.initialize({
-      chrome, firefox, edge, enableLogging,
+      chrome,
+      firefox,
+      edge,
+      enableLogging,
+      headless,
     }).forEach((driver) => {
       actualAddresses.forEach((address) => {
         actualWindowSizes.forEach((windowSize) => {
