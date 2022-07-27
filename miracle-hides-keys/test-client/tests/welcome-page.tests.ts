@@ -29,11 +29,6 @@ describe('WelcomePage', () => {
                 await page.toAsymmetricPageAsync();
               });
 
-              it('to license page', async function test() {
-                const page = await WelcomePage.initializeAsync(this.driver, address, size);
-                await page.toLicensePageAsync();
-              });
-
               it('to symmetric page', async function test() {
                 const page = await WelcomePage.initializeAsync(this.driver, address, size);
                 await page.toSymmetricPageAsync();

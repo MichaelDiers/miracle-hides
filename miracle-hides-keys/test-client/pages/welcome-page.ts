@@ -2,16 +2,22 @@
 import { WebDriver } from 'selenium-webdriver';
 import AsymmetricPage from './asymmetric-page';
 import BasePage from './base-page';
-import LicensePage from './licenses-page';
+import Footer from './footer';
+import Page from './page';
 import SymmetricPage from './symmetric-page';
 
-export default class WelcomePage extends BasePage {
-  private constructor(driver: WebDriver | BasePage) {
-    super(driver, 'main#welcomePage');
+export default class WelcomePage extends Page {
+  private constructor(driver: WebDriver | BasePage, footer: Footer) {
+    super(driver, 'main#welcomePage', footer);
   }
 
-  static async initializeAsync(driver: WebDriver | BasePage, url?: string, size?: { width?: number | 'max', height?: number | 'max' }) : Promise<WelcomePage> {
-    const page = new WelcomePage(driver);
+  static async initializeAsync(
+    driver: WebDriver | BasePage,
+    url?: string,
+    size?: { width?: number | 'max', height?: number | 'max' },
+  ) : Promise<WelcomePage> {
+    const footer = await Footer.initializeAsync(driver);
+    const page = new WelcomePage(driver, footer);
     if (url) {
       await page.getAsync(url);
     }
@@ -35,11 +41,6 @@ export default class WelcomePage extends BasePage {
   async toAsymmetricPageAsync() : Promise<AsymmetricPage> {
     await this.clickAsync('#generateAsync');
     return AsymmetricPage.initializeAsync(this);
-  }
-
-  async toLicensePageAsync() : Promise<LicensePage> {
-    await this.clickAsync('a[view=licensePage]');
-    return LicensePage.initializeAsync(this);
   }
 
   async toSymmetricPageAsync() : Promise<SymmetricPage> {
