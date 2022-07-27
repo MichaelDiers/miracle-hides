@@ -46,7 +46,7 @@
   }
 
   .grid-form {
-    grid-template-columns: minmax(auto, 200px) 1fr;
+    grid-template-columns: minmax(auto, 200px) minmax(auto, 600px);
   }
   
   .license-data > .desktop {
