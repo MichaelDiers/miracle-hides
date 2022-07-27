@@ -1,9 +1,25 @@
-.grid-form {
-  grid-template-columns: 1fr;
+@media only screen and (max-width: 800px) {
+  .license-data > .desktop {
+    display: none;
+  }
+
+  .license-data > .mobile {
+    display: grid;
+  }
 }
 
-.license-data > .desktop {
-  display: none;
+@media only screen and (min-width: 800px) {
+  .license-data > .desktop {
+    display: grid;
+  }
+
+  .license-data > .mobile {
+    display: none;
+  }
+}
+
+.grid-form {
+  grid-template-columns: 1fr;
 }
 
 .welcome {
@@ -45,9 +61,7 @@
     grid-template-columns: minmax(auto, 200px) 1fr;
   }
 
-  .license-data > .mobile {
-    display: none;
-  }
+  
 
   .welcome {
     grid-template-areas: 'headline headline' 'asymmetric symmetric';
