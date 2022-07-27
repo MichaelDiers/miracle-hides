@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { Builder, WebDriver } from 'selenium-webdriver';
 import { Options as ChromeOptions } from 'selenium-webdriver/chrome';
+import { Options as EdgeOptions } from 'selenium-webdriver/edge';
 import { Options as FirefoxOptions } from 'selenium-webdriver/firefox';
 import { DisplayName } from './constants';
 /* eslint-enable import/no-extraneous-dependencies */
@@ -13,14 +14,21 @@ export class Drivers {
   static initialize({
     chrome = true,
     firefox = true,
+    edge = true,
+    enableLogging = false,
   }: {
     chrome?: boolean,
     firefox?: boolean,
+    edge?: boolean,
+    enableLogging?: boolean,
   } = {}): DriversEntry[] {
     const drivers: DriversEntry[] = [];
     if (chrome) {
       const options = new ChromeOptions();
-      options.excludeSwitches('enable-logging');
+      if (!enableLogging) {
+        options.excludeSwitches('enable-logging');
+      }
+
       drivers.push({
         displayName: 'chrome',
         createDriverAsync: async () => new Builder()
@@ -36,6 +44,21 @@ export class Drivers {
         createDriverAsync: () => new Builder()
           .setFirefoxOptions(new FirefoxOptions())
           .forBrowser('firefox')
+          .build(),
+      });
+    }
+
+    if (edge) {
+      const options = new EdgeOptions();
+      if (!enableLogging) {
+        options.excludeSwitches('enable-logging');
+      }
+
+      drivers.push({
+        displayName: 'edge',
+        createDriverAsync: () => new Builder()
+          .setEdgeOptions(options)
+          .forBrowser('MicrosoftEdge')
           .build(),
       });
     }
