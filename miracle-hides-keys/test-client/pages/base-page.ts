@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { By, WebDriver } from 'selenium-webdriver';
+import { WindowSize } from '../tests/constants';
 
 export default class BasePage {
   private readonly driver: WebDriver;
@@ -37,33 +38,25 @@ export default class BasePage {
     return element.getText();
   }
 
-  protected async setWindowSizeAsync({
-    width,
-    height,
-  } : {
-    width?: number | 'max',
-    height?: number | 'max',
-  } = {}) : Promise<void> {
-    if (width && width !== 'max' && height && height !== 'max') {
-      await this.driver.manage().window().setRect({
-        x: 0, y: 0, width, height,
-      });
+  protected async setWindowSizeAsync(windowSize : WindowSize) : Promise<void> {
+    await this.driver.manage().window().maximize();
+
+    if (windowSize.height === 'max' && windowSize.width === 'max') {
       return;
     }
 
-    await this.driver.manage().window().maximize();
     const size = await this.driver.manage().window().getRect();
-
-    if (!width && height && height !== 'max') {
-      await this.driver.manage().window().setRect({
-        x: 0, y: 0, width: size.width, height,
-      });
+    const newSize = {
+      x: 0, y: 0, width: size.width, height: size.height,
+    };
+    if (windowSize.height !== 'max') {
+      newSize.height = windowSize.height;
     }
 
-    if (width && width !== 'max' && !height) {
-      await this.driver.manage().window().setRect({
-        x: 0, y: 0, width, height: size.height,
-      });
+    if (windowSize.width !== 'max') {
+      newSize.width = windowSize.width;
     }
+
+    await this.driver.manage().window().setRect(newSize);
   }
 }

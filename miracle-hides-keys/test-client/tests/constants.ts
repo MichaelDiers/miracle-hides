@@ -1,18 +1,37 @@
-export const ADDRESSES : { name: string, address: string }[] = [
+export interface DisplayName {
+  displayName: string;
+}
+
+export interface Address extends DisplayName {
+  url: string;
+}
+
+export const ADDRESSES : Address[] = [
   {
-    name: 'plain',
-    address: 'http://localhost:3000/plain/index.html',
+    displayName: 'plain',
+    url: 'http://localhost:3000/plain/index.html',
   },
 ];
 
-export const WINDOW_SIZES : { width?: number | 'max', height?: number | 'max' }[] = [
+export interface WindowSize extends DisplayName {
+  width: number | 'max';
+  height: number | 'max';
+}
+
+export const WINDOW_SIZES : WindowSize[] = [
   {
+    displayName: '799 x max',
+    height: 'max',
     width: 799,
   },
   {
+    displayName: '800 x max',
+    height: 'max',
     width: 800,
   },
   {
+    displayName: 'fullscreen',
+    height: 'max',
     width: 'max',
   },
 ];

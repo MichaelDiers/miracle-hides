@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { WebDriver } from 'selenium-webdriver';
+import { WindowSize } from '../tests/constants';
 import AsymmetricPage from './asymmetric-page';
 import BasePage from './base-page';
 import Footer from './footer';
@@ -14,7 +15,7 @@ export default class WelcomePage extends Page {
   static async initializeAsync(
     driver: WebDriver | BasePage,
     url?: string,
-    size?: { width?: number | 'max', height?: number | 'max' },
+    size?: WindowSize,
   ) : Promise<WelcomePage> {
     const footer = await Footer.initializeAsync(driver);
     const page = new WelcomePage(driver, footer);
