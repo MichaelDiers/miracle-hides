@@ -32,7 +32,7 @@ export class Drivers {
       }
 
       if (headless) {
-        options.headless();        
+        options.headless();
       }
 
       drivers.push({

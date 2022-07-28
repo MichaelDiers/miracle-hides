@@ -66,4 +66,12 @@ export class TestFrame {
 
     return entries;
   }
+
+  static testFramesShort() : TestFrameEntry[] {
+    return TestFrame.testFrames({
+      chrome: false,
+      edge: false,
+      windowSizes: 'fullscreen',
+    });
+  }
 }

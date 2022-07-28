@@ -1,5 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { By, WebDriver } from 'selenium-webdriver';
+import {
+  By,
+  WebDriver,
+} from 'selenium-webdriver';
 import { WindowSize } from '../tests/constants';
 
 export default class BasePage {
@@ -24,6 +27,23 @@ export default class BasePage {
     return element.click();
   }
 
+  protected async clickAndWaitForValueChanged(
+    selectorClick: string,
+    selectorValueChanged: string,
+  ) : Promise<string> {
+    const oldValue = this.getValueAsync(selectorValueChanged);
+    await (await this.driver.findElement(By.css(selectorClick))).click();
+    return this.driver.wait(async (driver: WebDriver) => {
+      const element = driver.findElement(By.css(selectorValueChanged));
+      const newValue = element.getAttribute('value');
+      if (!newValue || oldValue === newValue) {
+        return undefined;
+      }
+
+      return newValue;
+    });
+  }
+
   protected async getAsync(url: string) : Promise<void> {
     return this.driver.get(url);
   }
@@ -36,6 +56,28 @@ export default class BasePage {
   protected async getTextAsync(selector: string) : Promise<string> {
     const element = await this.driver.findElement(By.css(selector));
     return element.getText();
+  }
+
+  protected async getTextAreaText(selector: string) : Promise<string> {
+    const element = await this.driver.findElement(By.css(selector));
+    return element.getAttribute('value');
+  }
+
+  protected async getTextAreaChangedText(selector: string, oldText: string) : Promise<string> {
+    return this.driver.wait<string>(async (driver : WebDriver) => {
+      const element = await driver.findElement(By.css(selector));
+      const text = await element.getAttribute('value');
+      if (!text || text === oldText) {
+        return undefined;
+      }
+
+      return text;
+    }, 5000);
+  }
+
+  protected async getValueAsync(selector: string): Promise<string> {
+    const element = await this.driver.findElement(By.css(selector));
+    return element.getAttribute('value');
   }
 
   protected async setWindowSizeAsync(windowSize : WindowSize) : Promise<void> {

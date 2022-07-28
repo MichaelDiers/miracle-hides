@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { WebDriver } from 'selenium-webdriver';
 import { WindowSize } from '../tests/constants';
-import AsymmetricPage from './asymmetric-page';
+import { AsymmetricPage } from './asymmetric-page';
 import BasePage from './base-page';
 import Footer from './footer';
 import Page from './page';
