@@ -21,8 +21,8 @@ const ALGORITHM_RSA = 'RSA';
 
 const SELECTOR_ALGORITHM = '[name=type]';
 const SELECTOR_ALGORITHM_CHECKED = `${SELECTOR_ALGORITHM}:checked`;
-const SELECTOR_ALGORITHM_EC = `${SELECTOR_ALGORITHM}[value=EC]`;
-const SELECTOR_ALGORITHM_RSA = `${SELECTOR_ALGORITHM}[value=RSA]`;
+const SELECTOR_ALGORITHM_EC = `${SELECTOR_ALGORITHM}[value=${ALGORITHM_EC}]`;
+const SELECTOR_ALGORITHM_RSA = `${SELECTOR_ALGORITHM}[value=${ALGORITHM_RSA}]`;
 const SELECTOR_EC_NAMED_CURVE = '[name=ecNamedCurve]';
 const SELECTOR_EC_NAMED_CURVE_CHECKED = `${SELECTOR_EC_NAMED_CURVE}:checked`;
 const SELECTOR_LANGUAGE_TEST = 'label[for=type]';
@@ -137,7 +137,7 @@ export class AsymmetricPage extends Page {
   }
 
   async submitAsync() : Promise<AsymmetricPageValues> {
-    this.clickAndWaitForValueChanged(SELECTOR_SUBMIT, SELECTOR_PRIVATE_KEY);
+    await this.clickAndWaitForValueChanged(SELECTOR_SUBMIT, SELECTOR_PRIVATE_KEY);
     return this.collectValuesAsync();
   }
 

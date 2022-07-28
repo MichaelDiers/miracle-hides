@@ -6,7 +6,7 @@ import BasePage from './base-page';
 import Footer from './footer';
 import Page from './page';
 import SideMenu from './side-menu';
-import SymmetricPage from './symmetric-page';
+import { SymmetricPage } from './symmetric-page';
 
 export default class WelcomePage extends Page {
   private constructor(driver: WebDriver | BasePage, footer: Footer, sideMenu: SideMenu) {

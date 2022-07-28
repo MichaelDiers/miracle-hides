@@ -61,7 +61,7 @@ const asymmetricPageValuesCompare = (
   assert.notEqual(oldValues.inputTextEncrypted, newValues.inputTextEncrypted);
 };
 
-describe.only('AsymmetricPage', () => {
+describe('AsymmetricPage', () => {
   TestFrame.testFrames().forEach((testFrameEntry) => {
     describe(TestFrame.displayName(testFrameEntry), () => {
       beforeEach(async function beforeEach() {

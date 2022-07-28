@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
   By,
+  Key,
   WebDriver,
 } from 'selenium-webdriver';
 import { WindowSize } from '../tests/constants';
@@ -31,11 +32,11 @@ export default class BasePage {
     selectorClick: string,
     selectorValueChanged: string,
   ) : Promise<string> {
-    const oldValue = this.getValueAsync(selectorValueChanged);
+    const oldValue = await this.getValueAsync(selectorValueChanged);
     await (await this.driver.findElement(By.css(selectorClick))).click();
     return this.driver.wait(async (driver: WebDriver) => {
-      const element = driver.findElement(By.css(selectorValueChanged));
-      const newValue = element.getAttribute('value');
+      const element = await driver.findElement(By.css(selectorValueChanged));
+      const newValue = await element.getAttribute('value');
       if (!newValue || oldValue === newValue) {
         return undefined;
       }
@@ -78,6 +79,26 @@ export default class BasePage {
   protected async getValueAsync(selector: string): Promise<string> {
     const element = await this.driver.findElement(By.css(selector));
     return element.getAttribute('value');
+  }
+
+  protected async sendKeysAndWaitForValueChanged(
+    selectorValue: string,
+    value: string,
+    selectorValueChanged: string,
+  ) : Promise<string> {
+    const oldValue = await this.getValueAsync(selectorValueChanged);
+    const textElement = await this.driver.findElement(By.css(selectorValue));
+    await textElement.sendKeys(...Array(oldValue.length).fill(Key.BACK_SPACE), value, Key.TAB);
+
+    return this.driver.wait(async (driver: WebDriver) => {
+      const element = driver.findElement(By.css(selectorValueChanged));
+      const newValue = await element.getAttribute('value');
+      if (!newValue || oldValue === newValue) {
+        return undefined;
+      }
+
+      return newValue;
+    });
   }
 
   protected async setWindowSizeAsync(windowSize : WindowSize) : Promise<void> {

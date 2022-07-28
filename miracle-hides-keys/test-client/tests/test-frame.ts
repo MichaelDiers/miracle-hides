@@ -67,11 +67,12 @@ export class TestFrame {
     return entries;
   }
 
-  static testFramesShort() : TestFrameEntry[] {
+  static testFramesShort({ headless = true } : { headless?: boolean } = {}) : TestFrameEntry[] {
     return TestFrame.testFrames({
       chrome: false,
       edge: false,
       windowSizes: 'fullscreen',
+      headless,
     });
   }
 }
