@@ -137,6 +137,10 @@ export class SymmetricPage extends Page {
     return this.collectValuesAsync();
   }
 
+  async toAsymmetricPageAsync() : Promise<void> {
+    return this.clickAsync('#asymmetricAlgorithmsLink');
+  }
+
   private async selectAesKeySizeAsync(
     selectorClick: string,
     selectorValueChanged: string,

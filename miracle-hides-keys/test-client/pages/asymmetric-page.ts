@@ -141,6 +141,10 @@ export class AsymmetricPage extends Page {
     return this.collectValuesAsync();
   }
 
+  async toSymmetricPageAsync() : Promise<void> {
+    return this.clickAsync('#symmetricAlgorithmsLink');
+  }
+
   private async selectRsaKeySizeAsync(
     selectorClick: string,
     selectorValueChanged: string,

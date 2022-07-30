@@ -1,4 +1,5 @@
 import * as assert from 'assert';
+import { AsymmetricPage } from 'test-client/pages/asymmetric-page';
 import { SymmetricPageValues } from '../pages/symmetric-page';
 import WelcomePage from '../pages/welcome-page';
 import { TestFrame } from './test-frame';
@@ -130,6 +131,11 @@ describe('SymmetricPage', () => {
         const oldValues = await this.page.selectHmacAsync();
         const newValues = await this.page.submitAsync();
         symmetricPageValuesCompare(oldValues, newValues, '128', '128', 'HMAC', 'HMAC');
+      });
+
+      it('to asymmetric page', async function test() {
+        await this.page.toAsymmetricPageAsync();
+        await AsymmetricPage.initializeAsync(this.page);
       });
     });
   });

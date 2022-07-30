@@ -1,4 +1,5 @@
 import * as assert from 'assert';
+import { SymmetricPage } from '../pages/symmetric-page';
 import { AsymmetricPageValues } from '../pages/asymmetric-page';
 import WelcomePage from '../pages/welcome-page';
 import { TestFrame } from './test-frame';
@@ -152,6 +153,11 @@ describe('AsymmetricPage', () => {
         const oldValues = await this.page.selectRsaAsync();
         const newValues = await this.page.submitAsync();
         asymmetricPageValuesCompare(oldValues, newValues, '2048', '2048', 'RSA', 'RSA');
+      });
+
+      it('to symmetric page', async function test() {
+        await this.page.toSymmetricPageAsync();
+        await SymmetricPage.initializeAsync(this.page);
       });
     });
   });
