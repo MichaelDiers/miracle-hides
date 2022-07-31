@@ -136,6 +136,20 @@ export default class HtmlComponents {
     });
   }
 
+  static inputCheckbox({
+    id = '',
+    name = id,
+  } : {
+    id?: string,
+    name?: string,
+  } = {}) : string {
+    return HtmlComponents.input({
+      id,
+      name,
+      type: 'checkbox',
+    });
+  }
+
   static inputHidden({
     id = '',
     name = id,

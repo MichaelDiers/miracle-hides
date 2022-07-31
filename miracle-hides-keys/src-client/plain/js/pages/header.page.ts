@@ -66,6 +66,14 @@ export default class HeaderPage extends BasePage {
         source: PageEvents.HEADER_PAGE,
         value: HeaderLanguageKeys.MENU_HEADLINE,
       }),
+      HtmlComponents.div({
+        css: [Css.MOBILE_MENU_SYMBOL],
+        content: [
+          HtmlComponents.inputCheckbox(),
+          HtmlComponents.div({ css: [Css.ICON_FONT, Css.CONTENT_MENU] }),
+          HtmlComponents.div({ css: [Css.ICON_FONT, Css.CONTENT_CLOSE] }),
+        ],
+      }),
       HtmlComponents.navbar({
         css: [Css.NAVBAR],
         content: [
