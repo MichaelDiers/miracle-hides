@@ -13,7 +13,7 @@ header {
   grid-template-rows: auto auto auto;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: $mobile-max-width) {
   .grid-form > * {
     padding-left: 0;
     padding-right: 0;
@@ -44,7 +44,7 @@ header {
   }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: $mobile-max-width) {
   .col-2 {
     grid-column-start: 2;
   }
