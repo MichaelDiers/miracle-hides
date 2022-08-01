@@ -2,6 +2,11 @@
   grid-template-columns: 1fr;
 }
 
+header {
+  grid-template-areas: 'logo . mobile-menu-symbol';
+  grid-template-columns: 1fr 12fr 1fr;
+}
+
 .welcome {
   grid-template-areas: 'headline' 'asymmetric' 'symmetric';
   grid-template-columns: auto;
@@ -26,8 +31,7 @@
     margin-top: 0;
   }
 
-  header h1,
-  navbar {
+  header h1 {
     display: none;
   }
 
@@ -49,6 +53,19 @@
     grid-template-columns: minmax(auto, 200px) minmax(auto, 600px);
   }
   
+  header {
+    grid-template-areas: 'logo headline .' 'navbar navbar navbar';
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+  
+  header h1 {
+    grid-area: headline;
+  }
+
+  header .mobile-menu-symbol {
+    display: none;
+  }
+
   .license-data > .desktop {
     display: grid;
   }

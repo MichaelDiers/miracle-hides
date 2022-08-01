@@ -1,7 +1,5 @@
 header {
   display: grid;
-  grid-template-areas: 'logo headline .' 'navbar navbar navbar';
-  grid-template-columns: 1fr 12fr 1fr;
   padding: $default-padding;
   place-items: center;
 }
@@ -10,10 +8,10 @@ header .logo {
   grid-area: logo;
 }
 
-header h1 {
-  grid-area: headline;
-}
-
 header .navbar {
   grid-area: navbar;
+}
+
+header .mobile-menu-symbol {
+  grid-area: mobile-menu-symbol;
 }

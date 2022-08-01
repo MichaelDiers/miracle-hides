@@ -7,9 +7,11 @@ import Translator from '../translations/translator';
 import Logger from '../infrastructure/logger';
 import PageEvents from './page-events';
 
-const ASYMMETRIC_ALGORITHMS_LINK_ID = 'asymmetricAlgorithmsLink';
-
-const SYMMETRIC_ALGORITHMS_LINK_ID = 'symmetricAlgorithmsLink';
+const enum PageIds {
+  ASYMMETRIC_ALGORITHMS_LINK = 'asymmetricAlgorithmsLink',
+  SYMMETRIC_ALGORITHMS_LINK = 'symmetricAlgorithmsLink',
+  MENU_SYMBOL_TRIGGER = 'menuSymbolTrigger',
+}
 
 export default class HeaderPage extends BasePage {
   constructor(
@@ -47,7 +49,23 @@ export default class HeaderPage extends BasePage {
           const href = node.getAttribute('href');
           CustomEventRaiser.raise(href);
         }
+
+        const mobileMenuSymbol = document.querySelector(`.${Css.MOBILE_MENU_SYMBOL} input`) as HTMLInputElement;
+        if (mobileMenuSymbol.checked) {
+          mobileMenuSymbol.checked = false;
+          document.body.classList.remove(Css.NAVBAR_ACTIVE);
+        }
       });
+    });
+
+    element.querySelector(`#${PageIds.MENU_SYMBOL_TRIGGER}`).addEventListener('input', (e) => {
+      const target = e.target as HTMLInputElement;
+
+      if (target.checked) {
+        document.body.classList.add(Css.NAVBAR_ACTIVE);
+      } else {
+        document.body.classList.remove(Css.NAVBAR_ACTIVE);
+      }
     });
   }
 
@@ -69,7 +87,7 @@ export default class HeaderPage extends BasePage {
       HtmlComponents.div({
         css: [Css.MOBILE_MENU_SYMBOL],
         content: [
-          HtmlComponents.inputCheckbox(),
+          HtmlComponents.inputCheckbox({ id: PageIds.MENU_SYMBOL_TRIGGER }),
           HtmlComponents.div({ css: [Css.ICON_FONT, Css.CONTENT_MENU] }),
           HtmlComponents.div({ css: [Css.ICON_FONT, Css.CONTENT_CLOSE] }),
         ],
@@ -82,7 +100,7 @@ export default class HeaderPage extends BasePage {
               HtmlComponents.listItem({
                 css: [Css.ASYMMETRIC_COLOR],
                 content: HtmlComponents.anchor({
-                  id: ASYMMETRIC_ALGORITHMS_LINK_ID,
+                  id: PageIds.ASYMMETRIC_ALGORITHMS_LINK,
                   source: PageEvents.HEADER_PAGE,
                   text: HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS,
                   href: PageEvents.ASYMMETRIC_PAGE,
@@ -92,7 +110,7 @@ export default class HeaderPage extends BasePage {
               HtmlComponents.listItem({
                 css: [Css.SYMMETRIC_COLOR],
                 content: HtmlComponents.anchor({
-                  id: SYMMETRIC_ALGORITHMS_LINK_ID,
+                  id: PageIds.SYMMETRIC_ALGORITHMS_LINK,
                   source: PageEvents.HEADER_PAGE,
                   text: HeaderLanguageKeys.SYMMETRIC_ALGORITHMS,
                   href: PageEvents.SYMMETRIC_PAGE,

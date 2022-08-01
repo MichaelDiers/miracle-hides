@@ -15,6 +15,7 @@ const enum Css {
   MENU_LINK = 'menu-link',
   MOBILE_MENU_SYMBOL = 'mobile-menu-symbol',
   NAVBAR = 'navbar',
+  NAVBAR_ACTIVE = 'navbar-active',
   RADIO = 'radio',
   SUBMIT = 'submit',
   SYMMETRIC_COLOR = 'symmetric-color',
