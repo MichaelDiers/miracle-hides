@@ -1,6 +1,9 @@
 .welcome {
   display: grid;
   gap: 40px;
+  grid-template-areas: 'headline' 'asymmetric' 'symmetric';
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
   place-items: stretch;
 }
 
@@ -35,4 +38,12 @@
 .welcome li {
   margin: 30px;
   text-align: center;
+}
+
+@media only screen and (min-width: $mobile-max-width) {  
+  .welcome {
+    grid-template-areas: 'headline headline' 'asymmetric symmetric';
+    grid-template-columns: auto auto;
+    grid-template-rows: auto 1fr;
+  }
 }

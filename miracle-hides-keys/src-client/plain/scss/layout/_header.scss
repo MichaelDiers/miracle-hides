@@ -1,5 +1,7 @@
 header {
   display: grid;
+  grid-template-areas: 'logo . mobile-menu-symbol';
+  grid-template-columns: 1fr 12fr 1fr;
   padding: $default-padding;
   place-items: center;
 }
@@ -8,10 +10,31 @@ header .logo {
   grid-area: logo;
 }
 
+header .mobile-menu-symbol {
+  grid-area: mobile-menu-symbol;
+}
+
 header .navbar {
   grid-area: navbar;
 }
 
-header .mobile-menu-symbol {
-  grid-area: mobile-menu-symbol;
+@media only screen and (max-width: $mobile-max-width) {
+  header h1 {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: $mobile-max-width) {  
+  header {
+    grid-template-areas: 'logo headline .' 'navbar navbar navbar';
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+  
+  header h1 {
+    grid-area: headline;
+  }
+
+  header .mobile-menu-symbol {
+    display: none;
+  }
 }

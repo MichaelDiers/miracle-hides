@@ -25,3 +25,23 @@
 .license-data-fonts > .desktop {
   grid-template-columns: repeat(4, auto);
 }
+
+@media only screen and (max-width: $mobile-max-width) {
+  .license-data > .desktop {
+    display: none;
+  }
+
+  .license-data > .mobile {
+    display: grid;
+  }
+}
+
+@media only screen and (min-width: $mobile-max-width) {  
+  .license-data > .desktop {
+    display: grid;
+  }
+
+  .license-data > .mobile {
+    display: none;
+  }
+}
