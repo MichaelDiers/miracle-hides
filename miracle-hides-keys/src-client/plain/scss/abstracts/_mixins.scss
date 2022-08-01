@@ -166,5 +166,11 @@
   
   .#{$name} .button {
     background: transparent;
-  }  
+  }
+
+  @media only screen and (max-width: 800px) {
+    .#{$name}.navbar-active .navbar {
+      background: $background-color;
+    }
+  }
 }
