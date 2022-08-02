@@ -56,12 +56,12 @@ export default class WelcomePage extends Page {
     return super.getTextAsync('#generateAsync');
   }
 
-  async toAsymmetricPageAsync() : Promise<AsymmetricPage> {
+  async toAsymmetricPageViaLinkAsync() : Promise<AsymmetricPage> {
     await this.clickAsync('#generateAsync');
     return AsymmetricPage.initializeAsync(this);
   }
 
-  async toSymmetricPageAsync() : Promise<SymmetricPage> {
+  async toSymmetricPageViaLinkAsync() : Promise<SymmetricPage> {
     await this.clickAsync('#generateSync');
     return SymmetricPage.initializeAsync(this);
   }

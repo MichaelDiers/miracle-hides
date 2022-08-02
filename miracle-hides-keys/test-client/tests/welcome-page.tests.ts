@@ -27,7 +27,7 @@ describe('WelcomePage', () => {
           testFrameEntry.windowSize,
         );
 
-        await page.toAsymmetricPageAsync();
+        await page.toAsymmetricPageViaLinkAsync();
       });
 
       it('to symmetric page', async function test() {
@@ -37,7 +37,7 @@ describe('WelcomePage', () => {
           testFrameEntry.windowSize,
         );
 
-        await page.toSymmetricPageAsync();
+        await page.toSymmetricPageViaLinkAsync();
       });
     });
   });

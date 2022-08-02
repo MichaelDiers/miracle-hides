@@ -160,14 +160,6 @@ export class SymmetricPage extends Page {
     return this.collectValuesAsync();
   }
 
-  async toAsymmetricPageAsync(isMobile: boolean) : Promise<void> {
-    return this.header.toAsymmetricPageAsync(isMobile);
-  }
-
-  async toSymmetricPageAsync(isMobile: boolean) : Promise<void> {
-    return this.header.toSymmetricPageAsync(isMobile);
-  }
-
   private async selectAesKeySizeAsync(
     selectorClick: string,
     selectorValueChanged: string,

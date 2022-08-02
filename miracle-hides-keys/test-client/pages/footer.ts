@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { WebDriver } from 'selenium-webdriver';
 import BasePage from './base-page';
-import LicensePage from './licenses-page';
 
 export default class Footer extends BasePage {
   private constructor(driver: WebDriver | BasePage) {
@@ -12,8 +11,7 @@ export default class Footer extends BasePage {
     return new Footer(driver);
   }
 
-  async toLicensePageAsync() : Promise<LicensePage> {
+  async toLicensePageAsync() : Promise<void> {
     await this.clickAsync('a[view=licensePage]');
-    return LicensePage.initializeAsync(this);
   }
 }

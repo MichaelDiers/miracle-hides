@@ -6,11 +6,11 @@ import Header from './header';
 import SideMenu from './side-menu';
 
 export default abstract class Page extends BasePage {
-  public readonly footer: Footer;
+  private readonly footer: Footer;
 
-  public readonly sideMenu: SideMenu;
+  private readonly sideMenu: SideMenu;
 
-  protected readonly header: Header;
+  private readonly header: Header;
 
   protected constructor({
     driver,
@@ -36,4 +36,24 @@ export default abstract class Page extends BasePage {
   }
 
   abstract getLanguageTextAsync() : Promise<string>;
+
+  async toAsymmetricPageAsync(isMobile: boolean) : Promise<void> {
+    return this.header.toAsymmetricPageAsync(isMobile);
+  }
+
+  async toLicensePageAsync() : Promise<void> {
+    return this.footer.toLicensePageAsync();
+  }
+
+  async toSymmetricPageAsync(isMobile: boolean) : Promise<void> {
+    return this.header.toSymmetricPageAsync(isMobile);
+  }
+
+  async toggleLanguageAsync() : Promise<void> {
+    await this.sideMenu.toggleLanguageAsync();
+  }
+
+  async toggleThemeAsync() : Promise<void> {
+    await this.sideMenu.toggleThemeAsync();
+  }
 }

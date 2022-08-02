@@ -1,3 +1,4 @@
+import LicensePage from '../pages/licenses-page';
 import WelcomePage from '../pages/welcome-page';
 import { TestFrame } from './test-frame';
 
@@ -17,18 +18,27 @@ describe('Footer', () => {
         await this.driver.quit();
       });
 
-      it('from welcome page', async function test() {
-        await this.welcomePage.footer.toLicensePageAsync();
+      it('from welcome page to license page', async function test() {
+        // eslint-disable-next-line prefer-destructuring
+        const welcomePage : WelcomePage = this.welcomePage;
+        await welcomePage.toLicensePageAsync();
+        await LicensePage.initializeAsync(welcomePage);
       });
 
-      it('from asymmetric page', async function test() {
-        const page = await this.welcomePage.toAsymmetricPageAsync();
-        await page.footer.toLicensePageAsync();
+      it('from asymmetric page to license page', async function test() {
+        // eslint-disable-next-line prefer-destructuring
+        const welcomePage : WelcomePage = this.welcomePage;
+        const page = await welcomePage.toAsymmetricPageViaLinkAsync();
+        await page.toLicensePageAsync();
+        await LicensePage.initializeAsync(welcomePage);
       });
 
-      it('from symmetric page', async function test() {
-        const page = await this.welcomePage.toSymmetricPageAsync();
-        await page.footer.toLicensePageAsync();
+      it('from symmetric page to license page', async function test() {
+        // eslint-disable-next-line prefer-destructuring
+        const welcomePage : WelcomePage = this.welcomePage;
+        const page = await welcomePage.toSymmetricPageViaLinkAsync();
+        await page.toLicensePageAsync();
+        await LicensePage.initializeAsync(welcomePage);
       });
     });
   });

@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { AsymmetricPageValues } from '../pages/asymmetric-page';
+import { AsymmetricPage, AsymmetricPageValues } from '../pages/asymmetric-page';
 import WelcomePage from '../pages/welcome-page';
 import { TestFrame } from './test-frame';
 
@@ -71,7 +71,7 @@ describe('AsymmetricPage', () => {
           testFrameEntry.address.url,
           testFrameEntry.windowSize,
         );
-        this.page = await welcomePage.toAsymmetricPageAsync();
+        this.page = await welcomePage.toAsymmetricPageViaLinkAsync();
       });
 
       afterEach(async function afterEach() {
@@ -79,7 +79,9 @@ describe('AsymmetricPage', () => {
       });
 
       it('check initial values', async function test() {
-        const values : AsymmetricPageValues = await this.page.collectValuesAsync();
+        // eslint-disable-next-line prefer-destructuring
+        const page : AsymmetricPage = this.page;
+        const values : AsymmetricPageValues = await page.collectValuesAsync();
 
         assert.equal(values.algorithm, 'EC');
         assert.equal(values.namedCurve, 'sect239k1');
@@ -98,59 +100,71 @@ describe('AsymmetricPage', () => {
       });
 
       it('switch from ec to rsa', async function test() {
-        const oldValues = await this.page.collectValuesAsync();
-        const newValues = await this.page.selectRsaAsync();
+        // eslint-disable-next-line prefer-destructuring
+        const page : AsymmetricPage = this.page;
+        const oldValues = await page.collectValuesAsync();
+        const newValues = await page.selectRsaAsync();
         asymmetricPageValuesCompare(oldValues, newValues, undefined, '2048', 'EC', 'RSA');
       });
 
       it('switch from rsa 2048 to 1024', async function test() {
-        const oldValues = await this.page.selectRsaAsync();
-        const newValues = await this.page.selectRsa1024Async();
+        // eslint-disable-next-line prefer-destructuring
+        const page : AsymmetricPage = this.page;
+        const oldValues = await page.selectRsaAsync();
+        const newValues = await page.selectRsa1024Async();
         asymmetricPageValuesCompare(oldValues, newValues, '2048', '1024', 'RSA', 'RSA');
       });
 
       it('switch from rsa 2048 to 4096', async function test() {
-        const oldValues = await this.page.selectRsaAsync();
-        const newValues = await this.page.selectRsa4096Async();
+        // eslint-disable-next-line prefer-destructuring
+        const page : AsymmetricPage = this.page;
+        const oldValues = await page.selectRsaAsync();
+        const newValues = await page.selectRsa4096Async();
         asymmetricPageValuesCompare(oldValues, newValues, '2048', '4096', 'RSA', 'RSA');
       });
 
       it('switch from EC to rsa 2048 to 1024 to 2048 to 4096 to EC', async function test() {
+        // eslint-disable-next-line prefer-destructuring
+        const page : AsymmetricPage = this.page;
         // EC to RSA 2048
-        let oldValues = await this.page.collectValuesAsync();
-        let newValues = await this.page.selectRsaAsync();
+        let oldValues = await page.collectValuesAsync();
+        let newValues = await page.selectRsaAsync();
         asymmetricPageValuesCompare(oldValues, newValues, undefined, '2048', 'EC', 'RSA');
 
         // RSA 2048 to RSA 1024
         oldValues = newValues;
-        newValues = await this.page.selectRsa1024Async();
+        newValues = await page.selectRsa1024Async();
         asymmetricPageValuesCompare(oldValues, newValues, '2048', '1024', 'RSA', 'RSA');
 
         // RSA 1024 to RSA 2048
         oldValues = newValues;
-        newValues = await this.page.selectRsa2048Async();
+        newValues = await page.selectRsa2048Async();
         asymmetricPageValuesCompare(oldValues, newValues, '1024', '2048', 'RSA', 'RSA');
 
         // RSA 2048 to RSA 4096
         oldValues = newValues;
-        newValues = await this.page.selectRsa4096Async();
+        newValues = await page.selectRsa4096Async();
         asymmetricPageValuesCompare(oldValues, newValues, '2048', '4096', 'RSA', 'RSA');
 
         // RSA 4096 to EC
         oldValues = newValues;
-        newValues = await this.page.selectEcAsync();
+        newValues = await page.selectEcAsync();
         asymmetricPageValuesCompare(oldValues, newValues, '4096', undefined, 'RSA', 'EC');
       });
 
       it('submit EC', async function test() {
-        const oldValues = await this.page.collectValuesAsync();
-        const newValues = await this.page.submitAsync();
+        // eslint-disable-next-line prefer-destructuring
+        const page : AsymmetricPage = this.page;
+        const oldValues = await page.collectValuesAsync();
+        const newValues = await page.submitAsync();
         asymmetricPageValuesCompare(oldValues, newValues, undefined, undefined, 'EC', 'EC');
       });
 
       it('submit RSA', async function test() {
-        const oldValues = await this.page.selectRsaAsync();
-        const newValues = await this.page.submitAsync();
+        // eslint-disable-next-line prefer-destructuring
+        const page : AsymmetricPage = this.page;
+        const oldValues = await page.selectRsaAsync();
+        const newValues = await page.submitAsync();
         asymmetricPageValuesCompare(oldValues, newValues, '2048', '2048', 'RSA', 'RSA');
       });
     });

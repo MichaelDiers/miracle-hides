@@ -1,4 +1,5 @@
 import * as assert from 'assert';
+import LicensePage from '../pages/licenses-page';
 import Page from '../pages/page';
 import WelcomePage from '../pages/welcome-page';
 import { TestFrame } from './test-frame';
@@ -6,15 +7,22 @@ import { TestFrame } from './test-frame';
 const pageTests : { name: string, getPageAsync: (welcomePage: WelcomePage) => Promise<Page> }[] = [
   {
     name: 'AsymmetricPage',
-    getPageAsync: async (welcomePage: WelcomePage) => welcomePage.toAsymmetricPageAsync(),
+    getPageAsync: async (welcomePage: WelcomePage) => welcomePage.toAsymmetricPageViaLinkAsync(),
   },
   {
     name: 'SymmetricPage',
-    getPageAsync: async (welcomePage: WelcomePage) => welcomePage.toSymmetricPageAsync(),
+    getPageAsync: async (welcomePage: WelcomePage) => welcomePage.toSymmetricPageViaLinkAsync(),
   },
   {
     name: 'WelcomePage',
     getPageAsync: async (welcomePage: WelcomePage) => welcomePage,
+  },
+  {
+    name: 'LicensePage',
+    getPageAsync: async (welcomePage: WelcomePage) => {
+      await welcomePage.toLicensePageAsync();
+      return LicensePage.initializeAsync(welcomePage);
+    },
   },
 ];
 
@@ -40,9 +48,9 @@ describe('SideMenu', () => {
             const page = await getPageAsync(this.welcomePage);
 
             const textLanguage1 = await page.getLanguageTextAsync();
-            await page.sideMenu.toggleLanguageAsync();
+            await page.toggleLanguageAsync();
             const textLanguage2 = await page.getLanguageTextAsync();
-            await page.sideMenu.toggleLanguageAsync();
+            await page.toggleLanguageAsync();
             const textLanguage3 = await page.getLanguageTextAsync();
             assert.equal(textLanguage1, textLanguage3);
             assert.notEqual(textLanguage1, textLanguage2);
@@ -52,9 +60,9 @@ describe('SideMenu', () => {
             const page = await getPageAsync(this.welcomePage);
 
             const backgroundColor1 = await page.getBackgroundColorAsync();
-            await page.sideMenu.toggleThemeAsync();
+            await page.toggleThemeAsync();
             const backgroundColor2 = await page.getBackgroundColorAsync();
-            await page.sideMenu.toggleThemeAsync();
+            await page.toggleThemeAsync();
             const backgroundColor3 = await page.getBackgroundColorAsync();
             assert.equal(backgroundColor1, backgroundColor3);
             assert.notEqual(backgroundColor1, backgroundColor2);
