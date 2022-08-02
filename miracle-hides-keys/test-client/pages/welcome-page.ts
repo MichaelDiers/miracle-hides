@@ -9,8 +9,21 @@ import SideMenu from './side-menu';
 import { SymmetricPage } from './symmetric-page';
 
 export default class WelcomePage extends Page {
-  private constructor(driver: WebDriver | BasePage, footer: Footer, sideMenu: SideMenu) {
-    super(driver, 'main#welcomePage', footer, sideMenu);
+  private constructor({
+    driver,
+    footer,
+    sideMenu,
+  } : {
+    driver: WebDriver | BasePage,
+    footer: Footer,
+    sideMenu: SideMenu,
+  }) {
+    super({
+      driver,
+      verifyOnPageSelector: 'main#welcomePage',
+      footer,
+      sideMenu,
+    });
   }
 
   static async initializeAsync(
@@ -18,10 +31,15 @@ export default class WelcomePage extends Page {
     url?: string,
     size?: WindowSize,
   ) : Promise<WelcomePage> {
-    const footer = await Footer.initializeAsync(driver);
-    const sideMenu = await SideMenu.initializeAsync(driver);
+    const footer = Footer.initializeAsync(driver);
+    const sideMenu = SideMenu.initializeAsync(driver);
 
-    const page = new WelcomePage(driver, footer, sideMenu);
+    const page = new WelcomePage({
+      driver,
+      footer: await footer,
+      sideMenu: await sideMenu,
+    });
+
     if (url) {
       await page.getAsync(url);
     }

@@ -2,6 +2,7 @@
 import { WebDriver } from 'selenium-webdriver';
 import BasePage from './base-page';
 import Footer from './footer';
+import Header from './header';
 import Page from './page';
 import SideMenu from './side-menu';
 
@@ -40,15 +41,37 @@ const SELECTOR_TEST_INPUT_ENCRYPTED = '#testInputEncrypted';
 const SELECTOR_TEST_INPUT_DECRYPTED = '#testInputDecrypted';
 
 export class AsymmetricPage extends Page {
-  private constructor(driver: WebDriver | BasePage, footer: Footer, sideMenu: SideMenu) {
-    super(driver, SELECTOR_PAGE_VERIFIER, footer, sideMenu);
+  private constructor({
+    driver,
+    footer,
+    sideMenu,
+    header,
+  }: {
+    driver: WebDriver | BasePage,
+    footer: Footer,
+    sideMenu: SideMenu,
+    header: Header,
+  }) {
+    super({
+      driver,
+      verifyOnPageSelector: SELECTOR_PAGE_VERIFIER,
+      footer,
+      sideMenu,
+      header,
+    });
   }
 
   static async initializeAsync(driver: WebDriver | BasePage) : Promise<AsymmetricPage> {
-    const footer = await Footer.initializeAsync(driver);
-    const sideMenu = await SideMenu.initializeAsync(driver);
+    const footer = Footer.initializeAsync(driver);
+    const header = Header.initializeAsync(driver);
+    const sideMenu = SideMenu.initializeAsync(driver);
 
-    const page = new AsymmetricPage(driver, footer, sideMenu);
+    const page = new AsymmetricPage({
+      driver,
+      footer: await footer,
+      sideMenu: await sideMenu,
+      header: await header,
+    });
     await page.verifyOnPageAsync();
     return page;
   }
@@ -141,8 +164,12 @@ export class AsymmetricPage extends Page {
     return this.collectValuesAsync();
   }
 
-  async toSymmetricPageAsync() : Promise<void> {
-    return this.clickAsync('#symmetricAlgorithmsLink');
+  async toAsymmetricPageAsync(isMobile: boolean) : Promise<void> {
+    return this.header.toAsymmetricPageAsync(isMobile);
+  }
+
+  async toSymmetricPageAsync(isMobile: boolean) : Promise<void> {
+    return this.header.toSymmetricPageAsync(isMobile);
   }
 
   private async selectRsaKeySizeAsync(

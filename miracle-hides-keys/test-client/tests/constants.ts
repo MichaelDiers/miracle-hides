@@ -16,6 +16,7 @@ export const ADDRESSES : Address[] = [
 export interface WindowSize extends DisplayName {
   width: number | 'max';
   height: number | 'max';
+  isMobile: boolean;
 }
 
 export const WINDOW_SIZES : WindowSize[] = [
@@ -23,15 +24,18 @@ export const WINDOW_SIZES : WindowSize[] = [
     displayName: '799 x max',
     height: 'max',
     width: 799,
+    isMobile: true,
   },
   {
-    displayName: '800 x max',
+    displayName: '900 x max',
     height: 'max',
-    width: 800,
+    width: 900,
+    isMobile: false,
   },
   {
     displayName: 'fullscreen',
     height: 'max',
     width: 'max',
+    isMobile: false,
   },
 ];
