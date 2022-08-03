@@ -23,5 +23,5 @@
     "autoDocstring.quoteStyle": "'''",
     "autoDocstring.docstringFormat": "google",
     "autoDocstring.startOnNewLine": true,
-    "pylint.args": ["--indent-string='  '"]
+    "pylint.args": ["--indent-string='  '"],
   }
