@@ -1,12 +1,24 @@
 import { Component } from 'react';
 import { CustomEventRaiser } from '../custom-event-handler';
+import { CommonTranslation } from './Translations';
 
-class SideMenu extends Component {
+interface SideMenuProperties {
+  common: CommonTranslation;
+}
+
+class SideMenu extends Component<SideMenuProperties> {
   render() {
     return (
       <div className="side-menu" id="sideMenuPage">
-        <button className="button side-menu-theme" onClick={CustomEventRaiser.raiseToggleTheme}></button>
-        <button className="button side-menu-language" translationvalue="sideMenuPage.en.textContent">English</button>
+        <button
+          className="button side-menu-theme"
+          onClick={CustomEventRaiser.raiseToggleTheme}>
+        </button>
+        <button
+          className="button side-menu-language"
+          onClick={CustomEventRaiser.raiseToggleLanguage}>
+            {this.props.common.language}
+        </button>
       </div>
     );
   }

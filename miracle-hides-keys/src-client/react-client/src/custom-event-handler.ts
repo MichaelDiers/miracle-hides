@@ -1,4 +1,5 @@
 export enum EventNames {
+  ToggleLanguageEvent = 'toggleLanguageEvent',
   ShowHeaderEvent = 'showHeaderEvent',
   ToggleThemeEvent = 'toggleThemeEvent',
 }
@@ -17,6 +18,10 @@ export class CustomEventRaiser {
     );
   }
 
+  static raiseToggleLanguage() : void {
+    CustomEventRaiser.raise(EventNames.ToggleLanguageEvent);
+  }
+
   static raiseToggleTheme() : void {
     CustomEventRaiser.raise(EventNames.ToggleThemeEvent);
   }
@@ -29,6 +34,10 @@ export class CustomEventRaiser {
 export class EventSubscriber {
   static subscribe(eventName: string, handle: (event: CustomEvent) => void) : void {
     document.body.addEventListener(eventName, (e) => handle(e as CustomEvent));
+  }
+
+  static subscribeToToggleLanguage(handle: (event: CustomEvent) => void) : void {    
+    EventSubscriber.subscribe(EventNames.ToggleLanguageEvent, handle);
   }
 
   static subscribeToShowHeader(handle: (event: CustomEvent) => void) : void {    

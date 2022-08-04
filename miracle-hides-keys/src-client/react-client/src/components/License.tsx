@@ -1,7 +1,28 @@
 import { Component } from 'react';
 import { CustomEventRaiser } from '../custom-event-handler';
+import { CommonTranslation, LicenseTranslation } from './Translations';
 
-class License extends Component {
+interface LicenseProperties {
+  common: CommonTranslation;
+  translation: LicenseTranslation;
+}
+
+const fonts = [
+  {
+    font: 'Orbitron',
+    license: 'Open Font License 1.1',
+    author: 'Matt McInerney',
+    link: 'https://fonts.google.com/specimen/Orbitron'
+  },
+  {
+    font: 'Ubuntu Condensed',
+    license: 'Ubuntu Font License 1.0',
+    author: 'Dalton Maag',
+    link: 'https://fonts.google.com/specimen/Ubuntu+Condensed'
+  }
+];
+
+class License extends Component<LicenseProperties> {
   componentDidMount() {
     CustomEventRaiser.raiseShowHeader();
   }
@@ -9,47 +30,42 @@ class License extends Component {
   render() {
     return (
       <div>
-        <h1 translationvalue="licensePage.licenses.textContent">Lizenzen</h1>
-        <h2 translationvalue="licensePage.licensesNode.textContent">Bibliotheken</h2>
-        <h1 translationvalue="licensePage.licensesFonts.textContent">Schriftarten</h1>
+        <h1>{this.props.common.licenses}</h1>
+        <h2>{this.props.translation.licensesNode}</h2>
+        <h1>{this.props.translation.licensesFonts}</h1>
         <div className="license-data license-data-fonts">
           <div className="mobile">
-            <div>
-              <div className="header header-mobile" translationvalue="licensePage.fontFont.textContent">Schrift</div>
-              <div>Orbitron</div>
-              <div className="header header-mobile" translationvalue="licensePage.fontLicense.textContent">Lizenz</div>
-              <div>Open Font License 1.1</div>
-              <div className="header header-mobile" translationvalue="licensePage.fontAuthor.textContent">Autor</div>
-              <div>Matt McInerney</div>
-              <div className="header header-mobile" translationvalue="licensePage.fontLink.textContent">Link</div>
-              <div>https://fonts.google.com/specimen/Orbitron</div>
-            </div>
-          <div>
-          <div className="header header-mobile" translationvalue="licensePage.fontFont.textContent">Schrift</div>
-          <div>Ubuntu Condensed</div>
-            <div className="header header-mobile" translationvalue="licensePage.fontLicense.textContent">Lizenz</div>
-            <div>Ubuntu Font License 1.0</div>
-            <div className="header header-mobile" translationvalue="licensePage.fontAuthor.textContent">Autor</div>
-            <div>Dalton Maag</div>
-            <div className="header header-mobile" translationvalue="licensePage.fontLink.textContent">Link</div>
-            <div>https://fonts.google.com/specimen/Ubuntu+Condensed</div>
+            {
+              fonts.map(({ font, license, author, link }, i) => {
+                return (
+                  <div key={`mobile_${i}`}>
+                    <div className="header header-mobile">{this.props.translation.fontFont}</div>
+                    <div>{font}</div>
+                    <div className="header header-mobile">{this.props.translation.fontLicense}</div>
+                    <div>{license}</div>
+                    <div className="header header-mobile">{this.props.translation.fontAuthor}</div>
+                    <div>{author}</div>
+                    <div className="header header-mobile">{this.props.translation.fontLink}</div>
+                    <div>{link}</div>
+                  </div>
+                )
+              })
+            }            
+          </div>
+          <div className="desktop">
+            <div className="header header-desktop">{this.props.translation.fontFont}</div>
+            <div className="header header-desktop">{this.props.translation.fontLicense}</div>
+            <div className="header header-desktop">{this.props.translation.fontAuthor}</div>
+            <div className="header header-desktop">{this.props.translation.fontLink}</div>
+            {
+              fonts.map(({ font, license, author, link }, i) => {
+                return [font, license, author, link].map((entry, j) => {
+                  return (<div key={`dektop_${i}_${j}`}>{entry}</div>)
+                });
+              })
+            }
           </div>
         </div>
-        <div className="desktop">
-          <div className="header header-desktop" translationvalue="licensePage.fontFont.textContent">Schrift</div>
-          <div className="header header-desktop" translationvalue="licensePage.fontLicense.textContent">Lizenz</div>
-          <div className="header header-desktop" translationvalue="licensePage.fontAuthor.textContent">Autor</div>
-          <div className="header header-desktop" translationvalue="licensePage.fontLink.textContent">Link</div>
-          <div>Orbitron</div>
-          <div>Open Font License 1.1</div>
-          <div>Matt McInerney</div>
-          <div>https://fonts.google.com/specimen/Orbitron</div>
-          <div>Ubuntu Condensed</div>
-          <div>Ubuntu Font License 1.0</div>
-          <div>Dalton Maag</div>
-          <div>https://fonts.google.com/specimen/Ubuntu+Condensed</div>
-        </div>
-      </div>
       </div>
     );
   }

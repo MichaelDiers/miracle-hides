@@ -1,9 +1,14 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { CommonTranslation, HeaderTranslation } from './Translations';
 
-class Header extends Component<{ className: string }> {
-  
+interface HeaderProperties {
+  className: string;
+  common: CommonTranslation;
+  translation: HeaderTranslation;
+}
 
+class Header extends Component<HeaderProperties> {
   render() {
     return (
       <header id="headerPage" className={this.props.className}>
@@ -11,9 +16,13 @@ class Header extends Component<{ className: string }> {
           <span>mhk</span>
           <span>eys</span>
         </Link>
-        <h1 translationvalue="headerPage.menuHeadline.textContent">Miracle Hides Keys</h1>
+        <h1>{this.props.common.miracleHidesKeys}</h1>
         <div className="mobile-menu-symbol">
-          <input id="menuSymbolTrigger" name="menuSymbolTrigger" type="checkbox"></input>
+          <input
+            id="menuSymbolTrigger"
+            name="menuSymbolTrigger"
+            type="checkbox"
+          ></input>
           <div className="icon-font content-menu"></div>
           <div className="icon-font content-close"></div>
         </div>
@@ -23,18 +32,16 @@ class Header extends Component<{ className: string }> {
               <Link 
                 to='/asymmetric'
                 id="asymmetricAlgorithmsLink"
-                className="menu-link underline"
-                translationvalue="headerPage.asymmetricAlgorithms.textContent">
-                  asymmetrische Algorithmen
+                className="menu-link underline">
+                  {this.props.translation.asymmetricAlgorithms}
               </Link>              
             </li>
             <li className="symmetric-color">
               <Link
                 id="symmetricAlgorithmsLink"
                 className="menu-link underline"
-                to="/symmetric"
-                translationvalue="headerPage.symmetricAlgorithms.textContent">
-                  symmetrische Algorithmen
+                to="/symmetric">
+                  {this.props.translation.symmetricAlgorithms}
               </Link>
             </li>
           </ul>

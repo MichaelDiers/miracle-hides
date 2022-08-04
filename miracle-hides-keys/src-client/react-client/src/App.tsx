@@ -4,56 +4,73 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Css from './css';
-import Welcome from './components/Welcome';
+import Welcome, { WelcomeProperties } from './components/Welcome';
 import SideMenu from './components/SideMenu';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { EventSubscriber } from './custom-event-handler';
 import Asymmetric from './components/Asymmetric';
 import Symmetric from './components/Symmetric';
 import License from './components/License';
+import { Language, languageDe, languageEn, Translation, translations } from './components/Translations';
 
-class App extends Component {
-  constructor() {
-    super({});
+interface State {
+  language: Language,
+  translations: Translation,
+  showHeader: boolean,
+  theme: string,
+}
+
+class App extends Component<{}, State> {
+  constructor(props = {}) {
+    super(props);
     this.showHeader = this.showHeader.bind(this);
+    this.toggleLanguage = this.toggleLanguage.bind(this);
+    this.state = {
+      language: languageDe,
+      translations: translations.find(({ name }) => name === languageDe) || translations[0],
+      showHeader: false,
+      theme: Css.THEME_LIGHT,
+    }
   }
 
-  state = {
-    showHeader: false,
-    theme: Css.THEME_LIGHT,
-  };
-
   componentDidMount (){
-    this.handleInitalTheme();
-    EventSubscriber.subscribeToToggleTheme((e) => this.toggleTheme());
+    this.handleInitialTheme();
+    this.handleInitialLanguage();
+
+    EventSubscriber.subscribeToToggleLanguage((e) => this.toggleLanguage());
     EventSubscriber.subscribeToShowHeader(this.showHeader);
-    const language = window.navigator.language || document.documentElement.lang || 'en';
-    const lang = language.split('-')[0].toLowerCase();
-    document.body.setAttribute('lang', lang);
-    document.body.setAttribute('lang-toggle', lang === 'en' ? 'de' : 'en');  
+    EventSubscriber.subscribeToToggleTheme((e) => this.toggleTheme());
   };
 
   render() {
     return (
       <BrowserRouter>
         <div className={this.state.theme}>
-          <Header className={this.state.showHeader ? '' : 'hidden'}/>
+          <Header className={this.state.showHeader ? '' : 'hidden'} common={this.state.translations.common} translation={this.state.translations.header}/>
           <main>
             <Routes>
-              <Route path='/' element={<Welcome/>}/>
-              <Route path='/asymmetric' element={<Asymmetric/>}/>
-              <Route path='/symmetric' element={<Symmetric/>}/>
-              <Route path='/licenses' element={<License/>}/>
+              <Route path='/' element={<Welcome common={this.state.translations.common} />}/>
+              <Route path='/asymmetric' element={<Asymmetric common={this.state.translations.common} translation={this.state.translations.asymmetric} />}/>
+              <Route path='/symmetric' element={<Symmetric common={this.state.translations.common} translation={this.state.translations.symmetric}/>}/>
+              <Route path='/licenses' element={<License common={this.state.translations.common} translation={this.state.translations.license}/>}/>
             </Routes>
           </main>
-          <Footer/>
-          <SideMenu />
+          <Footer common={this.state.translations.common}/>
+          <SideMenu common={this.state.translations.common}/>
         </div>
       </BrowserRouter>
     );
   }
 
-  handleInitalTheme = () => {
+  handleInitialLanguage = () => {
+    const language = window.navigator.language || document.documentElement.lang || languageEn;
+    const lang = language.split('-')[0].toLowerCase() === languageDe ? languageDe : languageEn;
+
+    this.setState({ language: lang });    
+    this.setState({ translations: translations.find(({ name }) => name === lang) || translations[0] });
+  }
+
+  handleInitialTheme = () => {
     let theme = Css.THEME_LIGHT;            
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       theme = Css.THEME_DARK; 
@@ -79,6 +96,13 @@ class App extends Component {
     if (show !== this.state.showHeader) {
       this.setState({ showHeader: show });
     }
+  }
+
+  toggleLanguage() {
+    const language = this.state.language === languageEn ? languageDe : languageEn;
+    this.setState({ language });
+
+    this.setState({ translations: translations.find(({ name }) => name === language) || translations[0] });
   }
 
   toggleTheme() {

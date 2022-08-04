@@ -1,8 +1,13 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CustomEventRaiser } from '../custom-event-handler';
+import { CommonTranslation } from './Translations';
 
-class Welcome extends Component {
+export interface WelcomeProperties {
+  common: CommonTranslation;
+}
+
+class Welcome extends Component<WelcomeProperties> {
   componentDidMount() {
     CustomEventRaiser.raiseShowHeader(false);
   }
@@ -10,25 +15,25 @@ class Welcome extends Component {
   render() {
     return (
       <div className="welcome">
-        <h1 translationvalue="commonLanguageSource.miracleHidesKeys.textContent">Miracle Hides Keys</h1>
+        <h1>{this.props.common.miracleHidesKeys}</h1>
         <div className="asymmetric-color">
-          <h2 translationvalue="commonLanguageSource.asymmetricEncryption.textContent">asymmetrische Verschlüsselung</h2>
+          <h2>{this.props.common.asymmetricEncryption}</h2>
           <ol>
-            <li translationvalue="commonLanguageSource.algorithmEc.textContent">EC</li>
-            <li translationvalue="commonLanguageSource.algorithmRsa.textContent">RSA</li>
+            <li>{this.props.common.algorithmEcShort}</li>
+            <li>{this.props.common.algorithmRsaShort}</li>
           </ol>
           <Link to="/asymmetric">
-            <button id="generateAsync" className="button" translationvalue="commonLanguageSource.generate.textContent">Generieren</button>
+            <button id="generateAsync" className="button">{this.props.common.generate}</button>
           </Link>
         </div>
         <div className="symmetric-color">
-          <h2 translationvalue="commonLanguageSource.symmetricEncryption.textContent">symmetrische Verschlüsselung</h2>
+        <h2>{this.props.common.symmetricEncryption}</h2>
           <ol>
-            <li translationvalue="commonLanguageSource.algorithmAes.textContent">AES</li>
-            <li translationvalue="commonLanguageSource.algorithmHmac.textContent">HMAC</li>
+            <li>{this.props.common.algorithmAesShort}</li>
+            <li>{this.props.common.algorithmHmacShort}</li>
           </ol>
           <Link to="/symmetric">
-            <button id="generateSync" className="button" translationvalue="commonLanguageSource.generate.textContent">Generieren</button>
+            <button id="generateSync" className="button">{this.props.common.generate}</button>
           </Link>
         </div>
       </div>

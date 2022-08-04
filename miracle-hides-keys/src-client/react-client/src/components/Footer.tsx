@@ -1,16 +1,19 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { CommonTranslation } from './Translations';
 
-class Footer extends Component {
+interface FooterProperties {
+  common: CommonTranslation;
+}
+
+class Footer extends Component<FooterProperties> {
   render() {
     return (
       <footer id="footerPage">
         <Link
           className="footer-link underline"
-          view="licensePage"
-          to="/licenses"
-          translationvalue="commonLanguageSource.licenses.textContent">
-            Lizenzen
+          to="/licenses">
+            {this.props.common.licenses}
         </Link>
       </footer>
     );
