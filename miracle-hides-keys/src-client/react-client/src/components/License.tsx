@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { CustomEventRaiser } from '../custom-event-handler';
+import { CustomEventRaiser } from '../infrastructure/custom-event-handler';
 import { CommonTranslation, LicenseTranslation } from './Translations';
 
 interface LicenseProperties {

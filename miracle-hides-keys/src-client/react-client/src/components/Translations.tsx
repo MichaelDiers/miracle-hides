@@ -34,6 +34,7 @@ export interface CommonTranslation {
   testInputDecrypted: string;
   testInputDecryptedPlaceholder: string;
   testInputValue: string;
+  [key: string]: string;
 }
 
 export interface HeaderTranslation {

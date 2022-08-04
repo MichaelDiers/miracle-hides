@@ -7,17 +7,18 @@ import Css from './css';
 import Welcome, { WelcomeProperties } from './components/Welcome';
 import SideMenu from './components/SideMenu';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { EventSubscriber } from './custom-event-handler';
+import { EventSubscriber } from './infrastructure/custom-event-handler';
 import Asymmetric from './components/Asymmetric';
 import Symmetric from './components/Symmetric';
 import License from './components/License';
 import { Language, languageDe, languageEn, Translation, translations } from './components/Translations';
 
 interface State {
-  language: Language,
-  translations: Translation,
-  showHeader: boolean,
-  theme: string,
+  language: Language;
+  processActive: number;
+  translations: Translation;
+  showHeader: boolean;
+  theme: string;
 }
 
 class App extends Component<{}, State> {
@@ -27,6 +28,7 @@ class App extends Component<{}, State> {
     this.toggleLanguage = this.toggleLanguage.bind(this);
     this.state = {
       language: languageDe,
+      processActive: 0,
       translations: translations.find(({ name }) => name === languageDe) || translations[0],
       showHeader: false,
       theme: Css.THEME_LIGHT,

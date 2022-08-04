@@ -1,4 +1,6 @@
 export enum EventNames {
+  ProcessEndEvent = 'processEndEvent',
+  ProcessStartEvent = 'processStartEvent',
   ToggleLanguageEvent = 'toggleLanguageEvent',
   ShowHeaderEvent = 'showHeaderEvent',
   ToggleThemeEvent = 'toggleThemeEvent',
@@ -18,6 +20,14 @@ export class CustomEventRaiser {
     );
   }
 
+  static raiseProcessEnd() : void {
+    CustomEventRaiser.raise(EventNames.ProcessEndEvent);
+  }
+
+  static raiseProcessStart() : void {
+    CustomEventRaiser.raise(EventNames.ProcessStartEvent);
+  }
+
   static raiseToggleLanguage() : void {
     CustomEventRaiser.raise(EventNames.ToggleLanguageEvent);
   }
@@ -34,6 +44,14 @@ export class CustomEventRaiser {
 export class EventSubscriber {
   static subscribe(eventName: string, handle: (event: CustomEvent) => void) : void {
     document.body.addEventListener(eventName, (e) => handle(e as CustomEvent));
+  }
+
+  static subscribeToProcessEnd(handle: (event: CustomEvent) => void) : void {
+    EventSubscriber.subscribe(EventNames.ProcessEndEvent, handle);
+  }
+
+  static subscribeToProcessStart(handle: (event: CustomEvent) => void) : void {
+    EventSubscriber.subscribe(EventNames.ProcessStartEvent, handle);
   }
 
   static subscribeToToggleLanguage(handle: (event: CustomEvent) => void) : void {    

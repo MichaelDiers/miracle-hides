@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { CustomEventRaiser } from '../custom-event-handler';
+import { CustomEventRaiser } from '../infrastructure/custom-event-handler';
 import { CommonTranslation } from './Translations';
 
 export interface WelcomeProperties {
