@@ -12,7 +12,7 @@ a:focus:hover {
   outline-width: $default-outline-width-focus-hover;
 }
 
-a::after {
+.underline::after {
   bottom: -2px;
   content: '';
   height: 2px;
@@ -24,7 +24,7 @@ a::after {
   width: 100%;
 }
 
-a:hover::after {
+.underline:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }

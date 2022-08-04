@@ -78,7 +78,7 @@ export default class FooterPage extends BasePage {
   protected setupHtml(): string {
     return [
       HtmlComponents.anchor({
-        css: [Css.FOOTER_LINK],
+        css: [Css.FOOTER_LINK, Css.UNDERLINE],
         view: PageEvents.LICENSE_PAGE,
         source: COMMON_LANGUAGE_SOURCE,
         text: CommonLanguageKeys.LICENSES,

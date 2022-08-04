@@ -290,7 +290,7 @@ export default class HtmlComponents {
     content?: string[],
   }): string {
     return HtmlComponents.component({
-      tag: 'navbar',
+      tag: 'nav',
       id,
       css,
       content,

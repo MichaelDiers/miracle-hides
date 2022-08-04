@@ -73,7 +73,7 @@ export default class HeaderPage extends BasePage {
   protected setupHtml(): string {
     return [
       HtmlComponents.anchor({
-        css: [Css.LOGO],
+        css: [Css.LOGO, Css.UNDERLINE],
         href: PageEvents.WELCOME_PAGE,
         content: [
           HtmlComponents.span({ content: 'mhk' }),
@@ -104,7 +104,7 @@ export default class HeaderPage extends BasePage {
                   source: PageEvents.HEADER_PAGE,
                   text: HeaderLanguageKeys.ASYMMETRIC_ALGORITHMS,
                   href: PageEvents.ASYMMETRIC_PAGE,
-                  css: [Css.MENU_LINK],
+                  css: [Css.MENU_LINK, Css.UNDERLINE],
                 }),
               }),
               HtmlComponents.listItem({
@@ -114,7 +114,7 @@ export default class HeaderPage extends BasePage {
                   source: PageEvents.HEADER_PAGE,
                   text: HeaderLanguageKeys.SYMMETRIC_ALGORITHMS,
                   href: PageEvents.SYMMETRIC_PAGE,
-                  css: [Css.MENU_LINK],
+                  css: [Css.MENU_LINK, Css.UNDERLINE],
                 }),
               }),
             ],

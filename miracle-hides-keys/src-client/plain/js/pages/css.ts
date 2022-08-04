@@ -27,6 +27,7 @@ const enum Css {
   SIDE_MENU = 'side-menu',
   THEME_LIGHT = 'light',
   THEME_DARK = 'dark',
+  UNDERLINE = 'underline',
   WELCOME = 'welcome',
 }
 
