@@ -36,16 +36,16 @@
   $asymmetric-color-focus,
   $symmetric-color-focus,
 ) {
-  body.#{$name} {
+  .#{$name} {
     color: $color;
   }
   
-  body.#{$name},
+  .#{$name},
   .#{$name} .text {
     background-color: $background-color;
   }
   
-  body.#{$name} * {
+  .#{$name} * {
     border-color: inherit;
     color: inherit;
     outline-color: inherit;
