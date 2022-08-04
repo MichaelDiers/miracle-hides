@@ -6,7 +6,7 @@ class Footer extends Component {
     return (
       <footer id="footerPage">
         <Link
-          className="footer-link"
+          className="footer-link underline"
           view="licensePage"
           to="/licenses"
           translationvalue="commonLanguageSource.licenses.textContent">

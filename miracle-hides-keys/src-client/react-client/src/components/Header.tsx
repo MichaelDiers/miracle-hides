@@ -7,7 +7,7 @@ class Header extends Component<{ className: string }> {
   render() {
     return (
       <header id="headerPage" className={this.props.className}>
-        <Link className="logo" to="/">
+        <Link className="logo underline" to="/">
           <span>mhk</span>
           <span>eys</span>
         </Link>
@@ -23,7 +23,7 @@ class Header extends Component<{ className: string }> {
               <Link 
                 to='/asymmetric'
                 id="asymmetricAlgorithmsLink"
-                className="menu-link"
+                className="menu-link underline"
                 translationvalue="headerPage.asymmetricAlgorithms.textContent">
                   asymmetrische Algorithmen
               </Link>              
@@ -31,7 +31,7 @@ class Header extends Component<{ className: string }> {
             <li className="symmetric-color">
               <Link
                 id="symmetricAlgorithmsLink"
-                className="menu-link"
+                className="menu-link underline"
                 to="/symmetric"
                 translationvalue="headerPage.symmetricAlgorithms.textContent">
                   symmetrische Algorithmen
