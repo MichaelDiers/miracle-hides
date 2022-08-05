@@ -9,6 +9,7 @@ export interface CommonTranslation {
   algorithmHmacShort: string;
   algorithmRsaShort: string;
   asymmetricEncryption: string;
+  errorMessage: string;
   generate: string;
   keySize: string;
   keySize128: string;
@@ -70,7 +71,7 @@ export interface Translation {
   name: Language;
 }
 
-export const translations : Translation[] = [
+export const Translations : Translation[] = [
   {
     name: languageDe,    
     common: {
@@ -80,6 +81,7 @@ export const translations : Translation[] = [
       algorithmHmacShort: 'HMAC',
       algorithmRsaShort: 'RSA',
       asymmetricEncryption: 'asymmetrische Verschlüsselung',
+      errorMessage: 'Schlüssel können zur Zeit nicht genriert werden.',
       generate: 'Generieren',
       keySize: 'Schlüssellänge',
       keySize128: '128',
@@ -133,7 +135,8 @@ export const translations : Translation[] = [
       algorithmEcShort: 'EC',
       algorithmHmacShort: 'HMAC',
       algorithmRsaShort: 'RSA',
-      asymmetricEncryption: 'Symmetric Encryption',
+      asymmetricEncryption: 'Asymmetric Encryption',
+      errorMessage: 'Keys cannot be generated at the moment.',
       generate: 'Generate',
       keySize: 'Key Size',
       keySize128: '128',
