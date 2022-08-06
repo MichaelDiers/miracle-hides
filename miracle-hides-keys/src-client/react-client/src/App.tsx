@@ -1,5 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,13 +6,10 @@ import Css from './css';
 import Welcome from './components/Welcome';
 import SideMenu from './components/SideMenu';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CustomEventRaiser, EventSubscriber, EventUnsubscriber } from './infrastructure/custom-event-handler';
 import Asymmetric from './components/Asymmetric';
 import Symmetric from './components/Symmetric';
 import License from './components/License';
-import { Language, languageDe, languageEn, Translation, Translations } from './components/Translations';
-import { stringify } from 'querystring';
-import { setTimeout } from 'timers/promises';
+import { languageDe, languageEn, Translations } from './components/Translations';
 
 const initializeTheme = () => {
   let theme = Css.THEME_LIGHT;            
@@ -32,7 +28,6 @@ const initializeTranslations = () => {
 
 const App = () => {
   const [theme, setTheme] = useState(initializeTheme());
-  const [showHeader, setShowHeader] = useState(false);
   const [translations, setTranslations] = useState(initializeTranslations());
   const [isProcessing, setIsProcessing] = useState(false);
   const [data, setData] = useState({
@@ -131,11 +126,18 @@ const App = () => {
   return (
     <BrowserRouter basename='/react'>
       <div className={isProcessing ? `background-process-active ${theme}` : theme}>
-        <Header
-          className={showHeader ? '' : 'hidden'}
-          common={translations.common}
-          translation={translations.header}
-        />
+          <Routes>
+            <Route index />
+            <Route
+              path='/*'
+              element={
+                <Header
+                  common={translations.common}
+                  translation={translations.header}
+                />
+              }
+            ></Route>
+          </Routes>
         <main>
           <Routes>
             <Route index element={<Welcome common={translations.common} />}/>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { CommonTranslation, HeaderTranslation } from './Translations';
 
 interface HeaderProperties {
-  className: string;
   common: CommonTranslation;
   translation: HeaderTranslation;
 }
@@ -11,7 +10,7 @@ interface HeaderProperties {
 class Header extends Component<HeaderProperties> {
   render() {
     return (
-      <header id="headerPage" className={this.props.className}>
+      <header id="headerPage">
         <Link className="logo underline" to="/">
           <span>mhk</span>
           <span>eys</span>
