@@ -31,7 +31,8 @@ interface AsymmetricProps {
   common: CommonTranslation;
   translation: AsymmetricTranslation;
   data: AsymmetricPropsData;
-  createKeys: (request: CreateKeys) => void; 
+  createKeys: (request: CreateKeys) => void;
+  isProcessing: boolean;
 }
 
 const Asymmetric = (props: AsymmetricProps) => {  
@@ -48,11 +49,13 @@ const Asymmetric = (props: AsymmetricProps) => {
     rsaKeySizeValue?: string,
     typeValue?: string,
   } = {}) => {
-    props.createKeys({
-      ecNamedCurve: ecNamedCurveValue,
-      rsaKeySize: rsaKeySizeValue,
-      type: typeValue,
-    });
+    if (!props.isProcessing) {
+      props.createKeys({
+        ecNamedCurve: ecNamedCurveValue,
+        rsaKeySize: rsaKeySizeValue,
+        type: typeValue,
+      });
+    }
   }
 
   const handleAlgorithmTypeChange = (event: ChangeEvent<HTMLInputElement>) => {

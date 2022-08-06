@@ -108,6 +108,17 @@ const App = () => {
     });
   }
 
+  const handleTabs = (event: KeyboardEvent): void => {
+    if (isProcessing && event.key === 'Tab') {
+      event.preventDefault();
+    }
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('keydown', handleTabs);
+    return () => document.body.removeEventListener('keydown', handleTabs);
+  }, []);
+
   return (
     <BrowserRouter basename='/react'>
       <div className={isProcessing ? `background-process-active ${theme}` : theme}>
@@ -127,6 +138,7 @@ const App = () => {
                   translation={translations.asymmetric}
                   data={data}
                   createKeys={createAsymmetricKeys}
+                  isProcessing={isProcessing}
                 />
               }
             />
