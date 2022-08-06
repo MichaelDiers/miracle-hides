@@ -1,6 +1,4 @@
-import { HttpErrorByCode } from '@nestjs/common/utils/http-error-by-code.util';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { CustomEventRaiser, EventSubscriber, EventUnsubscriber } from '../infrastructure/custom-event-handler';
 import RadioButtons from './shared/RadioButtons';
 import ReadOnlyTextarea from './shared/ReadOnlyTextarea';
 import { AsymmetricTranslation, CommonTranslation } from './Translations';
@@ -79,6 +77,10 @@ const Asymmetric = (props: AsymmetricProps) => {
     event.preventDefault();
     callCreateKeys();
   }
+
+  useEffect(() => {
+    callCreateKeys();
+  }, []);
 
   return (
     <div className="asymmetric-color">

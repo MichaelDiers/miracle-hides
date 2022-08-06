@@ -48,10 +48,10 @@ const App = () => {
   const [data, setData] = useState({
     errorMessage: '',
     testInput: translations.common.testInputValue,
-    privateKey: 'private',
-    publicKey: 'public',
-    encrypted: 'enc',
-    decrypted: 'dec',
+    privateKey: '',
+    publicKey: '',
+    encrypted: '',
+    decrypted: '',
   });
 
   const createAsymmetricKeys = ({ type, rsaKeySize, ecNamedCurve } : { type: string, rsaKeySize: string, ecNamedCurve: string}) => {    
