@@ -121,7 +121,7 @@ const App = () => {
   useEffect(() => {
     document.body.addEventListener('keydown', handleTabs);
     return () => document.body.removeEventListener('keydown', handleTabs);
-  }, []);
+  });
 
   return (
     <BrowserRouter basename='/react'>
