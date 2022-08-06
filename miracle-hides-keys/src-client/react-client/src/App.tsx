@@ -30,16 +30,6 @@ const initializeTranslations = () => {
   return Translations.find(({ name }) => name.toLowerCase() === lang) || Translations[0];
 }
 
-const handleCreateKeys = () => {
-  console.log('create');
-  CustomEventRaiser.raiseKeysCreated({
-    privateKey: 'private',
-    publicKey: 'public',
-    encrypted: 'encrypted',
-    decrypted: 'decrypted',    
-  });
-};
-
 const App = () => {
   const [theme, setTheme] = useState(initializeTheme());
   const [showHeader, setShowHeader] = useState(false);
@@ -114,6 +104,25 @@ const App = () => {
     }
   }
 
+  const toggleLanguage = () => {
+    const newTranslations = translations.name === Translations[0].name 
+      ? Translations[1] : Translations[0];
+    setTranslations(newTranslations);
+    setData({
+      errorMessage: data.errorMessage,
+      testInput: newTranslations.common.testInputValue,
+      privateKey: data.privateKey,
+      publicKey: data.publicKey,
+      encrypted: '',
+      decrypted: '',
+    });
+  }
+
+  const toggleTheme = () => {
+    const newTheme = theme === Css.THEME_DARK ? Css.THEME_LIGHT : Css.THEME_DARK;
+    setTheme(newTheme);
+  }
+
   useEffect(() => {
     document.body.addEventListener('keydown', handleTabs);
     return () => document.body.removeEventListener('keydown', handleTabs);
@@ -163,7 +172,11 @@ const App = () => {
           </Routes>
         </main>
         <Footer common={translations.common}/>
-        <SideMenu common={translations.common}/>
+        <SideMenu
+          common={translations.common}
+          toggleLanguage={toggleLanguage}
+          toggleTheme={toggleTheme}
+        />
       </div>
     </BrowserRouter>
   );
