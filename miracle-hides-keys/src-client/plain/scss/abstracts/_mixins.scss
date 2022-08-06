@@ -160,6 +160,7 @@
     color: $symmetric-color-lighter;
   }
   
+  .#{$name}.background-process-active::before,
   .#{$name} .background-process-active::before {
     background-color: $overlay-color;
   }

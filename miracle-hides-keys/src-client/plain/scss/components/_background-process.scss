@@ -12,3 +12,8 @@
   top: 0;
   width: 100%;
 }
+
+.background-process-active :focus,
+.background-process-active :hover {
+  outline: none!important;
+}
