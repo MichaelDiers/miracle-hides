@@ -9,7 +9,11 @@ export interface Address extends DisplayName {
 export const ADDRESSES : Address[] = [
   {
     displayName: 'plain',
-    url: 'http://localhost:3000/plain/index.html',
+    url: 'http://localhost:3001/plain/index.html',
+  },
+  {
+    displayName: 'react',
+    url: 'http://localhost:3000/react',
   },
 ];
 

@@ -88,7 +88,13 @@ export default class BasePage {
   ) : Promise<string> {
     const oldValue = await this.getValueAsync(selectorValueChanged);
     const textElement = await this.driver.findElement(By.css(selectorValue));
-    await textElement.sendKeys(...Array(oldValue.length).fill(Key.BACK_SPACE), value, Key.TAB);
+    const textElementValueLength = (await textElement.getAttribute('value')).length;
+    await textElement.sendKeys(
+      value,
+      ...Array(value.length).fill(Key.ARROW_LEFT),
+      ...Array(textElementValueLength).fill(Key.BACK_SPACE),
+      Key.TAB,
+    );
 
     return this.driver.wait(async (driver: WebDriver) => {
       const element = driver.findElement(By.css(selectorValueChanged));

@@ -6,7 +6,7 @@ import { CommonTranslation, SymmetricTranslation } from './Translations';
 const ValidationData = {
   hmacMinSize: 8,
   hmaxMaxSize: 999999,
-  hmacDefaultSize: 1024,
+  hmacDefaultSize: 128,
 };
 
 interface CreateKeys {
@@ -50,7 +50,7 @@ class Symmetric extends Component<SymmetricProperties, SymmetricState> {
     this.state = {
       aesKeySize: AesKeySizes[0],
       hmacKeySize: `${ValidationData.hmacDefaultSize}`,
-      type: Types.HMAC,
+      type: Types.AES,
     };
 
     this.aesKeySizeChange = this.aesKeySizeChange.bind(this);

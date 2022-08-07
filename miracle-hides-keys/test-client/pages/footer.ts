@@ -12,6 +12,6 @@ export default class Footer extends BasePage {
   }
 
   async toLicensePageAsync() : Promise<void> {
-    await this.clickAsync('a[view=licensePage]');
+    await this.clickAsync('[href="/react/licenses"], [view=licensePage]');
   }
 }

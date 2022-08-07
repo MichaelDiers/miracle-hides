@@ -25,8 +25,15 @@ describe('Header', () => {
       });
 
       it('no header on welcome page', async function test() {
-        const header = await this.driver.findElement(By.css('header'));
-        await this.driver.wait(until.elementIsNotVisible(header));
+        let header;
+        try {
+          header = await this.driver.findElement(By.css('header'));
+        } catch {
+        }
+
+        if (header) {
+          await this.driver.wait(until.elementIsNotVisible(header));
+        }
       });
 
       it('from asymmetric page to symmetric page', async function test() {

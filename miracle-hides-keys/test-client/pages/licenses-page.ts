@@ -7,7 +7,7 @@ import Page from './page';
 import SideMenu from './side-menu';
 
 const SELECTOR_PAGE_VERIFIER = '#licensePage';
-const SELECTOR_LANGUAGE_TEST = '#licensePage div h1';
+const SELECTOR_LANGUAGE_TEST = '#licensePage h1';
 
 export default class LicensePage extends Page {
   private constructor({

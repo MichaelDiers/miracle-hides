@@ -32,7 +32,7 @@ export default abstract class Page extends BasePage {
   }
 
   async getBackgroundColorAsync() : Promise<string> {
-    return super.getBackgroundColorAsync('body');
+    return super.getBackgroundColorAsync('.app');
   }
 
   abstract getLanguageTextAsync() : Promise<string>;
