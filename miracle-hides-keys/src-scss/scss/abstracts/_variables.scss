@@ -1,0 +1,86 @@
+// global
+$default-outline-width-focus: 2px;
+$default-outline-width-focus-hover: $default-outline-width-focus + 1px;
+$default-outline-offset: 1px;
+
+$default-padding: 30px;
+
+$default-element-border-radius: 4px;
+$default-element-margin: 20px;
+$default-element-padding: 10px;
+
+// mobile - desktop
+$mobile-max-width: 800px;
+
+// colors
+$overlay-color: hsla(0, 0%, 4%, 0.2);
+
+$focus-correction: 30%;
+$lighter-correction: 0.65;
+$shadow-correction: 10%;
+
+// dark
+$asymmetric-color-h-dark: 157;
+$asymmetric-color-s-dark: 69%;
+$asymmetric-color-l-dark: 41%;
+
+$background-color-h-dark: 0;
+$background-color-s-dark: 18%;
+$background-color-l-dark: 13%;
+
+$color-h-dark: 0;
+$color-s-dark: 0%;
+$color-l-dark: 45%;
+
+$symmetric-color-h-dark: 9;
+$symmetric-color-s-dark: 69%;
+$symmetric-color-l-dark: 41%;
+
+$asymmetric-color-dark: hsl($asymmetric-color-h-dark, $asymmetric-color-s-dark, $asymmetric-color-l-dark);
+$asymmetric-color-focus-dark: hsl($asymmetric-color-h-dark, $asymmetric-color-s-dark, $asymmetric-color-l-dark + $focus-correction);
+$asymmetric-color-lighter-dark: hsla($asymmetric-color-h-dark, $asymmetric-color-s-dark, $asymmetric-color-l-dark, $lighter-correction);
+$asymmetric-color-shadow-dark: hsl($asymmetric-color-h-dark, $asymmetric-color-s-dark, $asymmetric-color-l-dark + $shadow-correction);
+
+$background-color-dark: hsl($background-color-h-dark, $background-color-s-dark, $background-color-l-dark);
+$background-color-lighter-dark: hsl($background-color-h-dark, $background-color-s-dark, $background-color-l-dark + $shadow-correction);
+
+$color-dark: hsl($color-h-dark, $color-s-dark, $color-l-dark);
+$color-focus-dark: hsl($color-h-dark, $color-s-dark, $color-l-dark + $focus-correction);
+
+$symmetric-color-dark: hsl($symmetric-color-h-dark, $symmetric-color-s-dark, $symmetric-color-l-dark);
+$symmetric-color-focus-dark: hsl($symmetric-color-h-dark, $symmetric-color-s-dark, $symmetric-color-l-dark + $focus-correction);
+$symmetric-color-lighter-dark: hsla($symmetric-color-h-dark, $symmetric-color-s-dark, $symmetric-color-l-dark, $lighter-correction);
+$symmetric-color-shadow-dark: hsl($symmetric-color-h-dark, $symmetric-color-s-dark, $symmetric-color-l-dark + $shadow-correction);
+
+// light
+$asymmetric-color-h-light: 41;
+$asymmetric-color-s-light: 98%;
+$asymmetric-color-l-light: 41%;
+
+$background-color-h-light: 180;
+$background-color-s-light: 21%;
+$background-color-l-light: 93%;
+
+$color-h-light: 191;
+$color-s-light: 81%;
+$color-l-light: 25%;
+
+$symmetric-color-h-light: 155;
+$symmetric-color-s-light: 41%;
+$symmetric-color-l-light: 49%;
+
+$asymmetric-color-light: hsl($asymmetric-color-h-light, $asymmetric-color-s-light, $asymmetric-color-l-light);
+$asymmetric-color-focus-light: hsl($asymmetric-color-h-light, $asymmetric-color-s-light, $asymmetric-color-l-light + $focus-correction);
+$asymmetric-color-lighter-light: hsla($asymmetric-color-h-light, $asymmetric-color-s-light, $asymmetric-color-l-light, $lighter-correction);
+$asymmetric-color-shadow-light: hsl($asymmetric-color-h-light, $asymmetric-color-s-light, $asymmetric-color-l-light + $shadow-correction);
+
+$background-color-light: hsl($background-color-h-light, $background-color-s-light, $background-color-l-light);
+$background-color-lighter-light: hsl($background-color-h-light, $background-color-s-light, $background-color-l-light + $shadow-correction);
+
+$color-light: hsl($color-h-light, $color-s-light, $color-l-light);
+$color-focus-light: hsl($color-h-light, $color-s-light, $color-l-light + $focus-correction);
+
+$symmetric-color-light: hsl($symmetric-color-h-light, $symmetric-color-s-light, $symmetric-color-l-light);
+$symmetric-color-focus-light: hsl($symmetric-color-h-light, $symmetric-color-s-light, $symmetric-color-l-light + $focus-correction);
+$symmetric-color-lighter-light: hsla($symmetric-color-h-light, $symmetric-color-s-light, $symmetric-color-l-light, $lighter-correction);
+$symmetric-color-shadow-light: hsl($symmetric-color-h-light, $symmetric-color-s-light, $symmetric-color-l-light + $shadow-correction);

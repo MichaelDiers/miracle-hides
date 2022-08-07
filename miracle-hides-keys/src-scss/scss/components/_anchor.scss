@@ -1,0 +1,30 @@
+a {
+  border-radius: 10px;
+  outline-offset: 8px;
+  position: relative;
+}
+
+a:focus {
+  outline: solid $default-outline-width-focus;  
+}
+
+a:focus:hover {
+  outline-width: $default-outline-width-focus-hover;
+}
+
+.underline::after {
+  bottom: -2px;
+  content: '';
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+  width: 100%;
+}
+
+.underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

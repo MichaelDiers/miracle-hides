@@ -1,0 +1,46 @@
+{
+  "name": "miracle-hides-keys-scss",
+  "version": "1.0.0",
+  "description": "styles for miracle-hides-keys",
+  "main": "client.scss",
+  "scripts": {
+    "prebuild": "npx rimraf build && npx mkdirp build && npx rimraf dist && npx mkdirp dist",
+    "build": "npm run stylelint && npm run build:client.css && npm run build:client.min.css && npm run build:fonts",
+    "build:sass": "npx sass --stop-on-error --no-source-map ./scss/client.scss",
+    "build:client.css": "npm run build:sass -- ./build/client.css && npm run build:autoprefixer -- -o ./dist/client.css ./build/client.css",
+    "build:client.min.css": "npm run build:sass -- ./build/client.min.css --style=compressed && npm run build:autoprefixer -- -o ./dist/client.min.css ./build/client.min.css",
+    "build:autoprefixer": "npx postcss --no-map --use autoprefixer ",
+    "build:fonts": "npx copyfiles -u 1 fonts/*/*.woff2 dist && npx copyfiles -u 1 fonts/**/*.txt dist",
+    "predist": "npx rimraf ../dist/client/css",
+    "dist": "npm run build && npm run dist:copy",
+    "dist:copy": "npx copyfiles -u 1 dist/**/* ../dist/client/css",
+    "stylelint": "npx stylelint --config .stylelintrc --fix scss/**/*.scss",
+    "git": "npm run stylelint && git add . && git status"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelDiers/miracle-hides.git"
+  },
+  "keywords": [
+    "sass",
+    "css",
+    "scss"
+  ],
+  "author": "Michael Diers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MichaelDiers/miracle-hides/issues"
+  },
+  "homepage": "https://github.com/MichaelDiers/miracle-hides/tree/main#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.8",
+    "copyfiles": "^2.4.1",
+    "mkdirp": "^1.0.4",
+    "postcss": "^8.4.16",
+    "postcss-cli": "^10.0.0",
+    "rimraf": "^3.0.2",
+    "sass": "^1.54.3",
+    "stylelint": "^14.9.1",
+    "stylelint-config-sass-guidelines": "^9.0.1"
+  }
+}

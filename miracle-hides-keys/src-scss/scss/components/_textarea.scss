@@ -1,0 +1,30 @@
+.textarea-container {
+  display: grid;
+  grid-template-areas: 'content';
+}
+
+.textarea-container textarea {
+  grid-area: content;
+  position: relative;
+  z-index: 1;
+}
+
+.textarea-container div {
+  align-self: start;
+  grid-area: content;
+  justify-self: end;
+  margin: 25px;
+  position: relative;
+  transform: scale(0);
+  transform-origin: top right;
+  transition: all 0.3s ease-out;
+  z-index: 2;
+}
+
+.textarea-container:hover div {
+  transform: scale(1);
+}
+
+.textarea-container div:active {
+  transform: scale(1.1);
+}

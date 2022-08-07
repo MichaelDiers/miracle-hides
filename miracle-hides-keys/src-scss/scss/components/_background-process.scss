@@ -1,0 +1,19 @@
+.background-process-active {
+  cursor: wait;
+  position: relative;
+}
+
+.background-process-active::before {
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.background-process-active :focus,
+.background-process-active :hover {
+  outline: none !important;
+}

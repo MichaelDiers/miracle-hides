@@ -1,0 +1,40 @@
+.grid-form {
+  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(auto, 500px);
+}
+
+@for $i from 1 through 3 {
+  .grid-form-row-#{$i * 2} {
+    @include grid(('columnsCount': #{$i * 2}, 'columnsSize': 'min-content', 'placeItems': 'center')...);
+  }
+}
+
+@media only screen and (max-width: $mobile-max-width) {
+  .grid-form > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .grid-form > label {
+    margin-bottom: 0;
+  }
+  
+  .grid-form > label + *,
+  .grid-form .grid-form-row-2 > *,
+  .grid-form .grid-form-row-4 > *,
+  .grid-form .grid-form-row-6 > *,
+  .grid-form textarea {
+    margin-top: 0;
+  }
+}
+
+@media only screen and (min-width: $mobile-max-width) {
+  .col-2 {
+    grid-column-start: 2;
+  }
+
+  .grid-form {
+    grid-template-columns: minmax(auto, 200px) minmax(auto, 600px);
+  }
+}
