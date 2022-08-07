@@ -41,6 +41,7 @@ export interface CommonTranslation {
 export interface HeaderTranslation {
   asymmetricAlgorithms: string;
   symmetricAlgorithms: string;
+  [key: string]: string;
 }
 
 export interface LicenseTranslation {

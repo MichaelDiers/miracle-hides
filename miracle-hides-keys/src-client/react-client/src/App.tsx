@@ -45,6 +45,7 @@ const App = () => {
     encrypted: '',
     decrypted: '',
   });
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   const createAsymmetricKeys = ({ type, rsaKeySize, ecNamedCurve } : { type: string, rsaKeySize: string, ecNamedCurve: string}) => {    
     setIsProcessing(true);
@@ -157,6 +158,10 @@ const App = () => {
     }
   }
 
+  const toggleIsNavbarOpen = (isOpen: boolean) => {
+    setIsNavbarOpen(isOpen);
+  }
+
   const toggleLanguage = () => {
     const newTranslations = translations.name === Translations[0].name 
       ? Translations[1] : Translations[0];
@@ -183,7 +188,7 @@ const App = () => {
 
   return (
     <BrowserRouter basename='/react'>
-      <div className={isProcessing ? `background-process-active ${theme}` : theme}>
+      <div className={`app ${theme} ${isProcessing ? `background-process-active ` : ''} ${isNavbarOpen ? `navbar-active ` : ''}`}>
           <Routes>
             <Route index />
             <Route
@@ -192,6 +197,8 @@ const App = () => {
                 <Header
                   common={translations.common}
                   translation={translations.header}
+                  isNavbarOpen={isNavbarOpen}
+                  toggleNavbarOpen={toggleIsNavbarOpen}
                 />
               }
             ></Route>
