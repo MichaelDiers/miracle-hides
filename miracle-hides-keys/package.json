@@ -1,0 +1,19 @@
+{
+  "name": "miracle-hides-keys",
+  "version": "1.0.0",
+  "description": "create keys for symmetric and asymmetric encryption",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelDiers/miracle-hides.git"
+  },
+  "author": "Michael Diers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MichaelDiers/miracle-hides/issues"
+  },
+  "homepage": "https://github.com/MichaelDiers/miracle-hides#readme"
+}
