@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "build",    
+    "target": "ES2017",
+    "skipLibCheck": true,    
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "types": [ "mocha", "node" ],
+  },
+  "include": ["./**/*"],
+  "exclude": ["node_modules", "build"],
+}
