@@ -83,7 +83,7 @@ const Asymmetric = (props: AsymmetricProps) => {
 
   useEffect(() => {
     callCreateKeys();
-  });
+  }, []);
 
   return (
     <div className="asymmetric-color">

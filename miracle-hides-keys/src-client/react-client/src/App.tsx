@@ -38,6 +38,13 @@ const App = () => {
     encrypted: '',
     decrypted: '',
   });
+  const [symmetricData, setSymmetricData] = useState({
+    errorMessage: '',
+    testInput: translations.common.testInputValue,
+    privateKey: '',
+    encrypted: '',
+    decrypted: '',
+  });
 
   const createAsymmetricKeys = ({ type, rsaKeySize, ecNamedCurve } : { type: string, rsaKeySize: string, ecNamedCurve: string}) => {    
     setIsProcessing(true);
@@ -93,6 +100,57 @@ const App = () => {
     });
   }
 
+  const createSymmetricKeys = ({ type, aesKeySize, hmacKeySize } : { type: string, aesKeySize: string, hmacKeySize: string}) => {    
+    setIsProcessing(true);
+    
+    const body = {
+      type,
+      aesKeySize,
+      hmacKeySize,
+      testInput: data.testInput,
+    };
+
+    fetch(
+      'http://localhost:3001/keys',
+      {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: [['Content-Type', 'application/json']],
+        mode:'cors',
+      },
+    ).then((response) => {
+      if (response.ok) {
+        response.text().then((text) => {
+          const json = JSON.parse(text);
+          const {
+            privateKey,
+            encrypted,
+            decrypted,
+            testInput,
+          } = json;
+
+          setSymmetricData({
+            errorMessage: '',
+            testInput,
+            privateKey,
+            encrypted,
+            decrypted,
+          });
+        });
+      } else {
+        setSymmetricData({
+          errorMessage: translations.common.errorMessage,
+          testInput: translations.common.testInput,
+          privateKey: '',
+          encrypted: '',
+          decrypted: '',
+        });
+      }
+
+      setIsProcessing(false);
+    });
+  }
+
   const handleTabs = (event: KeyboardEvent): void => {
     if (isProcessing && event.key === 'Tab') {
       event.preventDefault();
@@ -121,7 +179,7 @@ const App = () => {
   useEffect(() => {
     document.body.addEventListener('keydown', handleTabs);
     return () => document.body.removeEventListener('keydown', handleTabs);
-  });
+  }, []);
 
   return (
     <BrowserRouter basename='/react'>
@@ -159,6 +217,9 @@ const App = () => {
                 <Symmetric
                   common={translations.common}
                   translation={translations.symmetric}
+                  data={symmetricData}
+                  createKeys={createSymmetricKeys}
+                  isProcessing={isProcessing}
                 />
               }
             />
