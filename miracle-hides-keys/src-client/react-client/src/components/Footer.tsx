@@ -9,7 +9,7 @@ interface FooterProperties {
 class Footer extends Component<FooterProperties> {
   render() {
     return (
-      <footer id="footerPage">
+      <footer>
         <Link
           className="footer-link underline"
           to="/licenses">

@@ -24,7 +24,7 @@ const fonts = [
 class License extends Component<LicenseProperties> {
   render() {
     return (
-      <div>
+      <div id="headerPage">
         <h1>{this.props.common.licenses}</h1>
         <h2>{this.props.translation.licensesNode}</h2>
         <h1>{this.props.translation.licensesFonts}</h1>

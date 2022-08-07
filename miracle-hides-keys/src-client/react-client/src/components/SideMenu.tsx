@@ -10,7 +10,7 @@ interface SideMenuProperties {
 class SideMenu extends Component<SideMenuProperties> {
   render() {
     return (
-      <div className="side-menu" id="sideMenuPage">
+      <div className="side-menu">
         <button
           className="button side-menu-theme"
           onClick={this.props.toggleTheme}>

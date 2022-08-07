@@ -20,7 +20,7 @@ export default class WelcomePage extends Page {
   }) {
     super({
       driver,
-      verifyOnPageSelector: 'main#welcomePage',
+      verifyOnPageSelector: '#welcomePage',
       footer,
       sideMenu,
     });

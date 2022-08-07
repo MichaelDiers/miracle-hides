@@ -27,7 +27,7 @@ const SELECTOR_ALGORITHM_RSA = `${SELECTOR_ALGORITHM}[value=${ALGORITHM_RSA}]`;
 const SELECTOR_EC_NAMED_CURVE = '[name=ecNamedCurve]';
 const SELECTOR_EC_NAMED_CURVE_CHECKED = `${SELECTOR_EC_NAMED_CURVE}:checked`;
 const SELECTOR_LANGUAGE_TEST = 'label[for=type]';
-const SELECTOR_PAGE_VERIFIER = 'main#asymmetricPage';
+const SELECTOR_PAGE_VERIFIER = '#asymmetricPage';
 const SELECTOR_PRIVATE_KEY = '#asymmetricPrivateKey';
 const SELECTOR_PUBLIC_KEY = '#asymmetricPublicKey';
 const SELECTOR_RSA_KEY_SIZE = '[name=rsaKeySize]';

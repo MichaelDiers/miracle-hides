@@ -29,7 +29,7 @@ const SELECTOR_ALGORITHM_AES = `${SELECTOR_ALGORITHM}[value=${ALGORITHM_AES}]`;
 const SELECTOR_ALGORITHM_HMAC = `${SELECTOR_ALGORITHM}[value=${ALGORITHM_HMAC}]`;
 const SELECTOR_HMAC_KEY_SIZE = '[name=hmacKeySize]';
 const SELECTOR_LANGUAGE_TEST = 'label[for=type]';
-const SELECTOR_PAGE_VERIFIER = 'main#symmetricPage';
+const SELECTOR_PAGE_VERIFIER = '#symmetricPage';
 const SELECTOR_PRIVATE_KEY = '#symmetricPrivateKey';
 const SELECTOR_SUBMIT = '#symmetricSubmit';
 const SELECTOR_TEST_INPUT = '#testInput';

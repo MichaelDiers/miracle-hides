@@ -38,7 +38,7 @@ interface AsymmetricProps {
 const Asymmetric = (props: AsymmetricProps) => {  
   const [type, setType] = useState(Types.EC);
   const [ecNamedCurve, setEcNamedCurve] = useState(EcNamedCurves[0])
-  const [rsaKeySize, setRsaKeySize] = useState(RsaKeySizes[0]);  
+  const [rsaKeySize, setRsaKeySize] = useState(RsaKeySizes[1]);  
 
   const callCreateKeys = ({
     ecNamedCurveValue = ecNamedCurve,
@@ -86,7 +86,7 @@ const Asymmetric = (props: AsymmetricProps) => {
   }, []);
 
   return (
-    <div className="asymmetric-color">
+    <div className="asymmetric-color" id="asymmetricPage">
       <h1>{props.translation.headline}</h1>
       <div id="asymmetricErrorMessage">{props.data.errorMessage}</div>
       <form

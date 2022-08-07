@@ -6,7 +6,7 @@ import Header from './header';
 import Page from './page';
 import SideMenu from './side-menu';
 
-const SELECTOR_PAGE_VERIFIER = 'main#licensePage';
+const SELECTOR_PAGE_VERIFIER = '#licensePage';
 const SELECTOR_LANGUAGE_TEST = '#licensePage div h1';
 
 export default class LicensePage extends Page {

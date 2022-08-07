@@ -67,7 +67,7 @@ class Symmetric extends Component<SymmetricProperties, SymmetricState> {
 
   render() {
     return (
-      <div className="symmetric-color">
+      <div className="symmetric-color" id="symmetricPage">
         <h1>{this.props.translation.headline}</h1>
         <div id="symmetricErrorMessage"></div>
         <form

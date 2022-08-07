@@ -9,7 +9,7 @@ export interface WelcomeProperties {
 class Welcome extends Component<WelcomeProperties> {
   render() {
     return (
-      <div className="welcome">
+      <div className="welcome" id="welcomePage">
         <h1>{this.props.common.miracleHidesKeys}</h1>
         <div className="asymmetric-color">
           <h2>{this.props.common.asymmetricEncryption}</h2>
