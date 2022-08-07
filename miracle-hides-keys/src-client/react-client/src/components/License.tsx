@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { CustomEventRaiser } from '../infrastructure/custom-event-handler';
 import { CommonTranslation, LicenseTranslation } from './Translations';
 
 interface LicenseProperties {
@@ -23,10 +22,6 @@ const fonts = [
 ];
 
 class License extends Component<LicenseProperties> {
-  componentDidMount() {
-    CustomEventRaiser.raiseShowHeader();
-  }
-
   render() {
     return (
       <div>
