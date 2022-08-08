@@ -41,7 +41,7 @@ export default class SideMenuPage extends BasePage {
 
         (e.target as HTMLElement).setAttribute(
           'translationValue',
-          `${PageEvents.FOOTER_PAGE}.${lang}.${TRANSLATION_DESTINATION_TEXT_CONTENT}`,
+          `${PageEvents.SIDE_MENU_PAGE}.${lang}.${TRANSLATION_DESTINATION_TEXT_CONTENT}`,
         );
 
         this.translateAsync(document.body).catch((err) => this.exception(err.message, err.stack));
