@@ -4,19 +4,18 @@
   "description": "styles for miracle-hides-keys",
   "main": "client.scss",
   "scripts": {
-    "prebuild": "npx rimraf build && npx mkdirp build && npx rimraf dist && npx mkdirp dist",
+    "prebuild": "npx rimraf build dist && npx mkdirp build dist",
     "build": "npm run stylelint && npm run build:client.css && npm run build:client.min.css && npm run build:fonts",
     "build:sass": "npx sass --stop-on-error --no-source-map ./scss/client.scss",
     "build:client.css": "npm run build:sass -- ./build/client.css && npm run build:autoprefixer -- -o ./dist/client.css ./build/client.css",
     "build:client.min.css": "npm run build:sass -- ./build/client.min.css --style=compressed && npm run build:autoprefixer -- -o ./dist/client.min.css ./build/client.min.css",
     "build:autoprefixer": "npx postcss --no-map --use autoprefixer ",
-    "build:fonts": "npx copyfiles -u 1 fonts/*/*.woff2 dist && npx copyfiles -u 1 fonts/**/*.txt dist",
-    "predist": "npx rimraf ../dist/client/css",
-    "dist": "npm run build && npm run dist:copy",
-    "dist:copy": "npx copyfiles -u 1 dist/**/* ../dist/client/css && npm run dist:react",
+    "build:fonts": "npx copyfiles -u 1 fonts/*/*.woff2 dist && npx copyfiles -u 1 fonts/**/*.txt dist",    
+    "dist": "npm run build && npm run dist:react",
     "dist:react": "npx copyfiles -u 1 dist/**/* ../src-client-react/src/ && npx move-file ../src-client-react/src/client.min.css ../src-client-react/src/App.css && npx rimraf ../src-client-react/src/client.*css",
     "stylelint": "npx stylelint --config .stylelintrc --fix scss/**/*.scss",
-    "git": "npm run stylelint && git add . && git status"
+    "git": "npm run stylelint && git add . && git status",
+    "license-report": "npx rimraf license-report && npx mkdirp license-report && npx license-report --output=json > license-report/license-report.json"
   },
   "repository": {
     "type": "git",
@@ -36,6 +35,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.8",
     "copyfiles": "^2.4.1",
+    "license-report": "^6.0.0",
     "mkdirp": "^1.0.4",
     "move-file-cli": "^3.0.0",
     "postcss": "^8.4.16",

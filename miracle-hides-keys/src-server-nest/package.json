@@ -6,9 +6,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prebuild": "npx rimraf dist",
     "build": "nest build",
-    "build:license-report": "npx license-report --output=json > prebuild/license-page-data.json",
+    "license-report": "npx rimraf build license-report && npx mkdirp license-report && npx license-report --output=json > license-report/license-report.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",

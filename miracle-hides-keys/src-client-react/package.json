@@ -23,7 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "git": "git add . && git status"
+    "git": "git add . && git status",
+    "license-report": "npx rimraf license-report && npx mkdirp license-report && npx license-report --output=json > license-report/license-report.json"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "license-report": "^6.0.0",
+    "mkdirp": "^1.0.4",
+    "rimraf": "^3.0.2"
   }
 }

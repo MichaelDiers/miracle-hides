@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "build/tsc",    
+    "target": "ES2017",
+    "skipLibCheck": true,    
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "include": ["./src/*.ts"],
+  "exclude": ["build", "dist", "html", "images", "node_modules"],
+}

@@ -4,6 +4,7 @@
   "description": "create keys for symmetric and asymmetric encryption",
   "main": "index.js",
   "scripts": {
+    "predist": "npm run report --prefix helper",
     "dist": "npm run dist:all && npm run copy:all",
     "dist:all": "npm run dist:client:es6 && npm run dist:client:react && npm run dist:client:scss && npm run dist:server:nest",
     "dist:client:es6": "npm run dist --prefix ./src-client-es6",

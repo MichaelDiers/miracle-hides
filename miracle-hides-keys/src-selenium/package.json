@@ -7,13 +7,13 @@
     "test": "tests"
   },
   "scripts": {
-    "prebuild": "rimraf build",
     "build": "npm run lint && npm run build:tsc",
     "build:tsc": "npx tsc --project tsconfig.json",
     "lint": "npx eslint \"{pages,tests}/**/*.ts\" --fix",
     "pretest": "npm run build",
     "test": "npx mocha build/**/*.tests.js --timeout 10000 --retries 1",
-    "git": "npm run lint && git add . && git status"
+    "git": "npm run lint && git add . && git status",
+    "license-report": "npx rimraf build license-report && npx mkdirp license-report && npx license-report --output=json > license-report/license-report.json"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "eslint-config-airbnb-base-typescript": "^1.1.0",
     "eslint-plugin-import": "^2.26.0",
     "license-report": "^6.0.0",
+    "mkdirp": "^1.0.4",
     "mocha": "^10.0.0",
     "rimraf": "^3.0.2",
     "selenium-webdriver": "^4.3.1",
