@@ -13,7 +13,8 @@
     "build:fonts": "npx copyfiles -u 1 fonts/*/*.woff2 dist && npx copyfiles -u 1 fonts/**/*.txt dist",
     "predist": "npx rimraf ../dist/client/css",
     "dist": "npm run build && npm run dist:copy",
-    "dist:copy": "npx copyfiles -u 1 dist/**/* ../dist/client/css",
+    "dist:copy": "npx copyfiles -u 1 dist/**/* ../dist/client/css && npm run dist:react",
+    "dist:react": "npx copyfiles -u 1 dist/**/* ../src-client-react/src/ && npx move-file ../src-client-react/src/client.min.css ../src-client-react/src/App.css && npx rimraf ../src-client-react/src/client.*css",
     "stylelint": "npx stylelint --config .stylelintrc --fix scss/**/*.scss",
     "git": "npm run stylelint && git add . && git status"
   },
@@ -36,6 +37,7 @@
     "autoprefixer": "^10.4.8",
     "copyfiles": "^2.4.1",
     "mkdirp": "^1.0.4",
+    "move-file-cli": "^3.0.0",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
     "rimraf": "^3.0.2",
