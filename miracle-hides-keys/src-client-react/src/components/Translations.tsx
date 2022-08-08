@@ -51,6 +51,17 @@ export interface LicenseTranslation {
   fontFont: string;
   fontLicense: string;
   fontLink: string;
+  nodeName: string;
+  nodeLink: string;
+  nodeLicenseType: string;
+  nodeLicensePeriod: string;
+  nodeRemoteVersion: string;
+  nodeInstalledVersion: string;
+  nodeDefinedVersion: string;
+  nodeAuthor: string;
+  nodeDepartment: string;
+  nodeRelatedTo: string;
+  nodeMaterial: string;
 }
 
 export interface SymmetricTranslation {
@@ -123,6 +134,17 @@ export const Translations : Translation[] = [
       fontFont: 'Schriftart',
       fontLicense: 'Lizenz',
       fontLink: 'Link',
+      nodeName: 'Name',
+      nodeLink: 'Link',
+      nodeLicenseType: 'Lizenz',
+      nodeLicensePeriod: 'Lizenzzeitraum',
+      nodeRemoteVersion: 'Remote Version',
+      nodeInstalledVersion: 'Installierte Version',
+      nodeDefinedVersion: 'Defined Version',
+      nodeAuthor: 'Autor',
+      nodeDepartment: 'Department',
+      nodeRelatedTo: 'Related to',
+      nodeMaterial: 'Material',
     },
     symmetric: {
       headline: 'Generator für symmetrische Schlüssel',
@@ -178,6 +200,17 @@ export const Translations : Translation[] = [
       fontFont: 'Font',
       fontLicense: 'License',
       fontLink: 'Link',
+      nodeName: 'Name',
+      nodeLink: 'Link',
+      nodeLicenseType: 'License',
+      nodeLicensePeriod: 'License Period',
+      nodeRemoteVersion: 'Remote Version',
+      nodeInstalledVersion: 'Installed Version',
+      nodeDefinedVersion: 'Defined Version',
+      nodeAuthor: 'Author',
+      nodeDepartment: 'Department',
+      nodeRelatedTo: 'Related to',
+      nodeMaterial: 'Material',
     },
     symmetric: {
       headline: 'Symmetric Keys Generator'
