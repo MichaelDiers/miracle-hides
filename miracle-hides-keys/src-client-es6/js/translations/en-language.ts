@@ -96,7 +96,7 @@ export default class EnLanguage extends BaseLanguage {
           [LicenseLanguageKeys.NODE_INSTALLED_VERSION]: 'Installed Version',
           [LicenseLanguageKeys.NODE_DEFINED_VERSION]: 'Defined Version',
           [LicenseLanguageKeys.NODE_AUTHOR]: 'Author',
-          [LicenseLanguageKeys.FONT_FONT]: 'Schrift',
+          [LicenseLanguageKeys.FONT_FONT]: 'Font',
           [LicenseLanguageKeys.FONT_LICENSE]: 'License',
           [LicenseLanguageKeys.FONT_AUTHOR]: 'Author',
           [LicenseLanguageKeys.FONT_LINK]: 'Link',

@@ -19,7 +19,8 @@
     "dist:copy": "npx copyfiles -u 2 build/non-tsc/**/* dist && npx copyfiles -u 1 build/client.min.js dist/",
     "git": "npm run lint && git add . && git status",
     "lint": "eslint \"js/**/*.ts\" --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretoNest": "npm run dist",
+    "toNest": "npx copyfiles -u 1 dist/* ../src-server-nest/dist/client/es6 && npx copyfiles -u 3 ../src-scss/dist/**/* ../src-server-nest/dist/client/es6"
   },
   "repository": {
     "type": "git",
