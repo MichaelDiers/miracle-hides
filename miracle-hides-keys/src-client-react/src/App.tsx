@@ -152,12 +152,6 @@ const App = () => {
     });
   }
 
-  const handleTabs = (event: KeyboardEvent): void => {
-    if (isProcessing && event.key === 'Tab') {
-      event.preventDefault();
-    }
-  }
-
   const toggleIsNavbarOpen = (isOpen: boolean) => {
     setIsNavbarOpen(isOpen);
   }
@@ -182,6 +176,12 @@ const App = () => {
   }
 
   useEffect(() => {
+    const handleTabs = (event: KeyboardEvent): void => {
+      if (isProcessing && event.key === 'Tab') {
+        event.preventDefault();
+      }
+    }
+    
     document.body.addEventListener('keydown', handleTabs);
     return () => document.body.removeEventListener('keydown', handleTabs);
   }, []);
