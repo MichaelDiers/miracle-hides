@@ -181,9 +181,10 @@ const App = () => {
         event.preventDefault();
       }
     }
-    
+
     document.body.addEventListener('keydown', handleTabs);
     return () => document.body.removeEventListener('keydown', handleTabs);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
