@@ -19,6 +19,7 @@
     "deploy:es6": "npx copyfiles -E -V -u 2 ./src-client-es6/dist/**/* ./src-server-nest/dist/client/es6",
     "deploy:react": "npx copyfiles -E -V -u 2 ./src-client-react/build/**/* ./src-server-nest/dist/client/react",
     "deploy:scss:es6": "npx copyfiles -E -V -u 2 ./src-scss/dist/**/* ./src-server-nest/dist/client/es6",
+    "postdeploy": "ls -al src-server-nest/dist",
     "start": "npm run start:prod --prefix src-server-nest"
   },
   "repository": {
