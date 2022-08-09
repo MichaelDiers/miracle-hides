@@ -16,8 +16,8 @@
     "postcreate:report": "npx ts-node ./src/generate-license-report.ts > license-report/license-report.ts",
     "predeploy:report": "npm run create:report",
     "deploy:report": "npm run deploy:report:es6 && npm run deploy:report:react",
-    "deploy:report:es6": "npx copyfiles -E -u 1 license-report/license-report.ts ../src-client-es6/js/pages",
-    "deploy:report:react": "npx copyfiles -E -u 1 license-report/license-report.ts ../src-client-react/src/components"
+    "deploy:report:es6": "npx copyfiles -E -V -u 1 license-report/license-report.ts ../src-client-es6/js/pages",
+    "deploy:report:react": "npx copyfiles -E -V -u 1 license-report/license-report.ts ../src-client-react/src/components"
   },
   "repository": {
     "type": "git",
