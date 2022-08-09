@@ -15,14 +15,13 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "npm run lint:eslint",
-    "lint:eslint": "npx eslint \"{src,test}/**/*.ts\" --fix",    
+    "lint:eslint": "npx eslint \"{src,test}/**/*.ts\" --fix",
     "test": "jest --config ./test/unit/jest.json",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "git": "git add . && git status"
-
   },
   "dependencies": {
     "@nestjs/common": "^9.0.5",
@@ -31,6 +30,7 @@
     "@nestjs/serve-static": "^3.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "miracle-hides-keys": "file:..",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"

@@ -1,0 +1,12 @@
+name: Miracle Hides Keys
+on:
+  workflow_dispatch:
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: prepare deployment
+        run: npm run deploy
+        working-directory: miracle-hides-keys

@@ -4,18 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "precreate": "npx rimraf license-report && npx mkdirp license-report",
-    "create": "npm run create:es6 && npm run create:react && npm run create:scss && npm run create:selenium && npm run create:nest",
-    "create:es6": "npm run license-report --prefix ../src-client-es6 && npx move-file ../src-client-es6/license-report/license-report.json license-report/license-report.es6.json",
-    "create:react": "npm run license-report --prefix ../src-client-react && npx move-file ../src-client-react/license-report/license-report.json license-report/license-report.react.json",
-    "create:scss": "npm run license-report --prefix ../src-scss && npx move-file ../src-scss/license-report/license-report.json license-report/license-report.scss.json",
-    "create:selenium": "npm run license-report --prefix ../src-selenium && npx move-file ../src-selenium/license-report/license-report.json license-report/license-report.selenium.json",
-    "create:nest": "npm run license-report --prefix ../src-server-nest && npx move-file ../src-server-nest/license-report/license-report.json license-report/license-report.nest.json",
-    "postcreate": "npx ts-node ./src/generate-license-report.ts > license-report/license-report.ts",
-    "prereport": "npm run create",
-    "report": "npm run report:es6 && npm run report:react",
-    "report:es6": "npx copyfiles -u 1 license-report/license-report.ts ../src-client-es6/js/pages",
-    "report:react": "npx copyfiles -u 1 license-report/license-report.ts ../src-client-react/src/components"
+    "clean": "npx rimraf license-report",
+    "clean:all": "npm run clean && npx rimraf node_modules",
+    "precreate:report": "npm run clean && npx mkdirp license-report",
+    "create:report": "npm run create:report:es6 && npm run create:report:react && npm run create:report:scss && npm run create:report:selenium && npm run create:report:nest",
+    "create:report:es6": "npm run license-report --prefix ../src-client-es6 && npx move-file ../src-client-es6/license-report/license-report.json license-report/license-report.es6.json",
+    "create:report:react": "npm run license-report --prefix ../src-client-react && npx move-file ../src-client-react/license-report/license-report.json license-report/license-report.react.json",
+    "create:report:scss": "npm run license-report --prefix ../src-scss && npx move-file ../src-scss/license-report/license-report.json license-report/license-report.scss.json",
+    "create:report:selenium": "npm run license-report --prefix ../src-selenium && npx move-file ../src-selenium/license-report/license-report.json license-report/license-report.selenium.json",
+    "create:report:nest": "npm run license-report --prefix ../src-server-nest && npx move-file ../src-server-nest/license-report/license-report.json license-report/license-report.nest.json",
+    "postcreate:report": "npx ts-node ./src/generate-license-report.ts > license-report/license-report.ts",
+    "predeploy:report": "npm run create:report",
+    "deploy:report": "npm run deploy:report:es6 && npm run deploy:report:react",
+    "deploy:report:es6": "npx copyfiles -u 1 license-report/license-report.ts ../src-client-es6/js/pages",
+    "deploy:report:react": "npx copyfiles -u 1 license-report/license-report.ts ../src-client-react/src/components"
   },
   "repository": {
     "type": "git",
@@ -32,5 +34,8 @@
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "miracle-hides-keys": "file:.."
   }
 }

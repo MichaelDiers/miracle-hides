@@ -177,7 +177,7 @@ const REPORT = {
       material: 'material',
       licenseType: 'MIT',
       link: 'https://github.com/DefinitelyTyped/DefinitelyTyped.git',
-      remoteVersion: '18.6.4',
+      remoteVersion: '18.6.5',
       installedVersion: '18.0.6',
       definedVersion: '^18.0.6',
       author: 'n/a'
@@ -242,7 +242,7 @@ const REPORT = {
       material: 'material',
       licenseType: 'MIT',
       link: 'git+https://github.com/typescript-eslint/typescript-eslint.git',
-      remoteVersion: '5.32.0',
+      remoteVersion: '5.33.0',
       installedVersion: '5.32.0',
       definedVersion: '^5.32.0',
       author: 'n/a'
@@ -255,7 +255,7 @@ const REPORT = {
       material: 'material',
       licenseType: 'BSD-2-Clause',
       link: 'git+https://github.com/typescript-eslint/typescript-eslint.git',
-      remoteVersion: '5.32.0',
+      remoteVersion: '5.33.0',
       installedVersion: '5.32.0',
       definedVersion: '^5.32.0',
       author: 'n/a'
@@ -428,6 +428,19 @@ const REPORT = {
       installedVersion: '6.0.0',
       definedVersion: '^6.0.0',
       author: 'Yaniv Kessler'
+    },
+    {
+      department: 'kessler',
+      relatedTo: 'stuff',
+      name: 'miracle-hides-keys',
+      licensePeriod: 'perpetual',
+      material: 'material',
+      licenseType: 'MIT',
+      link: 'n/a',
+      remoteVersion: 'n/a',
+      installedVersion: '1.0.0',
+      definedVersion: 'n/a',
+      author: 'Michael Diers'
     },
     {
       department: 'kessler',
@@ -619,7 +632,7 @@ const REPORT = {
       material: 'material',
       licenseType: 'Apache-2.0',
       link: 'git+https://github.com/SeleniumHQ/selenium.git',
-      remoteVersion: '4.3.1',
+      remoteVersion: '4.4.0',
       installedVersion: '4.3.1',
       definedVersion: '^4.3.1',
       author: 'n/a'
