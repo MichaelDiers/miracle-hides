@@ -8,8 +8,5 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: prepare deployment
-        run: npm install --prefix src-scss
-        working-directory: miracle-hides-keys
-      - name: prepare deployment
-        run: npm run dist --prefix src-scss
+        run: npm run deploy
         working-directory: miracle-hides-keys
