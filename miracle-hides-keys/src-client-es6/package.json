@@ -18,11 +18,11 @@
     "predist": "npx rimraf dist && npx mkdirp dist",
     "dist": "npm run dist:build && npm run dist:copy",
     "dist:build": "npm run build",
-    "dist:copy": "npx copyfiles -E -V -u 2 build/non-tsc/**/* dist && npx copyfiles -E -V -u 1 build/client.min.js dist/",
+    "dist:copy": "npx copyfiles -E -V -u 2 \"build/non-tsc/**/*\" dist && npx copyfiles -E -V -u 1 build/client.min.js dist/",
     "git": "npm run lint && git add . && git status",
     "lint": "eslint \"js/**/*.ts\" --fix",
     "pretoNest": "npm run dist",
-    "toNest": "npx copyfiles -E -V -u 1 dist/* ../src-server-nest/dist/client/es6 && npx copyfiles -E -V -u 3 ../src-scss/dist/**/* ../src-server-nest/dist/client/es6"
+    "toNest": "npx copyfiles -E -V -u 1 dist/* ../src-server-nest/dist/client/es6 && npx copyfiles -E -V -u 3 \"../src-scss/dist/**/*\" ../src-server-nest/dist/client/es6"
   },
   "repository": {
     "type": "git",

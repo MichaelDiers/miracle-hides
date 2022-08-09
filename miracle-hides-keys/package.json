@@ -16,9 +16,9 @@
     "dist:scss": "npm run dist --prefix src-scss",
     "predeploy": "npm run dist && npx mkdirp ./src-server-nest/dist/client",
     "deploy": "npm run deploy:es6 && npm run deploy:react && npm run deploy:scss:es6",
-    "deploy:es6": "npx copyfiles -E -V -u 2 ./src-client-es6/dist/**/* ./src-server-nest/dist/client/es6",
+    "deploy:es6": "npx copyfiles -E -V -u 2 \"./src-client-es6/dist/**/*\" ./src-server-nest/dist/client/es6",
     "deploy:react": "npx copyfiles -E -V -u 2 \"./src-client-react/build/**/*.*\" ./src-server-nest/dist/client/react",
-    "deploy:scss:es6": "npx copyfiles -E -V -u 2 ./src-scss/dist/**/* ./src-server-nest/dist/client/es6",
+    "deploy:scss:es6": "npx copyfiles -E -V -u 2 \"./src-scss/dist/**/*\" ./src-server-nest/dist/client/es6",
     "postdeploy": "ls -al src-server-nest/dist && ls -al src-server-nest/dist/client && ls -al src-server-nest/dist/client/es6 && ls -al src-server-nest/dist/client/react && ls -al src-server-nest/dist/client/react/static && ls -al src-server-nest/dist/client/react/static/css && ls -al src-server-nest/dist/client/react/static/js && ls -al src-server-nest/dist/client/react/static/media",
     "start": "npm run start:prod --prefix src-server-nest"
   },

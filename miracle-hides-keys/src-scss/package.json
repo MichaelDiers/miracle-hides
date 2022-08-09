@@ -12,8 +12,8 @@
     "build:autoprefixer": "npx postcss --no-map --use autoprefixer ",
     "build:fonts": "npx copyfiles -E -V -u 1 fonts/*/*.woff2 dist && npx copyfiles -E -V -u 1 fonts/**/*.txt dist",
     "dist": "npm run build && npm run dist:react",
-    "dist:react": "npx copyfiles -V -E -u 1 dist/**/* dist/*.css ../src-client-react/src/ && npx move-file ../src-client-react/src/client.min.css ../src-client-react/src/App.css && npx rimraf ../src-client-react/src/client.*css",
-    "stylelint": "npx stylelint --config .stylelintrc --fix scss/**/*.scss",
+    "dist:react": "npx copyfiles -V -E -u 1  \"dist/**/*\" dist/*.css ../src-client-react/src/ && npx move-file ../src-client-react/src/client.min.css ../src-client-react/src/App.css && npx rimraf ../src-client-react/src/client.*css",
+    "stylelint": "npx stylelint --config .stylelintrc --fix \"scss/**/*.scss\"",
     "git": "npm run stylelint && git add . && git status",
     "license-report": "npx rimraf license-report && npx mkdirp license-report && npx license-report --output=json > license-report/license-report.json"
   },
