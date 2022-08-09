@@ -9,7 +9,7 @@
     "install:all": "npm install && npm install --prefix helper && npm install --prefix src-client-es6 && npm install --prefix src-client-react && npm install --prefix src-scss && npm install --prefix src-selenium && npm install --prefix src-server-nest",
     "deploy:report": "npm run deploy:report --prefix helper",
     "predist": "npm run install:all && npm run deploy:report",
-    "dist": "npm run dist:nest && npm run dist:es6 && npm run dist:react && npm run dist:scss",
+    "dist": "npm run dist:nest && npm run dist:scss && npm run dist:es6 && npm run dist:react",
     "dist:nest": "npm run build --prefix src-server-nest",
     "dist:es6": "npm run dist --prefix src-client-es6",
     "dist:react": "npm run build --prefix src-client-react",
