@@ -16,9 +16,9 @@
     "dist:scss": "npm run dist --prefix src-scss",
     "predeploy": "npm run dist && npx mkdirp ./src-server-nest/dist/client",
     "deploy": "npm run deploy:es6 && npm run deploy:react && npm run deploy:scss:es6",
-    "deploy:es6": "npx copyfiles -u 2 ./src-client-es6/dist/**/* ./src-server-nest/dist/client/es6",
-    "deploy:react": "npx copyfiles -u 2 ./src-client-react/build/**/* ./src-server-nest/dist/client/react",
-    "deploy:scss:es6": "npx copyfiles -u 2 ./src-scss/dist/**/* ./src-server-nest/dist/client/es6",
+    "deploy:es6": "npx copyfiles -E -u 2 ./src-client-es6/dist/**/* ./src-server-nest/dist/client/es6",
+    "deploy:react": "npx copyfiles -E -u 2 ./src-client-react/build/**/* ./src-server-nest/dist/client/react",
+    "deploy:scss:es6": "npx copyfiles -E -u 2 ./src-scss/dist/**/* ./src-server-nest/dist/client/es6",
     "start": "npm run start:prod --prefix src-server-nest"
   },
   "repository": {

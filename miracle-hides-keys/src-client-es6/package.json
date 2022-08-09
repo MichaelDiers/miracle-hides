@@ -9,8 +9,8 @@
     "prebuild": "npx rimraf build && npx mkdirp build && mkdirp build/non-tsc && npx rimraf license-report && mkdirp license-report",
     "build": "npm run lint && npm run build:html && npm run build:images && npm run build:tsc && npm run build:browserify && npm run build:uglyfy:client.min.js && npm run build:uglyfy:client.js",
     "build:browserify": "npx browserify build/tsc/main.js -o build/tsc/main.bundle.js",
-    "build:html": "npx copyfiles -u 1 html/*.html build/non-tsc",
-    "build:images": "npx copyfiles -u 1 images/*.png build/non-tsc",
+    "build:html": "npx copyfiles -E -u 1 html/*.html build/non-tsc",
+    "build:images": "npx copyfiles -E -u 1 images/*.png build/non-tsc",
     "license-report": "npx rimraf license-report && mkdirp license-report && npx license-report --output=json > license-report/license-report.json",
     "build:tsc": "npx tsc --project tsconfig.json",
     "build:uglyfy:client.min.js": "npx uglifyjs build/tsc/main.bundle.js --compress --mangle -o ./build/client.min.js",
@@ -18,11 +18,11 @@
     "predist": "npx rimraf dist && npx mkdirp dist",
     "dist": "npm run dist:build && npm run dist:copy",
     "dist:build": "npm run build",
-    "dist:copy": "npx copyfiles -u 2 build/non-tsc/**/* dist && npx copyfiles -u 1 build/client.min.js dist/",
+    "dist:copy": "npx copyfiles -E -u 2 build/non-tsc/**/* dist && npx copyfiles -E -u 1 build/client.min.js dist/",
     "git": "npm run lint && git add . && git status",
     "lint": "eslint \"js/**/*.ts\" --fix",
     "pretoNest": "npm run dist",
-    "toNest": "npx copyfiles -u 1 dist/* ../src-server-nest/dist/client/es6 && npx copyfiles -u 3 ../src-scss/dist/**/* ../src-server-nest/dist/client/es6"
+    "toNest": "npx copyfiles -E -u 1 dist/* ../src-server-nest/dist/client/es6 && npx copyfiles -E -u 3 ../src-scss/dist/**/* ../src-server-nest/dist/client/es6"
   },
   "repository": {
     "type": "git",
