@@ -1,2 +1,3 @@
-# miracle-hides
-chat application using google firebase
+# miracle-hides-keys
+
+Generate keys for asymmetric and symmetric encryption.
