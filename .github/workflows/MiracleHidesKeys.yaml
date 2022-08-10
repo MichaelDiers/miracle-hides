@@ -16,6 +16,7 @@ jobs:
         with:
           workload_identity_provider: 'projects/962188365368/locations/global/workloadIdentityPools/github/providers/GithubProvider'
           service_account: 'githubactions@miracle-hides.iam.gserviceaccount.com'
+          token_format: 'access_token'
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Use gcloud CLI'
