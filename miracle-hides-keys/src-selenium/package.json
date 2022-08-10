@@ -7,6 +7,8 @@
     "test": "tests"
   },
   "scripts": {
+    "clean": "npx rimraf license-report",
+    "clean:all": "npm run clean && npx rimraf node_modules",
     "build": "npm run lint && npm run build:tsc",
     "build:tsc": "npx tsc --project tsconfig.json",
     "lint": "npx eslint \"{pages,tests}/**/*.ts\" --fix",

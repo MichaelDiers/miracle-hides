@@ -6,6 +6,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "clean": "npx rimraf dist license-report",
+    "clean:all": "npm run clean && npx rimraf node_modules",
     "prebuild": "npx rimraf dist",
     "build": "nest build",
     "license-report": "npx rimraf build license-report && npx mkdirp license-report && npx license-report --output=json > license-report/license-report.json",
