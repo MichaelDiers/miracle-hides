@@ -11,5 +11,5 @@ jobs:
         run: npm run github
         working-directory: miracle-hides-keys
       - name: docker
-        run: docker build --help
+        run: docker build -t miraclehideskeys
         working-directory: miracle-hides-keys
