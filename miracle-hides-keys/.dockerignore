@@ -1,0 +1,9 @@
+.vscode
+license-report
+**/node_modules
+src-client-es6
+src-client-react
+src-scss
+src-selenium
+**/build
+**/dist

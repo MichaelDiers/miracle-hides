@@ -10,3 +10,6 @@ jobs:
       - name: prepare deployment
         run: npm run github
         working-directory: miracle-hides-keys
+      - name: docker
+        run: docker build
+        working-directory: miracle-hides-keys
