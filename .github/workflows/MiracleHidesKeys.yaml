@@ -10,6 +10,14 @@ jobs:
       - name: prepare deployment
         run: npm run github
         working-directory: miracle-hides-keys
-      - name: docker
-        run: docker build -t miraclehideskeys -f Dockerfile
-        working-directory: miracle-hides-keys
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: 'projects/962188365368/locations/global/workloadIdentityPools/github/providers/GithubProvider'
+          service_account: 'githubactions@miracle-hides.iam.gserviceaccount.com'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+      - name: 'Use gcloud CLI'
+        run: 'gcloud run deploy miracle-hides-keys --source miracle-hides-keys/src-server-nest --allow-unauthenticated --description="encryption service"'
+
