@@ -50,19 +50,20 @@ fs.readdir(directory, (err, files) => {
   report.node = nodeReport;
 
   // print object to stdout
+  const tab = '  ';
   console.log('const REPORT = {');
   Object.entries(report).forEach(([key, values]) => {
-    console.log(`\t${key}: [`);
+    console.log(`${tab}${key}: [`);
     values.forEach((entry) => {
-      console.log('\t\t{');
+      console.log(`${tab}${tab}{`);
       Object.entries(entry).forEach(([entryKey, entryValues]) => {
-        console.log(`\t\t\t${entryKey}: '${entryValues}',`);
+        console.log(`${tab}${tab}${tab}${entryKey}: '${entryValues}',`);
       });
 
-      console.log('\t\t},');
+      console.log(`${tab}${tab}},`);
     });
 
-    console.log('\t],')
+    console.log(`${tab}],`)
   });
 
   console.log('};')
