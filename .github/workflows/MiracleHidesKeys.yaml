@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: prepare deployment
         run: npm run github
         working-directory: miracle-hides-keys
@@ -14,7 +14,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0'
         with:
-          workload_identity_provider: 'projects/962188365368/locations/global/workloadIdentityPools/github/providers/GithubProvider'
+          workload_identity_provider: 'projects/962188365368/locations/global/workloadIdentityPools/github/providers/githubproviderid'
           service_account: 'githubactions@miracle-hides.iam.gserviceaccount.com'
           token_format: 'access_token'
       - name: 'Set up Cloud SDK'
