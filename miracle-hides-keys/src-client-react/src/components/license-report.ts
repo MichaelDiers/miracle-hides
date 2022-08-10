@@ -11,7 +11,7 @@ const REPORT = {
       remoteVersion: '9.0.0',
       installedVersion: '9.0.0',
       definedVersion: '^9.0.0',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -24,7 +24,7 @@ const REPORT = {
       remoteVersion: '9.0.8',
       installedVersion: '9.0.5',
       definedVersion: '^9.0.5',
-      author: 'Kamil Mysliwiec'
+      author: 'Kamil Mysliwiec',
     },
     {
       department: 'kessler',
@@ -37,7 +37,7 @@ const REPORT = {
       remoteVersion: '9.0.8',
       installedVersion: '9.0.5',
       definedVersion: '^9.0.5',
-      author: 'Kamil Mysliwiec'
+      author: 'Kamil Mysliwiec',
     },
     {
       department: 'kessler',
@@ -50,7 +50,7 @@ const REPORT = {
       remoteVersion: '9.0.8',
       installedVersion: '9.0.5',
       definedVersion: '^9.0.5',
-      author: 'Kamil Mysliwiec'
+      author: 'Kamil Mysliwiec',
     },
     {
       department: 'kessler',
@@ -63,7 +63,7 @@ const REPORT = {
       remoteVersion: '9.0.1',
       installedVersion: '9.0.1',
       definedVersion: '^9.0.1',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -76,7 +76,7 @@ const REPORT = {
       remoteVersion: '3.0.0',
       installedVersion: '3.0.0',
       definedVersion: '^3.0.0',
-      author: 'Kamil Mysliwiec'
+      author: 'Kamil Mysliwiec',
     },
     {
       department: 'kessler',
@@ -89,7 +89,7 @@ const REPORT = {
       remoteVersion: '9.0.8',
       installedVersion: '9.0.5',
       definedVersion: '^9.0.5',
-      author: 'Kamil Mysliwiec'
+      author: 'Kamil Mysliwiec',
     },
     {
       department: 'kessler',
@@ -102,7 +102,7 @@ const REPORT = {
       remoteVersion: '5.16.5',
       installedVersion: '5.16.4',
       definedVersion: '^5.16.4',
-      author: 'Ernesto Garcia <gnapse@gmail.com> (http://gnapse.github.io)'
+      author: 'Ernesto Garcia <gnapse@gmail.com> (http://gnapse.github.io)',
     },
     {
       department: 'kessler',
@@ -115,7 +115,7 @@ const REPORT = {
       remoteVersion: '13.3.0',
       installedVersion: '13.3.0',
       definedVersion: '^13.3.0',
-      author: 'Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com)'
+      author: 'Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com)',
     },
     {
       department: 'kessler',
@@ -128,7 +128,7 @@ const REPORT = {
       remoteVersion: '13.5.0',
       installedVersion: '13.5.0',
       definedVersion: '^13.5.0',
-      author: 'Giorgio Polvara <polvara@gmail.com>'
+      author: 'Giorgio Polvara <polvara@gmail.com>',
     },
     {
       department: 'kessler',
@@ -141,7 +141,7 @@ const REPORT = {
       remoteVersion: '4.17.13',
       installedVersion: '4.17.13',
       definedVersion: '^4.17.13',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -154,7 +154,7 @@ const REPORT = {
       remoteVersion: '28.1.6',
       installedVersion: '28.1.6',
       definedVersion: '^28.1.6',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -167,7 +167,7 @@ const REPORT = {
       remoteVersion: '9.1.1',
       installedVersion: '9.1.1',
       definedVersion: '^9.1.1',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -180,7 +180,7 @@ const REPORT = {
       remoteVersion: '18.6.5',
       installedVersion: '18.0.6',
       definedVersion: '^18.0.6',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -193,7 +193,7 @@ const REPORT = {
       remoteVersion: '18.0.17',
       installedVersion: '18.0.15',
       definedVersion: '^18.0.15',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -206,7 +206,7 @@ const REPORT = {
       remoteVersion: '18.0.6',
       installedVersion: '18.0.6',
       definedVersion: '^18.0.6',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -219,7 +219,7 @@ const REPORT = {
       remoteVersion: '4.1.2',
       installedVersion: '4.1.2',
       definedVersion: '^4.1.2',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -232,7 +232,7 @@ const REPORT = {
       remoteVersion: '2.0.12',
       installedVersion: '2.0.12',
       definedVersion: '^2.0.11',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -245,7 +245,7 @@ const REPORT = {
       remoteVersion: '5.33.0',
       installedVersion: '5.32.0',
       definedVersion: '^5.32.0',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -258,7 +258,7 @@ const REPORT = {
       remoteVersion: '5.33.0',
       installedVersion: '5.32.0',
       definedVersion: '^5.32.0',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -271,7 +271,7 @@ const REPORT = {
       remoteVersion: '10.4.8',
       installedVersion: '10.4.8',
       definedVersion: '^10.4.8',
-      author: 'Andrey Sitnik <andrey@sitnik.ru>'
+      author: 'Andrey Sitnik <andrey@sitnik.ru>',
     },
     {
       department: 'kessler',
@@ -284,7 +284,7 @@ const REPORT = {
       remoteVersion: '17.0.0',
       installedVersion: '17.0.0',
       definedVersion: '^17.0.0',
-      author: 'James Halliday mail@substack.net http://substack.net'
+      author: 'James Halliday mail@substack.net http://substack.net',
     },
     {
       department: 'kessler',
@@ -297,7 +297,7 @@ const REPORT = {
       remoteVersion: '0.5.1',
       installedVersion: '0.5.1',
       definedVersion: '^0.5.1',
-      author: 'TypeStack contributors'
+      author: 'TypeStack contributors',
     },
     {
       department: 'kessler',
@@ -310,7 +310,7 @@ const REPORT = {
       remoteVersion: '0.13.2',
       installedVersion: '0.13.2',
       definedVersion: '^0.13.2',
-      author: 'TypeStack contributors'
+      author: 'TypeStack contributors',
     },
     {
       department: 'kessler',
@@ -323,7 +323,7 @@ const REPORT = {
       remoteVersion: '2.4.1',
       installedVersion: '2.4.1',
       definedVersion: '^2.4.1',
-      author: ''
+      author: '',
     },
     {
       department: 'kessler',
@@ -336,7 +336,7 @@ const REPORT = {
       remoteVersion: '8.21.0',
       installedVersion: '8.21.0',
       definedVersion: '^8.21.0',
-      author: 'Nicholas C. Zakas <nicholas+npm@nczconsulting.com>'
+      author: 'Nicholas C. Zakas <nicholas+npm@nczconsulting.com>',
     },
     {
       department: 'kessler',
@@ -349,7 +349,7 @@ const REPORT = {
       remoteVersion: '15.0.0',
       installedVersion: '15.0.0',
       definedVersion: '^15.0.0',
-      author: 'Jake Teton-Landis (https://twitter.com/@jitl)'
+      author: 'Jake Teton-Landis (https://twitter.com/@jitl)',
     },
     {
       department: 'kessler',
@@ -362,7 +362,7 @@ const REPORT = {
       remoteVersion: '1.1.0',
       installedVersion: '1.1.0',
       definedVersion: '^1.1.0',
-      author: 'Matt Turnbull <matt@iamturns.com> (https://iamturns.com)'
+      author: 'Matt Turnbull <matt@iamturns.com> (https://iamturns.com)',
     },
     {
       department: 'kessler',
@@ -375,7 +375,7 @@ const REPORT = {
       remoteVersion: '8.5.0',
       installedVersion: '8.5.0',
       definedVersion: '^8.5.0',
-      author: 'Simon Lydell'
+      author: 'Simon Lydell',
     },
     {
       department: 'kessler',
@@ -388,7 +388,7 @@ const REPORT = {
       remoteVersion: '2.26.0',
       installedVersion: '2.26.0',
       definedVersion: '^2.26.0',
-      author: 'Ben Mosher <me@benmosher.com>'
+      author: 'Ben Mosher <me@benmosher.com>',
     },
     {
       department: 'kessler',
@@ -401,7 +401,7 @@ const REPORT = {
       remoteVersion: '4.2.1',
       installedVersion: '4.2.1',
       definedVersion: '^4.2.1',
-      author: 'Teddy Katz'
+      author: 'Teddy Katz',
     },
     {
       department: 'kessler',
@@ -414,7 +414,7 @@ const REPORT = {
       remoteVersion: '28.1.3',
       installedVersion: '28.1.3',
       definedVersion: '^28.1.3',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -427,7 +427,7 @@ const REPORT = {
       remoteVersion: '6.0.0',
       installedVersion: '6.0.0',
       definedVersion: '^6.0.0',
-      author: 'Yaniv Kessler'
+      author: 'Yaniv Kessler',
     },
     {
       department: 'kessler',
@@ -440,7 +440,7 @@ const REPORT = {
       remoteVersion: 'n/a',
       installedVersion: '1.0.0',
       definedVersion: 'n/a',
-      author: 'Michael Diers'
+      author: 'Michael Diers',
     },
     {
       department: 'kessler',
@@ -453,7 +453,7 @@ const REPORT = {
       remoteVersion: '1.0.4',
       installedVersion: '1.0.4',
       definedVersion: '^1.0.4',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -466,7 +466,7 @@ const REPORT = {
       remoteVersion: '10.0.0',
       installedVersion: '10.0.0',
       definedVersion: '^10.0.0',
-      author: 'TJ Holowaychuk <tj@vision-media.ca>'
+      author: 'TJ Holowaychuk <tj@vision-media.ca>',
     },
     {
       department: 'kessler',
@@ -479,7 +479,7 @@ const REPORT = {
       remoteVersion: '3.0.0',
       installedVersion: '3.0.0',
       definedVersion: '^3.0.0',
-      author: 'Sindre Sorhus sindresorhus@gmail.com https://sindresorhus.com'
+      author: 'Sindre Sorhus sindresorhus@gmail.com https://sindresorhus.com',
     },
     {
       department: 'kessler',
@@ -492,7 +492,7 @@ const REPORT = {
       remoteVersion: '8.4.16',
       installedVersion: '8.4.16',
       definedVersion: '^8.4.16',
-      author: 'Andrey Sitnik <andrey@sitnik.ru>'
+      author: 'Andrey Sitnik <andrey@sitnik.ru>',
     },
     {
       department: 'kessler',
@@ -505,7 +505,7 @@ const REPORT = {
       remoteVersion: '10.0.0',
       installedVersion: '10.0.0',
       definedVersion: '^10.0.0',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -518,7 +518,7 @@ const REPORT = {
       remoteVersion: '2.7.1',
       installedVersion: '2.7.1',
       definedVersion: '^2.3.2',
-      author: 'James Long'
+      author: 'James Long',
     },
     {
       department: 'kessler',
@@ -531,7 +531,7 @@ const REPORT = {
       remoteVersion: '18.2.0',
       installedVersion: '18.2.0',
       definedVersion: '^18.2.0',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -544,7 +544,7 @@ const REPORT = {
       remoteVersion: '18.2.0',
       installedVersion: '18.2.0',
       definedVersion: '^18.2.0',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -557,7 +557,7 @@ const REPORT = {
       remoteVersion: '6.3.0',
       installedVersion: '6.3.0',
       definedVersion: '^6.3.0',
-      author: 'Remix Software <hello@remix.run>'
+      author: 'Remix Software <hello@remix.run>',
     },
     {
       department: 'kessler',
@@ -570,7 +570,7 @@ const REPORT = {
       remoteVersion: '5.0.1',
       installedVersion: '5.0.1',
       definedVersion: '5.0.1',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -583,7 +583,7 @@ const REPORT = {
       remoteVersion: '0.1.13',
       installedVersion: '0.1.13',
       definedVersion: '^0.1.13',
-      author: 'Ron Buckton ron.buckton@microsoft.com http://github.com/rbuckton'
+      author: 'Ron Buckton ron.buckton@microsoft.com http://github.com/rbuckton',
     },
     {
       department: 'kessler',
@@ -596,7 +596,7 @@ const REPORT = {
       remoteVersion: '3.0.2',
       installedVersion: '3.0.2',
       definedVersion: '^3.0.2',
-      author: 'Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)'
+      author: 'Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)',
     },
     {
       department: 'kessler',
@@ -609,7 +609,7 @@ const REPORT = {
       remoteVersion: '7.5.6',
       installedVersion: '7.5.6',
       definedVersion: '^7.2.0',
-      author: 'Ben Lesh <ben@benlesh.com>'
+      author: 'Ben Lesh <ben@benlesh.com>',
     },
     {
       department: 'kessler',
@@ -619,10 +619,10 @@ const REPORT = {
       material: 'material',
       licenseType: 'MIT',
       link: 'git+https://github.com/sass/dart-sass.git',
-      remoteVersion: '1.54.3',
+      remoteVersion: '1.54.4',
       installedVersion: '1.54.3',
       definedVersion: '^1.54.3',
-      author: 'Natalie Weizenbaum nweiz@google.com https://github.com/nex3'
+      author: 'Natalie Weizenbaum nweiz@google.com https://github.com/nex3',
     },
     {
       department: 'kessler',
@@ -635,7 +635,7 @@ const REPORT = {
       remoteVersion: '4.4.0',
       installedVersion: '4.3.1',
       definedVersion: '^4.3.1',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -648,7 +648,7 @@ const REPORT = {
       remoteVersion: '0.5.21',
       installedVersion: '0.5.21',
       definedVersion: '^0.5.20',
-      author: 'n/a'
+      author: 'n/a',
     },
     {
       department: 'kessler',
@@ -661,7 +661,7 @@ const REPORT = {
       remoteVersion: '14.9.1',
       installedVersion: '14.9.1',
       definedVersion: '^14.9.1',
-      author: 'stylelint'
+      author: 'stylelint',
     },
     {
       department: 'kessler',
@@ -674,7 +674,7 @@ const REPORT = {
       remoteVersion: '9.0.1',
       installedVersion: '9.0.1',
       definedVersion: '^9.0.1',
-      author: 'Brett Jankord'
+      author: 'Brett Jankord',
     },
     {
       department: 'kessler',
@@ -687,7 +687,7 @@ const REPORT = {
       remoteVersion: '6.2.4',
       installedVersion: '6.2.4',
       definedVersion: '^6.1.3',
-      author: 'TJ Holowaychuk'
+      author: 'TJ Holowaychuk',
     },
     {
       department: 'kessler',
@@ -700,7 +700,7 @@ const REPORT = {
       remoteVersion: '28.0.7',
       installedVersion: '28.0.7',
       definedVersion: '^28.0.7',
-      author: 'Kulshekhar Kabra <kulshekhar@users.noreply.github.com> (https://github.com/kulshekhar)'
+      author: 'Kulshekhar Kabra <kulshekhar@users.noreply.github.com> (https://github.com/kulshekhar)',
     },
     {
       department: 'kessler',
@@ -713,7 +713,7 @@ const REPORT = {
       remoteVersion: '9.3.1',
       installedVersion: '9.3.1',
       definedVersion: '^9.2.3',
-      author: 'John Reilly <johnny_reilly@hotmail.com> (https://blog.johnnyreilly.com)'
+      author: 'John Reilly <johnny_reilly@hotmail.com> (https://blog.johnnyreilly.com)',
     },
     {
       department: 'kessler',
@@ -726,7 +726,7 @@ const REPORT = {
       remoteVersion: '10.9.1',
       installedVersion: '10.9.1',
       definedVersion: '^10.9.1',
-      author: 'Blake Embrey hello@blakeembrey.com http://blakeembrey.me'
+      author: 'Blake Embrey hello@blakeembrey.com http://blakeembrey.me',
     },
     {
       department: 'kessler',
@@ -739,7 +739,7 @@ const REPORT = {
       remoteVersion: '4.0.0',
       installedVersion: '4.0.0',
       definedVersion: '4.0.0',
-      author: 'Jonas Kello'
+      author: 'Jonas Kello',
     },
     {
       department: 'kessler',
@@ -752,7 +752,7 @@ const REPORT = {
       remoteVersion: '4.7.4',
       installedVersion: '4.7.4',
       definedVersion: '^4.7.4',
-      author: 'Microsoft Corp.'
+      author: 'Microsoft Corp.',
     },
     {
       department: 'kessler',
@@ -765,7 +765,7 @@ const REPORT = {
       remoteVersion: '3.16.3',
       installedVersion: '3.16.3',
       definedVersion: '^3.16.3',
-      author: 'Mihai Bazon <mihai.bazon@gmail.com> (http://lisperator.net/)'
+      author: 'Mihai Bazon <mihai.bazon@gmail.com> (http://lisperator.net/)',
     },
     {
       department: 'kessler',
@@ -778,23 +778,23 @@ const REPORT = {
       remoteVersion: '2.1.4',
       installedVersion: '2.1.4',
       definedVersion: '^2.1.4',
-      author: 'Philip Walton philip@philipwalton.com http://philipwalton.com'
-    }
+      author: 'Philip Walton philip@philipwalton.com http://philipwalton.com',
+    },
   ],
   fonts: [
     {
       font: 'Orbitron',
       license: 'Open Font License 1.1',
       author: 'Matt McInerney',
-      link: 'https://fonts.google.com/specimen/Orbitron'
+      link: 'https://fonts.google.com/specimen/Orbitron',
     },
     {
       font: 'Ubuntu Condensed',
       license: 'Ubuntu Font License 1.0',
       author: 'Dalton Maag',
-      link: 'https://fonts.google.com/specimen/Ubuntu+Condensed'
-    }
-  ]
-} ;
+      link: 'https://fonts.google.com/specimen/Ubuntu+Condensed',
+    },
+  ],
+};
 
 export default REPORT;

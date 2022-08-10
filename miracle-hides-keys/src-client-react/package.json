@@ -20,6 +20,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "clean": "npx rimraf build license-report",
+    "clean:all": "npm run clean && npx rimraf node_modules",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

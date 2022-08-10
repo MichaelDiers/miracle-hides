@@ -619,7 +619,7 @@ const REPORT = {
       material: 'material',
       licenseType: 'MIT',
       link: 'git+https://github.com/sass/dart-sass.git',
-      remoteVersion: '1.54.3',
+      remoteVersion: '1.54.4',
       installedVersion: '1.54.3',
       definedVersion: '^1.54.3',
       author: 'Natalie Weizenbaum nweiz@google.com https://github.com/nex3',
