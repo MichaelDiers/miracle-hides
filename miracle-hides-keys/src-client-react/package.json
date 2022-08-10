@@ -27,7 +27,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "git": "git add . && git status",
-    "license-report": "npx rimraf license-report && npx mkdirp license-report && npx license-report --output=json > license-report/license-report.json"
+    "license-report": "npx rimraf license-report && npx mkdirp license-report && npx license-report --output=json > license-report/license-report.json",
+    "pretoNest": "npm run build",
+    "toNest": "npx copyfiles -E -V -u 1 \"build/**/*\" ../src-server-nest/dist/client/react"
   },
   "eslintConfig": {
     "extends": [
