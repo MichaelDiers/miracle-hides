@@ -48,7 +48,24 @@ fs.readdir(directory, (err, files) => {
     return 0;
   });
   report.node = nodeReport;
-  console.log('const REPORT =', report, ';');
+
+  // print object to stdout
+  console.log('const REPORT = {');
+  Object.entries(report).forEach(([key, values]) => {
+    console.log(`\t${key}: [`);
+    values.forEach((entry) => {
+      console.log('\t\t{');
+      Object.entries(entry).forEach(([entryKey, entryValues]) => {
+        console.log(`\t\t\t${entryKey}: '${entryValues}',`);
+      });
+
+      console.log('\t\t},');
+    });
+
+    console.log('\t],')
+  });
+
+  console.log('};')
   console.log();
-  console.log('export default REPORT;');    
+  console.log('export default REPORT;');
 });
