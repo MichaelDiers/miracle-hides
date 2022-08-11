@@ -1,0 +1,22 @@
+{
+  "name": "miracle-hides-cloud-cleanup",
+  "version": "1.0.0",
+  "description": "Delete unused google cloud data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/MichaelDiers/miracle-hides"
+  },
+  "keywords": [
+    "js",
+    "'google cloud functions"
+  ],
+  "author": "Michael Diers",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.1.2"
+  }
+}

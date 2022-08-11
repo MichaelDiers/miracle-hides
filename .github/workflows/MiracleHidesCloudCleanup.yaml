@@ -1,0 +1,33 @@
+name: Miracle Hides Cloud Clean up
+on:
+  push:    
+    branches:    
+      - main
+    paths:
+      - miracle-hides-cloud-cleanup
+      - .github/workflows/MiracleHidesCloudCleanup.yaml
+  workflow_dispatch:
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: prepare deployment
+        run: npm run github
+        working-directory: miracle-hides-cloud-cleanup
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          token_format: 'id_token'
+          workload_identity_provider: '${{ secrets.gcloud_workload_identity_provider }}'
+          service_account: '${{ secrets.gcloud_service_account }}'
+          id_token_audience: '${{ secrets.gcloud_workload_identity_provider }}'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+      - name: 'Use gcloud CLI'
+        run: 'gcloud functions deploy cloud-clean-up --region us-central1 --entry-point=cloudCleanUp --gen2 --runtime=nodejs16 --source=index.js'
