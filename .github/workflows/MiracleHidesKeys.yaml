@@ -20,6 +20,7 @@ jobs:
           token_format: 'id_token'
           workload_identity_provider: '${{ secrets.gcloud_workload_identity_provider }}'
           service_account: '${{ secrets.gcloud_service_account }}'
+          id_token_audience: '${{ secrets.gcloud_workload_identity_provider }}'
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Use gcloud CLI'
