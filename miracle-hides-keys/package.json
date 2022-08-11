@@ -13,7 +13,7 @@
     "client:es6": "npm run toNest --prefix src-client-es6",
     "client:react": "npm run toNest --prefix src-client-react",
     "server": "npm run build --prefix src-server-nest",
-    "github": "npm run install:all && npm run scss && npm run server npm run client"
+    "github": "npm run install:all && npm run scss && npm run server && npm run client"
   },
   "repository": {
     "type": "git",
