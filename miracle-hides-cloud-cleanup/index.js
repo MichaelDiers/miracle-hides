@@ -10,7 +10,7 @@ const PROJECTS = [
 ];
 
 /**
- * Iterate all docker images of the given repository without a latest tag.
+ * Iterate all docker images of the given repository without a tag.
  * Extracts the sha from the docker uri and returns it. 
  * @param {ArtifactRegistryClient} client Client for accessing the artifact registry.
  * @param {IRepository[]} repository an object containing the repository data.
@@ -18,7 +18,7 @@ const PROJECTS = [
 async function* iterateImageShas(client, repository) {
   const iterableDocker = await client.listDockerImagesAsync({ parent: repository.name });
   for await (docker of iterableDocker) {
-    if (docker.tags.some((tag) => tag.toUpperCase() === 'LATEST')) {
+    if (docker.tags.length !== 0) {
       continue;
     }
 
@@ -87,7 +87,7 @@ functions.http('cloudCleanUp', async (req, res) => {
       if (versionIndex < 0) {
         continue;
       }
-
+      
       const [operation] = await client.deleteVersion({ name: versions[versionIndex] })
       await operation.promise();
       versions.splice(versionIndex, 1);
