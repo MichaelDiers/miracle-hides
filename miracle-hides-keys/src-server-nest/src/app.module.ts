@@ -6,7 +6,7 @@ import { KeyGeneratorModule } from './use-cases/key-generator/key-generator.modu
 import { RsaKeyGeneratorModule } from './use-cases/asymmetric-key-generator/asymmetric-key-generator.module';
 import { UtilsModule } from './core/utils/utils.module';
 import { SymmetricKeyGeneratorModule } from './use-cases/symmetric-key-generator/symmetric-key-generator.module';
-
+console.log(join(__dirname, 'client'));
 @Module({
   imports: [
     ControllersModule,
