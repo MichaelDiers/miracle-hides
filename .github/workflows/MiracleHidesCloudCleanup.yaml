@@ -4,7 +4,7 @@ on:
     branches:    
       - main
     paths:
-      - miracle-hides-cloud-cleanup
+      - miracle-hides-cloud-cleanup/**
       - .github/workflows/MiracleHidesCloudCleanup.yaml
   workflow_dispatch:
 jobs:
