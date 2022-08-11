@@ -11,7 +11,7 @@
     "build:browserify": "npx browserify build/tsc/main.js -o build/tsc/main.bundle.js",
     "build:css": "npx copyfiles -E -V \"css/**/*\" dist",
     "build:html": "npx copyfiles -E -V -u 1 html/*.html build/non-tsc",
-    "build:images": "npx copyfiles -E -V -u 1 images/*.png build/non-tsc",
+    "build:images": "npx copyfiles -E -V -u 1 \"images/**/*\" build/non-tsc",
     "prelicense-report": "npx rimraf license-report && mkdirp license-report",
     "license-report": "npx license-report --output=json > license-report/license-report.json",
     "build:tsc": "npx tsc --project tsconfig.json",

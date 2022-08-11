@@ -14,7 +14,8 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0'
         with:
-          credentials_json: '${{ secrets.GCLOUD_KEY }}'
+          workload_identity_provider: 'projects/962188365368/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'githubactions@miracle-hides.iam.gserviceaccount.com'
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Use gcloud CLI'
