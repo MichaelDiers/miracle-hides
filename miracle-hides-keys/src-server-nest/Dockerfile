@@ -1,6 +1,6 @@
 FROM node:lts-alpine as setup
 WORKDIR /app
-COPY ./dist ./package.json ./package-lock.json ./
+COPY . .
 RUN npm ci --omit=dev
 
 EXPOSE 3001
