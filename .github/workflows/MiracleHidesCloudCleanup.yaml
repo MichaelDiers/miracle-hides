@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+      - name: npm
+        run: npm ci --omit=dev
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0'
@@ -27,5 +29,4 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Use gcloud CLI'
-        run: 'gcloud functions deploy cloud-clean-up --region us-central1 --entry-point=cloudCleanUp --gen2 --runtime=nodejs16 --source=index.js --run-service-account=${{ secrets.gcloud_functions_cleanup }} --trigger-http'
-        working-directory: miracle-hides-cloud-cleanup
+        run: 'gcloud functions deploy cloud-clean-up --region us-central1 --entry-point=cloudCleanUp --gen2 --runtime=nodejs16 --source=miracle-hides-cloud-cleanup --run-service-account=${{ secrets.gcloud_functions_cleanup }} --trigger-http'
