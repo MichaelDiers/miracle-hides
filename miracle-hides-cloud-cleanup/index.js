@@ -95,5 +95,7 @@ functions.http('cloudCleanUp', async (req, res) => {
     }
   }
   
-  res.send(`deleted ${deleted} docker images`);
+  const info = `deleted ${deleted} docker images`;
+  console.info(info);
+  res.send(info);
 });
