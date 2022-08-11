@@ -18,5 +18,5 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Use gcloud CLI'
-        run: 'gcloud run deploy miracle-hides-keys --source miracle-hides-keys/src-server-nest --allow-unauthenticated --description="encryption service" --region=us-central1'
+        run: 'gcloud run deploy miracle-hides-keys --source miracle-hides-keys/src-server-nest --allow-unauthenticated --description="encryption service" --region=us-central1 --port=3001'
 
