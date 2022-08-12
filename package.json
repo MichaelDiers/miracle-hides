@@ -1,0 +1,22 @@
+{
+  "name": "miracle-hides",
+  "version": "1.0.0",
+  "description": "initialize new projects",
+  "main": "index.js",
+  "scripts": {
+    "init:node": "npx ts-node ./scripts/init-node.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelDiers/miracle-hides.git"
+  },
+  "author": "Michael Diers",
+  "license": "MIT",
+  "homepage": "https://github.com/MichaelDiers/miracle-hides#readme",
+  "devDependencies": {
+    "@types/node": "^18.7.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}
