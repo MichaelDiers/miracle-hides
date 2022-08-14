@@ -18,5 +18,8 @@
   "homepage": "https://github.com/MichaelDiers/miracle-hides#readme",
   "devDependencies": {
     "create-react-app": "^5.0.1"
+  },
+  "dependencies": {
+    "@nestjs/cli": "^9.0.0"
   }
 }
