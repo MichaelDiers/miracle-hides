@@ -1,0 +1,12 @@
+version: "3"
+services:
+  node_shell:
+    image: node:lts
+    container_name: node_shell_c
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/home/app
+    working_dir: /home/app
+    user: node
+    entrypoint: /bin/bash

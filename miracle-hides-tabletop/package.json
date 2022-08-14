@@ -1,0 +1,22 @@
+{
+  "name": "miracle-hides-tabletop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelDiers/miracle-hides.git"
+  },
+  "author": "Michael Diers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MichaelDiers/miracle-hides/issues"
+  },
+  "homepage": "https://github.com/MichaelDiers/miracle-hides#readme",
+  "devDependencies": {
+    "create-react-app": "^5.0.1"
+  }
+}
