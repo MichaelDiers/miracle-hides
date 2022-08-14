@@ -11,7 +11,7 @@ export default async function rulesService(): Promise<IRulesServiceResult> {
           'You cannot build an Industrial Complex in a conquered territory in the same turn.',
           'Air force cannot end its turn in a conquered territory.',
           'You cannot blitz through these territories.',
-          'Land units has to stop after conquering the first territory.',
+          'Land units must stop after conquering the first territory.',
         ],
       },
       {
