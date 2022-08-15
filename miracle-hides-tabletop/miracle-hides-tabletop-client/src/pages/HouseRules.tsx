@@ -21,15 +21,15 @@ export default function Rules({
       <div>{houseRulesServiceResult?.error}</div>
       <div>
         {
-          houseRulesServiceResult?.houseRules?.map(({ topic, descriptions }) => {
+          houseRulesServiceResult?.houseRules?.map(({ topic, descriptions }, divi) => {
             return (
-              <div>
+              <div key={divi}>
                 <h3>{topic}</h3>
                 <ul>
                   {
-                    descriptions.map((description) => {
+                    descriptions.map((description, lii) => {
                       return (
-                        <li>{description}</li>
+                        <li key={lii}>{description}</li>
                       )
                     })
                   }

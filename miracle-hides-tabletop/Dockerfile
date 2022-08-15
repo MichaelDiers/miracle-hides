@@ -18,5 +18,7 @@ COPY --from=server /app .
 COPY --from=client /app/build/. ./client
 
 ENV NODE_ENV=production
+ENV MH_PROJECT_NAME=miracle-hides
+
 EXPOSE 3000
 CMD ["node", "dist/main"]

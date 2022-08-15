@@ -1,7 +1,7 @@
 import { Controller, Get, Inject, Param } from '@nestjs/common';
-import { HOUSE_RULES_SERVICE, IHouseRulesService } from 'src/types/house-rule-service.interface';
+import { HOUSE_RULES_SERVICE, IHouseRulesService } from 'src/types/house-rules-service.interface';
 import { Language } from 'src/types/language.type';
-import IListHouseRulesResult from 'src/types/list-house-rules-result.interface';
+import IListHouseRulesResult from 'src/types/read-house-rules-result.interface';
 import { LanguagePipe } from 'src/validation/language-pipe';
 
 @Controller('house-rules')
@@ -13,6 +13,6 @@ export class HouseRulesController {
 
   @Get(':language')
   async listAsync(@Param('language', new LanguagePipe()) language: Language) : Promise<IListHouseRulesResult> {
-    return this.houseRulesService.listAsync(language);
+    return this.houseRulesService.readAsync(language);
   }
 }
