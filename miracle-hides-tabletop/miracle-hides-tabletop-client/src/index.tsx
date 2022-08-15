@@ -7,10 +7,10 @@ import App from './App';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './pages/Home';
-import Rules from './pages/Rules';
+import Rules from './pages/HouseRules';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import rulesService from './services/rules-service';
+import houseRulesService from './services/house-rules-service';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -22,7 +22,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route index element={ <Home/> } />
-          <Route path='/rules' element={ <Rules rulesService={rulesService}/> } />
+          <Route path='/house-rules' element={ <Rules houseRulesService={houseRulesService}/> } />
         </Routes>
       </BrowserRouter>
       <Footer/>
