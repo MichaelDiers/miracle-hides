@@ -15,7 +15,7 @@ export class HouseRulesServiceService implements IHouseRulesService {
             'You cannot build an Industrial Complex in a conquered territory in the same turn.',
             'Air force cannot end its turn in a conquered territory.',
             'You cannot blitz through these territories.',
-            'Land units must stop after conquering the first territory.',
+            'Land units must stop after conquering the first territory in combat and non-combat movement.',
           ],
         },
         {
