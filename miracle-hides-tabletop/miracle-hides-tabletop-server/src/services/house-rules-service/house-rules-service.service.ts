@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { IHouseRulesService } from 'src/types/house-rule-service.interface';
-import { ListHouseRulesRequestDto } from 'src/types/list-house-rules-request.dto';
+import { Language } from 'src/types/language.type';
 import IListHouseRulesResult from '../../types/list-house-rules-result.interface';
 
 @Injectable()
 export class HouseRulesServiceService implements IHouseRulesService {
-  async listAsync(request: ListHouseRulesRequestDto) : Promise<IListHouseRulesResult> {
+  async listAsync(language: Language) : Promise<IListHouseRulesResult> {
     return {
       headline: 'House Rules',
       houseRules: [

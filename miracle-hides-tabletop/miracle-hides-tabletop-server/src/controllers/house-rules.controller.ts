@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Param } from '@nestjs/common';
 import { HOUSE_RULES_SERVICE, IHouseRulesService } from 'src/types/house-rule-service.interface';
-import { ListHouseRulesRequestDto } from 'src/types/list-house-rules-request.dto';
+import { Language } from 'src/types/language.type';
 import IListHouseRulesResult from 'src/types/list-house-rules-result.interface';
+import { LanguagePipe } from 'src/validation/language-pipe';
 
 @Controller('house-rules')
 export class HouseRulesController {
@@ -10,8 +11,8 @@ export class HouseRulesController {
   ) {    
   }
 
-  @Get()
-  async listAsync(@Body() request: ListHouseRulesRequestDto) : Promise<IListHouseRulesResult> {
-    return this.houseRulesService.listAsync(request);
+  @Get(':language')
+  async listAsync(@Param('language', new LanguagePipe()) language: Language) : Promise<IListHouseRulesResult> {
+    return this.houseRulesService.listAsync(language);
   }
 }
