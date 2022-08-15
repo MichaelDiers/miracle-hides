@@ -21,4 +21,4 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Use gcloud CLI'
-        run: 'gcloud run deploy miracle-hides-tabletop --source miracle-hides-tabletop --allow-unauthenticated --description="tabletop games" --region=us-central1 --port=3000' --service-account=${{ secrets.GCLOUD_MHT_SERVICE_ACCOUNT }}
+        run: 'gcloud run deploy miracle-hides-tabletop --source miracle-hides-tabletop --allow-unauthenticated --description="tabletop games" --region=us-central1 --port=3000 --service-account=${{ secrets.GCLOUD_MHT_SERVICE_ACCOUNT }}'
