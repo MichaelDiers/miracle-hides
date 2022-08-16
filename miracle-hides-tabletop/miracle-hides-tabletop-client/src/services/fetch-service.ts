@@ -11,10 +11,11 @@ export default function fetchService({
   method: Method,
   body?: object,    
 }) : Promise<IFetchResult> {
+  const serverPrefix = process.env.REACT_APP_MH_SERVER_PREFIX || '';  
   return new Promise((resolve, reject) => {
     incrementActiveProcesses();
     fetch(
-      `http://localhost:3001${url}`,
+      `${serverPrefix}${url}`,
       {
         method,
         body: body ? JSON.stringify(body) : undefined,
