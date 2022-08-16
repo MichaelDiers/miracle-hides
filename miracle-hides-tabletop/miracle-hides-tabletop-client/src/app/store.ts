@@ -2,11 +2,13 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 
 import activeProcessesReducer, { activeProcessesSlice } from './active-processes-slice';
+import languageReducer from './language-slice';
 
 export const store = configureStore({
   reducer: {
     activeProcesses: activeProcessesReducer,
     counter: counterReducer,
+    language: languageReducer,
   },
 });
 

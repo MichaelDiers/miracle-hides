@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import IHouseRulesService from '../types/house-rules-service.interface';
 import IHouseRulesServiceResult from '../types/house-rules-service-result.interface';
+import { getLanguage } from '../app/language-slice';
+import { useAppSelector } from '../app/hooks';
 
 export default function Rules({
   houseRulesService,
@@ -8,9 +10,10 @@ export default function Rules({
   houseRulesService: IHouseRulesService,
 }) {
   const [houseRulesServiceResult, setHouseRulesServiceResult] = useState<IHouseRulesServiceResult>();
+  const language = useAppSelector(getLanguage);
 
   useEffect(() => {
-    houseRulesService('en')
+    houseRulesService(language)
       .then((result) => setHouseRulesServiceResult(result))
       .catch((result) => setHouseRulesServiceResult(result));
   }, []);

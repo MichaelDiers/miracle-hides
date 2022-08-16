@@ -1,1 +1,11 @@
 export type Language = 'en';
+
+const LANGUAGES = ['en'];
+
+export function toLanguageOrDefault(...languages: string[]) : Language {
+  const lang  = languages.map((value) => value.split('-')[0]).find((language) => {
+    return LANGUAGES.find((l) => l.toLowerCase() === language.toLowerCase());
+  });
+
+  return (lang || LANGUAGES[0]) as Language;
+}
