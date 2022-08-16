@@ -1,8 +1,7 @@
-
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import { Document } from 'mongoose';
 import HouseRuleDto from './house-rule.dto';
-import { HouseRule, HouseRuleSchema } from './house-rule.schema';
+import { HouseRuleSchema } from './house-rule.schema';
 
 export type HouseRulesDocument = HouseRules & Document;
 
@@ -11,7 +10,7 @@ export class HouseRules {
   @Prop({ required: true })
   headline: string;
 
-  @Prop({ required: true, type: [HouseRuleSchema]})
+  @Prop({ required: true, type: [HouseRuleSchema] })
   houseRules: HouseRuleDto[];
 
   @Prop({ required: true })

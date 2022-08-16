@@ -19,6 +19,6 @@ import { HouseRulesDatabaseModule } from 'src/house-rules-database/house-rules-d
       useClass: SecretManagerService,
     },
     MongodbConfigService,
-  ]
+  ],
 })
 export class ServicesModule {}

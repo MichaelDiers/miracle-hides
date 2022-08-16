@@ -7,10 +7,13 @@ import { HouseRules, HouseRulesDocument } from './house-rules.schema';
 @Injectable()
 export class HouseRulesDatabaseService implements IHouseRulesDatabaseService {
   constructor(
-    @InjectModel(HouseRules.name) private houseRulesModel: Model<HouseRulesDocument>,
+    @InjectModel(HouseRules.name)
+    private houseRulesModel: Model<HouseRulesDocument>,
   ) {}
 
-  async read(language: string): Promise<HouseRules|null> {
-    return this.houseRulesModel.findOne({ language: language.toUpperCase() }).exec();
+  async read(language: string): Promise<HouseRules | null> {
+    return this.houseRulesModel
+      .findOne({ language: language.toUpperCase() })
+      .exec();
   }
 }

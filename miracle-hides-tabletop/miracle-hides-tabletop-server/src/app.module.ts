@@ -20,7 +20,7 @@ import { HouseRulesDatabaseModule } from './house-rules-database/house-rules-dat
       imports: [ServicesModule],
       useClass: MongodbConfigService,
     }),
-    HouseRulesDatabaseModule
+    HouseRulesDatabaseModule,
   ],
   providers: [AppService],
 })

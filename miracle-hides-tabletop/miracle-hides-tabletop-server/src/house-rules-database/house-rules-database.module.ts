@@ -7,16 +7,17 @@ import { HOUSE_RULES_DATABASE_SERVICE } from 'src/types/house-rules-database-ser
 
 @Module({
   exports: [HOUSE_RULES_DATABASE_SERVICE],
-  imports: [MongooseModule.forFeature([
-    { name: HouseRule.name, schema: HouseRuleSchema },
-    { name: HouseRules.name, schema: HouseRulesSchema },
-  ])],
+  imports: [
+    MongooseModule.forFeature([
+      { name: HouseRule.name, schema: HouseRuleSchema },
+      { name: HouseRules.name, schema: HouseRulesSchema },
+    ]),
+  ],
   providers: [
     {
       provide: HOUSE_RULES_DATABASE_SERVICE,
       useClass: HouseRulesDatabaseService,
-    }
+    },
   ],
 })
-export class HouseRulesDatabaseModule {
-}
+export class HouseRulesDatabaseModule {}

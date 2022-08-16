@@ -4,4 +4,4 @@ export default class HouseRuleDto implements IHouseRule {
   topic: string;
 
   descriptions: string[];
-};
+}

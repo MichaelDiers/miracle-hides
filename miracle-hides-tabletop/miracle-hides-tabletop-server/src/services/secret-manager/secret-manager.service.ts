@@ -4,20 +4,23 @@ import { ISecretManagerService } from 'src/types/secret-manager-service.interfac
 
 @Injectable()
 export class SecretManagerService implements ISecretManagerService {
-  private readonly client: SecretManagerServiceClient = new SecretManagerServiceClient();
+  private readonly client: SecretManagerServiceClient =
+    new SecretManagerServiceClient();
 
-  async getMiracleHidesTabletopConnectionString() : Promise<string|undefined> {
+  async getMiracleHidesTabletopConnectionString(): Promise<string | undefined> {
     return this.getSecretAsync('MiracleHidesTabletopConnectionString');
   }
 
-  private async getSecretAsync(secretName: string) : Promise<string|undefined> {
+  private async getSecretAsync(
+    secretName: string,
+  ): Promise<string | undefined> {
     const name = `projects/${process.env.MH_PROJECT_NAME}/secrets/${secretName}/versions/latest`;
     try {
       const [version] = await this.client.accessSecretVersion({ name });
       return version.payload.data.toString();
-    } catch(err) {
-      console.error(err)
+    } catch (err) {
+      console.error(err);
       return;
-    }    
+    }
   }
 }
