@@ -1,3 +1,4 @@
+import { decrementActiveProcesses, incrementActiveProcesses } from '../app/store';
 import IFetchResult from "../types/fetch-result.interface";
 import { Method } from "../types/method.type";
 
@@ -11,6 +12,7 @@ export default function fetchService({
   body?: object,    
 }) : Promise<IFetchResult> {
   return new Promise((resolve, reject) => {
+    incrementActiveProcesses();
     fetch(
       `http://localhost:3001${url}`,
       {
@@ -29,6 +31,8 @@ export default function fetchService({
       }
     }).catch((err) => {
       reject({ error: err.message });
+    }).finally(() => {
+      decrementActiveProcesses();
     });
   });
 }
