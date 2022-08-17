@@ -4,4 +4,5 @@ export default interface IHouseRulesServiceResult {
   headline?: string;
   houseRules?: IHouseRule[];
   error?: string;
+  language?: string;
 }

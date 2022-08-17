@@ -1,4 +1,6 @@
-import { decrementActiveProcesses, incrementActiveProcesses } from '../app/store';
+import { actions } from '../app/active-processes-slice';
+import { useAppDispatch } from '../app/hooks';
+import { store } from '../app/store';
 import IFetchResult from "../types/fetch-result.interface";
 import { Method } from "../types/method.type";
 
@@ -13,7 +15,8 @@ export default function fetchService({
 }) : Promise<IFetchResult> {
   const serverPrefix = process.env.REACT_APP_MH_SERVER_PREFIX || '';  
   return new Promise((resolve, reject) => {
-    incrementActiveProcesses();
+    store.dispatch(actions.increment);
+
     fetch(
       `${serverPrefix}${url}`,
       {
@@ -33,7 +36,7 @@ export default function fetchService({
     }).catch((err) => {
       reject({ error: err.message });
     }).finally(() => {
-      decrementActiveProcesses();
+      store.dispatch(actions.decrement);
     });
   });
 }

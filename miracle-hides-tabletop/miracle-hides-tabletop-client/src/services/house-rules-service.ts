@@ -12,7 +12,7 @@ export default function houseRulesService(language: Language): Promise<IHouseRul
     }).then((fetchResult: IFetchResult) => {
       resolve(fetchResult.json as IHouseRulesServiceResult);
     }).catch((fetchResult: IFetchResult) => {
-      console.error(`Error: ${fetchResult.error} - Status: ${fetchResult.status}`);
+      console.error(fetchResult);
       reject({ error: 'nothing found' });
     });
   });

@@ -1,33 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from './store';
+import { createSlice } from '@reduxjs/toolkit'
 
-export interface IActiveProcessesState {
-  count: number;
-  isActive: boolean;
-}
-
-const initialState: IActiveProcessesState = {
-  count: 0,
-  isActive: false,
-};
-
-export const activeProcessesSlice = createSlice({
+const activeProcessesSlice = createSlice({
   name: 'activeProcesses',
-  initialState,
-  reducers: {
-    increment: (state) => {
-      state.count += 1;
-      state.isActive = state.count !== 0;
-    },
-    decrement: (state) => {
-      state.count -= 1;
-      state.isActive = state.count !== 0;
-    },    
+  initialState: {
+    value: 0
   },
+  reducers: {
+    increment: state => {
+      state.value += 1
+    },
+    decrement: state => {
+      state.value -= 1
+    },
+  }
 });
 
-export const getIsProcessActive = (state: RootState) => state.activeProcesses.isActive;
+export const reducer = activeProcessesSlice.reducer;
 
-export const { increment, decrement } = activeProcessesSlice.actions;
-
-export default activeProcessesSlice.reducer;
+export const actions = activeProcessesSlice.actions;

@@ -1,23 +1,9 @@
-import { useEffect, useState } from 'react';
-import IHouseRulesService from '../types/house-rules-service.interface';
-import IHouseRulesServiceResult from '../types/house-rules-service-result.interface';
-import { getLanguage } from '../app/language-slice';
 import { useAppSelector } from '../app/hooks';
+import { selectHouseRulesServiceResult } from '../app/selectors';
 
-export default function Rules({
-  houseRulesService,
-}: {
-  houseRulesService: IHouseRulesService,
-}) {
-  const [houseRulesServiceResult, setHouseRulesServiceResult] = useState<IHouseRulesServiceResult>();
-  const language = useAppSelector(getLanguage);
-
-  useEffect(() => {
-    houseRulesService(language)
-      .then((result) => setHouseRulesServiceResult(result))
-      .catch((result) => setHouseRulesServiceResult(result));
-  }, []);
-
+export default function Rules() {
+  const houseRulesServiceResult = useAppSelector(selectHouseRulesServiceResult);
+  
   return (
     <main>
       <h1>{houseRulesServiceResult?.headline}</h1>

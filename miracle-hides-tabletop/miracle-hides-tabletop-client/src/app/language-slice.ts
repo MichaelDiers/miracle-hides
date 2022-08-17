@@ -1,29 +1,22 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Language, toLanguageOrDefault } from '../types/language.type';
-import { RootState } from './store';
+import { createSlice } from '@reduxjs/toolkit'
+import { Language } from '../types/language.type';
 
-export interface ILanguageState {
-  lang: Language;
+interface ILanguageState {
+  lang?: Language;
 }
 
-const initialState: ILanguageState = {
-  lang: toLanguageOrDefault(navigator.language, document.documentElement.lang),
-};
+const initialState = (): ILanguageState => ({});
 
-document.documentElement.setAttribute('lang', initialState.lang);
-
-export const languageSlice = createSlice({
+const languageSlice = createSlice({
   name: 'language',
   initialState,
   reducers: {
-    setLanguage: (state, action: PayloadAction<Language>) => {
+    setLanguage: (state, action) => {
       state.lang = action.payload;
-    },
-  },
+    },    
+  }
 });
 
-export const getLanguage = (state: RootState) => state.language.lang;
+export const reducer = languageSlice.reducer;
 
-export const { setLanguage } = languageSlice.actions;
-
-export default languageSlice.reducer;
+export const actions = languageSlice.actions;

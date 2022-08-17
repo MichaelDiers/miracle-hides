@@ -3,18 +3,17 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { store } from './app/store';
-import App from './App';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Rules from './pages/HouseRules';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import houseRulesService from './services/house-rules-service';
+import { initializeLanguageAsync } from './app/thunks';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-
+store.dispatch(initializeLanguageAsync());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -22,7 +21,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route index element={ <Home/> } />
-          <Route path='/house-rules' element={ <Rules houseRulesService={houseRulesService}/> } />
+          <Route path='/house-rules' element={ <Rules /> } />
         </Routes>
       </BrowserRouter>
       <Footer/>
