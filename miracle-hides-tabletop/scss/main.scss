@@ -1,0 +1,10 @@
+// Uses a variant of the 7-1 pattern described at https://sass-guidelin.es/#architecture
+// and a variant of the https://github.com/KittyGiraudel/sass-boilerplate by Kitty Giraudel.
+
+@import 'abstracts/abstracts';
+@import 'base/base';
+@import 'layout/layout';
+@import 'components/components';
+@import 'pages/pages';
+@import 'themes/themes';
+@import 'vendors/vendors';

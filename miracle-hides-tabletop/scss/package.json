@@ -1,0 +1,46 @@
+{
+  "name": "extended-7-1",
+  "version": "1.0.0",
+  "description": "extended template for scss",
+  "main": "index.js",
+  "scripts": {
+    "autoprefixer:dev": "npm run call:autoprefixer -- -o ./build/autoprefixer.css ./build/sass.css",
+    "autoprefixer:prod": "npm run call:autoprefixer -- -o ./build/autoprefixer.min.css ./build/sass.min.css",
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "npm run sass:dev && npm run autoprefixer:dev",
+    "postbuild:dev": "npx copyfiles -u 1 build/autoprefixer.css dist/ && npx move-file dist/autoprefixer.css dist/client.css",
+    "build:prod": "npm run sass:prod && npm run autoprefixer:prod",
+    "postbuild:prod": "npx copyfiles -u 1 build/autoprefixer.min.css dist/ && npx move-file dist/autoprefixer.min.css dist/client.min.css",
+    "call:autoprefixer": "npx postcss --no-map --use autoprefixer ",
+    "call:sass": "npx sass --stop-on-error --no-source-map ./main.scss",
+    "prebuild": "npx rimraf build dist && npm run lint",
+    "sass:dev": "npm run call:sass -- ./build/sass.css",
+    "sass:prod": "npm run call:sass -- ./build/sass.min.css --style=compressed",
+    "lint": "npx stylelint **/*.scss --fix",
+    "preto:client": "npm run build:prod",
+    "to:client": "npx move-file dist/client.min.css ../miracle-hides-tabletop-client/src/index.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelDiers/Templates.git"
+  },
+  "keywords": [
+    "scss",
+    "template",
+    "7-1 pattern"
+  ],
+  "author": "Michael Diers",
+  "license": "MIT",
+  "homepage": "https://github.com/MichaelDiers/Templates#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.8",
+    "copyfiles": "^2.4.1",
+    "move-file-cli": "^3.0.0",
+    "postcss": "^8.4.16",
+    "postcss-cli": "^10.0.0",
+    "rimraf": "^3.0.2",
+    "sass": "^1.54.4",
+    "stylelint": "^14.10.0",
+    "stylelint-config-sass-guidelines": "^9.0.1"
+  }
+}

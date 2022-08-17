@@ -1,0 +1,5 @@
+$loader-params: (
+  name: 'loader',
+);
+
+@include rotating-circle-loader($loader-params...);
