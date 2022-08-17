@@ -15,8 +15,7 @@ export default function fetchService({
 }) : Promise<IFetchResult> {
   const serverPrefix = process.env.REACT_APP_MH_SERVER_PREFIX || '';  
   return new Promise((resolve, reject) => {
-    store.dispatch(actions.increment);
-
+    store.dispatch(actions.increment());
     fetch(
       `${serverPrefix}${url}`,
       {
@@ -36,7 +35,7 @@ export default function fetchService({
     }).catch((err) => {
       reject({ error: err.message });
     }).finally(() => {
-      store.dispatch(actions.decrement);
+      store.dispatch(actions.decrement());
     });
   });
 }

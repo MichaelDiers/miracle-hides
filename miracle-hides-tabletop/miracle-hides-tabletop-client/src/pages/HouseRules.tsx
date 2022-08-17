@@ -3,9 +3,9 @@ import { selectHouseRulesServiceResult } from '../app/selectors';
 
 export default function Rules() {
   const houseRulesServiceResult = useAppSelector(selectHouseRulesServiceResult);
-  
   return (
     <main>
+      <div className={`loader ${houseRulesServiceResult ? '' : ' show'}`} />
       <h1>{houseRulesServiceResult?.headline}</h1>
       <div>{houseRulesServiceResult?.error}</div>
       <div>

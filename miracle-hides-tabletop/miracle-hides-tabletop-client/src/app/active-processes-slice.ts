@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const activeProcessesSlice = createSlice({
   name: 'activeProcesses',
   initialState: {
-    value: 0
+    value: 0,
   },
   reducers: {
     increment: state => {
