@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Language } from '../types/language.type';
+import ILanguage from '../types/language.interface';
 
 interface ILanguageState {
-  lang?: Language;
+  languages?: ILanguage[];
+  current?: ILanguage;
 }
 
 const initialState = (): ILanguageState => ({});
@@ -11,9 +12,12 @@ const languageSlice = createSlice({
   name: 'language',
   initialState,
   reducers: {
-    setLanguage: (state, action) => {
-      state.lang = action.payload;
-    },    
+    setCurrent: (state, action) => {
+      state.current = action.payload;
+    },
+    setLanguages: (state, action) => {
+      state.languages = action.payload;
+    },
   }
 });
 

@@ -1,28 +1,22 @@
 import IFetchResult from '../types/fetch-result.interface';
-import IHouseRule from '../types/house-rule.interface';
-import IHouseRulesServiceResult from '../types/house-rules-service-result.interface';
+import ILanguageResult from '../types/language-result.interface';
+import ILanguage from '../types/language.interface';
 import { Method } from '../types/method.type';
 import { SERVICE_NOT_AVAIABLE } from '../types/service-result.interface';
 import cachedFetchService from './cached-fetch-service';
 
-export default function houseRulesService(language: string): Promise<IHouseRulesServiceResult> {
+export default function languagesService(): Promise<ILanguageResult> {
   return new Promise((resolve, reject) => {    
     cachedFetchService({
       method: 'GET' as Method,
-      url: `/api/house-rules/${language}`,
+      url: `/api/languages`,
     }).then((fetchResult: IFetchResult) => {
       if (!fetchResult.json) {
         resolve(SERVICE_NOT_AVAIABLE);
         console.error(fetchResult);
       }
 
-      const result = fetchResult.json as { headline: string, houseRules: IHouseRule[], language: string };      
-
-      resolve({
-        headline: result.headline,
-        houseRules: result.houseRules,
-        language: result.language,
-      });
+      resolve({ languages: fetchResult.json as ILanguage[] });
     }).catch((fetchResult: IFetchResult) => {
       console.error(fetchResult);
       reject(SERVICE_NOT_AVAIABLE);

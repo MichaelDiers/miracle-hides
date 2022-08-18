@@ -1,9 +1,8 @@
 import IHouseRule from './house-rule.interface';
-import { Language } from './language.type';
+import IServiceResult from './service-result.interface';
 
-export default interface IHouseRulesServiceResult {
+export default interface IHouseRulesServiceResult extends IServiceResult {
   headline?: string;
   houseRules?: IHouseRule[];
-  error?: string;
-  language?: Language;
+  language?: string;
 }
