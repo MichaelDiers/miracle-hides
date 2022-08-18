@@ -3,7 +3,7 @@ import { PipeTransform, Injectable, BadRequestException } from '@nestjs/common';
 @Injectable()
 export class LanguagePipe implements PipeTransform {
   transform(value: any): string {
-    if (value === 'en') {
+    if (value === 'en' || value === 'de') {
       return value;
     }
 
