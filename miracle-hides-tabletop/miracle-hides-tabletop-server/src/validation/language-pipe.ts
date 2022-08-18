@@ -1,11 +1,10 @@
 import { PipeTransform, Injectable, BadRequestException } from '@nestjs/common';
-import { Language } from 'src/types/language.type';
 
 @Injectable()
 export class LanguagePipe implements PipeTransform {
-  transform(value: any): Language {
+  transform(value: any): string {
     if (value === 'en') {
-      return value as Language;
+      return value;
     }
 
     throw new BadRequestException(`Language ${value} is not supported.`);

@@ -3,8 +3,7 @@ import {
   HOUSE_RULES_SERVICE,
   IHouseRulesService,
 } from 'src/types/house-rules-service.interface';
-import { Language } from 'src/types/language.type';
-import IListHouseRulesResult from 'src/types/read-house-rules-result.interface';
+import IHouseRules from 'src/types/house-rules.interface';
 import { LanguagePipe } from 'src/validation/language-pipe';
 
 @Controller('api/house-rules')
@@ -15,9 +14,9 @@ export class HouseRulesController {
   ) {}
 
   @Get(':language')
-  async listAsync(
-    @Param('language', new LanguagePipe()) language: Language,
-  ): Promise<IListHouseRulesResult> {
+  async readAsync(
+    @Param('language', new LanguagePipe()) language: string,
+  ): Promise<IHouseRules> {
     return this.houseRulesService.readAsync(language);
   }
 }

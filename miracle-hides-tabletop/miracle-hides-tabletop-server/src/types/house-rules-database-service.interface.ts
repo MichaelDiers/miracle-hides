@@ -1,7 +1,7 @@
-import { HouseRules } from 'src/house-rules-database/house-rules.schema';
+import IHouseRules from './house-rules.interface';
 
 export interface IHouseRulesDatabaseService {
-  read(language: string): Promise<HouseRules | null>;
+  readAsync(language: string): Promise<IHouseRules>;
 }
 
 export const HOUSE_RULES_DATABASE_SERVICE = 'HOUSE_RULES_DATABASE_SERVICE';
