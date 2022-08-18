@@ -7,7 +7,7 @@ import { Language } from 'src/types/language.type';
 import IListHouseRulesResult from 'src/types/read-house-rules-result.interface';
 import { LanguagePipe } from 'src/validation/language-pipe';
 
-@Controller('house-rules')
+@Controller('api/house-rules')
 export class HouseRulesController {
   constructor(
     @Inject(HOUSE_RULES_SERVICE)
