@@ -11,3 +11,11 @@ export function toLanguageOrDefault(...languages: string[]) : Language {
 
   return (lang || defaultLanguage) as Language;
 }
+
+export function normalizeLanguage(language: string): Language | undefined {
+  if (!language) {
+    return;
+  }
+
+  return language.split('-')[0].toLocaleLowerCase() as Language;
+}

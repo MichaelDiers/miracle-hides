@@ -1,5 +1,4 @@
 import { actions } from '../app/active-processes-slice';
-import { useAppDispatch } from '../app/hooks';
 import { store } from '../app/store';
 import IFetchResult from "../types/fetch-result.interface";
 import { Method } from "../types/method.type";
