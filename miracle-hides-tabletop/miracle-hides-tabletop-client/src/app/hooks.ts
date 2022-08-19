@@ -2,7 +2,6 @@ import { FetchBaseQueryError, skipToken } from '@reduxjs/toolkit/dist/query';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import ILanguage from '../types/language.interface';
 import { useReadHouseRulesQuery } from './house-rules-slice';
-import { languageSlice } from './language-slice';
 import { useReadLanguagesQuery } from './languages-slice';
 import { RootState, AppDispatch, store } from './store';
 import { useReadTranslationsQuery } from './translations-slice';
@@ -43,6 +42,7 @@ export const useReadCurrentLanguageCombinedQuery = () => {
     return { error: { status: 'CUSTOM_ERROR', error: 'Unable to set language.' } as FetchBaseQueryError };
   }
 
+  document.documentElement.lang = language.short;
   return { data: language.short, isError: false, isSuccess: true };
 }
 
