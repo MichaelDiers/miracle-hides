@@ -9,11 +9,11 @@ import Home from './pages/Home';
 import Rules from './pages/HouseRules';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import { initializeLanguageAsync } from './app/thunks';
+import { fetchLanguagesAsync } from './app/language-slice';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-store.dispatch(initializeLanguageAsync());
+store.dispatch(fetchLanguagesAsync({ dispatch: store.dispatch }));
 root.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -1,16 +1,16 @@
 import { useAppSelector } from '../app/hooks';
-import { selectHouseRulesServiceResult } from '../app/selectors';
+import { selectHouseRulesState } from '../app/selectors';
 
 export default function Rules() {
-  const houseRulesServiceResult = useAppSelector(selectHouseRulesServiceResult);
+  const houseRulesState = useAppSelector(selectHouseRulesState);
   return (
     <main>
-      <div className={`loader ${houseRulesServiceResult ? '' : ' show'}`} />
-      <h1>{houseRulesServiceResult?.headline}</h1>
-      <div>{houseRulesServiceResult?.error}</div>
+      <div className={`loader ${houseRulesState.isLoading ? ' show' : ''}`} />
+      <h1>{houseRulesState?.headline}</h1>
+      <div>{houseRulesState?.error}</div>
       <div>
         {
-          houseRulesServiceResult?.houseRules?.map(({ topic, descriptions }, divi) => {
+          houseRulesState?.houseRules?.map(({ topic, descriptions }, divi) => {
             return (
               <div key={divi}>
                 <h3>{topic}</h3>

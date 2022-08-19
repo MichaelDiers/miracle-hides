@@ -2,6 +2,7 @@ import { actions } from '../app/active-processes-slice';
 import { store } from '../app/store';
 import IFetchResult from "../types/fetch-result.interface";
 import { Method } from "../types/method.type";
+import FetchError from './fetch-error';
 
 export default function fetchService({
   url,
@@ -27,12 +28,14 @@ export default function fetchService({
       if (response.ok) {
         response.text()
           .then((text) => resolve({ status, json: JSON.parse(text) }))
-          .catch((err) => reject({ status, error: err.message }));
+          .catch((err) => {
+            reject(new FetchError({ message: err.message, status }));
+          });
       } else {
-        reject({ status })
+        reject(new FetchError({ status }));
       }
     }).catch((err) => {
-      reject({ error: err.message });
+      reject(new FetchError({ message: err.message }));
     }).finally(() => {
       store.dispatch(actions.decrement());
     });
