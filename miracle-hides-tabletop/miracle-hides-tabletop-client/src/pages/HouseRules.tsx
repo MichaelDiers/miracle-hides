@@ -1,11 +1,12 @@
 import { useAppSelector } from '../app/hooks';
 import { selectHouseRulesState } from '../app/selectors';
+import Loader from '../components/Loader';
 
 export default function Rules() {
   const houseRulesState = useAppSelector(selectHouseRulesState);
   return (
     <main>
-      <div className={`loader ${houseRulesState.isLoading ? ' show' : ''}`} />
+      <Loader isLoading={houseRulesState.isLoading} />
       <h1>{houseRulesState?.headline}</h1>
       <div>{houseRulesState?.error}</div>
       <div>
