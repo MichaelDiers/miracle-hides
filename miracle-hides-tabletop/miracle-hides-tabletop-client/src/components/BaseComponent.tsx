@@ -13,28 +13,19 @@ export default function BaseComponent({
   apiData,
   createContent,
 } : {
-  apiData: dataType,
-  createContent: (input: any) => JSX.Element,
+  apiData: dataType|dataType[],
+  createContent: (input: any|any[]) => JSX.Element,
 }) {
-  const {
-    data,
-    isError,
-    isFetching,
-    isLoading,
-    isSuccess,
-    isUninitialized, 
-  } = apiData;
-
-  let content;
-  if (isLoading || isFetching || isUninitialized) {
-    content = <Loader isLoading={true}/>;
-  } else if (isError || !isSuccess) {
-    content = <span>FATAL</span>;
-  } else {
-    content = createContent(data);
+  let values = Array.isArray(apiData) ? apiData : [apiData];
+  const isLoading = values.some(({ isLoading, isFetching, isUninitialized }) => isLoading || isFetching || isUninitialized);
+  if (isLoading) {
+    return (<Loader isLoading={true}/>);
   }
 
-  return (
-    content
-  );
+  const isError = values.some(({ isError, isSuccess }) => isError || !isSuccess);
+  if (isError) {
+    return (<span>FATAL</span>);
+  }
+
+  return (createContent(values.length === 1 ? values[0].data : values.map(({ data }) => data)));
 }

@@ -9,6 +9,15 @@ export class TranslationsController {
       case 'EN':
         return {
           language,
+          home: {
+            headline: 'One dice to rule them all!',
+          },
+          houseRules: {
+            headline: 'House Rules',
+          },
+          languages: {
+            headline: 'Languages',
+          },
           navbar: {
             home: 'Home',
             houseRules: 'House Rules',
@@ -18,6 +27,15 @@ export class TranslationsController {
       case 'DE':
         return {
           language,
+          home: {
+            headline: 'Ein Würfel sie zu knechten...',
+          },
+          houseRules: {
+            headline: 'Hausregeln',
+          },
+          languages: {
+            headline: 'Sprachen',
+          },
           navbar: {
             home: 'Home',
             houseRules: 'Hausregeln',

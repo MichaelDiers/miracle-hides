@@ -23,7 +23,6 @@ export class HouseRulesDatabaseService implements IHouseRulesDatabaseService {
     return {
       language: result.language,
       houseRules: result.houseRules,
-      headline: result.headline,
     };
   }
 }

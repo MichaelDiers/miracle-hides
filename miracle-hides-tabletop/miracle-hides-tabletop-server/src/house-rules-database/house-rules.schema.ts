@@ -7,9 +7,6 @@ export type HouseRulesDocument = HouseRules & Document;
 
 @Schema({ collection: 'house-rules' })
 export class HouseRules {
-  @Prop({ required: true })
-  headline: string;
-
   @Prop({ required: true, type: [HouseRuleSchema] })
   houseRules: HouseRuleDto[];
 

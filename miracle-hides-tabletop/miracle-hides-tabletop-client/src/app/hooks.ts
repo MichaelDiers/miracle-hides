@@ -3,7 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import ILanguage from '../types/language.interface';
 import { useReadHouseRulesQuery } from './house-rules-slice';
 import { useReadLanguagesQuery } from './languages-slice';
-import { RootState, AppDispatch, store } from './store';
+import { RootState, AppDispatch } from './store';
 import { useReadTranslationsQuery } from './translations-slice';
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
