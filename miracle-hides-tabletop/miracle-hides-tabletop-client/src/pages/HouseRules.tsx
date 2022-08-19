@@ -1,17 +1,21 @@
-import { useAppSelector } from '../app/hooks';
-import { selectHouseRulesState } from '../app/selectors';
-import Loader from '../components/Loader';
+import { useReadHouseRulesCombinedQuery } from '../app/hooks';
+import BaseComponent from '../components/BaseComponent';
+import IHouseRulesServiceResult from '../types/house-rules-service-result.interface';
 
-export default function Rules() {
-  const houseRulesState = useAppSelector(selectHouseRulesState);
+export default function HouseRules() {
   return (
-    <main>
-      <Loader isLoading={houseRulesState.isLoading} />
-      <h1>{houseRulesState?.headline}</h1>
-      <div>{houseRulesState?.error}</div>
+    <BaseComponent apiData={useReadHouseRulesCombinedQuery()} createContent={createContent}></BaseComponent>
+  ); 
+};
+
+const createContent = (apiData: any) : JSX.Element => {
+  const houseRules: IHouseRulesServiceResult = apiData; 
+  return (
+    <main>      
+      <h1>{houseRules?.headline}</h1>
       <div>
         {
-          houseRulesState?.houseRules?.map(({ topic, descriptions }, divi) => {
+          houseRules?.houseRules?.map(({ topic, descriptions }, divi) => {
             return (
               <div key={divi}>
                 <h3>{topic}</h3>
@@ -31,4 +35,4 @@ export default function Rules() {
       </div>        
     </main>
   );
-};
+}

@@ -6,25 +6,26 @@ import { store } from './app/store';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './pages/Home';
-import Rules from './pages/HouseRules';
+import HouseRules from './pages/HouseRules';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import { fetchLanguagesAsync } from './app/language-slice';
+import Language from './pages/Language';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-store.dispatch(fetchLanguagesAsync({ dispatch: store.dispatch }));
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Header/>
       <BrowserRouter>
+        <Header/>
         <Routes>
           <Route index element={ <Home/> } />
-          <Route path='/house-rules' element={ <Rules /> } />
+          <Route path='/house-rules' element={ <HouseRules /> } />
+          <Route path='/languages' element={ <Language/> } /> 
         </Routes>
-      </BrowserRouter>
-      <Footer/>
+        <Footer/>
+      </BrowserRouter>      
     </Provider>
   </React.StrictMode>
 );

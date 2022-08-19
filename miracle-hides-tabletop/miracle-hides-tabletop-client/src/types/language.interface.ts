@@ -1,5 +1,5 @@
 export default interface ILanguage {
-  isDefault: string;
+  isDefault: boolean;
   name: string;
   short: string;
 }

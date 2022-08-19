@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { reducer as activeProcesses  } from './active-processes-slice';
-import { reducer as data  } from './data-slice';
-import { reducer as language  } from './language-slice';
+import apiSlice from './api-slice';
+import { languageSlice } from './language-slice';
 
 export const store = configureStore({
   reducer: {
-    activeProcesses,
-    data,
-    language,
-  }
+    api: apiSlice.reducer,
+    language: languageSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware()
+      .concat(apiSlice.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

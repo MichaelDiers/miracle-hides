@@ -1,1 +1,0 @@
-export const SERVICE_NOT_AVAIABLE: string = 'Service not available.';
