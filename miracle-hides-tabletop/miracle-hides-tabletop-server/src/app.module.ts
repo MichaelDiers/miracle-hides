@@ -9,6 +9,7 @@ import { MongodbConfigService } from './services/mongodb-config/mongodb-config.s
 import { ServicesModule } from './services/services.module';
 import { HouseRulesDatabaseModule } from './house-rules-database/house-rules-database.module';
 import { LanguagesDatabaseModule } from './languages-database/languages-database.module';
+import { TranslationsDatabaseModule } from './translations-database/translations-database.module';
 
 @Module({
   controllers: [AppController],
@@ -23,6 +24,7 @@ import { LanguagesDatabaseModule } from './languages-database/languages-database
     }),
     HouseRulesDatabaseModule,
     LanguagesDatabaseModule,
+    TranslationsDatabaseModule,
   ],
   providers: [AppService],
 })

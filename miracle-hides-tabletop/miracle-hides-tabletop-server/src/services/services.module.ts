@@ -8,10 +8,13 @@ import { HouseRulesDatabaseModule } from 'src/house-rules-database/house-rules-d
 import { LanguagesService } from './languages/languages.service';
 import { LANGUAGES_SERVICE } from 'src/types/languages-service.interface';
 import { LanguagesDatabaseModule } from 'src/languages-database/languages-database.module';
+import { TranslationsService } from './translations/translations.service';
+import { TRANSLATIONS_SERVICE } from 'src/types/translations-service.interface';
+import { TranslationsDatabaseModule } from 'src/translations-database/translations-database.module';
 
 @Module({
-  exports: [HOUSE_RULES_SERVICE, LANGUAGES_SERVICE, SECRET_MANAGER_SERVICE],
-  imports: [HouseRulesDatabaseModule, LanguagesDatabaseModule],
+  exports: [HOUSE_RULES_SERVICE, LANGUAGES_SERVICE, SECRET_MANAGER_SERVICE, TRANSLATIONS_SERVICE],
+  imports: [HouseRulesDatabaseModule, LanguagesDatabaseModule, TranslationsDatabaseModule],
   providers: [
     {
       provide: HOUSE_RULES_SERVICE,
@@ -25,8 +28,11 @@ import { LanguagesDatabaseModule } from 'src/languages-database/languages-databa
       provide: SECRET_MANAGER_SERVICE,
       useClass: SecretManagerService,
     },
-    MongodbConfigService,
-    LanguagesService,
+    {
+      provide: TRANSLATIONS_SERVICE,
+      useClass: TranslationsService,
+    },
+    MongodbConfigService,    
   ],
 })
 export class ServicesModule {}
