@@ -1,24 +1,21 @@
 import { useReadHouseRulesCombinedQuery, useReadTranslationsCombinedQuery } from '../app/hooks';
-import BaseComponent from '../components/BaseComponent';
 import IHouseRulesServiceResult from '../types/house-rules-service-result.interface';
 import ITranslations from '../types/translations.interface';
+import BasePage from './BasePage';
 
 export default function HouseRules() {
-  return (
-    <BaseComponent
-      apiData={[useReadHouseRulesCombinedQuery(), useReadTranslationsCombinedQuery()]}
-      createContent={createContent}
-    ></BaseComponent>
-  ); 
-};
+  const houseRulesResult = useReadHouseRulesCombinedQuery();
+  const translationsResult = useReadTranslationsCombinedQuery();
+  const houseRules = houseRulesResult.data as IHouseRulesServiceResult;
+  const translations = translationsResult.data as ITranslations;
 
-const createContent = (apiData: any[]) : JSX.Element => {
-  const houseRules: IHouseRulesServiceResult = apiData[0];
-  const translations: ITranslations = apiData[1]; 
   return (
-    <main>      
-      <h1>{translations.houseRules.headline}</h1>
-      <div>
+    <BasePage
+      headline={translations?.houseRules.headline}
+      apiData={[translationsResult, houseRulesResult]}
+      isMain={true}
+      createContent={
+        <div>
         {
           houseRules?.houseRules?.map(({ topic, descriptions }, divi) => {
             return (
@@ -37,7 +34,8 @@ const createContent = (apiData: any[]) : JSX.Element => {
             )
           })
         }
-      </div>        
-    </main>
-  );
-}
+      </div>  
+      }      
+    />
+  ); 
+};

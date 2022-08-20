@@ -1,21 +1,21 @@
 import { Link } from 'react-router-dom';
 import { useReadTranslationsCombinedQuery } from '../app/hooks';
-import BaseComponent from '../components/BaseComponent';
 import ITranslations from '../types/translations.interface';
+import BasePage from './BasePage';
 
 export default function Home() {
-  const translations = useReadTranslationsCombinedQuery();
-  return (<BaseComponent apiData={translations} createContent={createContent}/>)
-}
-
-const createContent = (data: any) => {
-  const translations: ITranslations = data;
+  const translationsResult = useReadTranslationsCombinedQuery();
+  const translations = translationsResult.data as ITranslations;
   return (
-    <main>
-      <h1>{translations.home.headline}</h1>
-      <Link to='/house-rules'>
-        {translations.navbar.houseRules}
-      </Link>
-    </main>
+    <BasePage
+      headline={translations?.home.headline}
+      apiData={translationsResult}
+      isMain={true}
+      createContent={
+        <Link to='/house-rules'>
+          {translationsResult.data?.navbar.houseRules}
+        </Link>
+      }
+    />      
   );
 }
