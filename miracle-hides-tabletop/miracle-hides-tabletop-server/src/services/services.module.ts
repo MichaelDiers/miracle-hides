@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { SECRET_MANAGER_SERVICE } from 'src/types/secret-manager-service.interface';
+import { ISecretManagerService, SECRET_MANAGER_SERVICE } from 'src/types/secret-manager-service.interface';
 import { HOUSE_RULES_SERVICE } from '../types/house-rules-service.interface';
 import { HouseRulesService } from './house-rules/house-rules.service';
 import { SecretManagerService } from './secret-manager/secret-manager.service';
@@ -16,11 +16,15 @@ import { UserDatabaseModule } from 'src/user-database/user-database.module';
 import { USER_SERVICE } from 'src/types/user-service.interface';
 import { DEFAULT_HASH_SERVICE_ROUNDS, HashService, HASH_SERVICE_ROUNDS } from './hash/hash.service';
 import { HASH_SERVICE } from 'src/types/hash-service.interface';
+import { JwtService } from './jwt/jwt.service';
+import { JWT_SERVICE } from 'src/types/jwt-service.interface';
+import IJwtConfig from 'src/types/jwt-config.interface';
 
 @Module({
   exports: [
     HASH_SERVICE,
     HOUSE_RULES_SERVICE,
+    JWT_SERVICE,
     LANGUAGES_SERVICE,
     SECRET_MANAGER_SERVICE,
     TRANSLATIONS_SERVICE,
@@ -45,6 +49,15 @@ import { HASH_SERVICE } from 'src/types/hash-service.interface';
     {
       provide: HOUSE_RULES_SERVICE,
       useClass: HouseRulesService,
+    },
+    {
+      provide: JWT_SERVICE,
+      useFactory: async (secretService: ISecretManagerService) => {
+        const plainConfig = await secretService.getMiracleHidesTabletopJwtConfig();
+        const config: IJwtConfig = JSON.parse(plainConfig);
+        return new JwtService(config);
+      },
+      inject: [SECRET_MANAGER_SERVICE],
     },
     {
       provide: LANGUAGES_SERVICE,

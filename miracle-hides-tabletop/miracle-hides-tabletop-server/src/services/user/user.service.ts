@@ -6,11 +6,13 @@ import { IUserDatabaseService, USER_DATABASE_SERVICE } from 'src/types/user-data
 import { IUserService } from 'src/types/user-service.interface';
 import { HASH_SERVICE, IHashService } from 'src/types/hash-service.interface';
 import ISignInData from 'src/types/sign-in-data.interface';
+import { IJwtService, JWT_SERVICE } from 'src/types/jwt-service.interface';
 
 @Injectable()
 export class UserService implements IUserService {
   constructor(
     @Inject(HASH_SERVICE) private readonly hashService: IHashService,
+    @Inject(JWT_SERVICE) private readonly jwtService: IJwtService,
     @Inject(USER_DATABASE_SERVICE) private readonly databaseService: IUserDatabaseService,
   ) {}
 
@@ -37,7 +39,7 @@ export class UserService implements IUserService {
 
     return {
       displayName: user.displayName,
-      token: 'TOKEN',
+      token: await this.jwtService.signAsync(user),
     };
   }
 
@@ -52,7 +54,7 @@ export class UserService implements IUserService {
 
     return {
       displayName: user.displayName,
-      token: 'TOKEN',
+      token: await this.jwtService.signAsync(user),
     };
   }
 }

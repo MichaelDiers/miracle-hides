@@ -7,6 +7,10 @@ export class SecretManagerService implements ISecretManagerService {
   private readonly client: SecretManagerServiceClient =
     new SecretManagerServiceClient();
 
+  async getMiracleHidesTabletopJwtConfig(): Promise<string> {
+    return this.getSecretAsync('MiracleHidesTabletopJwtConfig');
+  }
+
   async getMiracleHidesTabletopConnectionString(): Promise<string | undefined> {
     return this.getSecretAsync('MiracleHidesTabletopConnectionString');
   }
