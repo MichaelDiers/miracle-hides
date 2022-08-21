@@ -1,10 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import signUpDataInterface from 'src/types/sign-up-data.interface';
 import ITokenResponse from 'src/types/token-response.interface';
 import { IUserDatabaseService, USER_DATABASE_SERVICE } from 'src/types/user-database-service.interface';
 import { IUserService } from 'src/types/user-service.interface';
 import { HASH_SERVICE, IHashService } from 'src/types/hash-service.interface';
+import ISignInData from 'src/types/sign-in-data.interface';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -32,6 +33,21 @@ export class UserService implements IUserService {
 
     if (!user) {
       return;
+    }
+
+    return {
+      displayName: user.displayName,
+      token: 'TOKEN',
+    };
+  }
+
+  async signInAsync(signInData: ISignInData): Promise<ITokenResponse> {
+    const user = await this.databaseService.findOneAsync(
+      async (user) => this.hashService.compareAsync(signInData.email, user.email),
+    );
+
+    if (!user) {
+      throw new NotFoundException();
     }
 
     return {
