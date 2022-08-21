@@ -10,6 +10,7 @@ import { ServicesModule } from './services/services.module';
 import { HouseRulesDatabaseModule } from './house-rules-database/house-rules-database.module';
 import { LanguagesDatabaseModule } from './languages-database/languages-database.module';
 import { TranslationsDatabaseModule } from './translations-database/translations-database.module';
+import { UserDatabaseModule } from './user-database/user-database.module';
 
 @Module({
   controllers: [AppController],
@@ -25,6 +26,7 @@ import { TranslationsDatabaseModule } from './translations-database/translations
     HouseRulesDatabaseModule,
     LanguagesDatabaseModule,
     TranslationsDatabaseModule,
+    UserDatabaseModule,
   ],
   providers: [AppService],
 })

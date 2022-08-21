@@ -11,20 +11,37 @@ import { LanguagesDatabaseModule } from 'src/languages-database/languages-databa
 import { TranslationsService } from './translations/translations.service';
 import { TRANSLATIONS_SERVICE } from 'src/types/translations-service.interface';
 import { TranslationsDatabaseModule } from 'src/translations-database/translations-database.module';
+import { UserService } from './user/user.service';
+import { UserDatabaseModule } from 'src/user-database/user-database.module';
+import { USER_SERVICE } from 'src/types/user-service.interface';
+import { DEFAULT_HASH_SERVICE_ROUNDS, HashService, HASH_SERVICE_ROUNDS } from './hash/hash.service';
+import { HASH_SERVICE } from 'src/types/hash-service.interface';
 
 @Module({
   exports: [
+    HASH_SERVICE,
     HOUSE_RULES_SERVICE,
     LANGUAGES_SERVICE,
     SECRET_MANAGER_SERVICE,
     TRANSLATIONS_SERVICE,
+    USER_SERVICE,
   ],
   imports: [
     HouseRulesDatabaseModule,
     LanguagesDatabaseModule,
     TranslationsDatabaseModule,
+    UserDatabaseModule,
   ],
   providers: [
+    {
+      provide: HASH_SERVICE_ROUNDS,
+      useValue: DEFAULT_HASH_SERVICE_ROUNDS,
+    },
+    {
+      provide: HASH_SERVICE,
+      useFactory: (rounds: number) => new HashService(rounds),
+      inject: [HASH_SERVICE_ROUNDS],
+    },
     {
       provide: HOUSE_RULES_SERVICE,
       useClass: HouseRulesService,
@@ -40,6 +57,10 @@ import { TranslationsDatabaseModule } from 'src/translations-database/translatio
     {
       provide: TRANSLATIONS_SERVICE,
       useClass: TranslationsService,
+    },
+    {
+      provide: USER_SERVICE,
+      useClass: UserService,
     },
     MongodbConfigService,
   ],
