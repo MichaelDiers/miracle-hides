@@ -1,10 +1,10 @@
 import { FetchBaseQueryError, skipToken } from '@reduxjs/toolkit/dist/query';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import ILanguage from '../types/language.interface';
-import { useReadHouseRulesQuery } from './house-rules-slice';
-import { useReadLanguagesQuery } from './languages-slice';
+import { useReadHouseRulesQuery } from './api-house-rules-slice';
+import { useReadLanguagesQuery } from './api-languages-slice';
 import { RootState, AppDispatch } from './store';
-import { useReadTranslationsQuery } from './translations-slice';
+import { useReadTranslationsQuery } from './api-translations-slice';
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();

@@ -2,7 +2,7 @@ import { ChangeEvent, Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, useReadTranslationsCombinedQuery } from '../app/hooks';
 import { languageSlice } from '../app/language-slice';
-import { useReadLanguagesQuery } from '../app/languages-slice';
+import { useReadLanguagesQuery } from '../app/api-languages-slice';
 import { RootState } from '../app/store';
 import ILanguage from '../types/language.interface';
 import ITranslations from '../types/translations.interface';
