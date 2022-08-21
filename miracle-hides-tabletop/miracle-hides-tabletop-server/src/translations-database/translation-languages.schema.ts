@@ -10,4 +10,5 @@ export class TranslationLanguages implements ITranslationsLanguages {
   headline: string;
 }
 
-export const TranslationLanguagesSchema = SchemaFactory.createForClass(TranslationLanguages);
+export const TranslationLanguagesSchema =
+  SchemaFactory.createForClass(TranslationLanguages);

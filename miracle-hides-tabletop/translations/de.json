@@ -1,0 +1,41 @@
+{
+  "_id": {
+    "$oid": "630258e68da396afec19ed65"
+  },
+  "language": "de",
+  "dashboard": {
+    "headline": "Dashboard"
+  },
+  "home": {
+    "headline": "Ein Würfel sie zu knechten!"
+  },
+  "houseRules": {
+    "headline": "Hausregeln"
+  },
+  "languages": {
+    "headline": "Spracheinstellungen"
+  },
+  "navbar": {
+    "dashboard": "Dashboard",
+    "home": "Home",
+    "houseRules": "Hausregeln",
+    "languages": "Spracheinstellungen",
+    "signIn": "Anmelden",
+    "signUp": "Konto erstellen",
+    "signOut": "Abmelden"
+  },
+  "signIn": {
+    "headline": "Anmelden"
+  },
+  "signUp": {
+    "headline": "Konto erstellen"
+  },
+  "userForm": {
+    "displayName": "Name",
+    "email": "Email",
+    "password": "Passwort",
+    "passwordRepetition": "Password wiederholen",
+    "signInSubmit": "Anmelden",
+    "signUpSubmit": "Konto erstellen"
+  }
+}

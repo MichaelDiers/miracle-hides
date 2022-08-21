@@ -10,4 +10,5 @@ export class TranslationHome implements ITranslationsHome {
   headline: string;
 }
 
-export const TranslationHomeSchema = SchemaFactory.createForClass(TranslationHome);
+export const TranslationHomeSchema =
+  SchemaFactory.createForClass(TranslationHome);

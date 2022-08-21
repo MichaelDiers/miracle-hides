@@ -13,9 +13,8 @@ export default function HouseRules() {
     <BasePage
       headline={translations?.houseRules.headline}
       apiData={[translationsResult, houseRulesResult]}
-      isMain={true}
-      createContent={
-        <div>
+      isMain={true}>
+      <div>
         {
           houseRules?.houseRules?.map(({ topic, descriptions }, divi) => {
             return (
@@ -34,8 +33,7 @@ export default function HouseRules() {
             )
           })
         }
-      </div>  
-      }      
-    />
-  ); 
+      </div>
+    </BasePage>
+  );
 };

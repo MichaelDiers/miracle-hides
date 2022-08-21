@@ -15,7 +15,7 @@ import { TranslationsDatabaseService } from './translations-database.service';
     {
       provide: TRANSLATIONS_DATABASE_SERVICE,
       useClass: TranslationsDatabaseService,
-    },    
-  ]
+    },
+  ],
 })
 export class TranslationsDatabaseModule {}

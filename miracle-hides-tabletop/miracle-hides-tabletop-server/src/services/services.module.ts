@@ -13,8 +13,17 @@ import { TRANSLATIONS_SERVICE } from 'src/types/translations-service.interface';
 import { TranslationsDatabaseModule } from 'src/translations-database/translations-database.module';
 
 @Module({
-  exports: [HOUSE_RULES_SERVICE, LANGUAGES_SERVICE, SECRET_MANAGER_SERVICE, TRANSLATIONS_SERVICE],
-  imports: [HouseRulesDatabaseModule, LanguagesDatabaseModule, TranslationsDatabaseModule],
+  exports: [
+    HOUSE_RULES_SERVICE,
+    LANGUAGES_SERVICE,
+    SECRET_MANAGER_SERVICE,
+    TRANSLATIONS_SERVICE,
+  ],
+  imports: [
+    HouseRulesDatabaseModule,
+    LanguagesDatabaseModule,
+    TranslationsDatabaseModule,
+  ],
   providers: [
     {
       provide: HOUSE_RULES_SERVICE,
@@ -32,7 +41,7 @@ import { TranslationsDatabaseModule } from 'src/translations-database/translatio
       provide: TRANSLATIONS_SERVICE,
       useClass: TranslationsService,
     },
-    MongodbConfigService,    
+    MongodbConfigService,
   ],
 })
 export class ServicesModule {}

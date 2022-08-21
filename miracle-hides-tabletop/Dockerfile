@@ -22,6 +22,8 @@ ENV MH_PROJECT_NAME=miracle-hides
 ENV REACT_APP_MH_HOUSE_RULES_URL=/api/house-rules
 ENV REACT_APP_MH_LANGUAGES_URL=/api/languages
 ENV REACT_APP_MH_TRANSLATIONS_URL=/api/translations
+ENV REACT_APP_MH_SIGN_IN_URL=/api/sign-in
+ENV REACT_APP_MH_SIGN_UP_URL=/api/sign-up
 
 EXPOSE 3000
 CMD ["node", "dist/main"]

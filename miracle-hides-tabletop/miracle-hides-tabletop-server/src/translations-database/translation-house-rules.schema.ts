@@ -10,4 +10,6 @@ export class TranslationHouseRules implements ITranslationsHouseRules {
   headline: string;
 }
 
-export const TranslationHouseRulesSchema = SchemaFactory.createForClass(TranslationHouseRules);
+export const TranslationHouseRulesSchema = SchemaFactory.createForClass(
+  TranslationHouseRules,
+);

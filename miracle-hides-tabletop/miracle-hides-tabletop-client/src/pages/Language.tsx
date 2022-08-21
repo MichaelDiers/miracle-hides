@@ -12,7 +12,7 @@ export default function Language() {
   const languagesResult = useReadLanguagesQuery();
   const translationsResult = useReadTranslationsCombinedQuery();
   const current = useSelector((state: RootState) => state.language.current?.short) || navigator.language.split('-')[0].toLowerCase();
-  const dispatch = useAppDispatch();  
+  const dispatch = useAppDispatch();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value;
@@ -25,27 +25,25 @@ export default function Language() {
 
   const languages = languagesResult.data as ILanguage[];
   const translations = translationsResult.data as ITranslations;
-    
+
   return (
     <BasePage
       headline={translations?.languages.headline}
       apiData={[translationsResult, languagesResult]}
-      isMain={true}
-      createContent={
-        <form>
-          {
-            languages?.map((language, i) => {
-              const id = `language_${i}`;
-              return (
-                <Fragment key={i}>
-                  <label htmlFor={id}>{language.name}</label>
-                  <input id={id} name='language' type='radio' value={language.short} checked={language.short === current} onChange={onChange}></input>
-                </Fragment>
-              )
-            })
-          }
-        </form>
-      }
-    />
+      isMain={true}>
+      <form>
+        {
+          languages?.map((language, i) => {
+            const id = `language_${i}`;
+            return (
+              <Fragment key={i}>
+                <label htmlFor={id}>{language.name}</label>
+                <input id={id} name='language' type='radio' value={language.short} checked={language.short === current} onChange={onChange}></input>
+              </Fragment>
+            )
+          })
+        }
+      </form>
+    </BasePage>
   );
 }

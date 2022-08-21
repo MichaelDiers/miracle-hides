@@ -1,0 +1,41 @@
+{
+  "_id": {
+    "$oid": "630259118da396afec19ed66"
+  },
+  "language": "en",
+  "dashboard": {
+    "headline": "Dashboard"
+  },
+  "home": {
+    "headline": "One dice to rule them all!"
+  },
+  "houseRules": {
+    "headline": "House Rules"
+  },
+  "languages": {
+    "headline": "Language Settings"
+  },
+  "navbar": {
+    "dashboard": "Dashboard",
+    "home": "Home",
+    "houseRules": "House Rules",
+    "languages": "Language Settings",
+    "signIn": "Sign in",
+    "signUp": "Create an account",
+    "signOut": "Log out"
+  },
+  "signIn": {
+    "headline": "Sign In"
+  },
+  "signUp": {
+    "headline": "Create an account"
+  },
+  "userForm": {
+    "displayName": "Name",
+    "email": "Email",
+    "password": "Password",
+    "passwordRepetition": "Password repetition",
+    "signInSubmit": "Sign in",
+    "signUpSubmit": "Create Account"
+  }
+}

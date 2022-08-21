@@ -7,6 +7,9 @@ export type TranslationNavbarDocument = TranslationNavbar & Document;
 @Schema()
 export class TranslationNavbar implements ITranslationsNavbar {
   @Prop({ required: true })
+  dashboard: string;
+
+  @Prop({ required: true })
   home: string;
 
   @Prop({ required: true })
@@ -14,6 +17,16 @@ export class TranslationNavbar implements ITranslationsNavbar {
 
   @Prop({ required: true })
   languages: string;
+
+  @Prop({ required: true })
+  signIn: string;
+
+  @Prop({ required: true })
+  signUp: string;
+
+  @Prop({ required: true })
+  signOut: string;
 }
 
-export const TranslationNavbarSchema = SchemaFactory.createForClass(TranslationNavbar);
+export const TranslationNavbarSchema =
+  SchemaFactory.createForClass(TranslationNavbar);

@@ -2,10 +2,35 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import ITranslationsNavbar from 'src/types/translations-navbar.interface';
 import ITranslations from 'src/types/translations.interface';
-import { TranslationHome, TranslationHomeSchema } from './translation-home.schema';
-import { TranslationHouseRules, TranslationHouseRulesSchema } from './translation-house-rules.schema';
-import { TranslationLanguages, TranslationLanguagesSchema } from './translation-languages.schema';
+import {
+  TranslationDashboard,
+  TranslationDashboardSchema,
+} from './translation-dashboard.schema';
+import {
+  TranslationHome,
+  TranslationHomeSchema,
+} from './translation-home.schema';
+import {
+  TranslationHouseRules,
+  TranslationHouseRulesSchema,
+} from './translation-house-rules.schema';
+import {
+  TranslationLanguages,
+  TranslationLanguagesSchema,
+} from './translation-languages.schema';
 import { TranslationNavbarSchema } from './translation-navbar.schema';
+import {
+  TranslationSignIn,
+  TranslationSignInSchema,
+} from './translation-sign-in.schema';
+import {
+  TranslationSignUp,
+  TranslationSignUpSchema,
+} from './translation-sign-up.schema';
+import {
+  TranslationUserForm,
+  TranslationUserFormSchema,
+} from './translation-user-form.schema';
 
 export type TranslationDocument = Translation & Document;
 
@@ -13,6 +38,9 @@ export type TranslationDocument = Translation & Document;
 export class Translation implements ITranslations {
   @Prop({ required: true })
   language: string;
+
+  @Prop({ required: true, type: TranslationDashboardSchema })
+  dashboard: TranslationDashboard;
 
   @Prop({ required: true, type: TranslationHomeSchema })
   home: TranslationHome;
@@ -25,6 +53,15 @@ export class Translation implements ITranslations {
 
   @Prop({ required: true, type: TranslationLanguagesSchema })
   languages: TranslationLanguages;
+
+  @Prop({ required: true, type: TranslationSignInSchema })
+  signIn: TranslationSignIn;
+
+  @Prop({ required: true, type: TranslationSignUpSchema })
+  signUp: TranslationSignUp;
+
+  @Prop({ required: true, type: TranslationUserFormSchema })
+  userForm: TranslationUserForm;
 }
 
 export const TranslationSchema = SchemaFactory.createForClass(Translation);

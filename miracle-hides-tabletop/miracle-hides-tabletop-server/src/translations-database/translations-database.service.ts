@@ -6,24 +6,30 @@ import ITranslations from 'src/types/translations.interface';
 import { Translation, TranslationDocument } from './translation.schema';
 
 @Injectable()
-export class TranslationsDatabaseService implements ITranslationsDatabaseService {
+export class TranslationsDatabaseService
+  implements ITranslationsDatabaseService
+{
   constructor(
     @InjectModel(Translation.name)
     private translationModel: Model<TranslationDocument>,
   ) {}
 
-  async readAsync(language: string) : Promise<ITranslations> {
+  async readAsync(language: string): Promise<ITranslations> {
     const result = await this.translationModel.findOne({ language }).exec();
     if (!result) {
       return;
     }
 
     return {
+      dashboard: result.dashboard,
       home: result.home,
       houseRules: result.houseRules,
       language: result.language,
       languages: result.languages,
-      navbar: result.navbar,      
+      navbar: result.navbar,
+      signIn: result.signIn,
+      signUp: result.signUp,
+      userForm: result.userForm,
     };
   }
 }

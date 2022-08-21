@@ -3,9 +3,17 @@ import { ServicesModule } from 'src/services/services.module';
 import { HouseRulesController } from './house-rules.controller';
 import { LanguageController } from './language.controller';
 import { TranslationsController } from './translations.controller';
+import { SignInController } from './sign-in.controller';
+import { SignUpController } from './sign-up.controller';
 
 @Module({
-  controllers: [HouseRulesController, LanguageController, TranslationsController],
+  controllers: [
+    HouseRulesController,
+    LanguageController,
+    TranslationsController,
+    SignInController,
+    SignUpController,
+  ],
   imports: [ServicesModule],
 })
 export class ControllersModule {}
