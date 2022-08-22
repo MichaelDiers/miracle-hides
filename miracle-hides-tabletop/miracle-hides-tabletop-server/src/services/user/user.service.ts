@@ -31,6 +31,7 @@ export class UserService implements IUserService {
       email: await this.hashService.hashAsync(signUpData.email),
       guid: uuidv4(),
       password: await this.hashService.hashAsync(signUpData.password),
+      roles: [UserRoles.USER],
     });
 
     if (!user) {

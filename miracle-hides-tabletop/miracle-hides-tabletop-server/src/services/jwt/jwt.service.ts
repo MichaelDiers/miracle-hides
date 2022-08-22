@@ -11,6 +11,7 @@ export class JwtService implements IJwtService {
   async signAsync(payload: IJwtPayload): Promise<string> {
     const plain = {
       displayName: payload.displayName,
+      roles: payload.roles,
     };
     
     return new Promise((resolve, reject) => {

@@ -17,6 +17,9 @@ export class User implements ISignUpData {
 
   @Prop({ required: true })
   password: string;
+
+  @Prop({ required: true })
+  roles: UserRoles[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
