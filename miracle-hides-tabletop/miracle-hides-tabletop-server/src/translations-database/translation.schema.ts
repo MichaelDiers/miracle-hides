@@ -31,6 +31,7 @@ import {
   TranslationUserForm,
   TranslationUserFormSchema,
 } from './translation-user-form.schema';
+import { TranslationValidation, TranslationValidationSchema } from './translation-validation.schema';
 
 export type TranslationDocument = Translation & Document;
 
@@ -62,6 +63,9 @@ export class Translation implements ITranslations {
 
   @Prop({ required: true, type: TranslationUserFormSchema })
   userForm: TranslationUserForm;
+
+  @Prop({ required: true, type: TranslationValidationSchema })
+  validation: TranslationValidation;
 }
 
 export const TranslationSchema = SchemaFactory.createForClass(Translation);

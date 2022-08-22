@@ -30,6 +30,7 @@ export class TranslationsDatabaseService
       signIn: result.signIn,
       signUp: result.signUp,
       userForm: result.userForm,
+      validation: result.validation,
     };
   }
 }

@@ -1,6 +1,6 @@
 {
   "_id": {
-    "$oid": "630258e68da396afec19ed65"
+    "$oid": "6303f77f6b513192c6dc1685"
   },
   "language": "de",
   "dashboard": {
@@ -25,10 +25,14 @@
     "signOut": "Abmelden"
   },
   "signIn": {
-    "headline": "Anmelden"
+    "headline": "Anmelden",
+    "cannotSignIn": "Anmeldung zur Zeit nicht möglich",
+    "unknownUser": "Kombination aus Benutzer und Passwort unbekannt"
   },
   "signUp": {
-    "headline": "Konto erstellen"
+    "headline": "Konto erstellen",
+    "cannotSignUp": "Registrierung zur Zeit nicht möglich",
+    "userExists": "Benutzer existiert bereits"
   },
   "userForm": {
     "displayName": "Name",
@@ -37,5 +41,14 @@
     "passwordRepetition": "Password wiederholen",
     "signInSubmit": "Anmelden",
     "signUpSubmit": "Konto erstellen"
+  },
+  "validation": {
+    "invalidEmail": "Ungültige Email",
+    "maxLength": "Max. LENGTH Zeichen",
+    "maxLengthReplace": "LENGTH",
+    "minLength": "Mind. LENGTH Zeichen",
+    "minLengthReplace": "LENGTH",
+    "missingValue": "Fehlende Angabe",
+    "passwordMismatch": "Passwörter stimmen nicht überein"
   }
 }

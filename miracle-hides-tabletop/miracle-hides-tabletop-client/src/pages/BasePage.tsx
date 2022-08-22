@@ -8,6 +8,8 @@ interface IApiData {
   isUninitialized: boolean;
 }
 
+export const ERROR_FALLBACK = 'error';
+
 export default function BasePage({
   children,
   headline,

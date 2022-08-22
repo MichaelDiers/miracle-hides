@@ -1,6 +1,6 @@
 {
   "_id": {
-    "$oid": "630259118da396afec19ed66"
+    "$oid": "6303f79f6b513192c6dc1686"
   },
   "language": "en",
   "dashboard": {
@@ -25,10 +25,14 @@
     "signOut": "Log out"
   },
   "signIn": {
-    "headline": "Sign In"
+    "headline": "Sign In",
+    "cannotSignIn": "You cannot sign in at the moment",
+    "unknownUser": "Unknown user/password"
   },
   "signUp": {
-    "headline": "Create an account"
+    "headline": "Create an account",
+    "cannotSignUp": "You cannot sign up at the moment",
+    "userExists": "User already exists"
   },
   "userForm": {
     "displayName": "Name",
@@ -37,5 +41,14 @@
     "passwordRepetition": "Password repetition",
     "signInSubmit": "Sign in",
     "signUpSubmit": "Create Account"
+  },
+  "validation": {
+    "invalidEmail": "Invalid email",
+    "maxLength": "Max. LENGTH characters",
+    "maxLengthReplace": "LENGTH",
+    "minLength": "Min. LENGTH characters",
+    "minLengthReplace": "LENGTH",
+    "missingValue": "Missing value",
+    "passwordMismatch": "Passwords do not match"
   }
 }

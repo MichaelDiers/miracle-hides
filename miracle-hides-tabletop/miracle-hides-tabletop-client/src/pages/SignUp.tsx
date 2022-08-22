@@ -16,10 +16,6 @@ export default function SignUp() {
   const [signUp, signUpStatus] = useSignUpMutation();
   
   const [error, setError] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordRepetition, setPasswordRepetition] = useState('');
 
   const user = useAppSelector(selectUser);
   
@@ -27,22 +23,18 @@ export default function SignUp() {
   
   const onSubmit = async (data: IUserFormSubmit): Promise<void> => {
     try {
-      if (password !== passwordRepetition) {
-        setError('Password mismatch')
-      } else if (!displayName) {
-        setError('Missing display name');
-      } else {
-        const request : ISignUp = {
-          displayName: data.displayName as string,
-          email: data.email,
-          password: data.password,
-        };
-
-        const user = await signUp(request).unwrap();
-        dispatch(userSlice.actions.updateUser(user));
-      }      
+      const user = await signUp(data as ISignUp).unwrap();
+      dispatch(userSlice.actions.updateUser(user));
     } catch (err) {
-      setError('Cannot signin');
+      const { status } = err as { status: number};
+      switch (status) {
+        case 409:
+          setError(translations?.signUp.userExists);
+          break;
+        default:
+          setError(translations?.signUp.cannotSignUp);
+          break;
+      } 
     }
   }
 
@@ -56,15 +48,7 @@ export default function SignUp() {
       apiData={[translationsResult, signUpStatus]}
       isMain={true}>
       <UserForm
-        displayName={displayName}
-        onDisplayNameChanged={(event) => setDisplayName(event.target.value)}
-        email={email}
-        onEmailChanged={(event) => setEmail(event.target.value)}
-        password={password}
-        onPasswordChanged={(event) => setPassword(event.target.value)}
-        passwordRepetition={passwordRepetition}
-        onPasswordRepetitionChanged={(event) => setPasswordRepetition(event.target.value)}
-        translations={translations?.userForm}
+        translations={translations}
         isSignUp={true}
         onSubmit={onSubmit}
         error={error}

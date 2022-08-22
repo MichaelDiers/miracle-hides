@@ -1,100 +1,123 @@
-import { ChangeEvent, FormEvent } from 'react';
-import ITranslationsUserForm from '../types/translations-user-form.interface';
+import { FormEvent, useState } from 'react';
+import { ERROR_FALLBACK } from '../pages/BasePage';
+import ITranslations from '../types/translations.interface';
+import { DISPLAY_NAME_MAX_LENGTH, DISPLAY_NAME_MIN_LENGTH, PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '../validation/validation-constants';
 import LabeledInput from './LabeledInput';
 
 export interface IUserFormSubmit {
   displayName?: string;
   email: string;
   password: string;
-  passwordRepetition?: string;
 }
 
 export default function UserForm({
-  displayName = '',
-  onDisplayNameChanged = () => {},
-  email = '',
-  onEmailChanged = () => {},
-  password = '',
-  onPasswordChanged = () => {},
-  passwordRepetition = '',
-  onPasswordRepetitionChanged = () => {},
+  error = '',
   translations,
   isSignIn = false,
   isSignUp = false,
-  onSubmit = () => {},
-  error,
-} : {
-  displayName?: string,
-  onDisplayNameChanged?: (event: ChangeEvent<HTMLInputElement>) => void,
-  email?: string
-  onEmailChanged?: (event: ChangeEvent<HTMLInputElement>) => void,
-  password?: string
-  onPasswordChanged?: (event: ChangeEvent<HTMLInputElement>) => void,
-  passwordRepetition?: string
-  onPasswordRepetitionChanged?: (event: ChangeEvent<HTMLInputElement>) => void,
-  translations: ITranslationsUserForm,
+  onSubmit = () => { },
+}: {
+  error?: string,
+  translations: ITranslations,
   isSignIn?: boolean,
   isSignUp?: boolean,
   onSubmit?: (data: IUserFormSubmit) => void,
-  error?: string,
 }) {
-  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordRepetition, setPasswordRepetition] = useState('');
+
+  const [displayNameError, setDisplayNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordRepetitionError, setPasswordRepetitionError] = useState('');
+
+  const onSubmitLocal = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const data : IUserFormSubmit = {
+    const formData: IUserFormSubmit = {
       email,
       password,
     };
 
     if (isSignUp) {
-      data.displayName = displayName;
-      data.passwordRepetition = passwordRepetition;
+      formData.displayName = displayName;
     }
 
-    onSubmit(data);
+    if (onSubmit) {
+      onSubmit(formData);
+    }
   }
 
+  const submitDisabled: boolean = (
+    !email || emailError ||
+    !password || passwordError ||
+    (isSignUp && (!displayName || displayNameError) ||
+      (isSignUp && (!passwordRepetition || passwordRepetitionError))) ||
+    (isSignUp && password !== passwordRepetition)
+  ) as boolean;
   return (
-    <form onSubmit={onFormSubmit}>
-      {
-        error ? <div>{error}</div> : null
-      }
+    <form onSubmit={onSubmitLocal}>
+      <div>{error}</div>
       <LabeledInput
-        label={translations?.displayName}
+        error={displayNameError}
+        errorUpdate={(error) => setDisplayNameError(error)}
+        label={translations?.userForm.displayName}
+        maxlength={DISPLAY_NAME_MAX_LENGTH}
+        minlength={DISPLAY_NAME_MIN_LENGTH}
         name='displayName'
-        onChange={onDisplayNameChanged}
-        value={displayName}
+        onChange={(event) => setDisplayName(event.target.value)}
+        required={true}
         show={isSignUp}
+        translations={translations?.validation} 
         type='text'
+        value={displayName}
       />
       <LabeledInput
-        label={translations?.email}
+        error={emailError}
+        errorUpdate={(error) => setEmailError(error)}
+        label={translations?.userForm.email}
         name='email'
-        onChange={onEmailChanged}
-        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        required={true}
         show={isSignIn || isSignUp}
+        translations={translations?.validation}
         type='email'
+        value={email}
       />
       <LabeledInput
-        label={translations?.password}
+        error={passwordError || ((isSignUp && password !== passwordRepetition) ? (translations?.validation?.passwordMismatch || ERROR_FALLBACK) : '')}
+        errorUpdate={(error) => setPasswordError(error)}
+        label={translations?.userForm.password}
+        maxlength={PASSWORD_MAX_LENGTH}
+        minlength={PASSWORD_MIN_LENGTH}
         name='password'
-        onChange={onPasswordChanged}
-        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+        required={true}
         show={isSignIn || isSignUp}
+        translations={translations?.validation} 
         type='password'
+        value={password}
       />
       <LabeledInput
-        label={translations?.passwordRepetition}
+        error={passwordRepetitionError || ((isSignUp && password !== passwordRepetition) ? (translations?.validation?.passwordMismatch || ERROR_FALLBACK) : '')}
+        errorUpdate={(error) => setPasswordRepetitionError(error)}
+        label={translations?.userForm.passwordRepetition}
+        maxlength={PASSWORD_MAX_LENGTH}
+        minlength={PASSWORD_MIN_LENGTH}
         name='passwordRepetition'
-        onChange={onPasswordRepetitionChanged}
-        value={passwordRepetition}
+        onChange={(event) => setPasswordRepetition(event.target.value)}
+        required={true}
         show={isSignUp}
+        translations={translations?.validation} 
         type='password'
+        value={passwordRepetition}
       />
-      {
-        (isSignIn || isSignUp) 
-          ? <input type='submit' value={(isSignIn ? translations?.signInSubmit : translations?.signUpSubmit) || ''}></input>
-          : null
-      }
+      <input
+        type='submit'
+        value={(isSignIn ? translations?.userForm.signInSubmit : translations?.userForm.signUpSubmit) || ''}
+        disabled={submitDisabled}
+      ></input>
     </form>
   )
 }

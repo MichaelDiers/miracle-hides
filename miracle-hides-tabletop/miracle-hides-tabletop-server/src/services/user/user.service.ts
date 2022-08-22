@@ -52,6 +52,10 @@ export class UserService implements IUserService {
       throw new NotFoundException();
     }
 
+    if (!await this.hashService.compareAsync(signInData.password, user.password)) {
+      throw new NotFoundException();
+    }
+
     return {
       displayName: user.displayName,
       token: await this.jwtService.signAsync(user),

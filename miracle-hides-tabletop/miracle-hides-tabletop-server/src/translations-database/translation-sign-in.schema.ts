@@ -7,7 +7,13 @@ export type TranslationSignInDocument = TranslationSignIn & Document;
 @Schema()
 export class TranslationSignIn implements ITranslationsSignIn {
   @Prop({ required: true })
+  cannotSignIn: string;
+
+  @Prop({ required: true })
   headline: string;
+
+  @Prop({ required: true })
+  unknownUser: string;
 }
 
 export const TranslationSignInSchema =

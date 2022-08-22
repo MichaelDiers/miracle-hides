@@ -6,6 +6,7 @@ import ITranslationsNavbar from './translations-navbar.interface';
 import ITranslationsSignIn from './translations-sign-in.interface';
 import ITranslationsSignUp from './translations-sign-up.interface';
 import ITranslationsUserForm from './translations-user-form.interface';
+import ITranslationsValidation from './translations-validation';
 
 export default interface ITranslations {
   dashboard: ITranslationsDashboard;
@@ -17,4 +18,5 @@ export default interface ITranslations {
   signIn: ITranslationsSignIn;
   signUp: ITranslationsSignUp;
   userForm: ITranslationsUserForm;
+  validation: ITranslationsValidation;
 }

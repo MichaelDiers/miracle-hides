@@ -7,7 +7,7 @@ import { userSlice } from '../app/user-slice';
 import UserForm, { IUserFormSubmit } from '../components/UserForm';
 import AppRoutes from '../types/app-routes.enum';
 import ITranslations from '../types/translations.interface';
-import BasePage from './BasePage';
+import BasePage, { ERROR_FALLBACK } from './BasePage';
 
 export default function SignIn() {
   const translationsResult = useReadTranslationsCombinedQuery();
@@ -15,8 +15,6 @@ export default function SignIn() {
   const [signIn, signInStatus] = useSignInMutation();
   
   const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   
   const { state } = useLocation();
   const previous = (state ? (state as { from: string }).from : '') || AppRoutes.DASHBOARD;
@@ -30,7 +28,15 @@ export default function SignIn() {
       const user = await signIn(data).unwrap();
       dispatch(userSlice.actions.updateUser(user));
     } catch (err) {
-      setError('Cannot signin');
+      const { status } = err as { status: number};
+      switch (status) {
+        case 404:
+          setError(translations?.signIn?.unknownUser || ERROR_FALLBACK);
+          break;
+        default:
+          setError(translations?.signIn?.cannotSignIn || ERROR_FALLBACK);
+          break;
+      } 
     }
   }
 
@@ -44,14 +50,10 @@ export default function SignIn() {
       apiData={[translationsResult, signInStatus]}
       isMain={true}>
       <UserForm
-        email={email}
-        onEmailChanged={(event) => setEmail(event.target.value)}
-        password={password}
-        onPasswordChanged={(event) => setPassword(event.target.value)}
-        translations={translations?.userForm}
+        error={error}
+        translations={translations}
         isSignIn={true}
         onSubmit={onSubmit}
-        error={error}
       />
     </BasePage>
   );
