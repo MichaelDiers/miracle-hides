@@ -4,7 +4,7 @@ import ITranslationsHome from 'src/types/translations-home.interface';
 
 export type TranslationHomeDocument = TranslationHome & Document;
 
-@Schema()
+@Schema({ id: false })
 export class TranslationHome implements ITranslationsHome {
   @Prop({ required: true })
   headline: string;

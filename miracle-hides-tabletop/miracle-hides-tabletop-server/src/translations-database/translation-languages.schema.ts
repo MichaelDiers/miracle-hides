@@ -4,7 +4,7 @@ import ITranslationsLanguages from 'src/types/translations-languages.interface';
 
 export type TranslationLanguagesDocument = TranslationLanguages & Document;
 
-@Schema()
+@Schema({ id: false })
 export class TranslationLanguages implements ITranslationsLanguages {
   @Prop({ required: true })
   headline: string;

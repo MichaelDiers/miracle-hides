@@ -4,7 +4,7 @@ import ITranslationsDashboard from 'src/types/translations-dashboard.interface';
 
 export type TranslationDashboardDocument = TranslationDashboard & Document;
 
-@Schema()
+@Schema({ id: false })
 export class TranslationDashboard implements ITranslationsDashboard {
   @Prop({ required: true })
   headline: string;

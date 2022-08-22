@@ -4,7 +4,7 @@ import ITranslationsSignIn from 'src/types/translations-sign-in.interface';
 
 export type TranslationSignInDocument = TranslationSignIn & Document;
 
-@Schema()
+@Schema({ id: false })
 export class TranslationSignIn implements ITranslationsSignIn {
   @Prop({ required: true })
   cannotSignIn: string;

@@ -4,7 +4,7 @@ import ITranslationsUserForm from 'src/types/translations-user-form.interface';
 
 export type TranslationUserFormDocument = TranslationUserForm & Document;
 
-@Schema()
+@Schema({ id: false })
 export class TranslationUserForm implements ITranslationsUserForm {
   @Prop({ required: true })
   displayName: string;
