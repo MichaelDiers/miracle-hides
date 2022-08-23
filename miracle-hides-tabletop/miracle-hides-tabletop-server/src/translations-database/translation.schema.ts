@@ -44,34 +44,34 @@ export class Translation implements ITranslations {
   @Prop({ required: true })
   language: string;
 
-  @Prop({ required: true, type: TranslationDashboardSchema })
+  @Prop({ required: true, type: TranslationDashboardSchema, _id: false })
   dashboard: TranslationDashboard;
 
-  @Prop({ required: true, type: TranslationHomeSchema })
+  @Prop({ required: true, type: TranslationHomeSchema, _id: false })
   home: TranslationHome;
 
-  @Prop({ required: true, type: TranslationInvitationsSchema })
+  @Prop({ required: true, type: TranslationInvitationsSchema, _id: false })
   invitations: TranslationInvitations;
 
-  @Prop({ required: true, type: TranslationNavbarSchema })
+  @Prop({ required: true, type: TranslationNavbarSchema, _id: false })
   navbar: ITranslationsNavbar;
 
-  @Prop({ required: true, type: TranslationHouseRulesSchema })
+  @Prop({ required: true, type: TranslationHouseRulesSchema, _id: false })
   houseRules: TranslationHouseRules;
 
-  @Prop({ required: true, type: TranslationLanguagesSchema })
+  @Prop({ required: true, type: TranslationLanguagesSchema, _id: false })
   languages: TranslationLanguages;
 
-  @Prop({ required: true, type: TranslationSignInSchema })
+  @Prop({ required: true, type: TranslationSignInSchema, _id: false })
   signIn: TranslationSignIn;
 
-  @Prop({ required: true, type: TranslationSignUpSchema })
+  @Prop({ required: true, type: TranslationSignUpSchema, _id: false })
   signUp: TranslationSignUp;
 
-  @Prop({ required: true, type: TranslationUserFormSchema })
+  @Prop({ required: true, type: TranslationUserFormSchema, _id: false })
   userForm: TranslationUserForm;
 
-  @Prop({ required: true, type: TranslationValidationSchema })
+  @Prop({ required: true, type: TranslationValidationSchema, _id: false })
   validation: TranslationValidation;
 }
 

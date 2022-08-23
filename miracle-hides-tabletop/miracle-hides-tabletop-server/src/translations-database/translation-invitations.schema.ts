@@ -4,7 +4,7 @@ import ITranslationsInvitations from 'src/types/translations-invitations';
 
 export type TranslationInvitationsDocument = TranslationInvitations & Document;
 
-@Schema({ id: false })
+@Schema()
 export class TranslationInvitations implements ITranslationsInvitations {
   @Prop({ required: true })
   headline: string;

@@ -4,7 +4,7 @@ import ITranslationsSignUp from 'src/types/translations-sign-up.interface';
 
 export type TranslationSignUpDocument = TranslationSignUp & Document;
 
-@Schema({ id: false })
+@Schema()
 export class TranslationSignUp implements ITranslationsSignUp {
   @Prop({ required: true })
   cannotSignUp: string;

@@ -4,7 +4,7 @@ import ITranslationsValidation from 'src/types/translations-validation';
 
 export type TranslationValidationDocument = TranslationValidation & Document;
 
-@Schema({ id: false })
+@Schema()
 export class TranslationValidation implements ITranslationsValidation {
   @Prop({ required: true })
   invalidEmail: string;

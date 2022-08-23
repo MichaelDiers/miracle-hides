@@ -4,7 +4,7 @@ import ITranslationsHouseRules from 'src/types/translations-house-rules.interfac
 
 export type TranslationHouseRulesDocument = TranslationHouseRules & Document;
 
-@Schema({ id: false })
+@Schema()
 export class TranslationHouseRules implements ITranslationsHouseRules {
   @Prop({ required: true })
   headline: string;

@@ -4,7 +4,7 @@ import ITranslationsNavbar from 'src/types/translations-navbar.interface';
 
 export type TranslationNavbarDocument = TranslationNavbar & Document;
 
-@Schema({ id: false })
+@Schema()
 export class TranslationNavbar implements ITranslationsNavbar {
   @Prop({ required: true })
   dashboard: string;
