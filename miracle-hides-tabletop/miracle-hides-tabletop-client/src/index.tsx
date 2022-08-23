@@ -5,16 +5,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { store } from './app/store';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Home from './pages/Home';
-import HouseRules from './pages/HouseRules';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import Language from './pages/Language';
-import SignIn from './pages/SignIn';
 import RequiresUser from './components/RequiresUser';
-import Dashboard from './pages/Dashboard';
-import SignUp from './pages/SignUp';
-import AppRoutes from './types/app-routes.enum';
+import ROUTES from './app/routes';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -23,17 +17,25 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Header/>
+        <Header />
         <Routes>
-          <Route index element={ <Home/> } />
-          <Route path={AppRoutes.HOUSE_RULES} element={ <HouseRules /> } />
-          <Route path={AppRoutes.LANGUAGES} element={ <Language/> } /> 
-          <Route path={AppRoutes.SIGN_IN} element={ <SignIn/> } />
-          <Route path={AppRoutes.SIGN_UP} element={ <SignUp/> } />
-          <Route path={AppRoutes.DASHBOARD} element={ <RequiresUser><Dashboard/></RequiresUser> } /> 
+          {
+            ROUTES.map(({ path, element, requiresUser, roles }, i) => {
+              if (path === '/') {
+                return <Route key={`route_${i}`} index element={element} />;
+              } else if (!requiresUser && roles.length === 0) {
+                return <Route key={`route_${i}`} path={path} element={element} />;
+              } else if (requiresUser && roles.length === 0) {
+                return <Route key={`route_${i}`} path={path} element={<RequiresUser>{element}</RequiresUser>} />;
+              }
+
+              return <Route key={`route_${i}`} path={path} element={<RequiresUser roles={roles}>{element}</RequiresUser>} />;
+            })
+          }
         </Routes>
-        <Footer/>
-      </BrowserRouter>      
+
+        <Footer />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

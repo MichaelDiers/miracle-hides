@@ -1,7 +1,8 @@
-import { createSlice, PayloadAction, ThunkAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import IPayload from '../types/payload.interface';
+import UserRoles from '../types/user-roles';
 import IUser from '../types/user.interface';
-import { AppDispatch, RootState } from './store';
+import { AppDispatch } from './store';
 
 interface IUserState {
   current?: IUser;

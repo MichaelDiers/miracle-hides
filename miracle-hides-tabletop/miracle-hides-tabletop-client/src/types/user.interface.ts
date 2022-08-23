@@ -1,5 +1,7 @@
+import UserRoles from './user-roles';
+
 export default interface IUser {
   name: string;
-  roles: string[];
+  roles: UserRoles[];
   token: string;
 }

@@ -15,6 +15,10 @@ import {
   TranslationHouseRulesSchema,
 } from './translation-house-rules.schema';
 import {
+  TranslationInvitations,
+  TranslationInvitationsSchema,
+} from './translation-invitations.schema';
+import {
   TranslationLanguages,
   TranslationLanguagesSchema,
 } from './translation-languages.schema';
@@ -45,6 +49,9 @@ export class Translation implements ITranslations {
 
   @Prop({ required: true, type: TranslationHomeSchema })
   home: TranslationHome;
+
+  @Prop({ required: true, type: TranslationInvitationsSchema })
+  invitations: TranslationInvitations;
 
   @Prop({ required: true, type: TranslationNavbarSchema })
   navbar: ITranslationsNavbar;

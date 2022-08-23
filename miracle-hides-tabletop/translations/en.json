@@ -12,6 +12,9 @@
   "houseRules": {
     "headline": "House Rules"
   },
+  "invitations": {
+    "headline": "Invite new user"
+  },
   "languages": {
     "headline": "Language Settings"
   },
@@ -19,6 +22,7 @@
     "dashboard": "Dashboard",
     "home": "Home",
     "houseRules": "House Rules",
+    "invitations": "Invite users",
     "languages": "Language Settings",
     "signIn": "Sign in",
     "signUp": "Create an account",

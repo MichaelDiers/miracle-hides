@@ -26,6 +26,7 @@ export class TranslationsDatabaseService
       houseRules: result.houseRules,
       language: result.language,
       languages: result.languages,
+      invitations: result.invitations,
       navbar: result.navbar,
       signIn: result.signIn,
       signUp: result.signUp,

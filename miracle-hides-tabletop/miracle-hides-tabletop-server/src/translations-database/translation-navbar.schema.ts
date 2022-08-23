@@ -16,6 +16,9 @@ export class TranslationNavbar implements ITranslationsNavbar {
   houseRules: string;
 
   @Prop({ required: true })
+  invitations: string;
+
+  @Prop({ required: true })
   languages: string;
 
   @Prop({ required: true })
