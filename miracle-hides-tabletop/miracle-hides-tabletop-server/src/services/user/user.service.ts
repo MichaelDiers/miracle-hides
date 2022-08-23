@@ -39,7 +39,6 @@ export class UserService implements IUserService {
     }
 
     return {
-      displayName: user.displayName,
       token: await this.jwtService.signAsync(user),
     };
   }
@@ -58,7 +57,6 @@ export class UserService implements IUserService {
     }
 
     return {
-      displayName: user.displayName,
       token: await this.jwtService.signAsync(user),
     };
   }
