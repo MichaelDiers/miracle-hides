@@ -5,6 +5,7 @@ import { LanguageController } from './language.controller';
 import { TranslationsController } from './translations.controller';
 import { SignInController } from './sign-in.controller';
 import { SignUpController } from './sign-up.controller';
+import { UserInvitationsController } from './user-invitations.controller';
 
 @Module({
   controllers: [
@@ -13,6 +14,7 @@ import { SignUpController } from './sign-up.controller';
     TranslationsController,
     SignInController,
     SignUpController,
+    UserInvitationsController,
   ],
   imports: [ServicesModule],
 })

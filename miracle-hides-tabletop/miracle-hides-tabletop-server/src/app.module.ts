@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
@@ -11,6 +11,10 @@ import { HouseRulesDatabaseModule } from './house-rules-database/house-rules-dat
 import { LanguagesDatabaseModule } from './languages-database/languages-database.module';
 import { TranslationsDatabaseModule } from './translations-database/translations-database.module';
 import { UserDatabaseModule } from './user-database/user-database.module';
+import { GuardsModule } from './guards/guards.module';
+import { MiddlewareModule } from './middleware/middleware.module';
+import { RequestLoggerMiddleware, REQUEST_LOGGER_MIDDLEWARE } from './middleware/request-logger.middleware';
+import { JwtMiddleware } from './middleware/jwt.middleware';
 
 @Module({
   controllers: [AppController],
@@ -27,7 +31,15 @@ import { UserDatabaseModule } from './user-database/user-database.module';
     LanguagesDatabaseModule,
     TranslationsDatabaseModule,
     UserDatabaseModule,
+    GuardsModule,
+    MiddlewareModule,
+    ServicesModule,
   ],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(RequestLoggerMiddleware, JwtMiddleware).forRoutes('*')
+  }
+
+}
