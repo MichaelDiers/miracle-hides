@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useSignInMutation } from '../app/api-sign-in.slice';
 import { useAppDispatch, useAppSelector, useReadTranslationsCombinedQuery } from '../app/hooks';
 import { selectUser } from '../app/selectors';
-import { userSlice } from '../app/user-slice';
+import { updateUserThunk } from '../app/user-slice';
 import UserForm, { IUserFormSubmit } from '../components/UserForm';
 import AppRoutes from '../types/app-routes.enum';
 import ITranslations from '../types/translations.interface';
@@ -24,9 +24,9 @@ export default function SignIn() {
   const dispatch = useAppDispatch();
   
   const onSubmit = async (data: IUserFormSubmit): Promise<void> => {
-    try {      
+    try {
       const user = await signIn(data).unwrap();
-      dispatch(userSlice.actions.updateUser(user));
+      dispatch(updateUserThunk(user?.token));
     } catch (err) {
       const { status } = err as { status: number};
       switch (status) {
