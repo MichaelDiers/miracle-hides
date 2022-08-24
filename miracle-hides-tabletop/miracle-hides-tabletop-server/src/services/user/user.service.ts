@@ -11,6 +11,7 @@ import IUserInvitationsService, { USER_INVITATION_SERVICE } from 'src/types/user
 import IUserInvitation from 'src/types/user-invitation.interface';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
+import IUserDto from 'src/types/user-dto.interface';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -100,6 +101,21 @@ export class UserService implements IUserService {
     return {
       token: await tokenPromise,
     };
+  }
+
+  async readAllAsync(): Promise<IUserDto[]> {
+    const users = await this.databaseService.readAllAsync();
+    return users.map(({
+      code,
+      displayName,
+      guid,
+      roles,
+    }) => ({
+      code,
+      displayName,
+      guid,
+      roles
+    }));
   }
 
   async signInAsync(signInData: ISignInData): Promise<ITokenResponse> {

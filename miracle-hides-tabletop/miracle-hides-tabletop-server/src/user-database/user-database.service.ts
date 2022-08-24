@@ -32,4 +32,12 @@ export class UserDatabaseService implements IUserDatabaseService {
     }
   }
 
+  async readAllAsync(): Promise<User[]> {
+    try {
+      const users = await this.userModel.find().exec();
+      return users;
+    } catch (err) {
+      return [];
+    }
+  }
 }

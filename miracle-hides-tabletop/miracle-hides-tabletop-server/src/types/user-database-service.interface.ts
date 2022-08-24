@@ -5,6 +5,8 @@ export interface IUserDatabaseService {
   createAsync(user: User, session?: ClientSession): Promise<User>;
 
   findOneAsync(predicate: (user: User) => Promise<boolean>): Promise<User>;
+
+  readAllAsync(): Promise<User[]>;
 }
 
 export const USER_DATABASE_SERVICE = 'USER_DATABASE_SERVICE';
