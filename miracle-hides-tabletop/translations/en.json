@@ -1,6 +1,13 @@
 {
   "_id": {
-    "$oid": "6303f79f6b513192c6dc1686"
+    "$oid": "630639dca715ee78695cc6bc"
+  },
+  "common": {
+    "back": "Back",
+    "email": "Email",
+    "emailPlaceholder": "<name@domain.com>",
+    "name": "Name",
+    "namePlaceholder": "Name of the invitation"
   },
   "language": "en",
   "dashboard": {
@@ -13,8 +20,23 @@
     "headline": "House Rules"
   },
   "invitations": {
-    "headline": "Invite new user"
+    "headline": "Inviate a new user",
+    "active": "active",
+    "create": "Invite user",
+    "delete": "Delete",
+    "notFound": "Invitation does not exists.",
+    "toggleToActive": "activate",
+    "toggleToInactive": "deactivate",
+    "unspecificError": "Please try again later",
+    "used": "inactive"
   },
+  "invitationsCreate": {
+    "headline": "Invite a new user",
+    "conflict": "Invitation already exists",
+    "createAndDone": "Done",
+    "createAndNext": "Next invitation",
+    "unspecificError": "You cannot create invitations at the moment"
+  }, 
   "languages": {
     "headline": "Language Settings"
   },

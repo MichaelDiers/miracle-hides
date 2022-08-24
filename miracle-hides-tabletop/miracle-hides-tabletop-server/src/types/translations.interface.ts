@@ -1,7 +1,9 @@
+import ITranslationsCommon from './translations-common';
 import ITranslationsDashboard from './translations-dashboard.interface';
 import ITranslationsHome from './translations-home.interface';
 import ITranslationsHouseRules from './translations-house-rules.interface';
 import ITranslationsInvitations from './translations-invitations';
+import ITranslationsInvitationsCreate from './translations-invitations-create';
 import ITranslationsLanguages from './translations-languages.interface';
 import ITranslationsNavbar from './translations-navbar.interface';
 import ITranslationsSignIn from './translations-sign-in.interface';
@@ -21,4 +23,6 @@ export default interface ITranslations {
   userForm: ITranslationsUserForm;
   validation: ITranslationsValidation;
   invitations: ITranslationsInvitations;
+  invitationsCreate: ITranslationsInvitationsCreate;
+  common: ITranslationsCommon;
 }

@@ -21,12 +21,14 @@ export class TranslationsDatabaseService
     }
 
     return {
+      common: result.common,
       dashboard: result.dashboard,
       home: result.home,
       houseRules: result.houseRules,
       language: result.language,
       languages: result.languages,
       invitations: result.invitations,
+      invitationsCreate: result.invitationsCreate,
       navbar: result.navbar,
       signIn: result.signIn,
       signUp: result.signUp,

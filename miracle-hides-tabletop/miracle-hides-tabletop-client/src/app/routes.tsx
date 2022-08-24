@@ -6,6 +6,7 @@ import Lost from '../pages/Lost';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import UserInvitations from '../pages/UserInvitations';
+import UserInvitationsCreate from '../pages/UserInvitationsCreate';
 import AppRoutes from '../types/app-routes.enum'
 import ITranslationsNavbar from '../types/translations-navbar.interface';
 import UserRoles from '../types/user-roles';
@@ -91,6 +92,15 @@ const ROUTES: IRouteElement[] = [
     roles: [UserRoles.ADMIN],
     navbar: true,
     translate: (translations: ITranslationsNavbar) => translations?.invitations,
+    hideIfUser: false,
+    requiresUser: true,
+  },
+  {
+    path: `${AppRoutes.USER_INVITATIONS}/${AppRoutes.USER_INVITATIONS_CREATE}`,
+    element: (<UserInvitationsCreate />),
+    roles: [UserRoles.ADMIN],
+    navbar: false,
+    translate: (translations: ITranslationsNavbar) => 'CREATE',
     hideIfUser: false,
     requiresUser: true,
   }

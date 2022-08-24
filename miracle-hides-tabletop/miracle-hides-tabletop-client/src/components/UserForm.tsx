@@ -24,8 +24,8 @@ export default function UserForm({
   onSubmit?: (data: IUserFormSubmit) => void,
 }) {
   const [displayName, setDisplayName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('bar@bar.de');
+  const [password, setPassword] = useState('bar@bar.de');
   const [passwordRepetition, setPasswordRepetition] = useState('');
 
   const [displayNameError, setDisplayNameError] = useState('');

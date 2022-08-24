@@ -12,6 +12,7 @@ export default function LabeledInput({
   onBlur,
   onChange,
   onFocus,
+  placeholder,
   required,
   show = true,
   type,
@@ -27,6 +28,7 @@ export default function LabeledInput({
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void,
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
   onFocus?: (event: FocusEvent<HTMLInputElement>) => void,
+  placeholder?: string,
   required?: boolean,
   show?: boolean,
   type: string,
@@ -73,6 +75,7 @@ export default function LabeledInput({
           onBlur={onBlur}
           onChange={onChangeLocal}
           onFocus={onFocus}
+          placeholder={placeholder}
           required={required}
           type={type}
           value={value}

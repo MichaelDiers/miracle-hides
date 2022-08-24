@@ -1,7 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import translationsCommon from 'src/types/translations-common';
+import translationsInvitationsCreate from 'src/types/translations-invitations-create';
 import ITranslationsNavbar from 'src/types/translations-navbar.interface';
 import ITranslations from 'src/types/translations.interface';
+import { TranslationCommon, TranslationCommonSchema } from './translation-common.schema';
 import {
   TranslationDashboard,
   TranslationDashboardSchema,
@@ -14,6 +17,7 @@ import {
   TranslationHouseRules,
   TranslationHouseRulesSchema,
 } from './translation-house-rules.schema';
+import { TranslationInvitationsCreateSchema } from './translation-invitations-create.schema';
 import {
   TranslationInvitations,
   TranslationInvitationsSchema,
@@ -41,6 +45,9 @@ export type TranslationDocument = Translation & Document;
 
 @Schema()
 export class Translation implements ITranslations {
+  @Prop({ required: true, type: TranslationCommonSchema, _id: false })
+  common: TranslationCommon;
+
   @Prop({ required: true })
   language: string;
 
@@ -52,6 +59,9 @@ export class Translation implements ITranslations {
 
   @Prop({ required: true, type: TranslationInvitationsSchema, _id: false })
   invitations: TranslationInvitations;
+
+  @Prop({ required: true, type: TranslationInvitationsCreateSchema, _id: false })
+  invitationsCreate: translationsInvitationsCreate;
 
   @Prop({ required: true, type: TranslationNavbarSchema, _id: false })
   navbar: ITranslationsNavbar;

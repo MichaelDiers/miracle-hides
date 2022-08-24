@@ -1,6 +1,13 @@
 {
   "_id": {
-    "$oid": "6303f77f6b513192c6dc1685"
+    "$oid": "630639b1a715ee78695cc6bb"
+  },
+  "common": {
+    "back": "zurück",
+    "email": "Email",
+    "emailPlaceholder": "<name@domain.com>",
+    "name": "Name",
+    "namePlaceholder": "Name der Einladung"
   },
   "language": "de",
   "dashboard": {
@@ -13,7 +20,22 @@
     "headline": "Hausregeln"
   },
   "invitations": {
-    "headline": "Benutzer einladen"
+    "headline": "Benutzer einladen",
+    "active": "aktiv",
+    "create": "Benutzer einladen",
+    "delete": "Löschen",
+    "notFound": "Einladung existiert nicht",
+    "toggleToActive": "aktivieren",
+    "toggleToInactive": "deaktivieren",
+    "unspecificError": "Bitte versuchen es sie später noch einmal",
+    "used": "inaktiv"
+  },
+  "invitationsCreate": {
+    "headline": "Benutzer einladen",
+    "conflict": "Einladung existiert bereits",
+    "createAndDone": "Abschließen",
+    "createAndNext": "Nächste Einladung",
+    "unspecificError": "Einladungen können im Moment nicht erstellt werden"
   },
   "languages": {
     "headline": "Spracheinstellungen"
