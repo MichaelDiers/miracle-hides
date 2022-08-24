@@ -18,7 +18,10 @@ import { DEFAULT_HASH_SERVICE_ROUNDS, HashService, HASH_SERVICE_ROUNDS } from '.
 import { HASH_SERVICE } from 'src/types/hash-service.interface';
 import { JwtService } from './jwt/jwt.service';
 import { JWT_SERVICE } from 'src/types/jwt-service.interface';
+import { UserInvitationsService } from './user-invitations/user-invitations.service';
 import IJwtConfig from 'src/types/jwt-config.interface';
+import { UserInvitationsDatabaseModule } from 'src/user-invitations-database/user-invitations-database.module';
+import { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.interface';
 
 @Module({
   exports: [
@@ -29,12 +32,14 @@ import IJwtConfig from 'src/types/jwt-config.interface';
     SECRET_MANAGER_SERVICE,
     TRANSLATIONS_SERVICE,
     USER_SERVICE,
+    USER_INVITATION_SERVICE,
   ],
   imports: [
     HouseRulesDatabaseModule,
     LanguagesDatabaseModule,
     TranslationsDatabaseModule,
     UserDatabaseModule,
+    UserInvitationsDatabaseModule,
   ],
   providers: [
     {
@@ -74,6 +79,10 @@ import IJwtConfig from 'src/types/jwt-config.interface';
     {
       provide: USER_SERVICE,
       useClass: UserService,
+    },
+    {
+      provide: USER_INVITATION_SERVICE,
+      useClass: UserInvitationsService,
     },
     MongodbConfigService,
   ],

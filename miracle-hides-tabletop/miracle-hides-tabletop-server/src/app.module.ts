@@ -15,6 +15,7 @@ import { GuardsModule } from './guards/guards.module';
 import { MiddlewareModule } from './middleware/middleware.module';
 import { RequestLoggerMiddleware, REQUEST_LOGGER_MIDDLEWARE } from './middleware/request-logger.middleware';
 import { JwtMiddleware } from './middleware/jwt.middleware';
+import { UserInvitationsDatabaseModule } from './user-invitations-database/user-invitations-database.module';
 
 @Module({
   controllers: [AppController],
@@ -34,6 +35,7 @@ import { JwtMiddleware } from './middleware/jwt.middleware';
     GuardsModule,
     MiddlewareModule,
     ServicesModule,
+    UserInvitationsDatabaseModule,
   ],
   providers: [AppService],
 })

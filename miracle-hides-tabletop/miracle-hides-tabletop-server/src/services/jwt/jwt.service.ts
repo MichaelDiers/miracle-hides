@@ -9,8 +9,9 @@ export class JwtService implements IJwtService {
   constructor(private readonly jwtConfig: IJwtConfig) { }
 
   async signAsync(payload: IJwtPayload): Promise<string> {
-    const plain = {
+    const plain: IJwtPayload = {
       displayName: payload.displayName,
+      guid: payload.guid,
       roles: payload.roles,
     };
     
