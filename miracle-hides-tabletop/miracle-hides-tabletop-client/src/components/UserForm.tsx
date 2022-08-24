@@ -1,10 +1,11 @@
 import { FormEvent, useState } from 'react';
 import { ERROR_FALLBACK } from '../pages/BasePage';
 import ITranslations from '../types/translations.interface';
-import { DISPLAY_NAME_MAX_LENGTH, DISPLAY_NAME_MIN_LENGTH, PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '../validation/validation-constants';
+import { DISPLAY_NAME_MAX_LENGTH, DISPLAY_NAME_MIN_LENGTH, PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH, UUID_MAX_LENGTH, UUID_MIN_LENGTH, UUID_PATTERN, UUID_REGEX } from '../validation/validation-constants';
 import LabeledInput from './LabeledInput';
 
 export interface IUserFormSubmit {
+  code?: string;
   displayName?: string;
   email: string;
   password: string;
@@ -27,11 +28,13 @@ export default function UserForm({
   const [email, setEmail] = useState('bar@bar.de');
   const [password, setPassword] = useState('bar@bar.de');
   const [passwordRepetition, setPasswordRepetition] = useState('');
+  const [invitationCode, setInvitationCode] = useState('');
 
   const [displayNameError, setDisplayNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordRepetitionError, setPasswordRepetitionError] = useState('');
+  const [invitationCodeError, setInvitationCodeError] = useState('');
 
   const onSubmitLocal = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -41,6 +44,7 @@ export default function UserForm({
     };
 
     if (isSignUp) {
+      formData.code = invitationCode;
       formData.displayName = displayName;
     }
 
@@ -54,7 +58,8 @@ export default function UserForm({
     !password || passwordError ||
     (isSignUp && (!displayName || displayNameError) ||
       (isSignUp && (!passwordRepetition || passwordRepetitionError))) ||
-    (isSignUp && password !== passwordRepetition)
+    (isSignUp && password !== passwordRepetition) ||
+    (isSignUp && (!invitationCode || invitationCodeError))
   ) as boolean;
   return (
     <form onSubmit={onSubmitLocal}>
@@ -112,6 +117,21 @@ export default function UserForm({
         translations={translations?.validation} 
         type='password'
         value={passwordRepetition}
+      />
+      <LabeledInput
+        error={invitationCodeError}
+        errorUpdate={(error) => setInvitationCodeError(error)}
+        label={translations?.userForm.invitationCode}
+        maxlength={UUID_MAX_LENGTH}
+        minlength={UUID_MIN_LENGTH}
+        name='passwordRepetition'
+        onChange={(event) => setInvitationCode(event.target.value)}
+        pattern={UUID_PATTERN}
+        required={true}
+        show={isSignUp}
+        translations={translations?.validation} 
+        type='text'
+        value={invitationCode}
       />
       <input
         type='submit'

@@ -10,7 +10,7 @@ const apiSignInSlice = apiSplice.injectEndpoints({
         url: `${baseUrl}`,
         method: 'POST',
         body: signInDto,
-      })
+      }),
     }),
   }),
   overrideExisting: false,

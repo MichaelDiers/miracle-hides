@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from './store';
 
+export const USER_INVITATION_TAG = 'UserInvitation';
+
 const baseUrl = process.env.REACT_APP_MH_SERVER_PREFIX || '';
 
 const apiSlice = createApi({
@@ -16,6 +18,7 @@ const apiSlice = createApi({
     },
   }),
   endpoints: () => ({}),
+  tagTypes: [USER_INVITATION_TAG]
 });
 
 export default apiSlice;

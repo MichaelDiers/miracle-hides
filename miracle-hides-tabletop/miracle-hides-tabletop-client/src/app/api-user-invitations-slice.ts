@@ -1,11 +1,9 @@
 import IUserInvitation from '../types/user-invitation.interface';
-import apiSplice from './api-slice';
+import apiSplice, { USER_INVITATION_TAG } from './api-slice';
 
 const baseUrl = process.env.REACT_APP_MH_USER_INVITATIONS_URL;
-const USER_INVITATION_TAG = 'UserInvitation';
 
-const userInvitationsSliceEnhance = apiSplice.enhanceEndpoints({addTagTypes: [USER_INVITATION_TAG]});
-const userInvitationsSlice = userInvitationsSliceEnhance.injectEndpoints({  
+const userInvitationsSlice = apiSplice.injectEndpoints({  
   endpoints: builder => ({
     createUserInvitation: builder.mutation({
       query: (request: { name: string, email?: string }) => ({

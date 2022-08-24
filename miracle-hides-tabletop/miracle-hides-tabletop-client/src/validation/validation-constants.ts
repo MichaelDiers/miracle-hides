@@ -3,3 +3,7 @@ export const DISPLAY_NAME_MAX_LENGTH = 256;
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MAX_LENGTH = 256;
 export const EMAIL_REGEX = /^[\w\d]+([+\.-]?[\w\d]+)*@[\w\d]+([+\.-]?[\w\d]+)*\.[\w\d]+$/;
+export const UUID_MIN_LENGTH = 36;
+export const UUID_MAX_LENGTH = 36;
+export const UUID_PATTERN = "[0-9a-fA-F]{8,8}-[0-9a-fA-F]{4,4}-[0-9a-fA-F]{4,4}-[0-9a-fA-F]{4,4}-[0-9a-fA-F]{12,12}";
+export const UUID_REGEX = /^[0-9a-fA-F]{8,8}-[0-9a-fA-F]{4,4}-[0-9a-fA-F]{4,4}-[0-9a-fA-F]{4,4}-[0-9a-fA-F]{12,12}$/;

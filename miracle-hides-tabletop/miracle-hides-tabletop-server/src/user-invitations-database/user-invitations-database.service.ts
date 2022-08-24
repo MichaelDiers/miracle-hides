@@ -67,6 +67,29 @@ export class UserInvitationsDatabaseService implements IUserInvitationDatabaseSe
     }
   }
 
+  async readByCodeAsync(ivcode: string): Promise<IUserInvitation> {
+    try {
+      const {
+        code,
+        created,
+        creator,
+        guid,
+        isActive,
+        name,
+      } = await this.userInvitationModel.findOne({ code: ivcode.toLowerCase() }).exec();
+      return {
+        code,
+        created,
+        creator,
+        guid,
+        isActive,
+        name,
+      };
+    } catch {
+      return;
+    }
+  }
+
   async readAllAsync(): Promise<IUserInvitation[]> {
     try {
       const documents = await this.userInvitationModel.find().exec();

@@ -1,8 +1,8 @@
+import { ClientSession } from 'mongoose';
 import { User } from 'src/user-database/user.schema';
-import ISignUpData from './sign-up-data.interface';
 
 export interface IUserDatabaseService {
-  createAsync(user: User): Promise<User>;
+  createAsync(user: User, session?: ClientSession): Promise<User>;
 
   findOneAsync(predicate: (user: User) => Promise<boolean>): Promise<User>;
 }

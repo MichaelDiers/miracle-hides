@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { ClientSession, Model } from 'mongoose';
 import { IUserDatabaseService } from 'src/types/user-database-service.interface';
 import { User, UserDocument } from './user.schema';
 
@@ -11,10 +11,10 @@ export class UserDatabaseService implements IUserDatabaseService {
     private userModel: Model<UserDocument>,
   ) {}
 
-  async createAsync(user: User): Promise<User> {
+  async createAsync(user: User, session?: ClientSession): Promise<User> {
     try {
-      const document = await this.userModel.create(user);
-      return document;
+      const documents = await this.userModel.create([user], {session});
+      return documents[0];
     } catch (err){
       return undefined;
     }

@@ -16,6 +16,8 @@ export default interface IUserInvitationsService {
   readAsync(guid: string): Promise<IUserInvitation>;
 
   readAllAsync(): Promise<IUserInvitation[]>;
+
+  readByCodeAsync(code: string): Promise<IUserInvitation>;
   
   updateAsync({
     guid,

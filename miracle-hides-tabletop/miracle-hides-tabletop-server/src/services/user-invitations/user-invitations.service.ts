@@ -56,6 +56,15 @@ export class UserInvitationsService implements IUserInvitationsService {
     return this.databaseService.readAllAsync();
   }
 
+  async readByCodeAsync(code: string): Promise<IUserInvitation> {
+    const result = await this.databaseService.readByCodeAsync(code);
+    if (!result) {
+      throw new NotFoundException();
+    }
+
+    return result;
+  }
+
   async updateAsync({
     guid,
     isActive,

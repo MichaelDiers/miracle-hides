@@ -13,6 +13,9 @@ export class TranslationUserForm implements ITranslationsUserForm {
   email: string;
 
   @Prop({ required: true })
+  invitationCode: string;
+  
+  @Prop({ required: true })
   password: string;
 
   @Prop({ required: true })

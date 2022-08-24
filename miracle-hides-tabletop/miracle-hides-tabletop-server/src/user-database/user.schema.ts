@@ -7,6 +7,9 @@ export type UserDocument = User & Document;
 @Schema({ autoIndex: true })
 export class User implements ISignUpData {
   @Prop({ required: true })
+  code: string;
+
+  @Prop({ required: true })
   displayName: string;
 
   @Prop({ required: true })

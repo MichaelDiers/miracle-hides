@@ -10,6 +10,8 @@ export default interface IUserInvitationDatabaseService {
 
   readAllAsync(): Promise<IUserInvitation[]>;
 
+  readByCodeAsync(code: string): Promise<IUserInvitation>;
+  
   updateAsync({
     guid,
     isActive,

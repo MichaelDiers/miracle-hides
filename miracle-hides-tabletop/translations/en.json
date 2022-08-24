@@ -63,6 +63,7 @@
   "userForm": {
     "displayName": "Name",
     "email": "Email",
+    "invitationCode": "Invitation Code",
     "password": "Password",
     "passwordRepetition": "Password repetition",
     "signInSubmit": "Sign in",
