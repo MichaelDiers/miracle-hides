@@ -20,15 +20,25 @@ export class UserDatabaseService implements IUserDatabaseService {
     }
   }
 
-  async findOneAsync(predicate: (user: User) => Promise<boolean>): Promise<User> {    
-    try {
-      for await (const doc of this.userModel.find().cursor()) {
-        if (await predicate(doc)) {
-          return doc;
+  async findOneAsync(predicate: ((user: User) => Promise<boolean>)|string): Promise<User> {
+    if (typeof predicate === 'function') {
+      try {
+        for await (const doc of this.userModel.find().cursor()) {
+          if (await predicate(doc)) {
+            return doc;
+          }
         }
+      } catch (err){
+        return;
       }
-    } catch (err){
-      return undefined;
+    }
+    else {
+      try {
+        const doc = await this.userModel.findOne({ guid: predicate }).exec();
+        return doc;
+      } catch (err) {
+        return;
+      }
     }
   }
 

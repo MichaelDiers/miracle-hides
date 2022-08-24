@@ -5,8 +5,10 @@ import Language from '../pages/Language';
 import Lost from '../pages/Lost';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import User from '../pages/User';
 import UserInvitations from '../pages/UserInvitations';
 import UserInvitationsCreate from '../pages/UserInvitationsCreate';
+import Users from '../pages/Users';
 import AppRoutes from '../types/app-routes.enum'
 import ITranslationsNavbar from '../types/translations-navbar.interface';
 import UserRoles from '../types/user-roles';
@@ -103,7 +105,25 @@ const ROUTES: IRouteElement[] = [
     translate: (translations: ITranslationsNavbar) => 'CREATE',
     hideIfUser: false,
     requiresUser: true,
-  }
+  },
+  {
+    path: AppRoutes.USERS,
+    element: (<Users />),
+    roles: [UserRoles.ADMIN],
+    navbar: true,
+    translate: (translations: ITranslationsNavbar) => 'USERS',
+    hideIfUser: false,
+    requiresUser: true,
+  },
+  {
+    path: AppRoutes.USER,
+    element: (<User />),
+    roles: [UserRoles.ADMIN],
+    navbar: false,
+    translate: (translations: ITranslationsNavbar) => 'USER',
+    hideIfUser: false,
+    requiresUser: true,
+  },
 ];
 
 export default ROUTES;

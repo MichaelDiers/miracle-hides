@@ -25,6 +25,7 @@ ENV REACT_APP_MH_TRANSLATIONS_URL=/api/translations
 ENV REACT_APP_MH_SIGN_IN_URL=/api/sign-in
 ENV REACT_APP_MH_SIGN_UP_URL=/api/sign-up
 ENV REACT_APP_MH_USER_INVITATIONS_URL=/api/user-invitations
+ENV REACT_APP_MH_USERS_URL=/api/user
 
 EXPOSE 3000
 CMD ["node", "dist/main"]

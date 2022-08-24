@@ -103,6 +103,20 @@ export class UserService implements IUserService {
     };
   }
 
+  async readAsync(guid: string): Promise<IUserDto> {
+    const doc = await this.databaseService.findOneAsync(guid);
+    if (!doc) {
+      throw new NotFoundException();
+    }
+
+    return {
+      code: doc.code,
+      displayName: doc.displayName,
+      guid: doc.guid,
+      roles: doc.roles,
+    };
+  }
+
   async readAllAsync(): Promise<IUserDto[]> {
     const users = await this.databaseService.readAllAsync();
     return users.map(({

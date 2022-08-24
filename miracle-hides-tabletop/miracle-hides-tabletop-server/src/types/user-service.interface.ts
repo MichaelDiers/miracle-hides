@@ -5,6 +5,7 @@ import IUserDto from './user-dto.interface';
 
 export interface IUserService {
   createAsync(signUpData: ISignUpData): Promise<ITokenResponse>;
+  readAsync(guid: string): Promise<IUserDto>;
   readAllAsync(): Promise<IUserDto[]>;
   signInAsync(signInData: ISignInData): Promise<ITokenResponse>;
 }

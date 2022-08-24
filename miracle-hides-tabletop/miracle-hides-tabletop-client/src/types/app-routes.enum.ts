@@ -10,6 +10,8 @@ const enum AppRoutes {
   SIGN_UP = '/sign-up',
   USER_INVITATIONS = '/invitations',
   USER_INVITATIONS_CREATE = 'create',
+  USERS = '/users',
+  USER = '/users/:guid',
 };
 
 export default AppRoutes;
