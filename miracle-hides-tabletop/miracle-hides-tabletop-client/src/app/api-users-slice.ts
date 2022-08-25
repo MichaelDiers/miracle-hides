@@ -7,6 +7,13 @@ const USER_TAG = 'User';
 const apiSliceEnhanced = apiSplice.enhanceEndpoints({ addTagTypes: [USER_TAG]});
 const usersSlice = apiSliceEnhanced.injectEndpoints({  
   endpoints: builder => ({
+    deleteUser: builder.mutation({
+      query: (guid: string) => ({
+        url: `${baseUrl}/${guid}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [USER_TAG],
+    }),
     readUser: builder.query<IUserDto, string>({
       query: (guid: string) => `${baseUrl}/${guid}`,
       providesTags: [USER_TAG],
@@ -14,12 +21,22 @@ const usersSlice = apiSliceEnhanced.injectEndpoints({
     readAllUsers: builder.query<IUserDto[], void>({
       query: () => `${baseUrl}`,
       providesTags: [USER_TAG],
+    }),
+    updateUser: builder.mutation({
+      query: (user: IUserDto) => ({
+        url: `${baseUrl}`,
+        method: 'PUT',
+        body: user,
+      }),
+      invalidatesTags: [USER_TAG],
     }),    
   }),
   overrideExisting: false,
 });
 
-export const { 
+export const {
+  useDeleteUserMutation, 
   useReadUserQuery,
   useReadAllUsersQuery,
+  useUpdateUserMutation,
  } = usersSlice;

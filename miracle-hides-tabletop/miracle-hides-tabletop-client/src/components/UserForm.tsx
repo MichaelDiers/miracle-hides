@@ -124,7 +124,7 @@ export default function UserForm({
         label={translations?.userForm.invitationCode}
         maxlength={UUID_MAX_LENGTH}
         minlength={UUID_MIN_LENGTH}
-        name='passwordRepetition'
+        name='invitationCode'
         onChange={(event) => setInvitationCode(event.target.value)}
         pattern={UUID_PATTERN}
         required={true}

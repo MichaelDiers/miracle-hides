@@ -4,7 +4,10 @@ import ITranslationsValidation from '../types/translations-validation';
 import { EMAIL_REGEX } from '../validation/validation-constants';
 
 export default function LabeledInput({
+  checked,
+  disabled = false,
   error,
+  isReadOnly = false,
   label,
   maxlength,
   minlength,
@@ -21,7 +24,10 @@ export default function LabeledInput({
   errorUpdate,
   translations,
 }: {
+  checked?: boolean,
+  disabled?: boolean,
   error?: string,
+  isReadOnly?: boolean,
   label: string,
   maxlength?: number,
   minlength?: number,
@@ -70,6 +76,8 @@ export default function LabeledInput({
       <>
         <label htmlFor={name}>{label}</label>
         <input
+          checked={checked}
+          disabled={disabled}
           id={name}
           maxLength={maxlength}
           minLength={minlength}
@@ -79,6 +87,7 @@ export default function LabeledInput({
           onFocus={onFocus}
           pattern={pattern}
           placeholder={placeholder}
+          readOnly={isReadOnly}
           required={required}
           type={type}
           value={value}

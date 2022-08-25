@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, Model } from 'mongoose';
+import UpdateUserDto from 'src/controllers/updateUser.dto';
 import { IUserDatabaseService } from 'src/types/user-database-service.interface';
 import { User, UserDocument } from './user.schema';
 
@@ -17,6 +18,15 @@ export class UserDatabaseService implements IUserDatabaseService {
       return documents[0];
     } catch (err){
       return undefined;
+    }
+  }
+
+  async deleteAsync(guid: string): Promise<boolean> {
+    try {
+      const result = await this.userModel.deleteOne({ guid }).exec();
+      return result.acknowledged && result.deletedCount === 1;
+    } catch (err) {
+      return false;
     }
   }
 
@@ -48,6 +58,15 @@ export class UserDatabaseService implements IUserDatabaseService {
       return users;
     } catch (err) {
       return [];
+    }
+  }
+
+  async updateAsync(user: UpdateUserDto): Promise<boolean> {
+    try {
+      const result = await this.userModel.updateOne({ guid: user.guid }, user);
+      return result.acknowledged && result.matchedCount === 1;
+    } catch (err) {
+      return false;
     }
   }
 }

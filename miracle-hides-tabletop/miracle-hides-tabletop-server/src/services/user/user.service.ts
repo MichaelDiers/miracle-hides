@@ -12,6 +12,7 @@ import IUserInvitation from 'src/types/user-invitation.interface';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
 import IUserDto from 'src/types/user-dto.interface';
+import UpdateUserDto from 'src/controllers/updateUser.dto';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -103,6 +104,13 @@ export class UserService implements IUserService {
     };
   }
 
+  async deleteAsync(guid: string): Promise<void> {
+    const result = await this.databaseService.deleteAsync(guid);
+    if (!result) {
+      throw new NotFoundException();
+    }
+  }
+
   async readAsync(guid: string): Promise<IUserDto> {
     const doc = await this.databaseService.findOneAsync(guid);
     if (!doc) {
@@ -148,5 +156,12 @@ export class UserService implements IUserService {
     return {
       token: await this.jwtService.signAsync(user),
     };
+  }
+
+  async updateAsync(user: UpdateUserDto): Promise<void> {
+    const result = await this.databaseService.updateAsync(user);
+    if(!result) {
+      throw new NotFoundException();
+    }
   }
 }
