@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import ISignUpData from 'src/types/sign-up-data.interface';
+import UserRoles from 'src/types/user-roles';
 
 export type UserDocument = User & Document;
 
@@ -9,14 +10,17 @@ export class User implements ISignUpData {
   @Prop({ required: true })
   code: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   displayName: string;
 
   @Prop({ required: true })
-  guid: string;
+  email: string;
 
   @Prop({ required: true })
-  email: string;
+  emailIsVerified: boolean;
+
+  @Prop({ required: true })
+  guid: string;
 
   @Prop({ required: true })
   password: string;
@@ -26,4 +30,3 @@ export class User implements ISignUpData {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
-UserSchema.index({ displayName: 1}, { unique: true });

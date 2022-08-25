@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Inject, Param, Put } from '@nestjs/common';
 import { Roles } from 'src/decorators/roles.decorator';
 import IUserDto from 'src/types/user-dto.interface';
+import UserRoles from 'src/types/user-roles';
 import { IUserService, USER_SERVICE } from 'src/types/user-service.interface';
 import { UuidPipe } from 'src/validation/uuid-pipe';
 import UpdateUserDto from './updateUser.dto';

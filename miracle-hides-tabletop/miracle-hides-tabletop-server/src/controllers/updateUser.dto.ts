@@ -1,4 +1,5 @@
-import { ArrayMinSize, arrayMinSize, IsArray, IsIn, IsInstance, IsString, IsUUID, Length, MinLength } from 'class-validator';
+import { IsArray, IsIn, IsString, IsUUID, Length } from 'class-validator';
+import UserRoles, { UserRolesList } from 'src/types/user-roles';
 
 export default class UpdateUserDto {
   @IsString()
@@ -9,6 +10,6 @@ export default class UpdateUserDto {
   guid: string;
 
   @IsArray()
-  @IsIn([UserRoles.ADMIN, UserRoles.POWERUSER, UserRoles.READONLY, UserRoles.USER], { each: true })
+  @IsIn(UserRolesList, { each: true })
   roles: UserRoles[];
 }

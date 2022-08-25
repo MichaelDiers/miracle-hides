@@ -13,6 +13,7 @@ import { InjectConnection } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
 import IUserDto from 'src/types/user-dto.interface';
 import UpdateUserDto from 'src/controllers/updateUser.dto';
+import UserRoles from 'src/types/user-roles';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -49,12 +50,13 @@ export class UserService implements IUserService {
     const user = {
       ...signUpData,
       email: await emailPromise,
+      emailIsVerified: false,
       guid: uuidv4(),
       password: await passwordPromise,
-      roles: [UserRoles.USER],
+      roles: [UserRoles.USER, UserRoles.VERIFY_EMAIL],
     };
 
-    const tokenPromise = this.jwtService.signAsync(user);
+    const tokenPromise = this.jwtService.signAsync({ ...user, roles: [UserRoles.VERIFY_EMAIL] });
 
     // start transaction
     const session = await sessionPromise;

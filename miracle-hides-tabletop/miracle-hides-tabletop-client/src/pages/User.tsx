@@ -4,13 +4,12 @@ import { useDeleteUserMutation, useReadUserQuery, useUpdateUserMutation } from '
 import { useReadTranslationsCombinedQuery } from '../app/hooks';
 import LabeledInput from '../components/LabeledInput';
 import AppRoutes from '../types/app-routes.enum';
-import UserRoles from '../types/user-roles';
+import UserRoles, { UserRolesList } from '../types/user-roles';
 import { DISPLAY_NAME_MAX_LENGTH, DISPLAY_NAME_MIN_LENGTH } from '../validation/validation-constants';
 import BasePage from './BasePage';
 
 const DELETE_SOURCE = 'delete';
 const UPDATE_SOURCE = 'update';
-const ROLES = [UserRoles.ADMIN, UserRoles.POWERUSER, UserRoles.READONLY, UserRoles.USER];
 
 export default function User() {
   const params = useParams();
@@ -27,7 +26,12 @@ export default function User() {
   const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [displayNameError, setDisplayNameError] = useState('');
 
-  const [roles, setRoles] = useState(user?.roles ? ROLES.map((role) => user.roles.includes(role)) : ROLES.map((role) => false));
+  const [roles, setRoles] = useState(
+    user?.roles 
+    ? UserRolesList.map((role) => user.roles.includes(role))
+    : UserRolesList.map((role) => false)
+  );
+
   const [rolesError, setRolesError] = useState('');
 
   const [isDeleted, setIsDeleted] = useState(false);
@@ -36,7 +40,7 @@ export default function User() {
   useEffect(() => {
     if (user) {
       setDisplayName(user.displayName);
-      setRoles(ROLES.map((role) => user.roles.includes(role)));
+      setRoles(UserRolesList.map((role) => user.roles.includes(role)));
     }
   }, [user]);
 
@@ -70,7 +74,7 @@ export default function User() {
         code: user.code,
         displayName,
         guid: user.guid,
-        roles: ROLES.filter((role, i) => roles[i]),
+        roles: UserRolesList.filter((role, i) => roles[i]),
       }).unwrap().then(() => {
       }).catch((err) => {
         switch (err.status) {
@@ -96,7 +100,7 @@ export default function User() {
     displayNameError,
     !roles,
     rolesError,
-    (displayName === user?.displayName && ROLES.every((role, i) => user.roles.includes(role) === roles[i]))
+    (displayName === user?.displayName && UserRolesList.every((role, i) => user.roles.includes(role) === roles[i]))
   ].some(Boolean);
 
   return (
@@ -134,7 +138,7 @@ export default function User() {
           <>
             <legend>ROLES</legend>
             {
-              ROLES.map((role, i) => (
+              UserRolesList.map((role, i) => (
                 <Fragment key={role}>
                   <label htmlFor={`role_${i}`}>{role}</label>
                   <input type='checkbox' checked={roles[i]} onChange={() => { const selected = [...roles]; selected[i] = !selected[i]; setRoles(selected); }}></input>
