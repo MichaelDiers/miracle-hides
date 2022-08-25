@@ -1,6 +1,6 @@
-import { ConflictException, ForbiddenException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
-import ISignUpDataInterface from 'src/types/sign-up-data.interface';
+import ISignUpData from 'src/types/sign-up-data.interface';
 import ITokenResponse from 'src/types/token-response.interface';
 import { IUserDatabaseService, USER_DATABASE_SERVICE } from 'src/types/user-database-service.interface';
 import { IUserService } from 'src/types/user-service.interface';
@@ -14,6 +14,8 @@ import { Connection } from 'mongoose';
 import IUserDto from 'src/types/user-dto.interface';
 import UpdateUserDto from 'src/controllers/updateUser.dto';
 import UserRoles from 'src/types/user-roles';
+import { IMailerService, MAILER_SERVICE } from 'src/types/services/mailer-service.interface';
+import { IAutherizedEmailVerification, IUnautherizedEmailVerification } from 'src/types/intersection-types';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -23,9 +25,10 @@ export class UserService implements IUserService {
     @Inject(USER_DATABASE_SERVICE) private readonly databaseService: IUserDatabaseService,
     @Inject(USER_INVITATION_SERVICE) private readonly userInvitationsService: IUserInvitationsService,
     @InjectConnection() private readonly connection: Connection,
+    @Inject(MAILER_SERVICE) private readonly mailerService: IMailerService,
   ) {}
 
-  async createAsync(signUpData: ISignUpDataInterface): Promise<ITokenResponse> {
+  async createAsync(signUpData: ISignUpData): Promise<ITokenResponse> {
     //
     // first phase: start all promises
     //
@@ -52,11 +55,13 @@ export class UserService implements IUserService {
       email: await emailPromise,
       emailIsVerified: false,
       guid: uuidv4(),
+      isVerified: false,
       password: await passwordPromise,
-      roles: [UserRoles.USER, UserRoles.VERIFY_EMAIL],
+      roles: [UserRoles.USER],
+      verification: uuidv4(),
     };
 
-    const tokenPromise = this.jwtService.signAsync({ ...user, roles: [UserRoles.VERIFY_EMAIL] });
+    const tokenPromise = this.jwtService.signAsync({ ...user });
 
     // start transaction
     const session = await sessionPromise;
@@ -80,7 +85,7 @@ export class UserService implements IUserService {
       await session.abortTransaction();
       throw new ForbiddenException();
     }
-    
+
     if (await userExistsPromise) {
       await session.abortTransaction();
       throw new ConflictException();
@@ -93,6 +98,14 @@ export class UserService implements IUserService {
       await session.abortTransaction();
       throw new ConflictException();
     }
+
+    await this.mailerService.sendAsync({
+      displayName: user.displayName,
+      frontEndUrl: process.env.MH_FRONT_END_URL,
+      language: signUpData.language,
+      to: signUpData.email,
+      verificationCode: user.code,
+    });
 
     // set user invitation to inactive
     this.userInvitationsService.updateAsync({
@@ -166,4 +179,46 @@ export class UserService implements IUserService {
       throw new NotFoundException();
     }
   }
+
+  async verifyEmailAuthorized(
+    autherizedEmailVerification: IAutherizedEmailVerification,
+    token: string,
+  ): Promise<ITokenResponse> {
+    try {
+      const { guid } = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+      const user = await this.readAsync(guid);
+
+      if (user.code !== autherizedEmailVerification.verificationCode) {
+        throw new UnauthorizedException();
+      }
+
+      if (!await this.databaseService.updateAsync({
+        guid: user.guid,
+        isVerified: true,
+        displayName: user.displayName,
+        roles: user.roles,
+       })) {
+        throw new UnauthorizedException();
+      }
+      
+      return {
+        token: await this.jwtService.signAsync({ ...user, isVerified: true }),
+      };
+    } catch (err) {
+      throw new UnauthorizedException();
+    }
+  }
+
+  async verifyEmailUnauthorized(
+    unautherizedEmailVerification: IUnautherizedEmailVerification,
+  ): Promise<ITokenResponse> {
+    const {
+      email,
+      password,
+      verificationCode,
+    } = unautherizedEmailVerification;
+    const { token } = await this.signInAsync({ email, password });
+    return this.verifyEmailAuthorized({ verificationCode }, token);
+  }
+  
 }

@@ -36,6 +36,7 @@ export function updateUserThunk(token: string) {
 
     const payload: IPayload = JSON.parse(window.atob(splittedToken[1]));
     const user: IUser = {
+      isVerified: payload.isVerified,
       name: payload.displayName,
       token,
       roles: payload.roles,

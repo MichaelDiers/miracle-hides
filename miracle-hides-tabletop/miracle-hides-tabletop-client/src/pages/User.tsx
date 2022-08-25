@@ -1,10 +1,10 @@
 import { FormEvent, Fragment, useEffect, useState } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useDeleteUserMutation, useReadUserQuery, useUpdateUserMutation } from '../app/api-users-slice';
 import { useReadTranslationsCombinedQuery } from '../app/hooks';
 import LabeledInput from '../components/LabeledInput';
 import AppRoutes from '../types/app-routes.enum';
-import UserRoles, { UserRolesList } from '../types/user-roles';
+import { UserRolesList } from '../types/user-roles';
 import { DISPLAY_NAME_MAX_LENGTH, DISPLAY_NAME_MIN_LENGTH } from '../validation/validation-constants';
 import BasePage from './BasePage';
 
@@ -74,6 +74,7 @@ export default function User() {
         code: user.code,
         displayName,
         guid: user.guid,
+        isVerified: user.isVerified,
         roles: UserRolesList.filter((role, i) => roles[i]),
       }).unwrap().then(() => {
       }).catch((err) => {

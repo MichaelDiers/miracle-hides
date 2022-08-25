@@ -1,4 +1,4 @@
-import { IsString, IsUUID, Length } from 'class-validator';
+import { IsIn, IsString, IsUUID, Length } from 'class-validator';
 import SignInDto from './sign-in.dto';
 
 export default class SignUpDto extends SignInDto {
@@ -8,4 +8,8 @@ export default class SignUpDto extends SignInDto {
 
   @IsUUID(4)
   code: string;
+
+  @IsString()
+  @IsIn(['en', 'de'])
+  language: string;
 }

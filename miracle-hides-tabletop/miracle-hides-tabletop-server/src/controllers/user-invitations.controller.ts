@@ -4,6 +4,7 @@ import { Roles } from 'src/decorators/roles.decorator';
 import { IJwtPayload } from 'src/types/jwt-payload.interface';
 import IUserInvitation from 'src/types/user-invitation.interface';
 import IUserInvitationsService, { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.interface';
+import UserRoles from 'src/types/user-roles';
 import { UuidPipe } from 'src/validation/uuid-pipe';
 import { CreateUserInvitationsDto, DeleteUserInvitationsDto, UpdateUserInvitationsDto } from './user-invitations.dto';
 

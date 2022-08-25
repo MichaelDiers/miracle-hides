@@ -1,11 +1,9 @@
 import IUserDto from '../types/user-dto.interface';
-import apiSplice from './api-slice';
+import apiSplice, { USER_TAG } from './api-slice';
 
 const baseUrl = process.env.REACT_APP_MH_USERS_URL;
-const USER_TAG = 'User';
 
-const apiSliceEnhanced = apiSplice.enhanceEndpoints({ addTagTypes: [USER_TAG]});
-const usersSlice = apiSliceEnhanced.injectEndpoints({  
+const usersSlice = apiSplice.injectEndpoints({  
   endpoints: builder => ({
     deleteUser: builder.mutation({
       query: (guid: string) => ({

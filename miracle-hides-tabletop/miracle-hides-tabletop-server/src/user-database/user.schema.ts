@@ -23,10 +23,19 @@ export class User implements ISignUpData {
   guid: string;
 
   @Prop({ required: true })
+  isVerified: boolean;
+
+  @Prop({ required: false })
+  language: string;
+  
+  @Prop({ required: true })
   password: string;
 
   @Prop({ required: true })
   roles: UserRoles[];
+
+  @Prop({ required: true })
+  verification: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

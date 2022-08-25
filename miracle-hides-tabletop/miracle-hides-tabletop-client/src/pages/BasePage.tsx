@@ -5,7 +5,7 @@ interface IApiData {
   isLoading?: boolean;
   isFetching?: boolean;
   isSuccess?: boolean;
-  isUninitialized: boolean;
+  isUninitialized?: boolean;
 }
 
 export const ERROR_FALLBACK = 'error';

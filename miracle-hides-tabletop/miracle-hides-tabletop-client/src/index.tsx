@@ -20,16 +20,16 @@ root.render(
         <Header />
         <Routes>
           {
-            ROUTES.map(({ path, element, requiresUser, roles }, i) => {
+            ROUTES.map(({ path, element, isVerified, requiresUser, roles }, i) => {
               if (path === '/') {
                 return <Route key={`route_${i}`} index element={element} />;
               } else if (!requiresUser && roles.length === 0) {
                 return <Route key={`route_${i}`} path={path} element={element} />;
               } else if (requiresUser && roles.length === 0) {
-                return <Route key={`route_${i}`} path={path} element={<RequiresUser>{element}</RequiresUser>} />;
+                return <Route key={`route_${i}`} path={path} element={<RequiresUser isVerified={isVerified}>{element}</RequiresUser>} />;
               }
 
-              return <Route key={`route_${i}`} path={path} element={<RequiresUser roles={roles}>{element}</RequiresUser>} />;
+              return <Route key={`route_${i}`} path={path} element={<RequiresUser isVerified={isVerified} roles={roles}>{element}</RequiresUser>} />;
             })
           }
         </Routes>

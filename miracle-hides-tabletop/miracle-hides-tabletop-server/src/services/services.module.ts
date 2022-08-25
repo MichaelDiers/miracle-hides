@@ -22,6 +22,9 @@ import { UserInvitationsService } from './user-invitations/user-invitations.serv
 import IJwtConfig from 'src/types/jwt-config.interface';
 import { UserInvitationsDatabaseModule } from 'src/user-invitations-database/user-invitations-database.module';
 import { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.interface';
+import { MailerService } from './mailer/mailer.service';
+import { MAILER_SERVICE } from 'src/types/services/mailer-service.interface';
+import IMailerServiceConfig from 'src/types/services/mailer-service-config.interface';
 
 @Module({
   exports: [
@@ -33,6 +36,7 @@ import { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.inte
     TRANSLATIONS_SERVICE,
     USER_SERVICE,
     USER_INVITATION_SERVICE,
+    MAILER_SERVICE,
   ],
   imports: [
     HouseRulesDatabaseModule,
@@ -83,6 +87,15 @@ import { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.inte
     {
       provide: USER_INVITATION_SERVICE,
       useClass: UserInvitationsService,
+    },
+    {
+      provide: MAILER_SERVICE,
+      useFactory: async (secretService: ISecretManagerService) => {
+        const plainConfig = await secretService.getMiracleHidesTabletopMailerConfig();
+        const config: IMailerServiceConfig = JSON.parse(plainConfig);
+        return new MailerService(config);
+      },
+      inject: [SECRET_MANAGER_SERVICE],
     },
     MongodbConfigService,
   ],

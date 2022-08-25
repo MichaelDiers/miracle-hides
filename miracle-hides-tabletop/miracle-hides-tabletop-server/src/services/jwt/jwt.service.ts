@@ -12,6 +12,7 @@ export class JwtService implements IJwtService {
     const plain: IJwtPayload = {
       displayName: payload.displayName,
       guid: payload.guid,
+      isVerified: payload.isVerified,
       roles: payload.roles,
     };
     

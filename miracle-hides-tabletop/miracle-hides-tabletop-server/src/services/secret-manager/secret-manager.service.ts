@@ -15,6 +15,10 @@ export class SecretManagerService implements ISecretManagerService {
     return this.getSecretAsync('MiracleHidesTabletopConnectionString');
   }
 
+  async getMiracleHidesTabletopMailerConfig(): Promise<string | undefined> {
+    return this.getSecretAsync('MiracleHidesTabletopMailerConfig');
+  }
+
   private async getSecretAsync(
     secretName: string,
   ): Promise<string | undefined> {

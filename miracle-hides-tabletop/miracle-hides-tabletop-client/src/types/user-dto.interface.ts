@@ -4,5 +4,6 @@ export default interface IUserDto {
   code: string;
   displayName: string;
   guid: string;
+  isVerified: boolean;
   roles: UserRoles[];
 }

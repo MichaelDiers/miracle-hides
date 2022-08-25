@@ -17,6 +17,7 @@ import UserRoles from '../types/user-roles';
 interface IRouteElement {
   element: JSX.Element;
   hideIfUser: boolean;
+  isVerified?: boolean;
   navbar: boolean;
   path: string;
   translate: (translations: ITranslationsNavbar) => string;
@@ -126,13 +127,24 @@ const ROUTES: IRouteElement[] = [
     requiresUser: true,
   },
   {
-    path: AppRoutes.EMAIL_VERIFICATION,
+    path: AppRoutes.EMAIL_VERIFICATION_INTERN,
     element: (<EmailVerification />),
-    roles: [UserRoles.VERIFY_EMAIL],
+    isVerified: false,
+    roles: [],
     navbar: false,
     translate: (translations: ITranslationsNavbar) => 'EMAIL_VERIFICATION',
     hideIfUser: false,
-    requiresUser: true,
+    requiresUser: false,
+  },
+  {
+    path: AppRoutes.EMAIL_VERIFICATION_EXTERN,
+    element: (<EmailVerification />),
+    isVerified: false,
+    roles: [],
+    navbar: false,
+    translate: (translations: ITranslationsNavbar) => 'EMAIL_VERIFICATION',
+    hideIfUser: false,
+    requiresUser: false,
   },
 ];
 
