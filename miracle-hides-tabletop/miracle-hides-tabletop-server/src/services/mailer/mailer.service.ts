@@ -21,6 +21,10 @@ export class MailerService implements IMailerService {
     to: string,
     verificationCode: string,
   }): Promise<boolean> {
+    if (!process.env.MH_SEND_MAILS) {
+      return true;
+    }
+    
     const transporter = createTransport(
       {
         host: this.config.host,
