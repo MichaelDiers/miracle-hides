@@ -1,4 +1,5 @@
 import Dashboard from '../pages/Dashboard';
+import EmailVerification from '../pages/EmailVerification';
 import Home from '../pages/Home';
 import HouseRules from '../pages/HouseRules';
 import Language from '../pages/Language';
@@ -39,7 +40,7 @@ const ROUTES: IRouteElement[] = [
     translate: (translations: ITranslationsNavbar) => translations?.houseRules || '',
     navbar: true,
     hideIfUser: false,
-    roles: [],
+    roles: [UserRoles.USER],
     requiresUser: false,
   },
   {
@@ -85,7 +86,7 @@ const ROUTES: IRouteElement[] = [
     navbar: true,
     translate: (translations: ITranslationsNavbar) => translations?.dashboard || '',
     hideIfUser: false,
-    roles: [],
+    roles: [UserRoles.USER],
     requiresUser: true,
   },
   {
@@ -121,6 +122,15 @@ const ROUTES: IRouteElement[] = [
     roles: [UserRoles.ADMIN],
     navbar: false,
     translate: (translations: ITranslationsNavbar) => 'USER',
+    hideIfUser: false,
+    requiresUser: true,
+  },
+  {
+    path: AppRoutes.EMAIL_VERIFICATION,
+    element: (<EmailVerification />),
+    roles: [UserRoles.VERIFY_EMAIL],
+    navbar: false,
+    translate: (translations: ITranslationsNavbar) => 'EMAIL_VERIFICATION',
     hideIfUser: false,
     requiresUser: true,
   },

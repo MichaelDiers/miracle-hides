@@ -1,5 +1,6 @@
 const enum AppRoutes {
   DASHBOARD = '/dashboard',
+  EMAIL_VERIFICATION = '/email-verification',
   ERROR_LOST = '/lost-and-found',
   EVENT_HANDLED = '/eventHandled',
   HOME = '/',

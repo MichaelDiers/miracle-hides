@@ -39,7 +39,7 @@ export default function SignUp() {
   }
 
   if (user) {
-    return (<Navigate to={AppRoutes.DASHBOARD}/>)
+    return (<Navigate to={AppRoutes.EMAIL_VERIFICATION}/>)
   }
 
   return (
