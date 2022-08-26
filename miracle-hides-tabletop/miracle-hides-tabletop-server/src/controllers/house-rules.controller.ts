@@ -1,4 +1,9 @@
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Inject,
+  Param,
+} from '@nestjs/common';
 import {
   HOUSE_RULES_SERVICE,
   IHouseRulesService,
