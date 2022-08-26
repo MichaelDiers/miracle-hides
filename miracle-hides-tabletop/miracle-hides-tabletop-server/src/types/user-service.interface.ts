@@ -1,5 +1,6 @@
 import UpdateUserDto from 'src/controllers/updateUser.dto';
-import { IAutherizedEmailVerification, IUnautherizedEmailVerification } from './intersection-types';
+import { IAutherizedEmailVerification, IUnautherizedEmailVerification } from 'src/intersection-types/interface-types';
+
 import ISignInData from './sign-in-data.interface';
 import ISignUpData from './sign-up-data.interface';
 import ITokenResponse from './token-response.interface';

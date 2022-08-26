@@ -3,6 +3,7 @@ import { IsPublic } from 'src/decorators/is-public.decorator';
 import ITokenResponse from 'src/types/token-response.interface';
 import { IUserService, USER_SERVICE } from 'src/types/user-service.interface';
 import { AutherizedEmailVerificationDto, UnautherizedEmailVerificationDto } from './intersection-dtos';
+
 import SignUpDto from './sign-up.dto';
 
 @Controller('api/sign-up')

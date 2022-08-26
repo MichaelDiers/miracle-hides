@@ -15,7 +15,8 @@ import IUserDto from 'src/types/user-dto.interface';
 import UpdateUserDto from 'src/controllers/updateUser.dto';
 import UserRoles from 'src/types/user-roles';
 import { IMailerService, MAILER_SERVICE } from 'src/types/services/mailer-service.interface';
-import { IAutherizedEmailVerification, IUnautherizedEmailVerification } from 'src/types/intersection-types';
+import { IAutherizedEmailVerification, IUnautherizedEmailVerification } from 'src/intersection-types/interface-types';
+
 
 @Injectable()
 export class UserService implements IUserService {

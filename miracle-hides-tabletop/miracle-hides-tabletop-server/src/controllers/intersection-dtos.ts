@@ -1,6 +1,7 @@
-import EmailDto from './base-dtos/email.dto';
-import PasswordDto from './base-dtos/password.dto';
-import VerificationCodeDto from './base-dtos/verification-code.dto';
+import { EmailDto } from 'src/base-types/email';
+import { PasswordDto } from 'src/base-types/password';
+import { VerificationCodeDto } from 'src/base-types/verification-code';
+
 
 export type UnautherizedEmailVerificationDto = EmailDto & PasswordDto & VerificationCodeDto;
 
