@@ -1,7 +1,4 @@
 {
-  "_id": {
-    "$oid": "630639dca715ee78695cc6bc"
-  },
   "common": {
     "back": "Back",
     "email": "Email",
