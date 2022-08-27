@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import ILanguage from '../types/language.interface';
+import { ILanguage } from '../types/language.types';
 
 interface ILanguageState {
   current?: ILanguage;

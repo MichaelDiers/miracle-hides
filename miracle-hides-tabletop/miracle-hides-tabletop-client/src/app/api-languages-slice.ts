@@ -1,4 +1,4 @@
-import ILanguage from '../types/language.interface';
+import { ILanguage } from '../types/language.types';
 import apiSplice from './api-slice';
 
 const baseUrl = process.env.REACT_APP_MH_LANGUAGES_URL;

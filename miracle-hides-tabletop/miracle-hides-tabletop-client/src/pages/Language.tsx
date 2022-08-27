@@ -4,22 +4,25 @@ import { useAppDispatch, useReadTranslationsCombinedQuery } from '../app/hooks';
 import { languageSlice } from '../app/language-slice';
 import { useReadLanguagesQuery } from '../app/api-languages-slice';
 import { RootState } from '../app/store';
-import ILanguage from '../types/language.interface';
+import { ILanguage } from '../types/language.types';
 import ITranslations from '../types/translations.interface';
 import BasePage from './BasePage';
 
 export default function Language() {
   const languagesResult = useReadLanguagesQuery();
   const translationsResult = useReadTranslationsCombinedQuery();
-  const current = useSelector((state: RootState) => state.language.current?.short) || navigator.language.split('-')[0].toLowerCase();
+  const current = useSelector((state: RootState) => state.language.current?.languageInternalName)
+    || navigator.language.split('-')[0].toLowerCase();
   const dispatch = useAppDispatch();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value;
-    const language = languagesResult.data?.find(({ short }) => value === short);
+    const language = languagesResult.data?.find(
+      ({ languageInternalName }) => value === languageInternalName,
+    );
     if (language) {
       dispatch(languageSlice.actions.updateLanguage(language));
-      document.documentElement.lang = language.short;
+      document.documentElement.lang = language.languageInternalName;
     }
   }
 
@@ -37,8 +40,17 @@ export default function Language() {
             const id = `language_${i}`;
             return (
               <Fragment key={i}>
-                <label htmlFor={id}>{language.name}</label>
-                <input id={id} name='language' type='radio' value={language.short} checked={language.short === current} onChange={onChange}></input>
+                <label htmlFor={id}>
+                  {language.displayName}
+                </label>
+                <input
+                  checked={language.languageInternalName === current}
+                  id={id}
+                  name='language'
+                  onChange={onChange}
+                  type='radio'
+                  value={language.languageInternalName}
+                ></input>
               </Fragment>
             )
           })

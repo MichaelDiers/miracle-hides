@@ -1,6 +1,10 @@
 import { FetchBaseQueryError, skipToken } from '@reduxjs/toolkit/dist/query';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import ILanguage from '../types/language.interface';
+import {
+  TypedUseSelectorHook,
+  useDispatch,
+  useSelector,
+} from 'react-redux';
+import { ILanguage } from '../types/language.types';
 import { useReadHouseRulesQuery } from './api-house-rules-slice';
 import { useReadLanguagesQuery } from './api-languages-slice';
 import { RootState, AppDispatch } from './store';
@@ -24,7 +28,9 @@ export const useReadCurrentLanguageCombinedQuery = () => {
         const browserLanguage = navigator.language?.split('-')[0].toUpperCase();
         if (browserLanguage) {
           // check if the selected browser language is available
-          language = languages.find(({ short }) => short.toUpperCase() === browserLanguage);
+          language = languages.find(
+            ({ languageInternalName }) => languageInternalName.toUpperCase() === browserLanguage,
+          );
           if (!language) {
             // select the default language of supported languages
             language = languages.find(({ isDefault }) => isDefault);
@@ -39,19 +45,32 @@ export const useReadCurrentLanguageCombinedQuery = () => {
   }
 
   if (!language) {
-    return { error: { status: 'CUSTOM_ERROR', error: 'Unable to set language.' } as FetchBaseQueryError };
+    return {
+      error: {
+        status: 'CUSTOM_ERROR',
+        error: 'Unable to set language.',
+      } as FetchBaseQueryError,
+    };
   }
 
-  document.documentElement.lang = language.short;
-  return { data: language.short, isError: false, isSuccess: true };
+  document.documentElement.lang = language.languageInternalName;
+  return { data: language.languageInternalName, isError: false, isSuccess: true };
 }
 
 export const useReadHouseRulesCombinedQuery = () => {
   const languageResult = useReadCurrentLanguageCombinedQuery();
-  return useReadHouseRulesQuery(languageResult.isSuccess ? languageResult.data as string : skipToken);
+  return useReadHouseRulesQuery(
+    languageResult.isSuccess
+    ? languageResult.data as string
+    : skipToken,
+  );
 };
 
 export const useReadTranslationsCombinedQuery = () => {
   const languageResult = useReadCurrentLanguageCombinedQuery();
-  return useReadTranslationsQuery(languageResult.isSuccess ? languageResult.data as string : skipToken);
+  return useReadTranslationsQuery(
+    languageResult.isSuccess
+    ? languageResult.data as string
+    : skipToken,
+  );
 }
