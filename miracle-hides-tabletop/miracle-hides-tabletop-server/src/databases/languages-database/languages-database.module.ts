@@ -1,14 +1,17 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LANGUAGES_DATABASE_SERVICE } from 'src/types/languages-database-service.interface';
-import { Language, LanguageSchema } from './language.schema';
+import {
+  LANGUAGE,
+  LanguageSchema,
+  LANGUAGES_DATABASE_SERVICE,
+} from '../../types/language.types';
 import { LanguagesDatabaseService } from './languages-database.service';
 
 @Module({
   exports: [LANGUAGES_DATABASE_SERVICE],
   imports: [
     MongooseModule.forFeature([
-      { name: Language.name, schema: LanguageSchema },
+      { name: LANGUAGE, schema: LanguageSchema },
     ]),
   ],
   providers: [

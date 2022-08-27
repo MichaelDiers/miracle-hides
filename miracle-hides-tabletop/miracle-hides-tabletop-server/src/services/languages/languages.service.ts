@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ILanguage } from 'src/types/language.type';
 import {
+  ILanguage,
   ILanguagesDatabaseService,
   LANGUAGES_DATABASE_SERVICE,
-} from 'src/types/languages-database-service.interface';
-import { ILanguagesService } from 'src/types/languages-service.interface';
+  ILanguagesService,
+} from '../../types/language.types';
 
 @Injectable()
 export class LanguagesService implements ILanguagesService {
@@ -14,7 +14,7 @@ export class LanguagesService implements ILanguagesService {
   ) {}
 
   async read(): Promise<ILanguage[]> {
-    const results = await this.database.read();
+    const results: ILanguage[] = await this.database.read();
     if (!results) {
       return;
     }
@@ -30,7 +30,7 @@ export class LanguagesService implements ILanguagesService {
       default:
         return results.map((result) => ({
           ...result,
-          isDefault: result.short === defaultLanguages[0].short,
+          isDefault: result.languageInternalName === defaultLanguages[0].languageInternalName,
         }));
     }
   }

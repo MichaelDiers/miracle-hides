@@ -1,11 +1,11 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { ILanguage } from 'src/types/language.type';
 import {
+  ILanguage,
   ILanguagesService,
   LANGUAGES_SERVICE,
-} from 'src/types/languages-service.interface';
+} from '../types/language.types';
 
-@Controller('api/languages')
+@Controller('api/v1/languages')
 export class LanguageController {
   constructor(
     @Inject(LANGUAGES_SERVICE) private readonly service: ILanguagesService,

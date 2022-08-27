@@ -8,7 +8,7 @@ import { ControllersModule } from './controllers/controllers.module';
 import { MongodbConfigService } from './services/mongodb-config/mongodb-config.service';
 import { ServicesModule } from './services/services.module';
 import { HouseRulesDatabaseModule } from './house-rules-database/house-rules-database.module';
-import { LanguagesDatabaseModule } from './languages-database/languages-database.module';
+import { LanguagesDatabaseModule } from './databases/languages-database/languages-database.module';
 import { TranslationsDatabaseModule } from './translations-database/translations-database.module';
 import { UserDatabaseModule } from './user-database/user-database.module';
 import { GuardsModule } from './guards/guards.module';

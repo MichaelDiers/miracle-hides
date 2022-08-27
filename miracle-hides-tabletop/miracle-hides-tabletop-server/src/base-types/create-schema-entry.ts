@@ -1,3 +1,16 @@
+export interface IEntry<Type> {
+  stringEnum?: string[],
+  index?: boolean;
+  lowercase?: boolean,
+  maxLength?: number;
+  minLength?: number;
+  name: string;
+  required?: boolean;
+  type: Type,
+  unique?: boolean;
+  validate?: { validator: (value) => boolean, },  
+}
+
 export default function createSchemaEntry<Type>({
   stringEnum,
   index = false,
@@ -21,17 +34,38 @@ export default function createSchemaEntry<Type>({
   unique?: boolean;
   validate?: (value) => boolean,
 }) {
-  const entry = {
-    enum: stringEnum,
-    index,
-    lowercase,
-    maxLength,
-    minLength,
-    required,
+  const entry: IEntry<Type> = {
+    name,
     type,
-    unique,
-    validate: undefined,    
   };
+
+  if (stringEnum) {
+    entry.stringEnum = stringEnum;
+  }
+
+  if (index || unique) {
+    entry.index = true;
+  }
+
+  if (lowercase) {
+    entry.lowercase = lowercase;
+  }
+
+  if (maxLength) {
+    entry.maxLength = maxLength;
+  }
+
+  if (minLength) {
+    entry.minLength = minLength;
+  }
+
+  if (required) {
+    entry.required = required;
+  }
+
+  if (unique) {
+    entry.unique = unique;
+  }
 
   if (validate) {
     entry.validate = {

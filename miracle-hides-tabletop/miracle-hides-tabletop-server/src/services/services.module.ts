@@ -6,8 +6,8 @@ import { SecretManagerService } from './secret-manager/secret-manager.service';
 import { MongodbConfigService } from './mongodb-config/mongodb-config.service';
 import { HouseRulesDatabaseModule } from 'src/house-rules-database/house-rules-database.module';
 import { LanguagesService } from './languages/languages.service';
-import { LANGUAGES_SERVICE } from 'src/types/languages-service.interface';
-import { LanguagesDatabaseModule } from 'src/languages-database/languages-database.module';
+import { LANGUAGES_SERVICE } from '../types/language.types';
+import { LanguagesDatabaseModule } from '../databases/languages-database/languages-database.module';
 import { TranslationsService } from './translations/translations.service';
 import { TRANSLATIONS_SERVICE } from 'src/types/translations-service.interface';
 import { TranslationsDatabaseModule } from 'src/translations-database/translations-database.module';
@@ -47,6 +47,11 @@ import IMailerServiceConfig from 'src/types/services/mailer-service-config.inter
   ],
   providers: [
     {
+      provide: LANGUAGES_SERVICE,
+      useClass: LanguagesService,
+    },
+
+    {
       provide: HASH_SERVICE_ROUNDS,
       useValue: DEFAULT_HASH_SERVICE_ROUNDS,
     },
@@ -67,10 +72,6 @@ import IMailerServiceConfig from 'src/types/services/mailer-service-config.inter
         return new JwtService(config);
       },
       inject: [SECRET_MANAGER_SERVICE],
-    },
-    {
-      provide: LANGUAGES_SERVICE,
-      useClass: LanguagesService,
     },
     {
       provide: SECRET_MANAGER_SERVICE,
