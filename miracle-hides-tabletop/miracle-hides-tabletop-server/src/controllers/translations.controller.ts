@@ -1,21 +1,21 @@
 import { Controller, Get, Inject, Param } from '@nestjs/common';
 import {
-  ITranslationsService,
-  TRANSLATIONS_SERVICE,
-} from 'src/types/translations-service.interface';
-import ITranslations from 'src/types/translations.interface';
+  ITranslation,
+  ITranslationService,
+  TRANSLATION_SERVICE,
+} from '../types/translation.types.gen';
 import { LanguagePipe } from 'src/validation/language-pipe';
 
-@Controller('api/translations')
+@Controller('api/v1/translations')
 export class TranslationsController {
   constructor(
-    @Inject(TRANSLATIONS_SERVICE)
-    private readonly service: ITranslationsService,
+    @Inject(TRANSLATION_SERVICE)
+    private readonly service: ITranslationService,
   ) {}
   @Get(':language')
   async base(
     @Param('language', new LanguagePipe()) language: string,
-  ): Promise<ITranslations> {
+  ): Promise<ITranslation> {
     return this.service.readAsync(language);
   }
 }

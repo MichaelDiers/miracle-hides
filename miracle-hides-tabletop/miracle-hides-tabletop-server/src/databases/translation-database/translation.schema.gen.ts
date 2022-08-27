@@ -3,10 +3,12 @@
 **/
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import * as translations from '../../types/translation.interface.gen';export type TranslationCommonDocument = TranslationCommon & Document;
+import * as translation from '../../types/translation.types.gen';
+
+export type TranslationCommonDocument = TranslationCommon & Document;
 
 @Schema()
-export class TranslationCommon implements translations.ITranslationCommon {
+export class TranslationCommon implements translation.ITranslationCommon {
 	@Prop({ required: true })
 	back: string;
 
@@ -28,7 +30,7 @@ export const TranslationCommonSchema = SchemaFactory.createForClass(TranslationC
 export type TranslationDashboardDocument = TranslationDashboard & Document;
 
 @Schema()
-export class TranslationDashboard implements translations.ITranslationDashboard {
+export class TranslationDashboard implements translation.ITranslationDashboard {
 	@Prop({ required: true })
 	headline: string;
 }
@@ -38,7 +40,7 @@ export const TranslationDashboardSchema = SchemaFactory.createForClass(Translati
 export type TranslationHomeDocument = TranslationHome & Document;
 
 @Schema()
-export class TranslationHome implements translations.ITranslationHome {
+export class TranslationHome implements translation.ITranslationHome {
 	@Prop({ required: true })
 	headline: string;
 }
@@ -48,7 +50,7 @@ export const TranslationHomeSchema = SchemaFactory.createForClass(TranslationHom
 export type TranslationHouseRulesDocument = TranslationHouseRules & Document;
 
 @Schema()
-export class TranslationHouseRules implements translations.ITranslationHouseRules {
+export class TranslationHouseRules implements translation.ITranslationHouseRules {
 	@Prop({ required: true })
 	headline: string;
 }
@@ -58,7 +60,7 @@ export const TranslationHouseRulesSchema = SchemaFactory.createForClass(Translat
 export type TranslationInvitationsDocument = TranslationInvitations & Document;
 
 @Schema()
-export class TranslationInvitations implements translations.ITranslationInvitations {
+export class TranslationInvitations implements translation.ITranslationInvitations {
 	@Prop({ required: true })
 	active: string;
 
@@ -92,7 +94,7 @@ export const TranslationInvitationsSchema = SchemaFactory.createForClass(Transla
 export type TranslationInvitationsCreateDocument = TranslationInvitationsCreate & Document;
 
 @Schema()
-export class TranslationInvitationsCreate implements translations.ITranslationInvitationsCreate {
+export class TranslationInvitationsCreate implements translation.ITranslationInvitationsCreate {
 	@Prop({ required: true })
 	conflict: string;
 
@@ -114,7 +116,7 @@ export const TranslationInvitationsCreateSchema = SchemaFactory.createForClass(T
 export type TranslationLanguagesDocument = TranslationLanguages & Document;
 
 @Schema()
-export class TranslationLanguages implements translations.ITranslationLanguages {
+export class TranslationLanguages implements translation.ITranslationLanguages {
 	@Prop({ required: true })
 	headline: string;
 }
@@ -124,7 +126,7 @@ export const TranslationLanguagesSchema = SchemaFactory.createForClass(Translati
 export type TranslationNavbarDocument = TranslationNavbar & Document;
 
 @Schema()
-export class TranslationNavbar implements translations.ITranslationNavbar {
+export class TranslationNavbar implements translation.ITranslationNavbar {
 	@Prop({ required: true })
 	dashboard: string;
 
@@ -155,7 +157,7 @@ export const TranslationNavbarSchema = SchemaFactory.createForClass(TranslationN
 export type TranslationSignInDocument = TranslationSignIn & Document;
 
 @Schema()
-export class TranslationSignIn implements translations.ITranslationSignIn {
+export class TranslationSignIn implements translation.ITranslationSignIn {
 	@Prop({ required: true })
 	cannotSignIn: string;
 
@@ -171,7 +173,7 @@ export const TranslationSignInSchema = SchemaFactory.createForClass(TranslationS
 export type TranslationSignUpDocument = TranslationSignUp & Document;
 
 @Schema()
-export class TranslationSignUp implements translations.ITranslationSignUp {
+export class TranslationSignUp implements translation.ITranslationSignUp {
 	@Prop({ required: true })
 	cannotSignUp: string;
 
@@ -187,7 +189,7 @@ export const TranslationSignUpSchema = SchemaFactory.createForClass(TranslationS
 export type TranslationUserFormDocument = TranslationUserForm & Document;
 
 @Schema()
-export class TranslationUserForm implements translations.ITranslationUserForm {
+export class TranslationUserForm implements translation.ITranslationUserForm {
 	@Prop({ required: true })
 	displayName: string;
 
@@ -215,7 +217,7 @@ export const TranslationUserFormSchema = SchemaFactory.createForClass(Translatio
 export type TranslationValidationDocument = TranslationValidation & Document;
 
 @Schema()
-export class TranslationValidation implements translations.ITranslationValidation {
+export class TranslationValidation implements translation.ITranslationValidation {
 	@Prop({ required: true })
 	invalidEmail: string;
 
@@ -243,7 +245,7 @@ export const TranslationValidationSchema = SchemaFactory.createForClass(Translat
 export type TranslationDocument = Translation & Document;
 
 @Schema()
-export class Translation implements translations.ITranslation {
+export class Translation implements translation.ITranslation {
 	@Prop({ required: true, type: TranslationCommon, _id: false })
 	common: TranslationCommon;
 

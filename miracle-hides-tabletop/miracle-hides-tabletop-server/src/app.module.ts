@@ -9,7 +9,7 @@ import { MongodbConfigService } from './services/mongodb-config/mongodb-config.s
 import { ServicesModule } from './services/services.module';
 import { HouseRulesDatabaseModule } from './house-rules-database/house-rules-database.module';
 import { LanguagesDatabaseModule } from './databases/languages-database/languages-database.module';
-import { TranslationsDatabaseModule } from './translations-database/translations-database.module';
+import { TranslationDatabaseModule } from './databases/translation-database/translation-database.module';
 import { UserDatabaseModule } from './user-database/user-database.module';
 import { GuardsModule } from './guards/guards.module';
 import { MiddlewareModule } from './middleware/middleware.module';
@@ -30,7 +30,7 @@ import { UserInvitationsDatabaseModule } from './user-invitations-database/user-
     }),
     HouseRulesDatabaseModule,
     LanguagesDatabaseModule,
-    TranslationsDatabaseModule,
+    TranslationDatabaseModule,
     UserDatabaseModule,
     GuardsModule,
     MiddlewareModule,

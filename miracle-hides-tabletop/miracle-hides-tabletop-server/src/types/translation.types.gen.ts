@@ -103,3 +103,15 @@ export interface ITranslation {
 	userForm: ITranslationUserForm;
 	validation: ITranslationValidation;
 }
+
+export interface ITranslationDatabaseService {
+	readAsync(languageInternalName: string): Promise<ITranslation>;
+}
+
+export const TRANSLATION_DATABASE_SERVICE = 'TRANSLATION_DATABASE_SERVICE';
+
+export interface ITranslationService {
+	readAsync(languageInternalName: string): Promise<ITranslation>;
+}
+
+export const TRANSLATION_SERVICE = 'TRANSLATION_SERVICE';

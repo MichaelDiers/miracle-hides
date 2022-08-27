@@ -1,18 +1,18 @@
 import { Inject, Injectable } from '@nestjs/common';
 import {
-  ITranslationsDatabaseService,
-  TRANSLATIONS_DATABASE_SERVICE,
-} from 'src/types/translations-database-service.interface';
-import { ITranslationsService } from 'src/types/translations-service.interface';
-import ITranslations from 'src/types/translations.interface';
+  ITranslation,
+  ITranslationDatabaseService,
+  ITranslationService,
+  TRANSLATION_DATABASE_SERVICE,
+} from '../../types/translation.types.gen';
 
 @Injectable()
-export class TranslationsService implements ITranslationsService {
+export class TranslationService implements ITranslationService {
   constructor(
-    @Inject(TRANSLATIONS_DATABASE_SERVICE)
-    private readonly service: ITranslationsDatabaseService,
+    @Inject(TRANSLATION_DATABASE_SERVICE)
+    private readonly service: ITranslationDatabaseService,
   ) {}
-  async readAsync(language: string): Promise<ITranslations> {
+  async readAsync(language: string): Promise<ITranslation> {
     return this.service.readAsync(language);
   }
 }

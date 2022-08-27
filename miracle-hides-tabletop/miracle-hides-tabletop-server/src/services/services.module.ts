@@ -8,9 +8,6 @@ import { HouseRulesDatabaseModule } from 'src/house-rules-database/house-rules-d
 import { LanguagesService } from './languages/languages.service';
 import { LANGUAGES_SERVICE } from '../types/language.types';
 import { LanguagesDatabaseModule } from '../databases/languages-database/languages-database.module';
-import { TranslationsService } from './translations/translations.service';
-import { TRANSLATIONS_SERVICE } from 'src/types/translations-service.interface';
-import { TranslationsDatabaseModule } from 'src/translations-database/translations-database.module';
 import { UserService } from './user/user.service';
 import { UserDatabaseModule } from 'src/user-database/user-database.module';
 import { USER_SERVICE } from 'src/types/user-service.interface';
@@ -25,6 +22,9 @@ import { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.inte
 import { MailerService } from './mailer/mailer.service';
 import { MAILER_SERVICE } from 'src/types/services/mailer-service.interface';
 import IMailerServiceConfig from 'src/types/services/mailer-service-config.interface';
+import { TRANSLATION_SERVICE } from '../types/translation.types.gen';
+import { TranslationDatabaseModule } from 'src/databases/translation-database/translation-database.module';
+import { TranslationService } from './translations/translations.service';
 
 @Module({
   exports: [
@@ -33,7 +33,7 @@ import IMailerServiceConfig from 'src/types/services/mailer-service-config.inter
     JWT_SERVICE,
     LANGUAGES_SERVICE,
     SECRET_MANAGER_SERVICE,
-    TRANSLATIONS_SERVICE,
+    TRANSLATION_SERVICE,
     USER_SERVICE,
     USER_INVITATION_SERVICE,
     MAILER_SERVICE,
@@ -41,7 +41,7 @@ import IMailerServiceConfig from 'src/types/services/mailer-service-config.inter
   imports: [
     HouseRulesDatabaseModule,
     LanguagesDatabaseModule,
-    TranslationsDatabaseModule,
+    TranslationDatabaseModule,
     UserDatabaseModule,
     UserInvitationsDatabaseModule,
   ],
@@ -78,8 +78,8 @@ import IMailerServiceConfig from 'src/types/services/mailer-service-config.inter
       useClass: SecretManagerService,
     },
     {
-      provide: TRANSLATIONS_SERVICE,
-      useClass: TranslationsService,
+      provide: TRANSLATION_SERVICE,
+      useClass: TranslationService,
     },
     {
       provide: USER_SERVICE,
