@@ -1,8 +1,8 @@
 import { IsBoolean } from 'class-validator';
 import createSchemaEntry from './create-schema-entry';
 
-export const isVerifiedSchemaEntry = () => createSchemaEntry({
-  name: 'isVerified',
+export const isVerifiedSchemaEntry = (name: string = 'isVerified') => createSchemaEntry({
+  name,
   type: Boolean,
 });
 

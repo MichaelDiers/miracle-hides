@@ -1,30 +1,31 @@
 import { Module } from '@nestjs/common';
 import { ISecretManagerService, SECRET_MANAGER_SERVICE } from 'src/types/secret-manager-service.interface';
-import { HOUSE_RULES_SERVICE } from '../types/house-rules-service.interface';
+import { HOUSE_RULES_SERVICE } from '../types/house-rule.types';
 import { HouseRulesService } from './house-rules/house-rules.service';
 import { SecretManagerService } from './secret-manager/secret-manager.service';
 import { MongodbConfigService } from './mongodb-config/mongodb-config.service';
-import { HouseRulesDatabaseModule } from 'src/house-rules-database/house-rules-database.module';
+import { HouseRulesDatabaseModule } from '../databases/house-rules-database/house-rules-database.module';
 import { LanguagesService } from './languages/languages.service';
 import { LANGUAGES_SERVICE } from '../types/language.types';
 import { LanguagesDatabaseModule } from '../databases/languages-database/languages-database.module';
 import { UserService } from './user/user.service';
-import { UserDatabaseModule } from 'src/user-database/user-database.module';
-import { USER_SERVICE } from 'src/types/user-service.interface';
+import { UserDatabaseModule } from '../databases/user-database/user-database.module';
+import { USER_SERVICE } from '../types/user.types';
 import { DEFAULT_HASH_SERVICE_ROUNDS, HashService, HASH_SERVICE_ROUNDS } from './hash/hash.service';
 import { HASH_SERVICE } from 'src/types/hash-service.interface';
 import { JwtService } from './jwt/jwt.service';
 import { JWT_SERVICE } from 'src/types/jwt-service.interface';
 import { UserInvitationsService } from './user-invitations/user-invitations.service';
 import IJwtConfig from 'src/types/jwt-config.interface';
-import { UserInvitationsDatabaseModule } from 'src/user-invitations-database/user-invitations-database.module';
-import { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.interface';
 import { MailerService } from './mailer/mailer.service';
 import { MAILER_SERVICE } from 'src/types/services/mailer-service.interface';
 import IMailerServiceConfig from 'src/types/services/mailer-service-config.interface';
 import { TRANSLATION_SERVICE } from '../types/translation.types.gen';
 import { TranslationDatabaseModule } from 'src/databases/translation-database/translation-database.module';
 import { TranslationService } from './translations/translations.service';
+import { TransactionsModule } from 'src/databases/transactions/transactions.module';
+import { USER_INVITATION_SERVICE } from 'src/types/user-invitations.types';
+import { UserInvitationsDatabaseModule } from 'src/databases/user-invitations-database/user-invitations-database.module';
 
 @Module({
   exports: [
@@ -41,6 +42,7 @@ import { TranslationService } from './translations/translations.service';
   imports: [
     HouseRulesDatabaseModule,
     LanguagesDatabaseModule,
+    TransactionsModule,
     TranslationDatabaseModule,
     UserDatabaseModule,
     UserInvitationsDatabaseModule,

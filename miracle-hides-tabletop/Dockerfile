@@ -27,7 +27,6 @@ ENV REACT_APP_MH_SIGN_UP_URL=/api/sign-up
 ENV REACT_APP_MH_USER_INVITATIONS_URL=/api/user-invitations
 ENV REACT_APP_MH_USERS_URL=/api/user
 ENV MH_FRONT_END_URL=https://miracle-hides-tabletop-prdsggicqa-uc.a.run.app/email-verification
-ENV MH_SEND_MAILS=true
 
 EXPOSE 3000
 CMD ["node", "dist/main"]

@@ -13,6 +13,6 @@ export interface IPassword {
 export class PasswordDto implements IPassword {
   @IsString()
   @Length(8, 256)
-  @IsNotIn(['password', 'PASSWORD', '12345678', '87654321'])
+  @IsNotIn(['password', 'PASSWORD', '12345678', '87654321', '01234567', '76543210'])
   password: string;
 }

@@ -7,15 +7,16 @@ import { AppService } from './app.service';
 import { ControllersModule } from './controllers/controllers.module';
 import { MongodbConfigService } from './services/mongodb-config/mongodb-config.service';
 import { ServicesModule } from './services/services.module';
-import { HouseRulesDatabaseModule } from './house-rules-database/house-rules-database.module';
+import { HouseRulesDatabaseModule } from './databases/house-rules-database/house-rules-database.module';
 import { LanguagesDatabaseModule } from './databases/languages-database/languages-database.module';
 import { TranslationDatabaseModule } from './databases/translation-database/translation-database.module';
-import { UserDatabaseModule } from './user-database/user-database.module';
+import { UserDatabaseModule } from './databases/user-database/user-database.module';
 import { GuardsModule } from './guards/guards.module';
 import { MiddlewareModule } from './middleware/middleware.module';
 import { RequestLoggerMiddleware, REQUEST_LOGGER_MIDDLEWARE } from './middleware/request-logger.middleware';
 import { JwtMiddleware } from './middleware/jwt.middleware';
-import { UserInvitationsDatabaseModule } from './user-invitations-database/user-invitations-database.module';
+import { UserInvitationsDatabaseModule } from './databases/user-invitations-database/user-invitations-database.module';
+import { TransactionsModule } from './databases/transactions/transactions.module';
 
 @Module({
   controllers: [AppController],
@@ -36,6 +37,7 @@ import { UserInvitationsDatabaseModule } from './user-invitations-database/user-
     MiddlewareModule,
     ServicesModule,
     UserInvitationsDatabaseModule,
+    TransactionsModule,
   ],
   providers: [AppService],
 })

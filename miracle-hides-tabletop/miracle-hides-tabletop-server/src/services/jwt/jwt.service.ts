@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import IJwtConfig from 'src/types/jwt-config.interface';
-import { IJwtPayload } from 'src/types/jwt-payload.interface';
-import { IJwtService } from 'src/types/jwt-service.interface';
+import IJwtConfig from '../../types/jwt-config.interface';
+import { IJwtPayload } from '../../types/user.types';
+import { IJwtService } from '../../types/jwt-service.interface';
 import { sign, Algorithm, verify } from 'jsonwebtoken';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class JwtService implements IJwtService {
     const plain: IJwtPayload = {
       displayName: payload.displayName,
       guid: payload.guid,
-      isVerified: payload.isVerified,
+      isEmailVerified: payload.isEmailVerified,
       roles: payload.roles,
     };
     

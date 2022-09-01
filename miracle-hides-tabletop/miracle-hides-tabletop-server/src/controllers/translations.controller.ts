@@ -12,6 +12,7 @@ export class TranslationsController {
     @Inject(TRANSLATION_SERVICE)
     private readonly service: ITranslationService,
   ) {}
+  
   @Get(':language')
   async base(
     @Param('language', new LanguagePipe()) language: string,

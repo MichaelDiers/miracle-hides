@@ -1,4 +1,4 @@
-import { IJwtPayload } from './jwt-payload.interface';
+import { IJwtPayload } from './user.types';
 
 export interface IJwtService {
   signAsync(payload: IJwtPayload): Promise<string>;

@@ -1,19 +1,23 @@
 import { Inject, Injectable } from '@nestjs/common';
-import {
-  HOUSE_RULES_DATABASE_SERVICE,
-  IHouseRulesDatabaseService,
-} from 'src/types/house-rules-database-service.interface';
-import IHouseRules from 'src/types/house-rules.interface';
-import { IHouseRulesService } from '../../types/house-rules-service.interface';
+import * as houseRuleTypes from '../../types/house-rule.types';
 
 @Injectable()
-export class HouseRulesService implements IHouseRulesService {
+export class HouseRulesService implements houseRuleTypes.IHouseRulesService {
   constructor(
-    @Inject(HOUSE_RULES_DATABASE_SERVICE)
-    private readonly houseRulesDatabaseService: IHouseRulesDatabaseService,
+    @Inject(houseRuleTypes.HOUSE_RULES_DATABASE_SERVICE)
+    private readonly houseRulesDatabaseService: houseRuleTypes.IHouseRulesDatabaseService,
   ) {}
 
-  readAsync(language: string): Promise<IHouseRules> {
-    return this.houseRulesDatabaseService.readAsync(language);
+  async readAsync(language: string): Promise<houseRuleTypes.IHouseRule> {
+    const result = await this.houseRulesDatabaseService.readAsync(language);
+    if (!result) {
+      return;
+    }
+
+    return {
+      houseRules: result.houseRules.map(
+        ({descriptions, guid, topic }) => ({ descriptions, guid, topic })),
+      languageInternalName: result.languageInternalName,
+    };
   }
 }

@@ -21,7 +21,7 @@ export class MailerService implements IMailerService {
     to: string,
     verificationCode: string,
   }): Promise<boolean> {
-    if (!process.env.MH_SEND_MAILS) {
+    if (process.env.MH_SUPPRESS_SEND_MAILS) {
       return true;
     }
     

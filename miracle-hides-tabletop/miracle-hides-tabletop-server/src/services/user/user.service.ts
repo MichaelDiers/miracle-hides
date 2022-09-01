@@ -1,21 +1,12 @@
-import { ConflictException, ForbiddenException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Inject, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
-import ISignUpData from 'src/types/sign-up-data.interface';
-import ITokenResponse from 'src/types/token-response.interface';
-import { IUserDatabaseService, USER_DATABASE_SERVICE } from 'src/types/user-database-service.interface';
-import { IUserService } from 'src/types/user-service.interface';
+import { IJwtPayload, ITokenResponse, IUser, IUserDatabaseService, IUserEmailVerification, IUserEmailVerificationWithPayload, IUserFrontEnd, IUserService, IUserSignIn, IUserSignUp, IUserUpdate, USER_DATABASE_SERVICE } from '../../types/user.types';
 import { HASH_SERVICE, IHashService } from 'src/types/hash-service.interface';
-import ISignInData from 'src/types/sign-in-data.interface';
 import { IJwtService, JWT_SERVICE } from 'src/types/jwt-service.interface';
-import IUserInvitationsService, { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.interface';
-import IUserInvitation from 'src/types/user-invitation.interface';
-import { InjectConnection } from '@nestjs/mongoose';
-import { Connection } from 'mongoose';
-import IUserDto from 'src/types/user-dto.interface';
-import UpdateUserDto from 'src/controllers/updateUser.dto';
+import { IUserInvitationService, USER_INVITATION_SERVICE } from '../../types/user-invitations.types';
 import UserRoles from 'src/types/user-roles';
 import { IMailerService, MAILER_SERVICE } from 'src/types/services/mailer-service.interface';
-import { IAutherizedEmailVerification, IUnautherizedEmailVerification } from 'src/intersection-types/interface-types';
+import { ITransactionFactory, TRANSACTION_FACTORY } from 'src/types/transaction.types';
 
 
 @Injectable()
@@ -24,96 +15,91 @@ export class UserService implements IUserService {
     @Inject(HASH_SERVICE) private readonly hashService: IHashService,
     @Inject(JWT_SERVICE) private readonly jwtService: IJwtService,
     @Inject(USER_DATABASE_SERVICE) private readonly databaseService: IUserDatabaseService,
-    @Inject(USER_INVITATION_SERVICE) private readonly userInvitationsService: IUserInvitationsService,
-    @InjectConnection() private readonly connection: Connection,
+    @Inject(USER_INVITATION_SERVICE) private readonly userInvitationsService: IUserInvitationService,
+    @Inject(TRANSACTION_FACTORY) private readonly transactionFactory: ITransactionFactory,
     @Inject(MAILER_SERVICE) private readonly mailerService: IMailerService,
   ) {}
 
-  async createAsync(signUpData: ISignUpData): Promise<ITokenResponse> {
+  async createAsync(userSignUp: IUserSignUp): Promise<ITokenResponse> {    
+    // read invitation code
+    let userInvitation;
+    try {
+      userInvitation = await this.userInvitationsService.readByInvitationCodeAsync(userSignUp.invitationCode);
+    } catch (err) {
+      throw new ForbiddenException();
+    }
+
+    if (!userInvitation.isActive) {
+      throw new ForbiddenException();
+    }
+
     //
     // first phase: start all promises
     //
 
-    // start a session
-    const sessionPromise = this.connection.startSession();
-
-    // read invitation code
-    const userInvitationPromise = this.userInvitationsService.readByCodeAsync(signUpData.code);
-
+    // start a transaction
+    const transactionPromise = this.transactionFactory.createAsync();
+  
     // check if user already exists
     const userExistsPromise = this.databaseService.findOneAsync(
-      async (user) => await this.hashService.compareAsync(signUpData.email, user.email) 
-        || signUpData.displayName.toUpperCase() === user.displayName.toUpperCase()
-        || signUpData.code === user.code,
+      async (user) => await this.hashService.compareAsync(userSignUp.email, user.email) 
+        || userSignUp.displayName.toUpperCase() === user.displayName.toUpperCase()
+        || userSignUp.invitationCode === user.invitationCode,
     );
 
     // hash input data
-    const emailPromise = this.hashService.hashAsync(signUpData.email);
-    const passwordPromise = this.hashService.hashAsync(signUpData.password);
+    const emailPromise = this.hashService.hashAsync(userSignUp.email);
+    const passwordPromise = this.hashService.hashAsync(userSignUp.password);
 
-    const user = {
-      ...signUpData,
+    const user: IUser = {
+      displayName: userSignUp.displayName,
       email: await emailPromise,
-      emailIsVerified: false,
       guid: uuidv4(),
-      isVerified: false,
+      invitationCode: userSignUp.invitationCode,
+      isEmailVerified: false,      
+      languageInternalName: userSignUp.languageInternalName,
       password: await passwordPromise,
       roles: [UserRoles.USER],
-      verification: uuidv4(),
+      verificationCode: uuidv4(),
     };
-
+  
     const tokenPromise = this.jwtService.signAsync({ ...user });
 
     // start transaction
-    const session = await sessionPromise;
-    session.startTransaction();
+    const transaction = await transactionPromise;
 
-    const createPromise = this.databaseService.createAsync(user, session);
+    const createPromise = this.databaseService.createAsync(user, transaction);
     
     //
     // second phase: check if all checks passed and commit or rollback
     //
 
-    // check invitation code results
-    let userInvitation: IUserInvitation;
-    try {
-      userInvitation = await userInvitationPromise;
-    } catch (err) {
-      // invitation does not exists
-    }
-
-    if (!userInvitation || !userInvitation.isActive) {
-      await session.abortTransaction();
-      throw new ForbiddenException();
-    }
-
     if (await userExistsPromise) {
-      await session.abortTransaction();
+      await transaction.abortTransactionAsync();
       throw new ConflictException();
     }
 
-    try {
-      await createPromise;
-      await session.commitTransaction();
-    } catch (err) {
-      await session.abortTransaction();
-      throw new ConflictException();
+    if (await createPromise) {
+      await transaction.commitTransactionAsync();
+    } else {
+      throw new InternalServerErrorException();
     }
 
     await this.mailerService.sendAsync({
       displayName: user.displayName,
       frontEndUrl: process.env.MH_FRONT_END_URL,
-      language: signUpData.language,
-      to: signUpData.email,
-      verificationCode: user.code,
+      language: userSignUp.languageInternalName,
+      to: userSignUp.email,
+      verificationCode: user.verificationCode,
     });
 
     // set user invitation to inactive
     this.userInvitationsService.updateAsync({
       guid: userInvitation.guid,
       isActive: false,
-      creator: user.guid,
-    }).catch((err) => {});
+      },
+      user.guid,
+    ).catch((err) => {});
 
     return {
       token: await tokenPromise,
@@ -127,99 +113,116 @@ export class UserService implements IUserService {
     }
   }
 
-  async readAsync(guid: string): Promise<IUserDto> {
+  async readAsync(guid: string): Promise<IUserFrontEnd> {
     const doc = await this.databaseService.findOneAsync(guid);
     if (!doc) {
       throw new NotFoundException();
     }
 
     return {
-      code: doc.code,
       displayName: doc.displayName,
       guid: doc.guid,
-      roles: doc.roles,
+      invitationCode: doc.invitationCode,
+      isEmailVerified: doc.isEmailVerified,
+      languageInternalName: doc.languageInternalName,
+      roles: doc.roles as UserRoles[],
+      verificationCode: doc.verificationCode,
     };
   }
 
-  async readAllAsync(): Promise<IUserDto[]> {
+  async readAllAsync(): Promise<IUserFrontEnd[]> {
     const users = await this.databaseService.readAllAsync();
     return users.map(({
-      code,
       displayName,
       guid,
+      invitationCode,
+      isEmailVerified,
+      languageInternalName,
       roles,
+      verificationCode,
     }) => ({
-      code,
       displayName,
       guid,
-      roles
+      invitationCode,
+      isEmailVerified,
+      languageInternalName,
+      roles: roles as UserRoles[],
+      verificationCode,
     }));
   }
 
-  async signInAsync(signInData: ISignInData): Promise<ITokenResponse> {
+  async signInAsync(userSignIn: IUserSignIn): Promise<ITokenResponse> {
     const user = await this.databaseService.findOneAsync(
-      async (user) => this.hashService.compareAsync(signInData.email, user.email),
+      async (user) => this.hashService.compareAsync(userSignIn.email, user.email),
     );
 
     if (!user) {
       throw new NotFoundException();
     }
 
-    if (!await this.hashService.compareAsync(signInData.password, user.password)) {
+    if (!await this.hashService.compareAsync(userSignIn.password, user.password)) {
       throw new NotFoundException();
     }
 
+    const payload: IJwtPayload = {
+      displayName: user.displayName,
+      guid: user.guid,
+      isEmailVerified: user.isEmailVerified,
+      roles: user.roles as UserRoles[],
+    };
+
     return {
-      token: await this.jwtService.signAsync(user),
+      token: await this.jwtService.signAsync(payload),
     };
   }
 
-  async updateAsync(user: UpdateUserDto): Promise<void> {
-    const result = await this.databaseService.updateAsync(user);
+  async updateAsync(user: IUserUpdate, updateUser: string): Promise<void> {
+    const result = await this.databaseService.updateAsync(user, updateUser);
     if(!result) {
       throw new NotFoundException();
     }
   }
 
-  async verifyEmailAuthorized(
-    autherizedEmailVerification: IAutherizedEmailVerification,
-    token: string,
-  ): Promise<ITokenResponse> {
+  async verifyEmail(
+    user: IUserEmailVerification | IUserEmailVerificationWithPayload)
+  : Promise<ITokenResponse> {
+    const userWithPayload = user as IUserEmailVerificationWithPayload;
+    if (!userWithPayload.guid) {
+      try {
+        const { email, password, verificationCode } = user as IUserEmailVerification;
+        const { token } = await this.signInAsync({ email, password })
+        const payload = await this.jwtService.verifyAsync(token);
+        return this.verifyEmail({
+          ...payload,
+          verificationCode,
+        });
+      } catch (err) {
+        throw new UnauthorizedException();
+      }
+    }
+
     try {
-      const { guid } = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
-      const user = await this.readAsync(guid);
-
-      if (user.code !== autherizedEmailVerification.verificationCode) {
+      const databaseUser = await this.readAsync(userWithPayload.guid);
+      if (!databaseUser || databaseUser.verificationCode !== userWithPayload.verificationCode) {
         throw new UnauthorizedException();
       }
 
-      if (!await this.databaseService.updateAsync({
-        guid: user.guid,
-        isVerified: true,
-        displayName: user.displayName,
-        roles: user.roles,
-       })) {
+      const userUpdate: IUserUpdate = {
+        displayName: databaseUser.displayName,
+        guid: databaseUser.guid,
+        isEmailVerified: true,
+        roles: databaseUser.roles
+      };
+
+      if (!await this.databaseService.updateAsync(userUpdate, databaseUser.guid)) {
         throw new UnauthorizedException();
       }
-      
+
       return {
-        token: await this.jwtService.signAsync({ ...user, isVerified: true }),
+        token: await this.jwtService.signAsync({ ...databaseUser, isEmailVerified: true }),
       };
     } catch (err) {
       throw new UnauthorizedException();
     }
   }
-
-  async verifyEmailUnauthorized(
-    unautherizedEmailVerification: IUnautherizedEmailVerification,
-  ): Promise<ITokenResponse> {
-    const {
-      email,
-      password,
-      verificationCode,
-    } = unautherizedEmailVerification;
-    const { token } = await this.signInAsync({ email, password });
-    return this.verifyEmailAuthorized({ verificationCode }, token);
-  }
-  
 }

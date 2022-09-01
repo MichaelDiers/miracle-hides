@@ -1,17 +1,16 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from '@nestjs/common';
 import { Payload } from 'src/decorators/payload.decorator';
 import { Roles } from 'src/decorators/roles.decorator';
-import { IJwtPayload } from 'src/types/jwt-payload.interface';
-import IUserInvitation from 'src/types/user-invitation.interface';
-import IUserInvitationsService, { USER_INVITATION_SERVICE } from 'src/types/user-invitations-service.interface';
+import { IJwtPayload } from '../types/user.types';
+import { IUserInvitation, IUserInvitationService, UserInvitationCreateDto, UserInvitationUpdateDto, USER_INVITATION_SERVICE } from '../types/user-invitations.types';
 import UserRoles from 'src/types/user-roles';
 import { UuidPipe } from 'src/validation/uuid-pipe';
-import { CreateUserInvitationsDto, DeleteUserInvitationsDto, UpdateUserInvitationsDto } from './user-invitations.dto';
+import { DisplayNameDto } from 'src/base-types/display-name';
 
-@Controller('api/user-invitations')
+@Controller('api/v1/user-invitations')
 export class UserInvitationsController {
   constructor(
-    @Inject(USER_INVITATION_SERVICE) private readonly userInvitationsService: IUserInvitationsService,
+    @Inject(USER_INVITATION_SERVICE) private readonly userInvitationsService: IUserInvitationService,
   ) { }
 
   @Delete(':guid')
@@ -22,39 +21,31 @@ export class UserInvitationsController {
 
   @Get()
   @Roles(UserRoles.ADMIN)
-  async readAll(): Promise<IUserInvitation[]> {
+  async readAllAsync(): Promise<IUserInvitation[]> {
     return this.userInvitationsService.readAllAsync();
   }
 
   @Get(':guid')
   @Roles(UserRoles.ADMIN)
-  async read(@Param('guid', new UuidPipe()) guid: string): Promise<IUserInvitation> {
+  async readAsync(@Param('guid', new UuidPipe()) guid: string): Promise<IUserInvitation> {
     return this.userInvitationsService.readAsync(guid);
   }
 
   @Post()
   @Roles(UserRoles.ADMIN)
   async createAsync(
-    @Body() createUserInvitationsDto: CreateUserInvitationsDto,
+    @Body() userInvitationCreateDto: DisplayNameDto,
     @Payload() payload: IJwtPayload,
   ): Promise<IUserInvitation> {
-    return this.userInvitationsService.createAsync({
-      creator: payload.guid,
-      name: createUserInvitationsDto.name,
-      email: createUserInvitationsDto.email,
-    });
+    return this.userInvitationsService.createAsync(userInvitationCreateDto, payload.guid);
   }
 
   @Put()
   @Roles(UserRoles.ADMIN)
   async updateAsync(
-    @Body() updateUserInvitationsDto: UpdateUserInvitationsDto,
+    @Body() userInvitationUpdateDto: UserInvitationUpdateDto,
     @Payload() payload: IJwtPayload,
   ): Promise<void> {
-    return this.userInvitationsService.updateAsync({
-      guid: updateUserInvitationsDto.guid,
-      isActive: updateUserInvitationsDto.isActive,
-      creator: payload.guid,
-    });
+    return this.userInvitationsService.updateAsync(userInvitationUpdateDto, payload.guid);
   }
 }

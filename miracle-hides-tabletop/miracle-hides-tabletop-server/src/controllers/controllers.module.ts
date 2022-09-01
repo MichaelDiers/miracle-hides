@@ -3,8 +3,6 @@ import { ServicesModule } from 'src/services/services.module';
 import { HouseRulesController } from './house-rules.controller';
 import { LanguageController } from './language.controller';
 import { TranslationsController } from './translations.controller';
-import { SignInController } from './sign-in.controller';
-import { SignUpController } from './sign-up.controller';
 import { UserInvitationsController } from './user-invitations.controller';
 import { UserController } from './user.controller';
 
@@ -13,8 +11,6 @@ import { UserController } from './user.controller';
     HouseRulesController,
     LanguageController,
     TranslationsController,
-    SignInController,
-    SignUpController,
     UserInvitationsController,
     UserController,
   ],

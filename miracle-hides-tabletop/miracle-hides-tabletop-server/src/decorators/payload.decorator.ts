@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { IJwtPayload } from 'src/types/jwt-payload.interface';
+import { IJwtPayload } from '../types/user.types';
 
 export const Payload = createParamDecorator(
   (data: unknown, ctx: ExecutionContext): IJwtPayload => {
