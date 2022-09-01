@@ -5,11 +5,11 @@ import ROUTES from '../app/routes';
 import { userSlice } from '../app/user-slice';
 import BasePage from '../pages/BasePage';
 import AppRoutes from '../types/app-routes.enum';
-import ITranslations from '../types/translations.interface';
+import { ITranslation } from '../types/translation.types.gen';
 
 export default function Navbar() {
   const trainslationsResult = useReadTranslationsCombinedQuery();
-  const translations: ITranslations = trainslationsResult.data;
+  const translations: ITranslation = trainslationsResult.data;
   const user = useAppSelector(state => state.user.current);
 
   const dispatch = useAppDispatch();

@@ -19,7 +19,7 @@ export default function RequiresUser({
     return (<Navigate to={AppRoutes.SIGN_IN} state={{ from: location.pathname }}/>);
   }
 
-  if (isVerified && !user.isVerified) {
+  if (isVerified && !user.isEmailVerified) {
     return (<Navigate to={AppRoutes.EMAIL_VERIFICATION_INTERN} state={{ from: location.pathname }}/>);
   }
 

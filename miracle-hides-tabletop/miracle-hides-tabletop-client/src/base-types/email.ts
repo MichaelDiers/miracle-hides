@@ -1,3 +1,3 @@
-export interface IEmail {
+export default interface IEmail {
   email: string;
 }

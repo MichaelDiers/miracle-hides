@@ -15,17 +15,17 @@ export default function Users() {
       <div>
         {
           <div>
-            <div>CODE</div>
+            <div>INVITATIONCODE</div>
             <div>DISPLAYNAME</div>
             <div>GUID</div>
             <div>ROLES</div>
           </div>
         }
         {
-          users?.map(({ code, displayName, guid, roles }, i) => {
+          users?.map(({ invitationCode, displayName, guid, roles }, i) => {
             return (
               <Link to={guid} key={`user_${i}`}>
-                <div aria-label='CODE'>{code}</div>
+                <div aria-label='INVITATIONCODE'>{invitationCode}</div>
                 <div aria-label='DISPLAYNAME'>{displayName}</div>
                 <div aria-label='GUID'>{guid}</div>
                 <div aria-label='ROLES'>{roles}</div>

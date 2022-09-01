@@ -167,6 +167,7 @@ let interfacesContent = generateInterface();
 interfacesContent = generateServiceInterfaces(interfacesContent);
 fs.writeFileSync(join(__dirname, 'translation.types.gen.ts'), interfacesContent);
 fs.writeFileSync(join(__dirname, '../miracle-hides-tabletop-server/src/types/translation.types.gen.ts'), interfacesContent);
+fs.writeFileSync(join(__dirname, '../miracle-hides-tabletop-client/src/types/translation.types.gen.ts'), interfacesContent);
 console.log('Generated interface');
 
 const schemaContent = generateSchema();

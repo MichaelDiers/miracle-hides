@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useReadTranslationsCombinedQuery } from '../app/hooks';
 import AppRoutes from '../types/app-routes.enum';
-import ITranslations from '../types/translations.interface';
+import { ITranslation } from '../types/translation.types.gen';
 import BasePage from './BasePage';
 
 export default function Home() {
   const translationsResult = useReadTranslationsCombinedQuery();
-  const translations = translationsResult.data as ITranslations;
+  const translations = translationsResult.data as ITranslation;
   return (
     <BasePage
       headline={translations?.home.headline}

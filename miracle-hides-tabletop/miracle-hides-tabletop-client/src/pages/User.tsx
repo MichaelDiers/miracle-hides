@@ -71,10 +71,9 @@ export default function User() {
 
     if (source === UPDATE_SOURCE) {
       updateUser({
-        code: user.code,
         displayName,
         guid: user.guid,
-        isVerified: user.isVerified,
+        isEmailVerified: user.isEmailVerified,
         roles: UserRolesList.filter((role, i) => roles[i]),
       }).unwrap().then(() => {
       }).catch((err) => {

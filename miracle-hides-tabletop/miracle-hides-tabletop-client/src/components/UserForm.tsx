@@ -1,11 +1,11 @@
 import { FormEvent, useState } from 'react';
 import { ERROR_FALLBACK } from '../pages/BasePage';
-import ITranslations from '../types/translations.interface';
+import { ITranslation } from '../types/translation.types.gen';
 import { DISPLAY_NAME_MAX_LENGTH, DISPLAY_NAME_MIN_LENGTH, PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH, UUID_MAX_LENGTH, UUID_MIN_LENGTH, UUID_PATTERN, UUID_REGEX } from '../validation/validation-constants';
 import LabeledInput from './LabeledInput';
 
 export interface IUserFormSubmit {
-  code?: string;
+  invitationCode?: string;
   displayName?: string;
   email: string;
   password: string;
@@ -19,7 +19,7 @@ export default function UserForm({
   onSubmit = () => { },
 }: {
   error?: string,
-  translations: ITranslations,
+  translations: ITranslation,
   isSignIn?: boolean,
   isSignUp?: boolean,
   onSubmit?: (data: IUserFormSubmit) => void,
@@ -44,7 +44,7 @@ export default function UserForm({
     };
 
     if (isSignUp) {
-      formData.code = invitationCode;
+      formData.invitationCode = invitationCode;
       formData.displayName = displayName;
     }
 

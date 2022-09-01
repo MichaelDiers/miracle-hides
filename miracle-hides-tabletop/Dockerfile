@@ -20,12 +20,10 @@ COPY --from=client /app/build/. ./client
 ENV NODE_ENV=production
 ENV MH_PROJECT_NAME=miracle-hides
 ENV REACT_APP_MH_LANGUAGES_URL=/api/v1/languages
-ENV REACT_APP_MH_HOUSE_RULES_URL=/api/house-rules
+ENV REACT_APP_MH_HOUSE_RULES_URL=/api/v1/house-rules
 ENV REACT_APP_MH_TRANSLATIONS_URL=/api/v1/translations
-ENV REACT_APP_MH_SIGN_IN_URL=/api/sign-in
-ENV REACT_APP_MH_SIGN_UP_URL=/api/sign-up
-ENV REACT_APP_MH_USER_INVITATIONS_URL=/api/user-invitations
-ENV REACT_APP_MH_USERS_URL=/api/user
+ENV REACT_APP_MH_USER_INVITATIONS_URL=/api/v1/user-invitations
+ENV REACT_APP_MH_USERS_URL=/api/v1/user
 ENV MH_FRONT_END_URL=https://miracle-hides-tabletop-prdsggicqa-uc.a.run.app/email-verification
 
 EXPOSE 3000

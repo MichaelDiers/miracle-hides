@@ -4,7 +4,7 @@ import { useCreateUserInvitationMutation } from '../app/api-user-invitations-sli
 import { useReadTranslationsCombinedQuery } from '../app/hooks';
 import LabeledInput from '../components/LabeledInput';
 import AppRoutes from '../types/app-routes.enum';
-import ITranslations from '../types/translations.interface';
+import { ITranslation } from '../types/translation.types.gen';
 import BasePage from './BasePage';
 
 const DONE_SOURCE = 'done';
@@ -13,7 +13,7 @@ const NEXT_SOURCE = 'next';
 export default function UserInvitationsCreate() {
   // api calls and mutations
   const translationsResult = useReadTranslationsCombinedQuery();
-  const translations = translationsResult.data as ITranslations;
+  const translations = translationsResult.data as ITranslation;
   const [createUserInvitation, createUserInvitationStatus] = useCreateUserInvitationMutation();
 
   // react states
@@ -28,7 +28,7 @@ export default function UserInvitationsCreate() {
     event.preventDefault();
     const source = (event.nativeEvent as SubmitEvent).submitter?.id || '';
     
-    createUserInvitation({ name, email })
+    createUserInvitation({ displayName: name })
       .unwrap()
       .then((result) => {
         setCreatedGuids([...createdGuids, result.guid]);

@@ -1,11 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import IPayload from '../types/payload.interface';
-import UserRoles from '../types/user-roles';
-import IUser from '../types/user.interface';
+import { ICurrentUser, IJwtPayload, IUserFrontEnd } from '../types/user.types';
 import { AppDispatch } from './store';
 
 interface IUserState {
-  current?: IUser;
+  current?: ICurrentUser;
 }
 
 const initialState = (): IUserState => ({});
@@ -17,7 +15,7 @@ export const userSlice = createSlice({
     resetUser: (state) => {
       state.current = undefined;
     },
-    updateUser: (state, action: PayloadAction<IUser>) => {
+    updateUser: (state, action: PayloadAction<ICurrentUser>) => {
       state.current = action.payload;
     }
   },  
@@ -34,12 +32,13 @@ export function updateUserThunk(token: string) {
       return;
     }
 
-    const payload: IPayload = JSON.parse(window.atob(splittedToken[1]));
-    const user: IUser = {
-      isVerified: payload.isVerified,
-      name: payload.displayName,
+    const payload: IJwtPayload = JSON.parse(window.atob(splittedToken[1]));
+    const user: ICurrentUser = {
+      isEmailVerified: payload.isEmailVerified,
+      displayName: payload.displayName,
       token,
       roles: payload.roles,
+      guid: payload.guid,
     };
 
     dispatch(userSlice.actions.updateUser(user));

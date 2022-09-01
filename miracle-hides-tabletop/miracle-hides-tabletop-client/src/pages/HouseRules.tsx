@@ -1,13 +1,13 @@
 import { useReadHouseRulesCombinedQuery, useReadTranslationsCombinedQuery } from '../app/hooks';
-import IHouseRulesServiceResult from '../types/house-rules-service-result.interface';
-import ITranslations from '../types/translations.interface';
+import { IHouseRule } from '../types/house-rule.types';
+import { ITranslation } from '../types/translation.types.gen';
 import BasePage from './BasePage';
 
 export default function HouseRules() {
   const houseRulesResult = useReadHouseRulesCombinedQuery();
   const translationsResult = useReadTranslationsCombinedQuery();
-  const houseRules = houseRulesResult.data as IHouseRulesServiceResult;
-  const translations = translationsResult.data as ITranslations;
+  const houseRules = houseRulesResult.data as IHouseRule;
+  const translations = translationsResult.data as ITranslation;
 
   return (
     <BasePage

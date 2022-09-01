@@ -11,7 +11,7 @@ import UserInvitations from '../pages/UserInvitations';
 import UserInvitationsCreate from '../pages/UserInvitationsCreate';
 import Users from '../pages/Users';
 import AppRoutes from '../types/app-routes.enum'
-import ITranslationsNavbar from '../types/translations-navbar.interface';
+import { ITranslationNavbar } from '../types/translation.types.gen';
 import UserRoles from '../types/user-roles';
 
 interface IRouteElement {
@@ -20,7 +20,7 @@ interface IRouteElement {
   isVerified?: boolean;
   navbar: boolean;
   path: string;
-  translate: (translations: ITranslationsNavbar) => string;
+  translate: (translations: ITranslationNavbar) => string;
   roles: UserRoles[],
   requiresUser: boolean;
 }
@@ -32,13 +32,13 @@ const ROUTES: IRouteElement[] = [
     navbar: true,
     path: AppRoutes.INDEX,
     roles: [],
-    translate: (translations: ITranslationsNavbar) => translations?.home || '',
+    translate: (translations: ITranslationNavbar) => translations?.home || '',
     requiresUser: false,
   },
   {
     path: AppRoutes.HOUSE_RULES,
     element: (<HouseRules />),
-    translate: (translations: ITranslationsNavbar) => translations?.houseRules || '',
+    translate: (translations: ITranslationNavbar) => translations?.houseRules || '',
     navbar: true,
     hideIfUser: false,
     roles: [UserRoles.USER],
@@ -47,7 +47,7 @@ const ROUTES: IRouteElement[] = [
   {
     path: AppRoutes.LANGUAGES,
     element: (<Language />),
-    translate: (translations: ITranslationsNavbar) => translations?.languages || '',
+    translate: (translations: ITranslationNavbar) => translations?.languages || '',
     navbar: true,
     hideIfUser: false,
     roles: [],
@@ -56,7 +56,7 @@ const ROUTES: IRouteElement[] = [
   {
     path: AppRoutes.SIGN_IN,
     element: (<SignIn />),
-    translate: (translations: ITranslationsNavbar) => translations?.signIn || '',
+    translate: (translations: ITranslationNavbar) => translations?.signIn || '',
     navbar: true,
     hideIfUser: true,
     roles: [],
@@ -65,7 +65,7 @@ const ROUTES: IRouteElement[] = [
   {
     path: AppRoutes.SIGN_UP,
     element: (<SignUp />),
-    translate: (translations: ITranslationsNavbar) => translations?.signUp || '',
+    translate: (translations: ITranslationNavbar) => translations?.signUp || '',
     navbar: true,
     hideIfUser: true,
     roles: [],
@@ -85,7 +85,7 @@ const ROUTES: IRouteElement[] = [
     path: AppRoutes.DASHBOARD,
     element: (<Dashboard />),
     navbar: true,
-    translate: (translations: ITranslationsNavbar) => translations?.dashboard || '',
+    translate: (translations: ITranslationNavbar) => translations?.dashboard || '',
     hideIfUser: false,
     roles: [UserRoles.USER],
     requiresUser: true,
@@ -95,7 +95,7 @@ const ROUTES: IRouteElement[] = [
     element: (<UserInvitations />),
     roles: [UserRoles.ADMIN],
     navbar: true,
-    translate: (translations: ITranslationsNavbar) => translations?.invitations,
+    translate: (translations: ITranslationNavbar) => translations?.invitations,
     hideIfUser: false,
     requiresUser: true,
   },
@@ -104,7 +104,7 @@ const ROUTES: IRouteElement[] = [
     element: (<UserInvitationsCreate />),
     roles: [UserRoles.ADMIN],
     navbar: false,
-    translate: (translations: ITranslationsNavbar) => 'CREATE',
+    translate: (translations: ITranslationNavbar) => 'CREATE',
     hideIfUser: false,
     requiresUser: true,
   },
@@ -113,7 +113,7 @@ const ROUTES: IRouteElement[] = [
     element: (<Users />),
     roles: [UserRoles.ADMIN],
     navbar: true,
-    translate: (translations: ITranslationsNavbar) => 'USERS',
+    translate: (translations: ITranslationNavbar) => 'USERS',
     hideIfUser: false,
     requiresUser: true,
   },
@@ -122,7 +122,7 @@ const ROUTES: IRouteElement[] = [
     element: (<User />),
     roles: [UserRoles.ADMIN],
     navbar: false,
-    translate: (translations: ITranslationsNavbar) => 'USER',
+    translate: (translations: ITranslationNavbar) => 'USER',
     hideIfUser: false,
     requiresUser: true,
   },
@@ -132,7 +132,7 @@ const ROUTES: IRouteElement[] = [
     isVerified: false,
     roles: [],
     navbar: false,
-    translate: (translations: ITranslationsNavbar) => 'EMAIL_VERIFICATION',
+    translate: (translations: ITranslationNavbar) => 'EMAIL_VERIFICATION',
     hideIfUser: false,
     requiresUser: false,
   },
@@ -142,7 +142,7 @@ const ROUTES: IRouteElement[] = [
     isVerified: false,
     roles: [],
     navbar: false,
-    translate: (translations: ITranslationsNavbar) => 'EMAIL_VERIFICATION',
+    translate: (translations: ITranslationNavbar) => 'EMAIL_VERIFICATION',
     hideIfUser: false,
     requiresUser: false,
   },

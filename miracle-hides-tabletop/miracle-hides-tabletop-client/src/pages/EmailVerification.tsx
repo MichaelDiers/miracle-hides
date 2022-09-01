@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { useVerifyEmailAuthorizedMutation, useVerifyEmailUnauthorizedMutation } from '../app/api-sign-up.slice';
+import { useVerifyEmailAuthorizedMutation, useVerifyEmailUnauthorizedMutation } from '../app/api-users-slice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { selectUser } from '../app/selectors';
 import { updateUserThunk } from '../app/user-slice';

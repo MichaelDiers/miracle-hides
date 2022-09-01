@@ -5,7 +5,7 @@ import { languageSlice } from '../app/language-slice';
 import { useReadLanguagesQuery } from '../app/api-languages-slice';
 import { RootState } from '../app/store';
 import { ILanguage } from '../types/language.types';
-import ITranslations from '../types/translations.interface';
+import { ITranslation } from '../types/translation.types.gen';
 import BasePage from './BasePage';
 
 export default function Language() {
@@ -27,7 +27,7 @@ export default function Language() {
   }
 
   const languages = languagesResult.data as ILanguage[];
-  const translations = translationsResult.data as ITranslations;
+  const translations = translationsResult.data as ITranslation;
 
   return (
     <BasePage

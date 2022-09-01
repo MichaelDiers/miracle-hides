@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent } from 'react';
 import { ERROR_FALLBACK } from '../pages/BasePage';
-import ITranslationsValidation from '../types/translations-validation';
+import { ITranslationValidation } from '../types/translation.types.gen';
 import { EMAIL_REGEX } from '../validation/validation-constants';
 
 export default function LabeledInput({
@@ -42,7 +42,7 @@ export default function LabeledInput({
   type: string,
   value?: string,
   errorUpdate?: (error: string) => void,
-  translations?: ITranslationsValidation,
+  translations?: ITranslationValidation,
 }) {
   if (show) {
     const onChangeLocal = (event: ChangeEvent<HTMLInputElement>): void => {

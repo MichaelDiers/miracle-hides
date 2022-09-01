@@ -3,14 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { useDeleteUserInvitationMutation, useReadAllUserInvitationQuery, useUpdateUserInvitationMutation } from '../app/api-user-invitations-slice';
 import { useReadTranslationsCombinedQuery } from '../app/hooks';
 import AppRoutes from '../types/app-routes.enum';
-import ITranslations from '../types/translations.interface';
-import IUserInvitation from '../types/user-invitation.interface';
+import { ITranslation } from '../types/translation.types.gen';
+import { IUserInvitation } from '../types/user-invitations.types';
 import BasePage from './BasePage';
 
 export default function UserInvitations() {
   // apis and mutations
   const translationsResult = useReadTranslationsCombinedQuery();
-  const translations = translationsResult.data as ITranslations;
+  const translations = translationsResult.data as ITranslation;
   const userInvitationsResult = useReadAllUserInvitationQuery();
   const userInvitations = userInvitationsResult.data as IUserInvitation[];
   const [deleteUserInvitation, deleteUserInvitationStatus] = useDeleteUserInvitationMutation();
@@ -25,7 +25,7 @@ export default function UserInvitations() {
 
   // delete an user invitation
   const onDelete = async (guid: string) => {
-    deleteUserInvitation({ guid })
+    deleteUserInvitation(guid)
       .unwrap()
       .catch((err) => {
         switch (err.status) {
@@ -72,15 +72,13 @@ export default function UserInvitations() {
           <Link to={AppRoutes.USER_INVITATIONS_CREATE}>{translations?.invitations.create}</Link>
         </button>
         {        
-          userInvitations?.map(({ code, name, isActive, creator, created, guid }, i) => {
+          userInvitations?.map(({ displayName, guid,  invitationCode, isActive }, i) => {
             return (
               <div key={`invitation_${i}`} className={createdGuids.includes(guid)  ? 'new' : ''}>
-                <div>{code}</div>
-                <div>{name}</div>
-                <div>{isActive ? translations?.invitations.active : translations?.invitations.used}</div>
-                <div>{creator}</div>
-                <div>{created}</div>
+                <div>{displayName}</div>
                 <div>{guid}</div>
+                <div>{isActive ? translations?.invitations.active : translations?.invitations.used}</div>
+                <div>{invitationCode}</div>                
                 <button onClick={() => onDelete(guid)}>{translations.invitations.delete}</button>
                 <button onClick={() => onToggleActive(guid, isActive)}>
                   { 

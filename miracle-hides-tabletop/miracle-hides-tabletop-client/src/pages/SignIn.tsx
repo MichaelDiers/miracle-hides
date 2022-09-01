@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSignInMutation } from '../app/api-sign-in.slice';
+import { useSignInMutation } from '../app/api-users-slice';
 import { useAppDispatch, useAppSelector, useReadTranslationsCombinedQuery } from '../app/hooks';
 import { selectUser } from '../app/selectors';
 import { updateUserThunk } from '../app/user-slice';
 import UserForm, { IUserFormSubmit } from '../components/UserForm';
 import AppRoutes from '../types/app-routes.enum';
-import ITranslations from '../types/translations.interface';
+import { ITranslation } from '../types/translation.types.gen';
 import BasePage, { ERROR_FALLBACK } from './BasePage';
 
 export default function SignIn() {
   const translationsResult = useReadTranslationsCombinedQuery();
-  const translations = translationsResult.data as ITranslations;
+  const translations = translationsResult.data as ITranslation;
   const [signIn, signInStatus] = useSignInMutation();
   
   const [error, setError] = useState('');
