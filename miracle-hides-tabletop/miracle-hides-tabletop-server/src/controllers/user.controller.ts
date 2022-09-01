@@ -13,6 +13,26 @@ export class UserController {
     @Inject(userTypes.USER_SERVICE) private readonly userService: userTypes.IUserService,
   ) {}
 
+  @Delete(':guid')
+  @Roles(UserRoles.ADMIN)
+  async deleteAsync(
+    @Param('guid', new UuidPipe()) guid: string
+  ): Promise<void> {
+    return this.userService.deleteAsync(guid);
+  }
+
+  @Get(':guid')
+  @Roles(UserRoles.ADMIN)
+  async readAsync(@Param('guid', new UuidPipe()) guid: string): Promise<userTypes.IUserFrontEnd> {
+    return this.userService.readAsync(guid);
+  }
+
+  @Get()
+  @Roles(UserRoles.ADMIN)
+  async readAllAsync(): Promise<userTypes.IUserFrontEnd[]> {
+    return this.userService.readAllAsync();
+  }
+
   @Post('sign-in')
   @IsPublic()
   async signInAsync(@Body() user: userTypes.UserSignInDto): Promise<userTypes.ITokenResponse> {
@@ -25,16 +45,8 @@ export class UserController {
     return this.userService.createAsync(user);
   }
 
-  @Put('sign-up')
-  @IsPublic()
-  async verifyEmailUnauthorized(
-    @Body() user: userTypes.UserEmailVerificationDto,
-  ): Promise<userTypes.ITokenResponse> {
-    return this.userService.verifyEmail(user);
-  }
-
   @Patch('sign-up')
-  @IsPublic()
+  @Roles(UserRoles.USER)
   async verifyEmailAuthorized(
     @Body() verificationCodeDto: VerificationCodeDto,
     @Payload() payload: userTypes.IJwtPayload,
@@ -42,24 +54,12 @@ export class UserController {
     return this.userService.verifyEmail({ ...verificationCodeDto, ...payload });
   }
 
-  @Delete(':guid')
-  @Roles(UserRoles.ADMIN)
-  async deleteAsync(
-    @Param('guid', new UuidPipe()) guid: string
-  ): Promise<void> {
-    return this.userService.deleteAsync(guid);
-  }
-  
-  @Get(':guid')
-  @Roles(UserRoles.ADMIN)
-  async readAsync(@Param('guid', new UuidPipe()) guid: string): Promise<userTypes.IUserFrontEnd> {
-    return this.userService.readAsync(guid);
-  }
-
-  @Get()
-  @Roles(UserRoles.ADMIN)
-  async readAllAsync(): Promise<userTypes.IUserFrontEnd[]> {
-    return this.userService.readAllAsync();
+  @Put('sign-up')
+  @IsPublic()
+  async verifyEmailUnauthorized(
+    @Body() user: userTypes.UserEmailVerificationDto,
+  ): Promise<userTypes.ITokenResponse> {
+    return this.userService.verifyEmail(user);
   }
 
   @Put()

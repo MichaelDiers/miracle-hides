@@ -13,6 +13,15 @@ export class UserInvitationsController {
     @Inject(USER_INVITATION_SERVICE) private readonly userInvitationsService: IUserInvitationService,
   ) { }
 
+  @Post()
+  @Roles(UserRoles.ADMIN)
+  async createAsync(
+    @Body() userInvitationCreateDto: DisplayNameDto,
+    @Payload() payload: IJwtPayload,
+  ): Promise<IUserInvitation> {
+    return this.userInvitationsService.createAsync(userInvitationCreateDto, payload.guid);
+  }
+
   @Delete(':guid')
   @Roles(UserRoles.ADMIN)
   async deleteAsync(@Param('guid', new UuidPipe()) guid: string): Promise<void> {
@@ -29,15 +38,6 @@ export class UserInvitationsController {
   @Roles(UserRoles.ADMIN)
   async readAsync(@Param('guid', new UuidPipe()) guid: string): Promise<IUserInvitation> {
     return this.userInvitationsService.readAsync(guid);
-  }
-
-  @Post()
-  @Roles(UserRoles.ADMIN)
-  async createAsync(
-    @Body() userInvitationCreateDto: DisplayNameDto,
-    @Payload() payload: IJwtPayload,
-  ): Promise<IUserInvitation> {
-    return this.userInvitationsService.createAsync(userInvitationCreateDto, payload.guid);
   }
 
   @Put()
