@@ -1,9 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
 import { ISecretManagerService } from 'src/types/secret-manager-service.interface';
+import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
 
 @Injectable()
 export class SecretManagerService implements ISecretManagerService {
+  constructor(
+    @Inject(LOGGING_SERVICE) private readonly loggingService: ILoggingService,
+  ) {}
+
   private readonly client: SecretManagerServiceClient =
     new SecretManagerServiceClient();
 
@@ -27,7 +32,7 @@ export class SecretManagerService implements ISecretManagerService {
       const [version] = await this.client.accessSecretVersion({ name });
       return version.payload.data.toString();
     } catch (err) {
-      console.error(err);
+      this.loggingService.error(err.message, err.stack);
       return;
     }
   }

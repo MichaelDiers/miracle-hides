@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
 import * as userInvitationTypes from '../../types/user-invitations.types';
 
 @Injectable()
@@ -8,6 +9,7 @@ export class UserInvitationsDatabaseService implements userInvitationTypes.IUser
   constructor(
     @InjectModel(userInvitationTypes.USER_INVITATION)
     private userInvitationModel: Model<userInvitationTypes.IUserInvitationDatabase>,
+    @Inject(LOGGING_SERVICE) private readonly loggingService: ILoggingService,
   ) {}
 
   async createAsync(
@@ -41,7 +43,7 @@ export class UserInvitationsDatabaseService implements userInvitationTypes.IUser
         updateUser,
       };
     } catch (err) {
-      console.log(err)
+      this.loggingService.error(err.message, err.stack);
       return;
     }
   }
@@ -50,7 +52,8 @@ export class UserInvitationsDatabaseService implements userInvitationTypes.IUser
     try {
       const result = await this.userInvitationModel.deleteOne({ guid });
       return result.acknowledged && result.deletedCount === 1;
-    } catch {
+    } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       return false;
     }
   }
@@ -77,7 +80,8 @@ export class UserInvitationsDatabaseService implements userInvitationTypes.IUser
         updated,
         updateUser,
       };
-    } catch {
+    } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       return;
     }
   }
@@ -107,7 +111,8 @@ export class UserInvitationsDatabaseService implements userInvitationTypes.IUser
         updated,
         updateUser,
       };
-    } catch {
+    } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       return;
     }
   }
@@ -134,7 +139,8 @@ export class UserInvitationsDatabaseService implements userInvitationTypes.IUser
         updated,
         updateUser,
       }));
-    } catch {
+    } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       return;
     }
   }
@@ -152,7 +158,8 @@ export class UserInvitationsDatabaseService implements userInvitationTypes.IUser
           updateUser: userUpdate,          
         });
       return updateResult.acknowledged && updateResult.matchedCount === 1;
-    } catch { 
+    } catch (err) {
+      this.loggingService.error(err.message, err.stack); 
       return false;
     }
   }

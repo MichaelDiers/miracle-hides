@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { createTransport } from 'nodemailer';
+import { ILoggingService } from 'src/types/logging.types';
 import IMailerServiceConfig from 'src/types/services/mailer-service-config.interface';
 import { IMailerService } from 'src/types/services/mailer-service.interface';
 
 @Injectable()
 export class MailerService implements IMailerService {
-  constructor(private readonly config: IMailerServiceConfig) {
-  }
+  constructor(
+    private readonly config: IMailerServiceConfig,
+    private readonly loggingService: ILoggingService,
+  ) {}
 
   async sendAsync({
     displayName,
@@ -60,6 +63,7 @@ export class MailerService implements IMailerService {
         }),
       });
     } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       return false;
     }
     return true;

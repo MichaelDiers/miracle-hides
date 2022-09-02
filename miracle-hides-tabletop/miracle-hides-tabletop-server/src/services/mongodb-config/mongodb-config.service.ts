@@ -27,7 +27,6 @@ export class MongodbConfigService implements MongooseOptionsFactory {
           resolve(options);
         })
         .catch((err) => {
-          console.error(err);
           reject(err);
         });
     });

@@ -11,7 +11,7 @@ export class HashService implements IHashService {
     try {
       const result = await compare(input, hash);
       return result;
-    } catch {
+    } catch (err) {
       return false;
     }
   }

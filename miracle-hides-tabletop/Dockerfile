@@ -25,6 +25,7 @@ ENV REACT_APP_MH_TRANSLATIONS_URL=/api/v1/translations
 ENV REACT_APP_MH_USER_INVITATIONS_URL=/api/v1/user-invitations
 ENV REACT_APP_MH_USERS_URL=/api/v1/user
 ENV MH_FRONT_END_URL=https://miracle-hides-tabletop-prdsggicqa-uc.a.run.app/email-verification
+ENV MH_LOG_LEVEL=ERROR
 
 EXPOSE 3000
 CMD ["node", "dist/main"]

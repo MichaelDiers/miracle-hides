@@ -7,6 +7,7 @@ import { IUserInvitationService, USER_INVITATION_SERVICE } from '../../types/use
 import UserRoles from 'src/types/user-roles';
 import { IMailerService, MAILER_SERVICE } from 'src/types/services/mailer-service.interface';
 import { ITransactionFactory, TRANSACTION_FACTORY } from 'src/types/transaction.types';
+import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
 
 
 @Injectable()
@@ -18,6 +19,7 @@ export class UserService implements IUserService {
     @Inject(USER_INVITATION_SERVICE) private readonly userInvitationsService: IUserInvitationService,
     @Inject(TRANSACTION_FACTORY) private readonly transactionFactory: ITransactionFactory,
     @Inject(MAILER_SERVICE) private readonly mailerService: IMailerService,
+    @Inject(LOGGING_SERVICE) private readonly loggingService: ILoggingService,
   ) {}
 
   async createAsync(userSignUp: IUserSignUp): Promise<ITokenResponse> {    
@@ -26,6 +28,7 @@ export class UserService implements IUserService {
     try {
       userInvitation = await this.userInvitationsService.readByInvitationCodeAsync(userSignUp.invitationCode);
     } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       throw new ForbiddenException();
     }
 
@@ -99,7 +102,7 @@ export class UserService implements IUserService {
       isActive: false,
       },
       user.guid,
-    ).catch((err) => {});
+    ).catch((err) => this.loggingService.error(err.message, err.stack));
 
     return {
       token: await tokenPromise,
@@ -197,6 +200,7 @@ export class UserService implements IUserService {
           verificationCode,
         });
       } catch (err) {
+        this.loggingService.error(err.message, err.stack);
         throw new UnauthorizedException();
       }
     }
@@ -222,6 +226,7 @@ export class UserService implements IUserService {
         token: await this.jwtService.signAsync({ ...databaseUser, isEmailVerified: true }),
       };
     } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       throw new UnauthorizedException();
     }
   }

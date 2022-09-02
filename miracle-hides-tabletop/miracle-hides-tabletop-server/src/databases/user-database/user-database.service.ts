@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, Model } from 'mongoose';
+import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
 import { IEntryInfo } from '../../base-types/entry-info';
 import { ITransaction } from '../../types/transaction.types';
 import UserRoles from '../../types/user-roles';
@@ -17,6 +18,7 @@ export class UserDatabaseService implements IUserDatabaseService {
   constructor(
     @InjectModel(USER)
     private userModel: Model<IDatabaseUser>,
+    @Inject(LOGGING_SERVICE) private readonly loggingService: ILoggingService,
   ) {}
 
   async createAsync(user: IUser, transaction?: ITransaction): Promise<IDatabaseUser> {
@@ -47,7 +49,7 @@ export class UserDatabaseService implements IUserDatabaseService {
       
       return documents[0];
     } catch (err){
-      console.log(err);
+      this.loggingService.error(err.message, err.stack);
       return undefined;
     }
   }
@@ -57,6 +59,7 @@ export class UserDatabaseService implements IUserDatabaseService {
       const result = await this.userModel.deleteOne({ guid });
       return result.acknowledged && result.deletedCount === 1;
     } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       return false;
     }
   }
@@ -70,6 +73,7 @@ export class UserDatabaseService implements IUserDatabaseService {
           }
         }
       } catch (err){
+        this.loggingService.error(err.message, err.stack);
         return;
       }
     }
@@ -78,6 +82,7 @@ export class UserDatabaseService implements IUserDatabaseService {
         const doc = await this.userModel.findOne({ guid: predicate }).exec();
         return doc;
       } catch (err) {
+        this.loggingService.error(err.message, err.stack);
         return;
       }
     }
@@ -88,6 +93,7 @@ export class UserDatabaseService implements IUserDatabaseService {
       const users = await this.userModel.find().exec();
       return users;
     } catch (err) {
+      this.loggingService.error(err.message, err.stack);
       return [];
     }
   }
@@ -156,6 +162,7 @@ export class UserDatabaseService implements IUserDatabaseService {
           result = await this.userModel.updateOne({ guid }, update);
         }
       } catch (err) {
+        this.loggingService.error(err.message, err.stack);
         return false;
       }
 

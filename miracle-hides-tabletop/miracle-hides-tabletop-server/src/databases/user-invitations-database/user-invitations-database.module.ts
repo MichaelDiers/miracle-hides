@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserInvitationsDatabaseService } from './user-invitations-database.service';
 import * as userInvitationTypes from '../../types/user-invitations.types';
+import { LoggingModule } from 'src/logging/logging.module';
 
 @Module({
   exports: [userInvitationTypes.USER_INVITATION_DATABASE_SERVICE],
@@ -12,6 +13,7 @@ import * as userInvitationTypes from '../../types/user-invitations.types';
         schema: userInvitationTypes.UserInvitationSchema,
       },
     ]),
+    LoggingModule,
   ],
   providers: [
     {

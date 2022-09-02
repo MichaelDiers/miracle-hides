@@ -17,6 +17,7 @@ import { RequestLoggerMiddleware, REQUEST_LOGGER_MIDDLEWARE } from './middleware
 import { JwtMiddleware } from './middleware/jwt.middleware';
 import { UserInvitationsDatabaseModule } from './databases/user-invitations-database/user-invitations-database.module';
 import { TransactionsModule } from './databases/transactions/transactions.module';
+import { LoggingModule } from './logging/logging.module';
 
 @Module({
   controllers: [AppController],
@@ -38,6 +39,7 @@ import { TransactionsModule } from './databases/transactions/transactions.module
     ServicesModule,
     UserInvitationsDatabaseModule,
     TransactionsModule,
+    LoggingModule,
   ],
   providers: [AppService],
 })

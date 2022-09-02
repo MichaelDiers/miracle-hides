@@ -26,6 +26,8 @@ import { TranslationService } from './translations/translations.service';
 import { TransactionsModule } from 'src/databases/transactions/transactions.module';
 import { USER_INVITATION_SERVICE } from 'src/types/user-invitations.types';
 import { UserInvitationsDatabaseModule } from 'src/databases/user-invitations-database/user-invitations-database.module';
+import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
+import { LoggingModule } from 'src/logging/logging.module';
 
 @Module({
   exports: [
@@ -42,6 +44,7 @@ import { UserInvitationsDatabaseModule } from 'src/databases/user-invitations-da
   imports: [
     HouseRulesDatabaseModule,
     LanguagesDatabaseModule,
+    LoggingModule,
     TransactionsModule,
     TranslationDatabaseModule,
     UserDatabaseModule,
@@ -93,12 +96,12 @@ import { UserInvitationsDatabaseModule } from 'src/databases/user-invitations-da
     },
     {
       provide: MAILER_SERVICE,
-      useFactory: async (secretService: ISecretManagerService) => {
+      useFactory: async (loggingService: ILoggingService, secretService: ISecretManagerService) => {
         const plainConfig = await secretService.getMiracleHidesTabletopMailerConfig();
         const config: IMailerServiceConfig = JSON.parse(plainConfig);
-        return new MailerService(config);
+        return new MailerService(config, loggingService);
       },
-      inject: [SECRET_MANAGER_SERVICE],
+      inject: [LOGGING_SERVICE, SECRET_MANAGER_SERVICE],
     },
     MongodbConfigService,
   ],
