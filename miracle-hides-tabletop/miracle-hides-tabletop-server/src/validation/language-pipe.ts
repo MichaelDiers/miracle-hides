@@ -1,5 +1,5 @@
 import { PipeTransform, Injectable, BadRequestException } from '@nestjs/common';
-import { LANGUAGES } from 'src/base-types/language-internal-name';
+import { LANGUAGES } from '../base-types/language-internal-name';
 
 @Injectable()
 export class LanguagePipe implements PipeTransform {

@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Put } from '@nestjs/common';
-import { Roles } from 'src/decorators/roles.decorator';
-import UserRoles from 'src/types/user-roles';
+import { Roles } from '../decorators/roles.decorator';
+import UserRoles from '../types/user-roles';
 import * as userTypes from '../types/user.types';
-import { UuidPipe } from 'src/validation/uuid-pipe';
-import { Payload } from 'src/decorators/payload.decorator';
-import { IsPublic } from 'src/decorators/is-public.decorator';
-import { VerificationCodeDto } from 'src/base-types/verification-code';
+import { UuidPipe } from '../validation/uuid-pipe';
+import { Payload } from '../decorators/payload.decorator';
+import { IsPublic } from '../decorators/is-public.decorator';
+import { VerificationCodeDto } from '../base-types/verification-code';
 
 @Controller('api/v1/user')
 export class UserController {

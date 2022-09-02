@@ -1,9 +1,9 @@
 import { Schema } from 'mongoose';
-import { DisplayNameDto, displayNameSchemaEntry, IDisplayName } from 'src/base-types/display-name';
-import { entryInfoSchemaEntry, IEntryInfo } from 'src/base-types/entry-info';
-import GuidDto, { guidSchemaEntry, IGuid } from 'src/base-types/guid';
-import { IInvitationCode, invitationCodeSchemaEntry } from 'src/base-types/invitation-code';
-import { IIsActive, IsActiveDto, isActiveSchemaEntry } from 'src/base-types/is-active';
+import { DisplayNameDto, displayNameSchemaEntry, IDisplayName } from '../base-types/display-name';
+import { entryInfoSchemaEntry, IEntryInfo } from '../base-types/entry-info';
+import GuidDto, { guidSchemaEntry, IGuid } from '../base-types/guid';
+import { IInvitationCode, invitationCodeSchemaEntry } from '../base-types/invitation-code';
+import { IIsActive, IsActiveDto, isActiveSchemaEntry } from '../base-types/is-active';
 
 export const UserInvitationSchema = new Schema({
   ...displayNameSchemaEntry(),

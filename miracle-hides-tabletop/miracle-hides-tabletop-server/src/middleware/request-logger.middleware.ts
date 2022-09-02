@@ -1,5 +1,5 @@
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
-import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
+import { ILoggingService, LOGGING_SERVICE } from '../types/logging.types';
 
 @Injectable()
 export class RequestLoggerMiddleware implements NestMiddleware {

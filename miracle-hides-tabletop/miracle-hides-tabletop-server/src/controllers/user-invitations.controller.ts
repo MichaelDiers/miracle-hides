@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from '@nestjs/common';
-import { Payload } from 'src/decorators/payload.decorator';
-import { Roles } from 'src/decorators/roles.decorator';
+import { Payload } from '../decorators/payload.decorator';
+import { Roles } from '../decorators/roles.decorator';
 import { IJwtPayload } from '../types/user.types';
 import { IUserInvitation, IUserInvitationService, UserInvitationCreateDto, UserInvitationUpdateDto, USER_INVITATION_SERVICE } from '../types/user-invitations.types';
-import UserRoles from 'src/types/user-roles';
-import { UuidPipe } from 'src/validation/uuid-pipe';
-import { DisplayNameDto } from 'src/base-types/display-name';
+import UserRoles from '../types/user-roles';
+import { UuidPipe } from '../validation/uuid-pipe';
+import { DisplayNameDto } from '../base-types/display-name';
 
 @Controller('api/v1/user-invitations')
 export class UserInvitationsController {

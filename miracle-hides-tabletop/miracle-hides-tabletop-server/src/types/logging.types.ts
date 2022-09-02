@@ -1,6 +1,6 @@
-import { IErrorType } from 'src/base-types/error-type';
-import { IMessage } from 'src/base-types/message';
-import { IStack } from 'src/base-types/stack';
+import { IErrorType } from '../base-types/error-type';
+import { IMessage } from '../base-types/message';
+import { IStack } from '../base-types/stack';
 
 export type ILogEntry = 
   IErrorType

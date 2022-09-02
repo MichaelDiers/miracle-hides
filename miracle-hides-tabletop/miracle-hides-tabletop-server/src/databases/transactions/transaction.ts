@@ -1,6 +1,6 @@
 import { InjectConnection } from '@nestjs/mongoose';
 import { ClientSession, Connection } from 'mongoose';
-import { ITransaction } from 'src/types/transaction.types';
+import { ITransaction } from '../../types/transaction.types';
 
 export class Transaction implements ITransaction {
   private session: ClientSession;

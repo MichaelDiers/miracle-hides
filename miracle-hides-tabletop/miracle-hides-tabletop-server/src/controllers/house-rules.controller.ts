@@ -9,7 +9,7 @@ import {
   IHouseRulesService,
   IHouseRule,
 } from '../types/house-rule.types';
-import { LanguagePipe } from 'src/validation/language-pipe';
+import { LanguagePipe } from '../validation/language-pipe';
 
 @Controller('api/v1/house-rules')
 export class HouseRulesController {

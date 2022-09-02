@@ -1,9 +1,9 @@
 import { Schema } from 'mongoose';
-import { descriptionsSchemaEntry, IDescriptions } from 'src/base-types/descriptions';
-import { entryInfoSchemaEntry, IEntryInfo } from 'src/base-types/entry-info';
-import { guidSchemaEntry, IGuid } from 'src/base-types/guid';
-import { ILanguageInternalName, languageInternalNameSchemaEntry } from 'src/base-types/language-internal-name';
-import { ITopic, topicSchemaEntry } from 'src/base-types/topic';
+import { descriptionsSchemaEntry, IDescriptions } from '../base-types/descriptions';
+import { entryInfoSchemaEntry, IEntryInfo } from '../base-types/entry-info';
+import { guidSchemaEntry, IGuid } from '../base-types/guid';
+import { ILanguageInternalName, languageInternalNameSchemaEntry } from '../base-types/language-internal-name';
+import { ITopic, topicSchemaEntry } from '../base-types/topic';
 
 export type IHouseRuleEntry = 
   IDescriptions

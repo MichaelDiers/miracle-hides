@@ -1,15 +1,15 @@
 import { Schema } from 'mongoose';
-import { DisplayNameDto, displayNameSchemaEntry, IDisplayName } from 'src/base-types/display-name';
-import IEmail, { EmailDto, emailSchemaEntry } from 'src/base-types/email';
-import { entryInfoSchemaEntry, IEntryInfo } from 'src/base-types/entry-info';
-import GuidDto, { guidSchemaEntry, IGuid } from 'src/base-types/guid';
-import { IInvitationCode, InvitationCodeDto, invitationCodeSchemaEntry } from 'src/base-types/invitation-code';
-import IsEmailVerifiedDto, { IIsEmailVerified, isEmailVerifiedSchemaEntry } from 'src/base-types/is-email-verified';
-import { ILanguageInternalName, LanguageInternalNameDto, languageInternalNameSchemaEntry } from 'src/base-types/language-internal-name';
-import { IPassword, PasswordDto, passwordSchemaEntry } from 'src/base-types/password';
-import { IDatabaseRoles, IRoles, RolesDto, rolesSchemaEntry } from 'src/base-types/roles';
-import { IToken } from 'src/base-types/token';
-import { IVerificationCode, VerificationCodeDto, verificationCodeSchemaEntry } from 'src/base-types/verification-code';
+import { DisplayNameDto, displayNameSchemaEntry, IDisplayName } from '../base-types/display-name';
+import IEmail, { EmailDto, emailSchemaEntry } from '../base-types/email';
+import { entryInfoSchemaEntry, IEntryInfo } from '../base-types/entry-info';
+import GuidDto, { guidSchemaEntry, IGuid } from '../base-types/guid';
+import { IInvitationCode, InvitationCodeDto, invitationCodeSchemaEntry } from '../base-types/invitation-code';
+import IsEmailVerifiedDto, { IIsEmailVerified, isEmailVerifiedSchemaEntry } from '../base-types/is-email-verified';
+import { ILanguageInternalName, LanguageInternalNameDto, languageInternalNameSchemaEntry } from '../base-types/language-internal-name';
+import { IPassword, PasswordDto, passwordSchemaEntry } from '../base-types/password';
+import { IDatabaseRoles, IRoles, RolesDto, rolesSchemaEntry } from '../base-types/roles';
+import { IToken } from '../base-types/token';
+import { IVerificationCode, VerificationCodeDto, verificationCodeSchemaEntry } from '../base-types/verification-code';
 import { ITransaction } from './transaction.types';
 import { intersectionHelper2, intersectionHelper3, intersectionHelper4, intersectionHelper5 } from '../base-types/intersection-helper.gen';
 

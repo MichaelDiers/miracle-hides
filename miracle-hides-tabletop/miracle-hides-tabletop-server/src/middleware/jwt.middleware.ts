@@ -1,6 +1,6 @@
 import { Inject, Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
-import { IJwtService, JWT_SERVICE } from 'src/types/jwt-service.interface';
-import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
+import { IJwtService, JWT_SERVICE } from '../types/jwt-service.interface';
+import { ILoggingService, LOGGING_SERVICE } from '../types/logging.types';
 
 @Injectable()
 export class JwtMiddleware implements NestMiddleware {

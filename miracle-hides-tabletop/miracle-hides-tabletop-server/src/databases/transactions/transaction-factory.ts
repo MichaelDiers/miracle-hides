@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
-import { ITransaction } from 'src/types/transaction.types';
+import { ITransaction } from '../../types/transaction.types';
 import { Transaction } from './transaction';
 
 @Injectable()

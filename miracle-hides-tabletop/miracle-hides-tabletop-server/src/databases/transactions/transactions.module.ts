@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TRANSACTION_FACTORY } from 'src/types/transaction.types';
+import { TRANSACTION_FACTORY } from '../../types/transaction.types';
 import { TransactionFactory } from './transaction-factory';
 
 @Module({

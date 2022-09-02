@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ErrorType } from 'src/base-types/error-type';
-import { ILogEntry, ILoggingService } from 'src/types/logging.types';
+import { ErrorType } from '../base-types/error-type';
+import { ILogEntry, ILoggingService } from '../types/logging.types';
 
 @Injectable()
 export class LoggingService implements ILoggingService{

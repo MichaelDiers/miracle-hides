@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
+import { ILoggingService, LOGGING_SERVICE } from '../../types/logging.types';
 import * as userInvitationTypes from '../../types/user-invitations.types';
 
 @Injectable()

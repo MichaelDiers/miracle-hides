@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LoggingModule } from 'src/logging/logging.module';
+import { LoggingModule } from '../../logging/logging.module';
 import { USER_DATABASE_SERVICE } from '../../types/user.types';
 import { USER, UserSchema } from '../../types/user.types';
 import { UserDatabaseService } from './user-database.service';

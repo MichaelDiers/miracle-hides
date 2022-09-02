@@ -4,7 +4,7 @@ import {
   ITranslationService,
   TRANSLATION_SERVICE,
 } from '../types/translation.types.gen';
-import { LanguagePipe } from 'src/validation/language-pipe';
+import { LanguagePipe } from '../validation/language-pipe';
 
 @Controller('api/v1/translations')
 export class TranslationsController {

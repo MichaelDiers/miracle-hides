@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
-import { ISecretManagerService } from 'src/types/secret-manager-service.interface';
-import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
+import { ISecretManagerService } from '../../types/secret-manager-service.interface';
+import { ILoggingService, LOGGING_SERVICE } from '../../types/logging.types';
 
 @Injectable()
 export class SecretManagerService implements ISecretManagerService {

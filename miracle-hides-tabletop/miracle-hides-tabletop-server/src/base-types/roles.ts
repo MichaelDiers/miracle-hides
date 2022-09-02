@@ -1,5 +1,5 @@
 import { IsIn } from 'class-validator';
-import UserRoles, { UserRolesList } from 'src/types/user-roles';
+import UserRoles, { UserRolesList } from '../types/user-roles';
 import createSchemaEntry from './create-schema-entry';
 
 export const rolesSchemaEntry = () => createSchemaEntry({

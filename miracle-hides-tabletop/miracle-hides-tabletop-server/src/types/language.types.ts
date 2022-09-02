@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
-import { displayNameSchemaEntry, IDisplayName } from 'src/base-types/display-name';
-import { IIsDefault, isDefaultSchemaEntry } from 'src/base-types/is-default';
-import { ILanguageInternalName, languageInternalNameSchemaEntry } from 'src/base-types/language-internal-name';
+import { displayNameSchemaEntry, IDisplayName } from '../base-types/display-name';
+import { IIsDefault, isDefaultSchemaEntry } from '../base-types/is-default';
+import { ILanguageInternalName, languageInternalNameSchemaEntry } from '../base-types/language-internal-name';
 
 // used for di
 export const LANGUAGES_SERVICE = 'LANGUAGES_SERVICE';

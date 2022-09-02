@@ -6,7 +6,7 @@ import {
 import {
   ISecretManagerService,
   SECRET_MANAGER_SERVICE,
-} from 'src/types/secret-manager-service.interface';
+} from '../../types/secret-manager-service.interface';
 
 @Injectable()
 export class MongodbConfigService implements MongooseOptionsFactory {

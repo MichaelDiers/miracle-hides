@@ -1,13 +1,13 @@
 import { ConflictException, ForbiddenException, Inject, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { IJwtPayload, ITokenResponse, IUser, IUserDatabaseService, IUserEmailVerification, IUserEmailVerificationWithPayload, IUserFrontEnd, IUserService, IUserSignIn, IUserSignUp, IUserUpdate, USER_DATABASE_SERVICE } from '../../types/user.types';
-import { HASH_SERVICE, IHashService } from 'src/types/hash-service.interface';
-import { IJwtService, JWT_SERVICE } from 'src/types/jwt-service.interface';
+import { HASH_SERVICE, IHashService } from '../../types/hash-service.interface';
+import { IJwtService, JWT_SERVICE } from '../../types/jwt-service.interface';
 import { IUserInvitationService, USER_INVITATION_SERVICE } from '../../types/user-invitations.types';
-import UserRoles from 'src/types/user-roles';
-import { IMailerService, MAILER_SERVICE } from 'src/types/services/mailer-service.interface';
-import { ITransactionFactory, TRANSACTION_FACTORY } from 'src/types/transaction.types';
-import { ILoggingService, LOGGING_SERVICE } from 'src/types/logging.types';
+import UserRoles from '../../types/user-roles';
+import { IMailerService, MAILER_SERVICE } from '../../types/services/mailer-service.interface';
+import { ITransactionFactory, TRANSACTION_FACTORY } from '../../types/transaction.types';
+import { ILoggingService, LOGGING_SERVICE } from '../../types/logging.types';
 
 
 @Injectable()
